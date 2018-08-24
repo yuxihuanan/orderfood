@@ -3,7 +3,7 @@ package com.orderfood.pojo;
 import java.io.Serializable;
 
 /**
- * 库存表实体类345
+ * 库存表实体类
  */
 public class OrderfoodCargo implements Serializable {
     private Integer cargoid;//库物编号
