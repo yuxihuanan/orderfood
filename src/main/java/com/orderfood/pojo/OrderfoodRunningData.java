@@ -3,16 +3,19 @@ package com.orderfood.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 收支流水表实体类
+ */
 public class OrderfoodRunningData implements Serializable {
-    private Integer dataid;
+    private Integer dataid;//
 
-    private Float dataprice;
+    private Float dataprice;//
 
-    private String datastatement;
+    private String datastatement;//
 
-    private Date createdate;
+    private Date createdate;//
 
-    private String datacomment;
+    private String datacomment;//
 
     public OrderfoodRunningData(Integer dataid, Float dataprice, String datastatement, Date createdate, String datacomment) {
         this.dataid = dataid;

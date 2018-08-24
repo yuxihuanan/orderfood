@@ -2,12 +2,15 @@ package com.orderfood.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 桌位表实体类
+ */
 public class OrderfoodTable implements Serializable {
-    private Integer tableid;
+    private Integer tableid;//桌位编号
 
-    private Integer tablenumber;
+    private Integer tablenumber;//桌位号
 
-    private String tablestatus;
+    private String tablestatus;//状态
 
     public OrderfoodTable(Integer tableid, Integer tablenumber, String tablestatus) {
         this.tableid = tableid;

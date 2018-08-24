@@ -6,13 +6,13 @@ import java.io.Serializable;
  * 导航表
  */
 public class OrderfoodMenu implements Serializable {
-    private Integer menuid;//
+    private Integer menuid;//导航栏编号
 
-    private String menuname;
+    private String menuname;//导航栏名称
 
-    private Integer parentid;
+    private Integer parentid;//父级编号
 
-    private String menuurl;
+    private String menuurl;//导航Url
 
     public OrderfoodMenu(Integer menuid, String menuname, Integer parentid, String menuurl) {
         this.menuid = menuid;
