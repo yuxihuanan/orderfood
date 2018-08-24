@@ -2,16 +2,19 @@ package com.orderfood.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 配方表实体类
+ */
 public class OrderfoodRecipe implements Serializable {
-    private Integer rRecipeid;
+    private Integer rRecipeid;//配方编号
 
-    private String recipecontent;
+    private String recipecontent;//配方声明
 
-    private Integer rStockid;
+    private Integer rStockid;//原料id
 
-    private Float recipeweight;
+    private Float recipeweight;//配料剂量
 
-    private Integer rCuisineid;
+    private Integer rCuisineid;//菜品id
 
     public OrderfoodRecipe(Integer rRecipeid, String recipecontent, Integer rStockid, Float recipeweight, Integer rCuisineid) {
         this.rRecipeid = rRecipeid;

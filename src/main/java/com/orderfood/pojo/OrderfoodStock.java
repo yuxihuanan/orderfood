@@ -2,14 +2,17 @@ package com.orderfood.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 原料表实体类
+ */
 public class OrderfoodStock implements Serializable {
-    private Integer stockid;
+    private Integer stockid;//原料编号
 
-    private String stockname;
+    private String stockname;//原料名
 
-    private Float stockweight;
+    private Float stockweight;//单位数
 
-    private String stockunit;
+    private String stockunit;//单位kg/L
 
     public OrderfoodStock(Integer stockid, String stockname, Float stockweight, String stockunit) {
         this.stockid = stockid;

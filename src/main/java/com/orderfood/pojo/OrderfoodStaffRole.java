@@ -2,10 +2,13 @@ package com.orderfood.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 员工角色表实体类
+ */
 public class OrderfoodStaffRole implements Serializable {
-    private Integer roleid;
+    private Integer roleid;//角色编号
 
-    private Integer employeeid;
+    private Integer employeeid;//员工编号
 
     public OrderfoodStaffRole(Integer roleid, Integer employeeid) {
         this.roleid = roleid;

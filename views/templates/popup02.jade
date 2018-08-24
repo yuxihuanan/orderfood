@@ -21,42 +21,42 @@ html
       // SubPopup
       #SubPopup
         script(type='text/javascript').
-          $(function(){
-          $(".select").each(function(){
-          var s=$(this);
-          var z=parseInt(s.css("z-index"));
-          var dt=$(this).children("dt");
-          var dd=$(this).children("dd");
-          var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-          var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-          dt.click(function(){dd.is(":hidden")?_show():_hide();});
-          dd.find("a").click(function(){dt.html($(this).html());_hide();});
-          $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
+            $(function(){
+                $(".select").each(function(){
+                    var s=$(this);
+                    var z=parseInt(s.css("z-index"));
+                    var dt=$(this).children("dt");
+                    var dd=$(this).children("dd");
+                    var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+                    var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+                    dt.click(function(){dd.is(":hidden")?_show():_hide();});
+                    dd.find("a").click(function(){dt.html($(this).html());_hide();});
+                    $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
         .form_boxC
           table(cellpadding='0', cellspacing='0')
             tbody
               tr
-                th(width='100') 预算部门
+                th(width='100') 棰勭畻閮ㄩ棬
                 td
                   // selectbox
                   .selectbox(style='width:230px;')
                     dl.select
-                      dt 请选择
+                      dt 璇烽�夋嫨
                       dd
                         ul
                           li
-                            a(href='#') 选项选项A
+                            a(href='#') 閫夐」閫夐」A
                           li
-                            a(href='#') 选项选项B
+                            a(href='#') 閫夐」閫夐」B
                           li
-                            a(href='#') 选项选项C
+                            a(href='#') 閫夐」閫夐」C
                           li
-                            a(href='#') 选项选项D
+                            a(href='#') 閫夐」閫夐」D
                           li
-                            a(href='#') 选项选项E
+                            a(href='#') 閫夐」閫夐」E
                   // /selectbox
               tr
-                th 年度
+                th 骞村害
                 td
                   // selectbox
                   .selectbox(style='width:230px;')
@@ -82,7 +82,7 @@ html
       // SubPopup
       #BtmBtn
         .btn_boxB.floatR.mag_l20
-          input(name='', type='button', value='取消', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
+          input(name='', type='button', value='鍙栨秷', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
         .btn_box.floatR
-          input(name='', type='button', value='提交', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
+          input(name='', type='button', value='鎻愪氦', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
     // /Popup
