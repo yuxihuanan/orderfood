@@ -21,119 +21,119 @@ html
       // SubPopup
       #SubPopup
         script(type='text/javascript').
-          $(function(){
-          $(".select").each(function(){
-          var s=$(this);
-          var z=parseInt(s.css("z-index"));
-          var dt=$(this).children("dt");
-          var dd=$(this).children("dd");
-          var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-          var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-          dt.click(function(){dd.is(":hidden")?_show():_hide();});
-          dd.find("a").click(function(){dt.html($(this).html());_hide();});
-          $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
+            $(function(){
+                $(".select").each(function(){
+                    var s=$(this);
+                    var z=parseInt(s.css("z-index"));
+                    var dt=$(this).children("dt");
+                    var dd=$(this).children("dd");
+                    var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+                    var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+                    dt.click(function(){dd.is(":hidden")?_show():_hide();});
+                    dd.find("a").click(function(){dt.html($(this).html());_hide();});
+                    $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
         .form_boxC
           p
             | "
             span.f_cB *
-            | "ºÅÎª±ØÌîÏîÄ¿
+            | "å·ä¸ºå¿…å¡«é¡¹ç›®
           table(cellpadding='0', cellspacing='0')
             tbody
               tr
                 th(width='100')
-                  | Ô±¹¤±àÂë 
+                  | å‘˜å·¥ç¼–ç 
                   span.f_cB *
                 td
                   .txtbox.floatL(style='width:100px;')
                     input(name='', type='text', size='5', value='11498')
               tr
                 th
-                  | Ô±¹¤ĞÕÃû 
+                  | å‘˜å·¥å§“å
                   span.f_cB *
                 td
                   .txtbox.floatL(style='width:100px;')
-                    input(name='', type='text', size='5', value='×¯Ò»µÏ')
+                    input(name='', type='text', size='5', value='åº„ä¸€è¿ª')
               tr
                 th
-                  | Ô±¹¤¸ÚÎ» 
+                  | å‘˜å·¥å²—ä½
                   span.f_cB *
                 td
                   // selectbox
                   .selectbox(style='width:230px;')
                     dl.select
-                      dt NP-Õ½ÂÔÍÆ½ø×¨Ô±
+                      dt NP-æˆ˜ç•¥æ¨è¿›ä¸“å‘˜
                       dd
                         ul
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîA
+                            a(href='#') é€‰é¡¹é€‰é¡¹A
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîB
+                            a(href='#') é€‰é¡¹é€‰é¡¹B
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîC
+                            a(href='#') é€‰é¡¹é€‰é¡¹C
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîD
+                            a(href='#') é€‰é¡¹é€‰é¡¹D
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîE
+                            a(href='#') é€‰é¡¹é€‰é¡¹E
                   // /selectbox
               tr
                 th
-                  | ĞÔ±ğ 
+                  | æ€§åˆ«
                   span.f_cB *
                 td
                   // selectbox
                   .selectbox(style='width:230px;')
                     dl.select
-                      dt ÇëÑ¡Ôñ
+                      dt è¯·é€‰æ‹©
                       dd
                         ul
                           li
-                            a(href='#')  ÄĞ 
+                            a(href='#')  ç”·
                           li
-                            a(href='#')  Å® 
+                            a(href='#')  å¥³
                   // /selectbox
               tr
                 th
-                  | ËùÊô²¿ÃÅ 
+                  | æ‰€å±éƒ¨é—¨
                   span.f_cB *
                 td
                   // selectbox
                   .selectbox(style='width:230px;')
                     dl.select
-                      dt ÖÇ»ÛÉú»î¾­ÓªÌå
+                      dt æ™ºæ…§ç”Ÿæ´»ç»è¥ä½“
                       dd
                         ul
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîA
+                            a(href='#') é€‰é¡¹é€‰é¡¹A
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîB
+                            a(href='#') é€‰é¡¹é€‰é¡¹B
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîC
+                            a(href='#') é€‰é¡¹é€‰é¡¹C
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîD
+                            a(href='#') é€‰é¡¹é€‰é¡¹D
                           li
-                            a(href='#') Ñ¡ÏîÑ¡ÏîE
+                            a(href='#') é€‰é¡¹é€‰é¡¹E
                   // /selectbox
               tr
-                th ÊÇ·ñÆôÓÃ
+                th æ˜¯å¦å¯ç”¨
                 td
                   input(name='', type='checkbox', value='')
               tr
                 th
-                  | E-Mail 
+                  | E-Mail
                   span.f_cB *
                 td
                   .txtbox.floatL
                     input(name='', type='text', value='zhuangyd@haiersoft.com')
               tr
-                th ±¸×¢
+                th å¤‡æ³¨
                 td
                   .txtbox
                     textarea(name='', cols='25', rows='5')
-                  p.f_cB.pdg_t5 ×î¶à500×Ö
+                  p.f_cB.pdg_t5 æœ€å¤š500å­—
       // SubPopup
       #BtmBtn
         .btn_boxB.floatR.mag_l20
-          input(name='', type='button', value='È¡Ïû', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
+          input(name='', type='button', value='å–æ¶ˆ', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
         .btn_box.floatR
-          input(name='', type='button', value='Ìá½»', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
+          input(name='', type='button', value='æäº¤', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
     // /Popup
