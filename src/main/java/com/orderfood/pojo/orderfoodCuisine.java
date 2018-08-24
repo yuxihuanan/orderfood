@@ -6,17 +6,17 @@ import java.io.Serializable;
  * 菜品表实体类
  */
 public class orderfoodCuisine implements Serializable {
-    private Integer cuisineid;//
+    private Integer cuisineid;//菜品编号
 
-    private String cuisinename;//
+    private String cuisinename;//菜名
 
-    private Float price;//
+    private Float price;//价格
 
-    private String cuisineacronym;//
+    private String cuisineacronym;//首字母缩写
 
-    private Integer cuisineidentify;//
+    private Integer cuisineidentify;//菜品标识
 
-    private Integer cClassifyid;//
+    private Integer cClassifyid;//所属菜品分类
 
     public orderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
         this.cuisineid = cuisineid;
