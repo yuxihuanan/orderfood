@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 收支流水表实体类
+ * 收支流水表实体类123
  */
 public class OrderfoodRunningData implements Serializable {
     private Integer dataid;//收支编号
