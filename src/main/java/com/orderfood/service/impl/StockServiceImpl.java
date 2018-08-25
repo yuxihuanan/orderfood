@@ -1,6 +1,6 @@
 package com.orderfood.service.impl;
 
-import com.orderfood.dao.StockDao;
+import com.orderfood.mapper.StockMapper;
 import com.orderfood.pojo.OrderfoodStock;
 import com.orderfood.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +11,27 @@ import java.util.List;
 @Service("stockService")
 public class StockServiceImpl implements StockService {
 
-    @Autowired
-    private StockDao stockDao;
 
+    @Autowired
+    private StockMapper stockMapper;
 
     @Override
     public Integer InsertStock(OrderfoodStock stock) {
-        return stockDao.InsertStock(stock);
+        return stockMapper.selectCountByExample(stock);
     }
 
     @Override
     public Integer UpdateStock(OrderfoodStock stock) {
-        return stockDao.UpdateStock(stock);
+        return stockMapper.updateByPrimaryKey(stock);
     }
 
     @Override
     public Integer DeleteStock(Integer stockId) {
-        return stockDao.DeleteStock(stockId);
+        return stockMapper.deleteByExample(stockId);
     }
 
     @Override
     public List<OrderfoodStock> SelectStock(OrderfoodStock stock) {
-        return stockDao.SelectStock(stock);
+        return stockMapper.selectAll();
     }
 }
