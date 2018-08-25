@@ -10,6 +10,26 @@ public class OrderfoodJurisdiction implements Serializable {
 
     private Integer jClassifyid;//导航编号
 
+    private OrderfoodMenu classify;//导航对象
+
+    private OrderfoodEmployeeRole role;//角色对象
+
+    public OrderfoodMenu getClassify() {
+        return classify;
+    }
+
+    public void setClassify(OrderfoodMenu classify) {
+        this.classify = classify;
+    }
+
+    public OrderfoodEmployeeRole getRole() {
+        return role;
+    }
+
+    public void setRole(OrderfoodEmployeeRole role) {
+        this.role = role;
+    }
+
     public OrderfoodJurisdiction(Integer jRoleid, Integer jClassifyid) {
         this.jRoleid = jRoleid;
         this.jClassifyid = jClassifyid;

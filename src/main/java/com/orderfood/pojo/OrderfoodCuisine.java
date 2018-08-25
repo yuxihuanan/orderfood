@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 菜品表实体类
  */
-public class orderfoodCuisine implements Serializable {
+public class OrderfoodCuisine implements Serializable {
     private Integer cuisineid;//菜品编号
 
     private String cuisinename;//菜名
@@ -18,7 +18,7 @@ public class orderfoodCuisine implements Serializable {
 
     private Integer cClassifyid;//所属菜品分类
 
-    public orderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
+    public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
         this.cuisineid = cuisineid;
         this.cuisinename = cuisinename;
         this.price = price;
@@ -27,7 +27,7 @@ public class orderfoodCuisine implements Serializable {
         this.cClassifyid = cClassifyid;
     }
 
-    public orderfoodCuisine() {
+    public OrderfoodCuisine() {
         super();
     }
 
