@@ -1,0 +1,70 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='KnowLedgeClass.jade')
+              p
+                | 硬装
+          li
+            a(href='biaoganxiangmuList.jade')
+              p
+                | 标杆项目
+          li
+            a(href='ruanzhuangxiangmuList.jade')
+              p
+                | 软装
+          li
+            a(href='xiangmuguanliList.jade')
+              p
+                | 项目管理
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')
+              td.mian_b_bg_lm(colspan='3', width='95%')
+                | 项目信息详细
+            tr
+              td
+              td(colspan='3')
+                table(style='width: 100%;', border='1')
+                  tbody
+                    tr
+                      td(width='1%')
+                      td(width='15%', align='center')
+                        a(href='KnowLedgeClassDetailList.jade')
+                          img(src='..\images\Developer.png', width='120', height='120')
+                      td(width='15%', align='center')
+                        img(src='..\images\Developer.png', width='120', height='120')
+                      td(width='15%', align='center')
+                        img(src='..\images\Developer.png', width='120', height='120')
+                      td(width='15%', align='center')
+                        img(src='..\images\Developer.png', width='120', height='120')
+                      td(width='39%')
+                    tr
+                      td
+                      td(align='center')
+                        a(href='KnowLedgeClassDetailList.jade') 图纸
+                      td(align='center')
+                        | 效果图
+                      td(align='center')
+                        | 材料清单
+                      td(align='center')
+                        | 设计说明
+                      td
+            tr(height='50')
+              td
+              td
+                div(align='center')
+                  img(src='..\images\bnt_05.gif', alt='', width='80', height='22', onclick='javascript:window.history.go(-1);')
+              td
+              td
+    script(src='/common.js')
