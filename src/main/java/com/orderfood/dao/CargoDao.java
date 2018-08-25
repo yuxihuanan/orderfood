@@ -1,6 +1,7 @@
 package com.orderfood.dao;
 
 import com.orderfood.pojo.OrderfoodCargo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

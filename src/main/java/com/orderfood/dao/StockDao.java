@@ -1,12 +1,14 @@
 package com.orderfood.dao;
 
 import com.orderfood.pojo.OrderfoodStock;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * 原料管理Dao接口
  */
+@Repository
 public interface StockDao {
     /**
      * 新增原料
