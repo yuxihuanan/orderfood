@@ -10,6 +10,16 @@ public class OrderfoodStaffRole implements Serializable {
 
     private Integer employeeid;//员工编号
 
+    private OrderfoodEmployee employee;//员工对象
+
+    public OrderfoodEmployee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(OrderfoodEmployee employee) {
+        this.employee = employee;
+    }
+
     public OrderfoodStaffRole(Integer roleid, Integer employeeid) {
         this.roleid = roleid;
         this.employeeid = employeeid;
