@@ -1,217 +1,449 @@
-doctype html
-html
+doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
   head
-    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    title
-    meta(name='keywords', content='')
-    meta(name='description', content='')
-    meta(name='generator', content='')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    meta(name='viewport', content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;')
-    link(href='css/haiersoft.css', rel='stylesheet', type='text/css', media='screen,print')
-    link(href='css/print.css', rel='stylesheet', type='text/css', media='print')
-    script(src='js/jquery-1.10.1.min.js')
-    script(src='js/side.js', type='text/javascript')
-    //if lt IE 9
-      script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
-      script(src='http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js')
+    title 世尊家具综合管理系统
+    meta(http-equiv='Content-Type', content='text/html; charset=gb2312')
+    script(type='text/javascript').
+        function pr(_id)
+        {
+            var select_id = parseInt(_id.replace("xx",""));
+            for (i=1;i<=8;i++)
+            {
+                if (i==select_id)
+                {
+                    document.getElementById("xx"+i).className = "x_css";
+                }
+                else
+                {
+                    document.getElementById("xx"+i).className = "y_css";
+                }
+            }
+        }
+    script(language='javascript', type='text/javascript').
+        function show(num){
+            document.getElementById(num).style.display="block";
+        }
+        function hidden1(num){
+            document.getElementById(num).style.display="none";
+        }
+    script(language='javascript', type='text/javascript').
+        function r(num){
+            document.getElementById(num).style.display="block";
+        }
+        function r_1(num){
+            document.getElementById(num).style.display="none";
+        }
+    script(language='javascript', type='text/javascript').
+        function srcchange(id)
+        {
+            if(id=="hr1")
+            {
+                document.getElementById("mainFrame").src="rsxz/Employlee.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/rensiManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr2")
+            {
+                document.getElementById("mainFrame").src="rsxz/RecruiterApply.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/xingzhengManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr3")
+            {
+                document.getElementById("mainFrame").src="rsxz/ExaAppDocument.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr15")
+            {
+                document.getElementById("mainFrame").src="notice/NoticeClass.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr16")
+            {
+                document.getElementById("mainFrame").src="notice/NoticeShow.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr17")
+            {
+                document.getElementById("mainFrame").src="notice/Notice.html";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr18")
+            {
+                document.getElementById("mainFrame").src="notice/NoticeCount.html";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr19")
+            {
+                document.getElementById("mainFrame").src="xtsz/XTCS.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr20")
+            {
+                document.getElementById("mainFrame").src="xtsz/Branch.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr21")
+            {
+                document.getElementById("mainFrame").src="xtsz/Role.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr22")
+            {
+                document.getElementById("mainFrame").src="xtsz/Power.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr23")
+            {
+                document.getElementById("mainFrame").src="xtsz/EaDoc.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr4")
+            {
+                document.getElementById("mainFrame").src="knowledge/KnowLedgeClass.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/itemdangan' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr5")
+            {
+                document.getElementById("mainFrame").src="knowledge/KnowLedge.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/itemxinde.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr6")
+            {
+                document.getElementById("mainFrame").src="knowledge/openKnowLedge.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/picmanager.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr7")
+            {
+                document.getElementById("mainFrame").src="knowledge/ChangjianWenti.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/question.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr8")
+            {
+                document.getElementById("mainFrame").src="task/Schedule.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr9")
+            {
+                document.getElementById("mainFrame").src="task/TaskAllot.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr10")
+            {
+                document.getElementById("mainFrame").src="task/TaskShow.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr51")
+            {
+                document.getElementById("mainFrame").src="task/IssuedTask.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr11")
+            {
+                document.getElementById("mainFrame").src="task/DelayTaskApply.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr12")
+            {
+                document.getElementById("mainFrame").src="task/DelayTask.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr13")
+            {
+                document.getElementById("mainFrame").src="task/MoveTaskApply.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr14")
+            {
+                document.getElementById("mainFrame").src="task/MoveTask.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr24")
+            {
+                document.getElementById("mainFrame").src="client/OrderManager.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/orderManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr25")
+            {
+                document.getElementById("mainFrame").src="client/ClientManager.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/clientManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr26")
+            {
+                document.getElementById("mainFrame").src="xtsz/NormalManage.htm";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr27")
+            {
+                document.getElementById("mainFrame").src="xtsz/CustomManage.htm";
+                document.getElementById("dTitle").style.display="none";
+            }
+            //        else if(id=="hr28")
+            //    {
+            //    document.getElementById("mainFrame").src="client/ClientIdea.jade";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //        else if(id=="hr29")
+            //    {
+            //    document.getElementById("mainFrame").src="#";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //        else if(id=="hr30")
+            //    {
+            //    document.getElementById("mainFrame").src="client/ClientReceipt.jade";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //        else if(id=="hr31")
+            //    {
+            //    document.getElementById("mainFrame").src="client/ClientAudit.jade";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //        else if(id=="hr32")
+            //    {
+            //    document.getElementById("mainFrame").src="client/ClientManager.jade";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //     else if(id=="hr33")
+            //    {
+            //    document.getElementById("mainFrame").src="client/ClientLog.jade";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            else if(id=="hr34")
+            {
+                document.getElementById("mainFrame").src="task/TaskResult.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr35")
+            {
+                document.getElementById("mainFrame").src="item/ItemClass.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr36")
+            {
+                document.getElementById("mainFrame").src="item/Item.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr37")
+            {
+                document.getElementById("mainFrame").src="item/ItemPact.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr38")
+            {
+                document.getElementById("mainFrame").src="item/TaskAllo.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr39")
+            {
+                document.getElementById("mainFrame").src="item/TaskProShow.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr40")
+            {
+                document.getElementById("mainFrame").src="item/TaskProRec.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr41")
+            {
+                document.getElementById("mainFrame").src="item/ItemToFile.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr42")
+            {
+                document.getElementById("mainFrame").src="item/ItemToFileAudit.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr43")
+            {
+                document.getElementById("mainFrame").src="product/LineManage.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr44")
+            {
+                document.getElementById("mainFrame").src="product/StyleView.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr45")
+            {
+                document.getElementById("mainFrame").src="product/SpecificationView.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr46")
+            {
+                document.getElementById("mainFrame").src="product/productManage.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr47")
+            {
+                document.getElementById("mainFrame").src="product/ProductDetail.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            //     else if(id=="hr48")
+            //    {
+            //    document.getElementById("mainFrame").src="product/PurchaseView.htm";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            else if(id=="hr49")
+            {
+                document.getElementById("mainFrame").src="product/FavoritesView.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="hr50")
+            {
+                document.getElementById("mainFrame").src="product/ProductShowMange.jade";
+                document.getElementById("dTitle").style.display="none";
+            }
+            //    else if(id=="hr43")
+            //    {
+            //    document.getElementById("mainFrame").src="product/ProductLine.html";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            //        else if(id=="hr46")
+            //    {
+            //    document.getElementById("mainFrame").src="product/productManage.html";
+            //    document.getElementById("dTitle").style.display="none";
+            //    }
+            else if(id=="hr497")//48
+            {
+                document.getElementById("mainFrame").src="knowledge/Peixuzhiliao.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/peixunzhiliao.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr498")//49
+            {
+                document.getElementById("mainFrame").src="knowledge/OtherKnowLedge.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/otherziliao.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr499")
+            {
+                document.getElementById("mainFrame").src="knowledge/gerenzhiliaolist.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/gereziliao.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="hr500")
+            {
+                document.getElementById("mainFrame").src="knowledge/AuditKnowLedge.jade";
+                document.getElementById("dTitle").innerHTML="<img src='images/knowledgeshenhe.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+        }
+        function changeIcon(id)
+        {
+            if(id=="HR")
+            {
+                document.getElementById("dTitle").innerHTML="<img src='images/rensiManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="Notice")
+            {
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="KnowLedge")
+            {
+                document.getElementById("dTitle").innerHTML="<img src='images/itemdangan.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="Task")
+            {
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="Order")
+            {
+                document.getElementById("dTitle").innerHTML="<img src='images/orderManage.jpg' alt='' style='margin-top:5px'/>";
+                document.getElementById("dTitle").style.display="block";
+            }
+            else if(id=="Item")
+            {
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="System")
+            {
+                document.getElementById("dTitle").style.display="none";
+            }
+            else if(id=="Product")
+            {
+                document.getElementById("dTitle").style.display="none";
+            }
+        }
+    link(rel='stylesheet', type='text/css', href='css/index.css')
   body
-    // wrap_left
-    #frmTitle.wrap_left(name='fmTitle')
-      // Logo
-      #Logo
-        span 人单合一
-      // /Logo
-      // menu_list
-      script.
-        $(function() {
-        $(".menu_list dd");
-        $(".menu_list dt").click(function(){
-        $(this).toggleClass("open").next().slideToggle("fast");
-        });
-        });
-      .menu_list
-        dl
-          dt
-            each item in users
-              span='收银管理' + item.roleid + use
-          dd
-            if !ss
-              a(href='', title='选桌') 选桌
-            else
-              a(href='', title='选桌') 选桌1
-            a(href='', title='点菜') 点菜
-            a.active(href='', title='下单') 下单
-            a(href='', title='修改订单') 修改订单
-            a(href='', title='结账') 结账
-          dt
-            span 员工管理
-          dd
-            a(href='', title='员工管理') 员工管理
-            a(href='', title='角色管理') 角色管理
-            a(href='', title='权限管理') 权限管理
-          dt
-            span 菜品管理
-          dd
-            a(href='', title='菜品管理') 菜品管理
-            a(href='', title='菜品分类') 菜品分类
-          dt
-            span 用料管理
-          dd
-            a(href='', title='原料管理') 原料管理
-          dt
-            span 库存管理
-          dd
-            a(href='', title='出库管理') 出库管理
-            a(href='', title='入库管理') 入库管理
-            a(href='', title='库存管理') 库存管理
-          dt
-            span 数据管理
-          dd
-            a(href='', title='收支流水') 收支流水
-            a(href='', title='收支统计') 收支统计
-            a(href='', title='订单记录') 订单记录
-      // /menu_list
-    // /wrap_left
-    // picBox
-    #switchPoint.picBox(onclick='switchSysBar()')
-    // /picBox
-    // wrap_right
-    .wrap_right
-      header
-        // Header
-        #Header
-          // Head
-          #Head
-            script(language='javascript').
-              function showmenu(id){id.style.visibility = "visible";}
-              function hidmenu(){UserList.style.visibility = "hidden";}
-              document.onclick = hidmenu;
-            .user
-              a(href='javascript:showmenu(UserList)') admin
-              #UserList
-                a(href='') 修改
-                a(href='') 注销
-                a(href='') 退出
-          // /Head
-        // /Header
-      // Contents
-      #Contents
-        script(type='text/javascript').
-          $(function(){
-          $(".select").each(function(){
-          var s=$(this);
-          var z=parseInt(s.css("z-index"));
-          var dt=$(this).children("dt");
-          var dd=$(this).children("dd");
-          var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-          var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-          dt.click(function(){dd.is(":hidden")?_show():_hide();});
-          dd.find("a").click(function(){dt.html($(this).html());_hide();});
-          $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
-        // TopMain
-        #TopMain
-          // selectbox
-          .selectbox.floatL.mag_r20
-            span.sttl 年度：
-            dl.select(style='width:200px;')
-              dt 全部
-              dd
-                ul
-                  li
-                    a(href='#') 选项选项A
-                  li
-                    a(href='#') 选项选项B
-                  li
-                    a(href='#') 选项选项C
-                  li
-                    a(href='#') 选项选项D
-                  li
-                    a(href='#') 选项选项E
-          // /selectbox
-          // selectbox
-          .selectbox.floatL.mag_r20
-            span.sttl 部门：
-            dl.select(style='width:200px;')
-              dt 全部
-              dd
-                ul
-                  li
-                    a(href='#') 选项选项A
-                  li
-                    a(href='#') 选项选项B
-                  li
-                    a(href='#') 选项选项C
-                  li
-                    a(href='#') 选项选项D
-                  li
-                    a(href='#') 选项选项E
-          // /selectbox
-          // btn_box
-          .btn_box.floatL
-            input(name='', type='button', value='查询', onmousemove="this.className='input_move'", onmouseout="this.className='input_out'")
-          // /btn_box
-        // /TopMain
-        // MainForm
-        #MainForm
-          .form_boxA
-            h2 年度预算列表
-            table(cellpadding='0', cellspacing='0')
-              tbody
-                tr
-                  th 序号
-                  th 部门
-                  th 年度
-                  th 提交人
-                  th 预算收入（元）
-                  th 预算成本（元）
-                  th 预算费用（元）
-                  th 状态
-                  th 操作
-                tr
-                  td 1
-                  td 财务部
-                  td 2015
-                  td 王友强
-                  td 120890000.00
-                  td 120890000.00
-                  td 120890000.00
-                  td.f_cA 审核通过
-                  td
-                    a(href='#') 查看
-                    |  
-                    a(href='#') 操作
-            p.msg 共找到47条年度预算记录，当前显示从第1条至第10条
-        // /MainForm
-        // PageNum
-        ul#PageNum
-          li
-            a(href='') 首页
-          li
-            a(href='') 上一页
-          li
-            a(href='') 1
-          li
-            a(href='') 2
-          li
-            a(href='') 3
-          li
-            a(href='') 4
-          li
-            a(href='') 5
-          li
-            a(href='') 6
-          li
-            a(href='') 下一页
-          li
-            a(href='') 尾页
-        // /PageNum
-      // /Contents
-      // /footer
-      footer
-        address
-          | 电子邮箱：sales@haiersoft.com  技术支持：人单合一平台项目组
-          br
-          | 青岛海尔软件有限公司版权所有  Copyright © 2015 Haiersoft Corporation, All Rights.
-      // /footer
-    // /wrap_right
+    div(style='width: 1430px; height: 100%;')
+      .mian_r(onmousemove='r(22)', onmouseout='r_1(22)')
+        #22.mian_r_bj.png(style='display: none;', onmousemove='r(22)', onmouseout='r_1(22)')
+          div
+            a(href='#')
+              img(src='images\r_icon_03.png')
+            a(href='#')
+              img(src='images\r_icon_06.png')
+            a(href='#')
+              img(src='images\r_icon_08.png')
+            a(href='#')
+              img(src='images\r_icon_10.png')
+      table(height='100%', width='1425', border='0', cellpadding='0', cellspacing='0', style='overflow: hidden;')
+        tbody
+          tr
+            td(colspan='2', height='52')
+              div
+                #header
+                  .header01
+                    p.logo
+                      a(href='index-x.jade')
+                        img(src='images/logo_03.gif', alt='')
+                    p.right_01
+                      img(src='images/pic_06.gif', alt='')
+                    p.right_02
+                      | 您好，
+                      span happy
+                      | ，欢迎登录！
+          tr
+            td(width='190', valign='top', style='background: url(images/lift_bj_02.gif) repeat-y;', background='images/lift_bj_02.gif ')
+              .side(style='position: absolute;')
+                ul#nav
+                  li#xx1.y_css(onmouseover='show(1)', onmouseout='hidden1(1)')
+                    a(href='rsxz/Employlee.jade', onclick="changeIcon('HR')", target='mainFrame', onmousedown="javascript:pr('xx1')")
+                      span
+                      p.icon_01
+                        | 收银管理
+                  li#xx2.y_css
+                    a(href='notice/NoticeClass.jade', onclick="changeIcon('Notice')", target='mainFrame', onmousedown="javascript:pr('xx2')", onmouseover='show(2)', onmouseout='hidden1(2)')
+                      span
+                      p.icon_10
+                        | 员工管理
+                  li#xx3.y_css
+                    a(href='knowledge/KnowLedgeClass.jade', target='mainFrame', onclick="changeIcon('KnowLedge')", onmousedown="javascript:pr('xx3')", onmouseover='show(3)', onmouseout='hidden1(3)')
+                      span
+                      p.icon_02
+                        | 菜品管理
+                  li#xx4.y_css
+                    a(href='task/MoveTaskApply.jade', onclick="changeIcon('Task')", target='mainFrame', onmousedown="javascript:pr('xx4')", onmouseover='show(4)', onmouseout='hidden1(4)')
+                      span
+                      p.icon_04
+                        | 用料管理
+                  li#xx5.y_css
+                    a(href='client/OrderManager.jade', onclick="changeIcon('Order')", target='mainFrame', onmousedown="javascript:pr('xx5')", onmouseover='show(5)', onmouseout='hidden1(5)')
+                      span
+                      p.icon_05
+                        | 库存管理
+                  li#xx6.y_css
+                    a(href='item/Item.jade', onclick="changeIcon('Item')", target='mainFrame', onmousedown="javascript:pr('xx6')", onmouseover='show(6)', onmouseout='hidden1(6)')
+                      span
+                      p.icon_07
+                        | 数据管理
+            td(width='1215', valign='top')
+              #dTitle(style='float:left; margin-left:30px;')
+                img(src='images/shouye.jpg', alt='', style='margin-top:5px')
+              div(style='text-align: right; margin-right: 15px; float: right')
+                img(src='images/middil_05.gif', alt='')
+                a(href='login.jade')
+                  img(alt='', src='images/middil_06.gif')
+              iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame', src='index1')
+            td(width='5', valign='top', style='position: relative;', height='93%')
+    div(style='text-align:center;')
+    script(src='/common.js')

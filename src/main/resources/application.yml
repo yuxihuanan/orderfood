@@ -42,9 +42,9 @@ spring:
     timeout: 0
   jade4j:
     caching: false
-    prefix: file:E:\项目\orderfood\views\templates\
+    prefix: file:E:\Y2\orderfood\views\templates\
   resources:
-    static-locations: file:E:\项目\orderfood\views\static\
+    static-locations: file:E:\Y2\orderfood\views\static\
 
 ---
 spring:
@@ -86,9 +86,9 @@ spring:
     timeout: 0
   jade4j:
     caching: false
-    prefix: file:/root/templates/templates/
+    prefix: file:E:\Y2\orderfood\views\templates\
   resources:
-    static-locations: file:/root/templates/static/
+    static-locations: file:E:\Y2\orderfood\views\static\
 ---
 mybatis:
     type-aliases-package: com.platform.api.model.entity

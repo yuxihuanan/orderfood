@@ -1,0 +1,92 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='MoveTaskApply.jade')
+              p 原料管理
+      .mian_b
+        .mian_b1
+          a(href='AddTaskMove.jade', title='添加')
+          p.mian_b1_a1
+            a(href='AddTaskMove.jade', title='添加')
+            a(href='#', title='删除')
+          p.mian_b1_a2
+          p.mian_b1_sousuo
+            input(name='', type='text')
+          a(href='#', title='搜索')
+          p.mian_b1_a3
+            a(href='#', title='搜索')
+            a(href='#', title='最后')
+          p.mian_b1_a4
+            a(href='#', title='下一页')
+          p.mian_b1_a5
+          p.mian_b1_list 1 2 3 4……
+          a(href='#', title='上一页')
+          p.mian_b1_a6
+            a(href='#', title='上一页')
+            a(href='#', title='最前')
+          p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='3%')
+                input(name='', type='checkbox', value='')
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 申请人
+              td.mian_b_bg_lm(width='25%')
+                span
+                | 申请原因
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核状态
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核时间
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核人
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+            tr
+              td
+                input(name='', type='checkbox', value='')
+              td 吴菲菲
+              td 太多了
+              td 同意
+              td 2012-3-20
+              td 总经理
+              td.mian_b_icon_01(width='8%')
+                a(href='AddTaskMove.jade') 编辑
+              td.mian_b_icon_02(width='8%')
+                a(href='MoveTaskDetail.jade') 查看
+            tr
+              td.mian_b_bg_lm(width='3%')  
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 申请人
+              td.mian_b_bg_lm(width='25%')
+                span
+                | 申请原因
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核状态
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核时间
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 审核人
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+    script(src='/common.js')
