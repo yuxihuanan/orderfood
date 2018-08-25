@@ -1,0 +1,179 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(language='javascript', type='text/javascript').
+      function click1(num){
+      if(document.getElementById(num).style.display=="block")
+      {
+      document.getElementById(num).style.display="none";
+      }
+      else
+      {
+      document.getElementById(num).style.display="block";
+      }
+      }
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='Employlee.jade')
+              p
+                | 选台
+          li
+            a(href='RSEventApply.jade')
+              p
+                | 点菜
+          li
+            a(href='RSEventApply.jade')
+              p
+                | 下单
+          li
+            a(href='RSEventApply.jade')
+              p
+                | 修改订单
+          li
+            a(href='RSEventApply.jade')
+              p
+                | 结账
+      .mian_b
+        .mian_b1
+          a(href='AddEmploylee.jade', title='添加')
+            p.mian_b1_a1
+          a(href='#', title='删除')
+            p.mian_b1_a2
+          p.mian_b1_sousuo
+            input(name='', type='text')
+          a(href='#', title='搜索')
+            p.mian_b1_a3
+          p.mian_b1_a9
+            a(href='#', onclick="click1('search')") 高级搜索>>
+          a(href='#', title='最后')
+            p.mian_b1_a4
+          a(href='#', title='下一页')
+            p.mian_b1_a5
+          p.mian_b1_list
+            | 1 2 3 4……
+          a(href='#', title='上一页')
+            p.mian_b1_a6
+          a(href='#', title='最前')
+            p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr#search(style='display: none;')
+              td(colspan='8', style='height: 35px; background-color: #DBDBDB;margin-left:20px')
+                select
+                  option
+                    | 性别
+                  option
+                    | 男
+                  option
+                    | 女
+                select
+                  option
+                    | 所属部门
+                  option
+                    | 软装部
+                  option
+                    | 人事部
+                select
+                  option
+                    | 状态
+                  option
+                    | 在职
+                  option
+                    | 离职
+                input.input_03(name='', type='text', value='工号、姓名、职位、手机')
+                input.input_03(name='', type='text', value='起始日期')
+                |  - 
+                input.input_03(name='', type='text', value='结束日期')
+              td(colspan='3', style='height: 35px; background-color: #DBDBDB;')
+                a(href='#', title='高级搜索')
+                  p.mian_b1_a8(onclick="click('search');")
+            tr
+              td.mian_b_bg_lm(width='3%')
+                input(name='', type='checkbox', value='')
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 工号
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 员工姓名
+              td.mian_b_bg_lm(width='5%')
+                span
+                | 性别
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 员工职位
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 手机
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 所属部门
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 入职时间
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 状态
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+            tr
+              td
+                input(name='', type='checkbox', value='')
+              td
+                | 1001
+              td
+                | 吴菲菲
+              td
+                | 男
+              td
+                | 经理
+              td
+                | 15236988554
+              td
+                | 软装部
+              td
+                | 2010-5-1
+              td
+                | 在职
+              td.mian_b_icon_01(width='5%')
+                a(href='AddEmploylee.jade') 编辑
+              td.mian_b_icon_02(width='5%')
+                a(href='EmployeeDetail.jade') 查看
+            tr
+              td.mian_b_bg_lm(width='3%')
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 工号
+              td.mian_b_bg_lm(width='5%')
+                span
+                | 员工名称
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 性别
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 员工职位
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 手机
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 所属部门
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 入职时间
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 状态
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+    script(src='/common.js')

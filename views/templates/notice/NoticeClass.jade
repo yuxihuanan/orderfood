@@ -1,0 +1,80 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='NoticeClass.jade')
+              p
+                | 员工管理
+          li
+            a(href='Notice.jade')
+              p
+                | 角色管理
+          li
+            a(href='NoticeCount.jade')
+              p
+                | 权限管理
+      .mian_b
+        .mian_b1
+          a(href='AddNoticeClass.jade', title='添加')
+            p.mian_b1_a1
+          a(href='#', title='删除')
+            p.mian_b1_a2
+          p.mian_b1_sousuo
+            input(name='', type='text')
+          a(href='#', title='搜索')
+            p.mian_b1_a3
+          a(href='#', title='最后')
+            p.mian_b1_a4
+          a(href='#', title='下一页')
+            p.mian_b1_a5
+          p.mian_b1_list
+            | 1 2 3 4……
+          a(href='#', title='上一页')
+            p.mian_b1_a6
+          a(href='#', title='最前')
+            p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='3%')
+                input(name='', type='checkbox', value='')
+              td.mian_b_bg_lm(width='15%')
+                span
+                | 类别名称
+              td.mian_b_bg_lm(width='35%')
+                span
+                | 类别备注
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+            tr
+              td
+                input(name='', type='checkbox', value='')
+              td
+                | 小道消息
+              td
+                | 八卦新闻，乱七八糟的消息
+              td.mian_b_icon_01(width='8%')
+                a(href='AddNoticeClass.jade') 编辑
+              td.mian_b_icon_02(width='8%')
+                a(href='NoticeClassDetail.jade') 查看
+            tr
+              td.mian_b_bg_lm(width='3%')
+              td.mian_b_bg_lm(width='15%')
+                span
+                | 类别名称
+              td.mian_b_bg_lm(width='35%')
+                span
+                | 类别备注
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+    script(src='/common.js')
