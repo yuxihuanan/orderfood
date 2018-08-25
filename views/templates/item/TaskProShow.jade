@@ -1,0 +1,130 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='Item.jade')
+              p
+                | 收支流水
+          li
+            a(href='TaskAllo.jade')
+              p
+                | 收支统计
+          li
+            a(href='TaskProShow.jade')
+              p
+                | 订单记录
+      .mian_b
+        .mian_b1
+          p.mian_b1_sousuo
+            input(name='', type='text')
+          a(href='#', title='搜索')
+            p.mian_b1_a3
+          a(href='#', title='最后')
+            p.mian_b1_a4
+          a(href='#', title='下一页')
+            p.mian_b1_a5
+          p.mian_b1_list
+            | 1 2 3 4……
+          a(href='#', title='上一页')
+            p.mian_b1_a6
+          a(href='#', title='最前')
+            p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 项目编号
+              td.mian_b_bg_lm(width='20%')
+                span
+                | 项目名称
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 项目类别
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 所属客户
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 项目状态
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 创建人
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 创建时间
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+            tr
+              td
+                | hr1001
+              td
+                | 沙发订做项目
+              td
+                | 软装
+              td
+                | 吴先生
+              td
+                | 新项目
+              td
+                | 总经理
+              td
+                | 2012-3-16
+              td.mian_b_icon_01(width='8%')
+                a(href='TaskProDetail.jade') 进度查询
+              td.mian_b_icon_02(width='8%')
+                a(href='ItemDetail.jade') 查看
+            tr
+              td
+                | hr1001
+              td
+                | 沙发订做项目
+              td
+                | 硬装
+              td
+                | 吴先生
+              td
+                | 新项目
+              td
+                | 总经理
+              td
+                | 2012-3-16
+              td.mian_b_icon_01(width='8%')
+                a(href='TaskYinProDetail.jade') 进度查询
+              td.mian_b_icon_02(width='8%')
+                a(href='ItemDetail.jade') 查看
+            tr
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 项目编号
+              td.mian_b_bg_lm(width='20%')
+                span
+                | 项目名称
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 项目类别
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 所属客户
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 项目状态
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 创建人
+              td.mian_b_bg_lm(width='8%')
+                span
+                | 创建时间
+              td.mian_b_bg_lm(colspan='2')
+                span
+                | 操作
+    script(src='/common.js')
