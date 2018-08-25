@@ -27,6 +27,16 @@ public class OrderfoodEmployee implements Serializable {
 
     private Date createdate;//入店时间
 
+    private OrderfoodEmployeeRole orderfoodEmployeeRole;//角色对象
+
+    public OrderfoodEmployeeRole getOrderfoodEmployeeRole() {
+        return orderfoodEmployeeRole;
+    }
+
+    public void setOrderfoodEmployeeRole(OrderfoodEmployeeRole orderfoodEmployeeRole) {
+        this.orderfoodEmployeeRole = orderfoodEmployeeRole;
+    }
+
     public OrderfoodEmployee(Integer employeeid, String employeename, Integer age, String username, String password, Integer eRoleid, Integer sex, String address, String phone, Date createdate) {
         this.employeeid = employeeid;
         this.employeename = employeename;
