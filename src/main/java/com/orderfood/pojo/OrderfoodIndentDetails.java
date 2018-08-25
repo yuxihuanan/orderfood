@@ -10,6 +10,10 @@ public class OrderfoodIndentDetails implements Serializable {
 
     private Integer dCuisineid;//菜品编号
 
+    private OrderfoodIndent indent; //订单
+
+    private orderfoodCuisine cuisine;//菜品编号所对应的菜品信息
+
     private Integer detailscount;//菜品数量
 
     private Integer dIndentid;//订单编号
@@ -55,5 +59,21 @@ public class OrderfoodIndentDetails implements Serializable {
 
     public void setdIndentid(Integer dIndentid) {
         this.dIndentid = dIndentid;
+    }
+
+    public orderfoodCuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(orderfoodCuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public OrderfoodIndent getIndent() {
+        return indent;
+    }
+
+    public void setIndent(OrderfoodIndent indent) {
+        this.indent = indent;
     }
 }

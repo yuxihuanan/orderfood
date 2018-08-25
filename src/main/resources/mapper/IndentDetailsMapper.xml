@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.IndentDetailsMapper">
+    <resultMap id="ds" type="com.orderfood.pojo.OrderfoodIndentDetails">
+        <id property="detailsId" column="detailsId"/>
+        <result property="d_cuisineId" column="d_cuisineId"/>
+        <result property="detailsCount" column="detailsCount"/>
+        <result property="d_indentId" column="d_indentId"/>
+        <association property="indent" javaType="com.orderfood.pojo.OrderfoodIndent" column="indentId">
+
+        </association>
+        <association property="cuisine" resultMap="cu" />
+    </resultMap>
+    
+    <select id="getDetail" resultMap="ds">
+      SELECT * FROM `orderfood_indent` i INNER JOIN `orderfood_indent_details` d
+	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
+	          ON d.`d_cuisineId`=c.`cuisineId` WHERE i.`i_tableId`=3
+    </select>
+</mapper>
