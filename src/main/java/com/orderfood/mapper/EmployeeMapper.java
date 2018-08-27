@@ -9,12 +9,4 @@ import java.util.List;
 
 @Repository("employeeMapper")
 public interface EmployeeMapper extends CommonMapper<OrderfoodEmployee> {
-    @Select("" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "")
-    public List<OrderfoodEmployee> SelectEmployee(OrderfoodEmployee employee);
 }

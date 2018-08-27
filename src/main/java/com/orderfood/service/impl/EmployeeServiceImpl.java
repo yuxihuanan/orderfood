@@ -14,21 +14,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Integer InsertEmployee(OrderfoodEmployee employee) {
-        return employeeMapper.insertUseGeneratedKeys(employee);
+        return null;
     }
 
     @Override
     public Integer UpdateEmployee(OrderfoodEmployee employee) {
-        return employeeMapper.updateByPrimaryKey(employee);
+        return null;
     }
 
     @Override
     public Integer DeleteEmployee(Integer employeeId) {
-        return employeeMapper.deleteByPrimaryKey(employeeId);
+        return null;
     }
 
     @Override
     public List<OrderfoodEmployee> SelectEmployee(OrderfoodEmployee employee) {
-        return employeeMapper.selectAll();
+        return null;
     }
 }

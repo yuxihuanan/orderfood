@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("indentDetailsService")
 public class IndentDetailsServiceImpl implements IndentDetailsService {
 
     @Autowired
@@ -21,17 +21,17 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      */
     @Override
     public List<OrderfoodIndentDetails> getDetail(String tableId) {
-        return indentDetailsMapper.getDetail(tableId);
+        return null;
     }
 
     /**
      * 根据所传入的OrderfoodIndentDetails对象对其进行更新
-     * @param orderfoodIndentDetails
+     * @param OrderfoodIndentDetails
      * @return
      */
     @Override
     public int updateDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
-        return indentDetailsMapper.updateDetails(orderfoodIndentDetails);
+        return 0;
     }
 
     /**
@@ -41,7 +41,7 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      */
     @Override
     public int deleteDetaiils(int detailsId) {
-        return indentDetailsMapper.deleteDetaiils(detailsId);
+        return 0;
     }
 
     /**
@@ -51,6 +51,6 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      */
     @Override
     public int addDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
-        return indentDetailsMapper.addDetails(orderfoodIndentDetails);
+        return 0;
     }
 }
