@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 @Controller
 public class controller {
-    @Resource(name="login")
+    /*@Resource(name="login")
     private LoginService login;
     @RequestMapping("index")
     public ModelAndView goIndex()
@@ -19,11 +19,10 @@ public class controller {
         model.addObject("use","222");
         model.addObject("ss",true);
         return model;
-    }
+    }*/
     @RequestMapping("index1")
     public ModelAndView goIndex1(){
         ModelAndView model=new ModelAndView("index1");
         return model;
     }
-
 }
