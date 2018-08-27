@@ -447,3 +447,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             td(width='5', valign='top', style='position: relative;', height='93%')
     div(style='text-align:center;')
     script(src='/common.js')
+        script.
+            $(function () {
+                $.get("OrderTableUpadte","",function (data) {
+                    alert(data);
+                })
+            })

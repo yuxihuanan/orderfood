@@ -9,13 +9,13 @@ import javax.annotation.Resource;
 
 @Controller
 public class LoginController {
-    @Resource(name="login")
-    private LoginService login;
-    @RequestMapping("login")
-    public ModelAndView  Login()
-    {
-        ModelAndView model=new ModelAndView("index");
-        model.addObject("users",login.AdminLogin(null));
-        return model;
-    }
+//    @Resource(name="login")
+//    private LoginService login;
+//    @RequestMapping("login")
+//    public ModelAndView  Login()
+//    {
+//        ModelAndView model=new ModelAndView("index");
+//        model.addObject("users",login.AdminLogin(null));
+//        return model;
+//    }
 }

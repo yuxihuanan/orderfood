@@ -2,6 +2,7 @@ package com.orderfood.service;
 
 
 import com.orderfood.pojo.OrderfoodIndentDetails;
+import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.pojo.OrderfoodTable;
 
 import java.util.List;
@@ -18,10 +19,16 @@ public interface CashierService {
 
     /**
      * 选桌
-     * @param tableId
+     * @param OrderfoodTable
      * @return
      */
-    public Integer Choosetable(Integer tableId);
+    public Integer Choosetable(OrderfoodTable OrderfoodTable);
+
+    /**
+     * 查看菜品
+     * @return
+     */
+    public List<OrderfoodMenu> getOrderfoodMenuAll();
 
     /**
      * 下单
