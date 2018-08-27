@@ -1,0 +1,57 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='NoticeClass.jade')
+              p
+                | 公告类别
+          li
+            a(href='Notice.jade')
+              p
+                | 公告管理
+          li
+            a(href='NoticeCount.jade')
+              p
+                | 公告统计
+          li
+            a(href='NoticeShow.jade')
+              p
+                | 公告查看
+          | >
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')
+              td.mian_b_bg_lm(colspan='3')
+                | 公告类别详细
+            tr
+              td
+              td(width='10%', valign='top')
+                | 类别名称：
+              td(width='60%')
+                | 小道消息
+              td(width='30%')
+            tr
+              td
+              td(valign='top')
+                | 类别备注：
+              td
+                | 八卦新闻，乱七八糟的消息
+              td
+            tr
+              td
+              td
+              td
+                div(align='center')
+                  img(src='..\images\bnt_05.gif', alt='', width='80', height='22', onclick='javascript:window.history.go(-1);')
+              td
+    script(src='/common.js')

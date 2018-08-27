@@ -13,7 +13,7 @@ public class OrderfoodIndent implements Serializable {
 
     private Integer iTableid;//所属桌号
 
-    private Date createdate;//创建时间
+    private String createdate;//创建时间
 
     private String indentcomment;//订单备注
 
@@ -23,7 +23,7 @@ public class OrderfoodIndent implements Serializable {
 
     private Integer iEmployeeid;//服务员 员工id
 
-    public OrderfoodIndent(Integer indentid, String indentcode, Integer iTableid, Date createdate, String indentcomment, Float totalmoney, Float netmoney, Integer iEmployeeid) {
+    public OrderfoodIndent(Integer indentid, String indentcode, Integer iTableid, String createdate, String indentcomment, Float totalmoney, Float netmoney, Integer iEmployeeid) {
         this.indentid = indentid;
         this.indentcode = indentcode;
         this.iTableid = iTableid;
@@ -62,11 +62,11 @@ public class OrderfoodIndent implements Serializable {
         this.iTableid = iTableid;
     }
 
-    public Date getCreatedate() {
+    public String getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(Date createdate) {
+    public void setCreatedate(String createdate) {
         this.createdate = createdate;
     }
 

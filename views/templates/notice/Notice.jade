@@ -1,0 +1,82 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='NoticeClass.jade')
+              p
+                | 员工管理
+          li
+            a(href='Notice.jade')
+              p
+                | 角色管理
+          li
+            a(href='NoticeCount.jade')
+              p
+                | 权限管理
+      .mian_b
+        .mian_b1
+          a(href='AddNotice.jade', title='添加')
+            p.mian_b1_a1
+          a(href='#', title='删除')
+            p.mian_b1_a2
+          p.mian_b1_sousuo
+            input(name='', type='text')
+          a(href='#', title='搜索')
+            p.mian_b1_a3
+          a(href='#', title='最后')
+            p.mian_b1_a4
+          a(href='#', title='下一页')
+            p.mian_b1_a5
+          p.mian_b1_list
+            | 1 2 3 4……
+          a(href='#', title='上一页')
+            p.mian_b1_a6
+          a(href='#', title='最前')
+            p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='3%')
+                input(name='', type='checkbox', value='')
+              td.mian_b_bg_lm(width='56%', colspan='2')
+                | 公告主题
+              td.mian_b_bg_lm(width='25%')
+                span
+                | 有效期
+              td.mian_b_bg_lm(width='16%', colspan='2')
+                | 操作
+            tr
+              td
+                input(name='', type='checkbox', value='')
+              td(width='44')
+                img(src='..\images\pic_03.jpg', width='40', height='40', alt='', style='margin: 3px;')
+              td
+                span(style='color: #307d74;') 联想扬天
+                | ：4000年前，华夏先民就开始以“春分竖蛋”庆贺春天的来临，“春分到，蛋儿俏”的说法流传至今
+              td
+                | 2012-03-23 至 2012-03-25
+              td(width='8%')
+                .mian_b_icon_04
+                  a(href='AddNotice.jade') 编辑
+              td(width='8%')
+                .mian_b_icon_03
+                  a(href='NoticeShowDetail.jade') 查看
+            tr
+              td.mian_b_bg_lm
+                input(name='', type='checkbox', value='')
+              td.mian_b_bg_lm(colspan='2')
+                | 公告主题
+              td.mian_b_bg_lm
+                span
+                | 有效期
+              td.mian_b_bg_lm(colspan='2')
+                | 操作
+    script(src='/common.js')

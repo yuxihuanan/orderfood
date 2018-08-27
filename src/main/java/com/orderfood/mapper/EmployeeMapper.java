@@ -4,6 +4,6 @@ import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodStaffRole;
 import org.springframework.stereotype.Repository;
 
-@Repository("loginMapper")
+@Repository("employeeMapper")
 public interface EmployeeMapper extends CommonMapper<OrderfoodEmployee> {
 }

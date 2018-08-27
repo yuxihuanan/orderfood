@@ -1,0 +1,194 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='OrderClass.jade')
+              p
+                | 订单分类
+          li
+            a(href='AddOrder.jade')
+              p
+                | 新建订单
+          li
+            a(href='OrderManager.jade')
+              p
+                | 订单维护
+          li
+            a(href='OrderShow.jade')
+              p
+                | 订单查询
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='1', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')  
+              td.mian_b_bg_lm(colspan='3') 订单详细
+            tr
+              td  
+              td(width='15%', valign='top') 项目名称
+              td(width='60%')
+                | XX项目
+              td(width='20%')  
+            tr
+              td  
+              td(valign='top') 订单编号
+              td
+                | hr10010
+              td  
+            tr
+              td  
+              td(valign='top') 项目负责人
+              td
+                | 吴菲菲
+              td  
+            tr
+              td  
+              td(valign='top') 项目金额
+              td 1000000.00 
+              td  
+            tr
+              td  
+              td(valign='top') 项目周期
+              td 5周 
+              td  
+            tr
+              td  
+              td(valign='top') 订单类别
+              td
+                | 临时订单
+              td  
+            tr
+              td  
+              td(colspan='2') 客户信息
+              td  
+            tr
+              td
+              td(colspan='3')
+                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
+                  tbody
+                    tr
+                      td(align='center') 客户编号
+                      td(align='center') 客户名称
+                      td(align='center') 客户类型
+                      td(align='center') 联系人
+                      td(align='center') 职位
+                      td(align='center') 联系方式
+                      td(align='center') 备注
+                    tr
+                      td(align='center') 10010
+                      td(align='center') XXX有限公司
+                      td(align='center') vip客户
+                      td(align='center') 张先生
+                      td(align='center') 经理
+                      td(align='center') 15021556621
+                      td(align='center') 认真对待
+            tr
+              td  
+              td(valign='top', colspan='2') 订单信息—项目内容
+              td  
+            tr
+              td  
+              td(colspan='3')
+                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
+                  tbody
+                    tr
+                      td(align='center') 项目内容
+                      td(align='center') 项目风格
+                      td(align='center') 项目类型
+                      td(align='center') 项目订立时间
+                      td(align='center') 项目完成时间
+                      td(align='center') 备注
+                    tr
+                      td(align='center') XXX项目开始
+                      td(align='center') 欧美风格
+                      td(align='center') 重点项目
+                      td(align='center') 2012-5-12
+                      td(align='center') 2012-6-12
+                      td(align='center') 认真对待
+            tr
+              td  
+              td(valign='top', colspan='2') 订单信息—产品清单（零售、工程订单） 
+              td
+            tr
+              td  
+              td(colspan='3')
+                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
+                  tbody
+                    tr
+                      td(align='center') 产品编号
+                      td(align='center') 产品名称
+                      td(align='center') 数量
+                      td(align='center') 单位
+                      td(align='center') 单价
+                      td(align='center') 总额
+                      td(align='center') 备注
+                    tr
+                      td(align='center') hr1001
+                      td(align='center') 给力产品
+                      td(align='center') 12
+                      td(align='center') 个
+                      td(align='center') 150.00/个
+                      td(align='center') 18000.00
+                      td(align='center') 超贵的额
+            tr
+              td  
+              td(valign='top') 附加信息
+              td
+                | 请慎重对待该项目
+              td
+            tr
+              td  
+              td(valign='top', colspan='2') 订单完成进度
+              td
+            tr
+              td  
+              td(colspan='3')
+                table(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='1')
+                  tbody
+                    tr
+                      td(width='10%', style='background-color:White', align='center') 编号
+                      td(width='15%', style='background-color:White', align='center') 付款阶段
+                      td(width='15%', style='background-color:White', align='center') 付款方式 
+                      td(width='15%', style='background-color:White', align='center') 付款比重
+                      td(width='10%', style='background-color:White', align='center') 付款进度
+                      td(width='10%', style='background-color:White', align='center') 备注
+                    tr
+                      td(style='background-color:White', align='center') 1
+                      td(style='background-color:White', align='center') 合同订立阶段
+                      td(style='background-color:White', align='center') 网银 
+                      td(style='background-color:White', align='center') 1
+                      td(style='background-color:White', align='center') 50% 
+                      td(style='background-color:White', align='center') 认真核对好 
+                    tr
+                      td(style='background-color:White', align='center') 2
+                      td(style='background-color:White', align='center') 合同确定阶段
+                      td(style='background-color:White', align='center') 网银 
+                      td(style='background-color:White', align='center') 1
+                      td(style='background-color:White', align='center') 50% 
+                      td(style='background-color:White', align='center') 认真核对好 
+            tr
+              td  
+              td 合同附件查看
+              td 合同附件... 下载
+              td
+            tr
+              td  
+              td 客户资料查看
+              td 资料附件... 下载
+              td
+            tr
+              td  
+              td  
+              td
+                div(align='center')
+                  img(src='..\images\bnt_05.gif', alt='', width='80', height='22', onclick='javascript:history.go(-1);')
+              td  
+    script(src='/common.js')

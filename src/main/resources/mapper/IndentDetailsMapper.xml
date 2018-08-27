@@ -2,14 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.orderfood.mapper.IndentDetailsMapper">
     <resultMap id="ds" type="com.orderfood.pojo.OrderfoodIndentDetails">
-        <id property="detailsId" column="detailsId"/>
-        <result property="d_cuisineId" column="d_cuisineId"/>
-        <result property="detailsCount" column="detailsCount"/>
-        <result property="d_indentId" column="d_indentId"/>
-        <association property="indent" javaType="com.orderfood.pojo.OrderfoodIndent" column="indentId">
-
+        <id property="detailsid" column="detailsId"/>
+        <result property="dCuisineid" column="d_cuisineId"/>
+        <result property="detailscount" column="detailsCount"/>
+        <result property="dIndentid" column="d_indentId"/>
+        <association property="indent" javaType="com.orderfood.pojo.OrderfoodIndent">
+            <id property="indentid" column="indentId"/>
+            <result property="indentcode" column="indentCode"/>
+            <result property="iTableid" column="i_tableId"/>
+            <result property="createdate" column="createDate"/>
+            <result property="indentcomment" column="indentComment"/>
+            <result property="totalmoney" column="totalmoney"/>
+            <result property="netmoney" column="netmoney"/>
+            <result property="iEmployeeid" column="i_employeeId"/>
         </association>
-        <association property="cuisine" resultMap="cu" />
+        <association property="cuisine" javaType="com.orderfood.pojo.orderfoodCuisine">
+            <id property="cuisineid" column="cuisineId"/>
+            <result property="cuisinename" column="cuisineName"/>
+            <result property="price" column="price"/>
+            <result property="cuisineacronym" column="cuisineAcronym"/>
+            <result property="cuisineidentify" column="cuisineIdentify"/>
+            <result property="cClassifyid" column="c_classifyId"/>
+        </association>
     </resultMap>
     
     <select id="getDetail" resultMap="ds">
@@ -17,4 +31,16 @@
 	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
 	          ON d.`d_cuisineId`=c.`cuisineId` WHERE i.`i_tableId`=3
     </select>
+
+    <update id="updateDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        UPDATE `orderfood_indent_details` d SET d.`detailsCount`=#{detailscount} WHERE d.`detailsId`=#{detailsid}
+    </update>
+    
+    <delete id="deleteDetaiils">
+        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsid}
+    </delete>
+
+    <insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        INSERT INTO `orderfood_indent_details` VALUES(NULL,#{dCuisineid},#{},#{})
+    </insert>
 </mapper>

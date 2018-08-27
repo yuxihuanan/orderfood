@@ -20,5 +20,9 @@ public class controller {
         model.addObject("ss",true);
         return model;
     }*/
-
+    @RequestMapping("index1")
+    public ModelAndView goIndex1(){
+        ModelAndView model=new ModelAndView("index1");
+        return model;
+    }
 }
