@@ -27,7 +27,7 @@ public class OrderFoodTableController {
     public ModelAndView OrdrTableShow(){
         ModelAndView modelAndView=new ModelAndView("page/begintheatricalperformance");
         modelAndView.addObject("ordertable",cashierService.getAllTable());
-        return modelAndView;
+            return modelAndView;
     }
     @ResponseBody
     @RequestMapping("OrderTableUpadte")
