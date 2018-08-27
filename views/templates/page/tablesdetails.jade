@@ -12,154 +12,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         img(src='img/return.png')
       h1 桌台详情
       p
-    p.state 未下单
+    p.state 已下单
     .content
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 挂炉蜜汁叉烧
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
     .footer-space
     .bottom
       .bottom_1
@@ -167,9 +21,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           input.note(type='text', value='备注')
         p.total
           | 合计：
-          span ￥536.0
+          span.price ￥536.0
           |  共
-          span 8
+          span.sum 8
           | 菜
       .bottom_2
         .sub_but
@@ -177,13 +31,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li
             input.orange_btn(type='button', value='全单催菜')
           li
-            input.orange_btn(type='button', value='上传订单')
-          li
-            input.orange_btn(type='button', value='更新订单')
-        ul.action_btn
-          li
             input.gray_btn(type='button', value='桌面清台')
           li
-            input.green_btn(type='button', value='保存订单')
-          li
-            input.orange_btn(type='button', value='确定下单')
+            input.orange_btn(type='button', value='更新订单' onclick='upda()')
+
+
+      script(src='/js/jquery-1.7.1.min.js')
+      script(src='/js/tablesdetails.js')
+      script(type='text/javaScript')
+
+
