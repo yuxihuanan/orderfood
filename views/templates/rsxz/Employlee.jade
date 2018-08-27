@@ -114,13 +114,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 | 手机
               td.mian_b_bg_lm(width='10%')
                 span
-                | 所属部门
-              td.mian_b_bg_lm(width='10%')
-                span
                 | 入职时间
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 状态
               td.mian_b_bg_lm(colspan='2')
                 span
                 | 操作
@@ -138,15 +132,22 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td
                 | 15236988554
               td
-                | 软装部
-              td
                 | 2010-5-1
-              td
-                | 在职
               td.mian_b_icon_01(width='5%')
                 a(href='AddEmploylee.jade') 编辑
               td.mian_b_icon_02(width='5%')
                 a(href='EmployeeDetail.jade') 查看
+            each item in employees
+
+                  tr
+                    td
+                      input(name='', type='checkbox', value='')
+                    td=item.employeeid
+                    td=item.employeename
+                    td=item.sexs
+                    td=item.orderfoodEmployeeRole.rolename
+                    td=item.phone
+                    td=item.createdate
             tr
               td.mian_b_bg_lm(width='3%')
               td.mian_b_bg_lm(width='10%')
@@ -166,13 +167,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 | 手机
               td.mian_b_bg_lm(width='10%')
                 span
-                | 所属部门
-              td.mian_b_bg_lm(width='10%')
-                span
                 | 入职时间
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 状态
               td.mian_b_bg_lm(colspan='2')
                 span
                 | 操作

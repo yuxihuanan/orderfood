@@ -4,9 +4,10 @@ import com.orderfood.mapper.EmployeeMapper;
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;

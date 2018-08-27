@@ -1,5 +1,8 @@
 package com.orderfood.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,14 +23,14 @@ public class OrderfoodEmployee implements Serializable {
     private Integer eRoleid;//角色
 
     private Integer sex;//性别
+    @Transient  ////表示此数据不在数据库表里建立属性
+    private String sexs;
 
     private String address;//所在地址
 
     private String phone;//电话号
-
-    private Date createdate;//入店时间
-
-    private OrderfoodEmployeeRole orderfoodEmployeeRole;//角色对象
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String createdate;//入店时间
 
     public OrderfoodEmployeeRole getOrderfoodEmployeeRole() {
         return orderfoodEmployeeRole;
@@ -37,7 +40,18 @@ public class OrderfoodEmployee implements Serializable {
         this.orderfoodEmployeeRole = orderfoodEmployeeRole;
     }
 
-    public OrderfoodEmployee(Integer employeeid, String employeename, Integer age, String username, String password, Integer eRoleid, Integer sex, String address, String phone, Date createdate) {
+    @Transient
+   private OrderfoodEmployeeRole orderfoodEmployeeRole;//对象
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public OrderfoodEmployee(Integer employeeid, String employeename, Integer age, String username, String password, Integer eRoleid, Integer sex, String sexs,String address, String phone, String createdate,OrderfoodEmployeeRole getOrderfoodEmployeeRole) {
         this.employeeid = employeeid;
         this.employeename = employeename;
         this.age = age;
@@ -45,9 +59,11 @@ public class OrderfoodEmployee implements Serializable {
         this.password = password;
         this.eRoleid = eRoleid;
         this.sex = sex;
+        this.sexs=sexs;
         this.address = address;
         this.phone = phone;
         this.createdate = createdate;
+        this.orderfoodEmployeeRole =  orderfoodEmployeeRole;
     }
 
     public OrderfoodEmployee() {
@@ -107,6 +123,11 @@ public class OrderfoodEmployee implements Serializable {
     }
 
     public void setSex(Integer sex) {
+        if(sex==1){
+            setSexs("男");
+        }else if(sex==0){
+            setSexs("女");
+        }
         this.sex = sex;
     }
 
@@ -126,11 +147,11 @@ public class OrderfoodEmployee implements Serializable {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public String getSexs() {
+        return sexs;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setSexs(String sexs) {
+        this.sexs = sexs;
     }
 }
