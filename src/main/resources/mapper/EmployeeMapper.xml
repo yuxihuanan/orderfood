@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.EmployeeMapper">
+    <resultMap id="Em" type="com.orderfood.pojo.OrderfoodEmployee">
+        <id property="employeeid" column="employeeId"/>
+        <result property="employeename" column="employeeName"/>
+        <result property="age" column="age"/>
+        <result property="username" column="userName"/>
+        <result property="password" column="password"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="createdate" column="createDate"/>
+        <result property="eRoleid" column="e_roleId"/>
+        <association property="orderfoodEmployeeRole" javaType="com.orderfood.pojo.OrderfoodEmployeeRole">
+            <id property="roleid" column="roleId"/>
+            <result property="rolename" column="roleName"/>
+        </association>
+    </resultMap>
+
+    <select id="getAllEm" resultMap="Em">
+              SELECT * FROM orderfood_employee em,orderfood_employee_role ro WHERE em.`e_roleId`=ro.`roleId`
+    </select>
+    <delete id="delEm" parameterType="Integer">
+              DELETE FROM orderfood_employee WHERE employeeId = #{employeeid}
+    </delete>
+    <insert id="addEm" parameterType="com.orderfood.pojo.OrderfoodEmployee">
+              INSERT INTO orderfood_employee VALUES (NULL,#{employeename},#{age},#{username},#{password},#{eRoleid},#{sex},#{address},#{phone},#{createdate})
+    </insert>
+    <update id="updEm" parameterType="com.orderfood.pojo.OrderfoodEmployee">
+            UPDATE orderfood_employee SET employeeName = #{employeename},age=#{age},userName=#{username},`password`=#{password},e_roleId = #{eRoleid},sex=#{sex},address=,#{address},phone=#{phone},createDate=#{createdate}) WHERE employeeId = #{employeeid}
+    </update>
+    <select id="selEm" resultMap="Em">
+          SELECT * FROM orderfood_employee WHERE employeeId = #{employeeid}
+    </select>
+</mapper>
