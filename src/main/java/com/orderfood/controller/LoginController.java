@@ -8,21 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 
 @Controller
-public class controller {
-    /*@Resource(name="login")
+public class LoginController {
+    @Resource(name="login")
     private LoginService login;
-    @RequestMapping("index")
-    public ModelAndView goIndex()
+    @RequestMapping("login")
+    public ModelAndView  Login()
     {
         ModelAndView model=new ModelAndView("index");
         model.addObject("users",login.AdminLogin(null));
-        model.addObject("use","222");
-        model.addObject("ss",true);
-        return model;
-    }*/
-    @RequestMapping("index1")
-    public ModelAndView goIndex1(){
-        ModelAndView model=new ModelAndView("index1");
         return model;
     }
 }

@@ -12,7 +12,7 @@ public class StockController {
 
     @Resource(name="stockService")
     private StockService stockService;
-    @RequestMapping("login")
+    @RequestMapping("stocklogin")
     public ModelAndView SelectStock(OrderfoodStock stock) {
         ModelAndView model = new ModelAndView("index");
         model.addObject("users",stockService.SelectStock(null));

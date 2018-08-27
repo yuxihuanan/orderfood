@@ -1,25 +1,28 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
  * 订单详情
  */
+@Table(name = "orderfood_indent_details")
 public class OrderfoodIndentDetails implements Serializable {
+
     private Integer detailsid;//订单详情编号
 
     private Integer dCuisineid;//菜品编号
 
+    @Transient
+    private OrderfoodIndent indent; //订单
+
+    @Transient
+    private OrderfoodCuisine cuisine;//菜品编号所对应的菜品信息
+
     private Integer detailscount;//菜品数量
 
     private Integer dIndentid;//订单编号
-
-    public OrderfoodIndentDetails(Integer detailsid, Integer dCuisineid, Integer detailscount, Integer dIndentid) {
-        this.detailsid = detailsid;
-        this.dCuisineid = dCuisineid;
-        this.detailscount = detailscount;
-        this.dIndentid = dIndentid;
-    }
 
     public OrderfoodIndentDetails() {
         super();
@@ -55,5 +58,21 @@ public class OrderfoodIndentDetails implements Serializable {
 
     public void setdIndentid(Integer dIndentid) {
         this.dIndentid = dIndentid;
+    }
+
+    public OrderfoodCuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(OrderfoodCuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public OrderfoodIndent getIndent() {
+        return indent;
+    }
+
+    public void setIndent(OrderfoodIndent indent) {
+        this.indent = indent;
     }
 }
