@@ -1,11 +1,11 @@
 package com.orderfood.service.impl;
 
 import com.orderfood.mapper.OrderFoodTableMapper;
+import com.orderfood.mapper.OrderfoodTableCuisineMapper;
+import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodIndentDetails;
-import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.pojo.OrderfoodTable;
 import com.orderfood.service.CashierService;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,8 @@ import java.util.List;
 public class CashierServiceImpl implements CashierService {
     @Autowired
     private OrderFoodTableMapper orderFoodTableMapper;
+    @Autowired
+    private OrderfoodTableCuisineMapper orderfoodTableCuisineMapper;
     @Override
     /**
      * 查看所有桌号
@@ -36,8 +38,8 @@ public class CashierServiceImpl implements CashierService {
      * @return
      */
     @Override
-    public List<OrderfoodMenu> getOrderfoodMenuAll() {
-        return null;
+    public List<OrderfoodCuisine> getOrderfoodCuisineAll() {
+        return orderfoodTableCuisineMapper.selectAll();
     }
 
     @Override

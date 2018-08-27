@@ -1,0 +1,151 @@
+@charset "utf-8";
+/* CSS Document */
+.left{ float:left;}
+.right{ float:right;}
+.gray_btn,.orange_btn,.green_btn,.blue_btn{ background:#ababab; width:70px; height:24px; line-height:24px; text-align:center; border:none; border-radius:3px; color:#fff; font-size:12px;}
+.blue_btn{ background:#1ac5d4;}
+.orange_btn{ background:#fd4505;}
+.green_btn{ background:#a6b254;}
+/************************ 台况****************************************/
+html{ height:100%; width:100%; background: url(../img/bg.jpg); background-size:cover; background-attachment:fixed; }
+body{  box-sizing:border-box; padding-top:60px;}
+header{ width:100%; height:50px; position:fixed; top:0px;text-align:center; background:#7e2e14; color:#fff; line-height:50px; font-size:24px; z-index:999; overflow:hidden;}
+.nav{  width:100%; position:fixed; top:50px; z-index:999}
+.nav ul{ overflow:hidden;border-bottom:1px solid #7e2e14; width:100%; box-sizing:border-box; height:35px;}
+.nav ul li a{ width:33.3%; float:left; text-align:center; line-height:30px; font-size:16px; color:#7e2e14;}
+a.active{border-bottom:5px solid #7e2e14;}
+.content{ width:100%; box-sizing:border-box; padding:10px; margin-bottom:60px; overflow:hidden;color:#7e2e14;}
+.content ul.desk { overflow:hidden; margin-top:20px;}
+.content ul.desk li{ float:left; margin-bottom:30px; width:33.3%; text-align:center;}
+.content ul.desk li a.subscribe,.content ul li a.service,.content ul li a.unused{ display:block; width:90px; height:90px ; margin:0 auto; background:url(../img/subscribe.png); background-size:cover; position:relative; }
+p.sub_txt{ width:12px; text-align:center; font-size:12px; color:#fff; position:absolute; top:4px; left:21px; text-align:center;}
+.p_num{ font-size:16px; font-weight:600;}
+.content ul li a.service{ background:url(../img/service.png); background-size:cover;}
+p.use_txt{ color:#000; text-align:center; line-height:90px;}
+.content ul li a.unused{ background:url(../img/unused.png); background-size:cover;}
+.footer-space{width:100%;height:80px;}
+footer{ background:#8b3519; width:100%; height:76px; padding:10px 0; box-sizing:border-box; position:fixed; bottom:0;}
+footer ul{ overflow:hidden;}
+footer ul li{ float:left; width:25%; text-align:center;}
+footer ul li a img{ width:30px; height:30px;}
+footer ul li a p{ color:#fff8f6; margin-top:10px;}
+footer ul li a p.cur{ color:#face7e; }
+/************************ 台况****************************************/
+#open{ display:none; background:rgba(0,0,0,0.5); height:100%; width:100%; position:fixed; top:0%; left:0%; z-index:1000;}
+#open .white_content {
+    display:none;
+    position: absolute;
+    top: 25%;
+    left:15%;
+    width: 60%;
+    height:26%;
+    padding: 20px;
+    background-color:#fff;
+    z-index:1002;
+    overflow:hidden;
+    text-align:center;
+    border-radius:5px;
+    color:#7e2e14;
+}
+#open .white_content select{ width:90px; margin-bottom:36px;}
+#open .white_content a.close{ position:absolute; top:5px; right:5px;}
+#open .white_content a.close img{ width:18px; height:18px;}
+#open .white_content h2{ margin-bottom:10px; font-size:18px;}
+#open .white_content h2 span{ color:#fd4505;}
+
+/************************ 快速点餐****************************************/
+header a.return img{float:left; width:10px; height:20px; padding:15px 0 15px 10px;}
+p.switch{ width:60%; margin:0 auto; border:1px solid #fff; border-radius:5px; height:30px; margin-top:10px; overflow:hidden;}
+p.switch a{ font-size:16px; width:50%; text-align:center; color:#fff; line-height:30px; float:left;}
+p.switch a.selected{ background:#fcf4e1; color:#7e2e14;}
+a.amount{ background: url(../img/amount.png) no-repeat; position:fixed; top:10px; right:5px; width:40px; height:50px; z-index:1000; background-size:cover; text-align:center; color:#fff; font-size:14px; padding-top:5px;}
+a.amount span{ font-weight:800; display:block; font-size:16px;}
+ul.menu{ margin-bottom:80px;}
+ul.menu li,ul.dishes li{ border-bottom:1px solid #e5c575; padding:10px 0; overflow:hidden; width:100%;  position:relative;}
+ul.menu li img,ul.dishes li img{ width:120px; height:90px; border:1px solid #e5e5e5; border-radius:3px; margin-right:5px; float:left;}
+ul.menu li h4,ul.dishes li h4{ font-size:16px;}
+ul.menu li p.price{ line-height:50px; }
+.discount{ color:#fd4505; font-size:14px;}
+span.dis_price{ background:#fd4505; border-radius:3px; color:#fff; margin-right:3px; font-size:12px;}
+a.add{  position:absolute; top:40px; right:5px;}
+ul.menu li a.add img{width:30px; height:30px; border:none;}
+
+/************************ 菜谱点餐****************************************/
+ul.classes{ float:left; width:28%; text-align:center;color:#7e2e14; margin-bottom:80px; margin-right:2%; box-sizing:border-box;}
+ul.classes li{ height:50px; line-height:50px; border-bottom:1px solid #e5c575; border-right:1px solid #e5c575; background:#fdeec4;}
+ul.classes li.choosed{ border-right:0; border-left:5px solid #7e2e14; background:none; position:relative;}
+span.sub{ display:block; width:20px; height:20px; border-radius:50px; border:1px solid #fff; background:#fb6e52; color:#fff; position:absolute; top:-5px; right:5px; line-height:20px; text-align:center;}
+ul.dishes{ float:left; width:70%; margin-bottom:100px;}
+ul.dishes li img{ width:80px; height:60px;}
+ul.dishes li a.add img{ width:25px; height:25px; border:none;}
+
+/************************ 我的菜单****************************************/
+p.state{ border-bottom:1px solid #e9cd88; padding-bottom:5px; color:#d46946; text-align:center; margin-bottom:20px;}
+.name{ font-size:16px; font-weight:600;}
+.order_list{ width:100%; border-bottom:1px solid #e5c575; margin-bottom:20px; }
+.order_list td{ width:33%; text-align:center; height:26px; line-height:26px; color:#7e2e14;}
+td.edit{ color:#fd4505; font-size:12px;}
+.edit img{ width:20px; height:20px;}
+ul.call li{ border-bottom:1px solid #C90; overflow:hidden; margin-bottom:30px; font-size:14px;}
+ul.call li img{ float:right; width:8px; height:16px; margin-right:10px;}
+ul.call li span{ color:#F30;}
+.deal,.h_deal{ float:right; background:#F60; width:50px; height:24px; text-align:center; line-height:24px; color:#fff; border-radius:5px; }
+.h_deal{ background:#CCC;}
+td.m_num{overflow:hidden;}
+td.m_num span{float:right;height:24px; line-height:22px; font-size:20px; margin-right:5px;}
+td.m_num span.count{ background:#7e2e14; border-radius:200px; width:24px; font-weight:bold; color:#fff; }
+.bottom{  width:100%; position:fixed; bottom:0; left:0;}
+.bottom_1{ overflow:hidden; width:100%;  background:#ffefc2; padding:10px 5px; box-sizing:border-box;}
+.bottom_2{ background:#8b3519; width:100%;  overflow:hidden;  padding:10px 5px; box-sizing:border-box;}
+.note{ width:50%; border:1px solid #e5c575; background:#ffefc2; height:30px; float:left; border-radius:3px;}
+p.total{ float:left; width:50%; text-align:right;  font-size:12px; line-height:30px;}
+p.total span{ color:#F30; font-size:14px;}
+
+/************************账单****************************************/
+table.bill{ border-bottom:1px solid #C90; background:#fff6dd; width:95%; margin:10px auto;}
+.td_1{ width:80%; text-align:left; line-height:28px;}
+.td_2{ width:20%; text-align:right; line-height:28px;}
+.td_2 a,.state{ color:#F30;}
+
+
+/************************桌台详情****************************************/
+ul.action_btn{ overflow:hidden; position:relative; }
+ul.action_btn li{ width:33.33%; float:left; text-align:center;}
+#hid_ul{ margin-bottom:20px;}
+
+/****************************更多************************************/
+ul.moreSet{ overflow:hidden; margin-top:10px;}
+ul.moreSet li{ width:50%; float:left;}
+ul.moreSet li a{ display:block; margin:0 auto;}
+ul.infor{ margin:30px auto;}
+ul.infor li{ overflow:hidden; border-bottom:1px solid #7e2e14; padding:5px; height:24px; line-height:24px; margin-bottom:30px;  }
+ul.infor li a{ color:#7e2e14; padding-left:30px;}
+ul.infor li img{ width:12px; height:20px; float:right;}
+ul.infor li.hotel{ background:url(../img/icon.png) no-repeat left top; }
+ul.infor li.waiter{ background:url(../img/icon.png) no-repeat 0 -32px; }
+ul.infor li.food{ background:url(../img/icon.png) no-repeat 0 -67px; }
+ul.infor li.password{ background:url(../img/icon.png) no-repeat 0 -101px; }
+ul.infor li.exit{ background:url(../img/icon.png) no-repeat 0 -136px; }
+
+/****************************酒店信息************************************/
+.content h2.name{ text-align:center; font-size:18px;}
+.content .h_logo{ margin:10px auto; border-radius:200px; border:#fce6a8 5px solid; width:120px; height:120px; display:block;}
+.content h3.brief{ font-size:16px; margin-bottom:5px; font-weight:600;}
+.content p.br_con{ text-indent:2em; font-size:14px; line-height:24px; margin-bottom:30px;}
+.content dl{ overflow:hidden; width:100%; margin:10px auto; font-size:14px;}
+.content dt{ width:20%; float:left;}
+.content dd{ width:80%; float:right; border-bottom:1px solid #e5c575; }
+
+/****************************修改密码************************************/
+dl.pass_w{ margin:30px auto 50px;}
+dl.pass_w dt{ width:35%;}
+dl.pass_w dd{ width:65%;}
+dl.pass_w dd input{ border:none; background:none; outline:none;}
+a.modify{ display:block; height:30px; width:150px; font-size:14px; margin:80px auto 0; background:#fd4505; color:#fff; text-align:center; line-height:30px; border-radius:5px;}
+
+/****************************登录************************************/
+
+.login{ width:90%; margin:30px auto 0; overflow:hidden;}
+p.log_f{ border-bottom:1px solid #e5c575; margin-bottom:50px; }
+.id_name,.login_word{ border:none; background:none; }
+.registered{ width:70%; margin:0 auto; display:block;}

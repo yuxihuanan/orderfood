@@ -1,8 +1,8 @@
 package com.orderfood.service;
 
 
+import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodIndentDetails;
-import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.pojo.OrderfoodTable;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public interface CashierService {
      * 查看菜品
      * @return
      */
-    public List<OrderfoodMenu> getOrderfoodMenuAll();
+    public List<OrderfoodCuisine> getOrderfoodCuisineAll();
 
     /**
      * 下单
