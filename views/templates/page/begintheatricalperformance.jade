@@ -22,55 +22,21 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         each item in ordertable
           if item.tablestatus==0
             li
-              a.unused(href='javascript:void(0)', onclick="document.getElementById('open').style.display='block';document.getElementById('operate').style.display='block'")
+              a.unused(href="OrdermealShow/"+item.tablenumber+"")
                 p.use_txt
                   | 无人
               p.d_num=item.tablenumber
-            #open
-              #operate.white_content
-                a.close(href='javascript:void(0)', onclick="document.getElementById('open').style.display='none';document.getElementById('operate').style.display='none'")
-                  img(src='img/close.png')
-                h2
-                  | 桌号：
-                  span=item.tablenumber
-                form
-                  p
-                    | 人数：
-                    select
-                      option 1人
-                      option 2人
-                      option 3人
-                      option 4人
-                a.gray_btn.left(href='#') 取消预约
-                a.orange_btn.right(href='Order meal.html') 确定开台
           else
             li
-              a.service(href='tables details.html')
+              a.service(href='TablesdetailsShow')
                 p.use_txt
                   | 在用
               p.d_num=item.tablenumber
-            #open
-              #operate.white_content
-                a.close(href='javascript:void(0)', onclick="document.getElementById('open').style.display='none';document.getElementById('operate').style.display='none'")
-                  img(src='img/close.png')
-                h2
-                  | 桌号：
-                  span=item.tablenumber
-                form
-                  p
-                    | 人数：
-                    select
-                      option 1人
-                      option 2人
-                      option 3人
-                      option 4人
-                a.gray_btn.left(href='#') 取消预约
-                a.orange_btn.right(href='Order meal.html') 确定开台
     .footer-space
     footer
       ul
         li
-          a(href='begin theatrical performance.html')
+          a(href='OrdrTableShow')
             img(src='img/footer_1.png')
             p.cur 台 况
         li

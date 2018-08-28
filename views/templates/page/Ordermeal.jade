@@ -4,80 +4,67 @@ html
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     link(href='css/reset1.css', type='text/css', rel='stylesheet')
     link(href='css/style.css', type='text/css', rel='stylesheet')
+    script(src="js/jquery-1.7.1.min.js")
+    script.
+      var jsons=new Array();
+      function add(id) {
+          var datajson={
+              name:$(id).prev().prev().prev().text(),
+              price:$(id).prev().prev().text()
+          }
+          jsons.push(datajson)
+          $(".amount span").text(jsons.length)
+      }
+      function dianji() {
+          console.info(JSON.stringify(jsons))
+            alert(JSON.stringify(jsons))
+          $.ajax({
+               "url": "AddMyMeum",
+               "data": {
+                   jsonArray:JSON.stringify(jsons)
+               },
+               "dataType": "json",
+               "type": "post",
+              "success": function(data) {
+                  window.location.href="MymenmShow";
+              }
+
+           })
+      }
+
     title 快速点餐
   body
     header
       a.return(href='#')
         img(src='img/return.png')
       p.switch
-        a.selected(href='#') 快速点餐
-        a(href='The menu order.html') 菜谱点餐
-    a.amount(href='My menu.html')
+        a.selected(href='OrdermealShow') 快速点餐
+        a(href='ThemenuorderShow') 菜谱点餐
+    a.amount(href="javaScript:void(0)" onclick="dianji()")
       | 已点
-      span 3
+      span 0
     .content
       ul.menu
-        li
-          img(src='img/food_01.png')
-          h4 梅菜扣肉
-          p.price 28.0元/份
-          p.discount
-            span 折扣价
-            | 26.0元/份
-          a.add(href='#')
-            img(src='img/add.png')
-        li
-          img(src='img/food_02.png')
-          h4 梅菜扣肉
-          p.price 28.0元/份
-          p.discount
-            span 折扣价
-            | 26.0元/份
-          a.add(href='#')
-            img(src='img/add.png')
-        li
-          img(src='img/food_03.png')
-          h4 梅菜扣肉
-          p.price 28.0元/份
-          p.discount
-            span 折扣价
-            | 26.0元/份
-          a.add(href='#')
-            img(src='img/add.png')
-        li
-          img(src='img/food_01.png')
-          h4 梅菜扣肉
-          p.price 28.0元/份
-          p.discount
-            span 折扣价
-            | 26.0元/份
-          a.add(href='#')
-            img(src='img/add.png')
-        li
-          img(src='img/food_01.png')
-          h4 梅菜扣肉
-          p.price 28.0元/份
-          p.discount
-            span 折扣价
-            | 26.0元/份
-          a.add(href='#')
-            img(src='img/add.png')
+        each item in foodCuisine
+          li
+            img(src='img/food_01.png')
+            h4.cuisinename=item.cuisinename
+            p.price=item.price+"元/份"
+            p.discount
+              span 推荐
+            a.add(href='javaScirpt:void(0)' onclick="add(this)")
+              img(src='img/add.png')
     .footer-space
     footer
       ul
         li
-          a(href='begin theatrical performance.html')
+          a(href='OrdrTableShow')
             img(src='img/footer_1.png')
             p.cur 台 况
+        li
+          a(href='call out.html')
+            p
         li
           a(href='bill.html')
             img(src='img/footer_02.png')
             p 账 单
-        li
-          a(href='call out.html')
-            img(src='img/footer_03.png')
-            p 呼 叫
-        li
-          a(href='more.html')
-            img(src='img/footer_4.png')
-            p 更 多

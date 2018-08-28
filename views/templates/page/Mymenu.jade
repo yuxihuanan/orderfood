@@ -6,12 +6,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     link(href='css/reset1.css', type='text/css', rel='stylesheet')
     link(href='css/style.css', type='text/css', rel='stylesheet')
+    script(src="js/jquery-1.7.1.min.js")
     title 我的菜单
     header
       a.return(href='#')
         img(src='img/return.png')
       h1 我的菜单
       p
+        each
     p.state 未下单
     .content
       table.order_list
@@ -24,131 +26,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           tr
             td 38.0/份
             td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 挂炉蜜汁叉烧
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
             td.m_num
               span.count +
               span.amount 1
