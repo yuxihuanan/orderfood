@@ -13,15 +13,15 @@ import java.util.List;
 public interface LoginService {
     /**
      * 登录
-     * @param staff
+     * @param employee
      * @return
      */
-    public OrderfoodEmployee AdminLogin(OrderfoodEmployee staff);
+    public OrderfoodEmployee AdminLogin(OrderfoodEmployee employee);
 
     /**
      * 权限分配
      * @param roleId
      * @return
      */
-    public OrderfoodJurisdiction GetJurisdiction(Integer roleId);
+    public List<OrderfoodJurisdiction> GetJurisdiction(Integer roleId);
 }

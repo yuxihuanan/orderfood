@@ -1,5 +1,6 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -9,9 +10,9 @@ public class OrderfoodJurisdiction implements Serializable {
     private Integer jRoleid;//角色编号
 
     private Integer jClassifyid;//导航编号
-
+    @Transient  //表示此数据不在数据库表里建立属性
     private OrderfoodMenu classify;//导航对象
-
+    @Transient  //表示此数据不在数据库表里建立属性
     private OrderfoodEmployeeRole role;//角色对象
 
     public OrderfoodMenu getClassify() {

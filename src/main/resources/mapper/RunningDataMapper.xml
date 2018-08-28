@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.RunningDataMapper">
+        <resultMap id="runningdata" type="com.orderfood.pojo.OrderfoodRunningData">
+                <id column="dataId" property="dataid"></id>
+                <result column="dataPrice" property="dataprice"></result>
+                <result column="dataStatement" property="datastatement"></result>
+                <result column="createDate" property="createdate"></result>
+                <result column="dataComment" property="datacomment"></result>
+        </resultMap>
+
+    <select id="SelectRunningData" resultMap="runningdata">
+SELECT
+ dataId,
+ dataPrice,
+ dataStatement,
+ createDate,
+ dataComment
+ FROM
+ orderfood_running_data
+ <trim prefix="where" prefixOverrides="and | or">
+     <if test="runningData.datastatement!=null and runningData.datastatement!=''">
+         and dataStatement=#{runningData.datastatement}
+     </if>
+     <if test="runningData.startDate!=null and runningData.startDate!='' and runningData.stopDate!=null and runningData.stopDate!=''">
+       and createDate  BETWEEN #{runningData.startDate} AND #{runningData.stopDate}
+     </if>
+ </trim>
+    </select>
+</mapper>
