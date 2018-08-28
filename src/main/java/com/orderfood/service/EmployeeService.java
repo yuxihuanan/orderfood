@@ -11,30 +11,35 @@ import java.util.List;
 @Repository
 public interface EmployeeService {
     /**
-     * 新增员工
-     * @param employee
+     * 查询全部的员工信息
      * @return
      */
-    public Integer InsertEmployee(OrderfoodEmployee employee);
+    List<OrderfoodEmployee> getAllEm();
 
     /**
-     * 修改员工
-     * @param employee
+     * 根据员工编号删除员工
+     * @param employeeid
      * @return
      */
-    public Integer UpdateEmployee(OrderfoodEmployee employee);
+    int delEm(int employeeid);
 
     /**
-     * 删除员工
-     * @param employeeId
+     * 添加员工
+     * @param orderfoodEmployee
      * @return
      */
-    public Integer DeleteEmployee(Integer employeeId);
+    int addEm(OrderfoodEmployee orderfoodEmployee);
 
     /**
-     * 查询员工
-     * @param employee
+     * 修改员工信息
+     * @param orderfoodEmployee
+     */
+    int updEm(OrderfoodEmployee orderfoodEmployee);
+
+    /**
+     * 根据id查询员工信息
+     * @param employeeid
      * @return
      */
-    public List<OrderfoodEmployee> SelectEmployee(OrderfoodEmployee employee);
+    int selEm(int employeeid);
 }

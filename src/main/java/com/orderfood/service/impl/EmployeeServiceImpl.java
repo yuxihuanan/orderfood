@@ -12,23 +12,57 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
 
+    /**
+     * 查询全部员工
+     * @return
+     */
     @Override
-    public Integer InsertEmployee(OrderfoodEmployee employee) {
-        return null;
+    public List<OrderfoodEmployee> getAllEm() {
+        return employeeMapper.getAllEm();
     }
 
+    /**
+     * 根据员工id删除员工
+     * @param employeeid
+     * @return
+     */
     @Override
-    public Integer UpdateEmployee(OrderfoodEmployee employee) {
-        return null;
+    public int delEm(int employeeid) {
+        return employeeMapper.delEm(employeeid);
     }
 
+    /**
+     * 添加员工
+     * @param orderfoodEmployee
+     * @return
+     */
     @Override
-    public Integer DeleteEmployee(Integer employeeId) {
-        return null;
+    public int addEm(OrderfoodEmployee orderfoodEmployee) {
+        return employeeMapper.addEm(orderfoodEmployee);
     }
 
+    /**
+     * 实现修改员工数据
+     * @param orderfoodEmployee
+     * @return
+     */
     @Override
-    public List<OrderfoodEmployee> SelectEmployee(OrderfoodEmployee employee) {
-        return null;
+    public int updEm(OrderfoodEmployee orderfoodEmployee) {
+        try {
+            employeeMapper.updEm(orderfoodEmployee);
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
+    }
+
+    /**
+     * 根据id查询员工信息
+     * @param employeeid
+     * @return
+     */
+    @Override
+    public int selEm(int employeeid) {
+        return employeeMapper.selEm(employeeid);
     }
 }

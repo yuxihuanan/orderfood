@@ -1,34 +1,36 @@
-package com.orderfood.service;
+package com.orderfood.mapper;
 
-
+import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodEmployeeRole;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface EmployeeRoleService {
+
+public interface EmployeeRodeMapper extends CommonMapper<OrderfoodEmployee> {
     /**
-     * 查询角色信息
+     * 查询全部角色
      * @return
      */
     List<OrderfoodEmployeeRole> getAllRo();
 
     /**
-     * 根据id删除角色信息
+     * 根据id删除角色
      * @param roleid
      * @return
      */
     int delRo(int roleid);
 
     /**
-     * 添加角色信息
+     * 添加角色
      * @param orderfoodEmployeeRole
      * @return
      */
     int addRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
 
     /**
-     * 修改角色信息
+     * 修改角色
      * @param orderfoodEmployeeRole
      */
-    int updRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
+    void updRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
 }
