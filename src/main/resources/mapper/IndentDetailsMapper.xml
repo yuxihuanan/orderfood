@@ -37,7 +37,7 @@
     </update>
 
     <delete id="deleteDetaiils">
-        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsid}
+        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsId}
     </delete>
 
     <!--<insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">-->

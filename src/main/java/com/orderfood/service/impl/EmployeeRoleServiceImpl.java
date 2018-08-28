@@ -9,23 +9,29 @@ import java.util.List;
 public class EmployeeRoleServiceImpl implements EmployeeRoleService {
     @Autowired
     private EmployeeRoleService employeeRoleService;
+
     @Override
-    public Integer InsertEmployeeRole(OrderfoodEmployeeRole role) {
-        return employeeRoleService.InsertEmployeeRole(role);
+    public List<OrderfoodEmployeeRole> getAllRo() {
+        return employeeRoleService.getAllRo();
     }
 
     @Override
-    public Integer UpdateEmployeeRole(OrderfoodEmployeeRole role) {
-        return employeeRoleService.UpdateEmployeeRole(role);
+    public int delRo(int roleid) {
+        return employeeRoleService.delRo(roleid);
     }
 
     @Override
-    public Integer DeleteEmployeeRole(Integer roleId) {
-        return employeeRoleService.DeleteEmployeeRole(roleId);
+    public int addRo(OrderfoodEmployeeRole orderfoodEmployeeRole) {
+        return employeeRoleService.addRo(orderfoodEmployeeRole);
     }
 
     @Override
-    public List<OrderfoodEmployeeRole> SelectEmployeeRole(OrderfoodEmployeeRole role) {
-        return employeeRoleService.SelectEmployeeRole(role);
+    public int updRo(OrderfoodEmployeeRole orderfoodEmployeeRole) {
+        try {
+            employeeRoleService.updRo(orderfoodEmployeeRole);
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
     }
 }
