@@ -1,7 +1,10 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表实体类
@@ -18,6 +21,15 @@ public class OrderfoodIndent implements Serializable {
     private String indentcomment;//订单备注
 
     private Float totalmoney;//订单总金额
+
+    @Transient
+    private List<OrderfoodIndentDetails> details; //订单详情
+
+    @Transient
+    private OrderfoodTable orderfoodTable;//桌台详请
+
+    @Transient
+    private OrderfoodEmployee orderfoodEmployee; //员工详请
 
     private Float netmoney;//实付总金额
 
@@ -100,5 +112,29 @@ public class OrderfoodIndent implements Serializable {
 
     public void setiEmployeeid(Integer iEmployeeid) {
         this.iEmployeeid = iEmployeeid;
+    }
+
+    public List<OrderfoodIndentDetails> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderfoodIndentDetails> details) {
+        this.details = details;
+    }
+
+    public OrderfoodTable getOrderfoodTable() {
+        return orderfoodTable;
+    }
+
+    public void setOrderfoodTable(OrderfoodTable orderfoodTable) {
+        this.orderfoodTable = orderfoodTable;
+    }
+
+    public OrderfoodEmployee getOrderfoodEmployee() {
+        return orderfoodEmployee;
+    }
+
+    public void setOrderfoodEmployee(OrderfoodEmployee orderfoodEmployee) {
+        this.orderfoodEmployee = orderfoodEmployee;
     }
 }
