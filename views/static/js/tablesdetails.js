@@ -1,35 +1,15 @@
 var indentId;  //订单编号
-function init2(url) {
+
+/**
+ * 当用户从正在使用的桌子进来时,调用此方法查看订单详情：statu=1
+ * @param url
+ * @param tableId
+ */
+function init(url,tableId) {
     $.ajax({
         "url":url,
         "type":"post",
-        "data":"tableId=3",
-        "dataType":"JSON",
-        "success":function (result) {
-            $(result).each(function () {
-                $(".content").append("<table class=\"order_list\">" +
-                    "<tr>" +
-                    "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
-                    "<input name='d_cuisineId' type='hidden' value='"+this.dCuisineid+"'/>"+
-                    "<td class=\"name\">"+this.cuisine.cuisinename+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
-                    "</tr>" +
-                    "<tr>" +
-                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" onclick='jian($(this))'>-</span></td>" +
-                    "</tr>" +
-                    "</table>");
-            });
-            jisuan();
-        },
-        "error":function () {
-            alert("网络错误!!");
-        }
-    });
-}
-function init(url) {
-    $.ajax({
-        "url":url,
-        "type":"post",
-        "data":"tableId=3",
+        "data":"tableId="+tableId,
         "dataType":"JSON",
         "success":function (result) {
             indentId=result[0].dIndentid;
@@ -48,11 +28,46 @@ function init(url) {
             jisuan();
         },
         "error":function () {
-            alert("网络错误!!");
+            alert("网络错误!");
         }
     });
 }
 
+/**
+ * 当用户使用订单页面访问过来时,加载此方法
+ * @param url
+ */
+function init2(url) {
+    $.ajax({
+        "url":url,
+        "type":"post",
+        "data":"tableId=3",
+        "dataType":"JSON",
+        "success":function (result) {
+            $(result).each(function () {
+                $(".content").append("<table class=\"order_list\">" +
+                    "<tr>" +
+                    "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
+                    "<input name='d_cuisineId' type='hidden' value='"+this.id+"'/>"+
+                    "<td class=\"name\">"+this.name+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td>"+this.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.num+"</span><span class=\"count\" onclick='jian($(this))'>-</span></td>" +
+                    "</tr>" +
+                    "</table>");
+            });
+            jisuan();
+        },
+        "error":function () {
+            alert("网络错误2!!");
+        }
+    });
+}
+
+/**
+ * 判断用户加菜的数量
+ * @param j
+ */
 function jia(j){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
@@ -63,6 +78,11 @@ function jia(j){
       alert("已经点的够多了!");
     }
 }
+
+/**
+ * 判断用户减菜的数量
+ * @param j
+ */
 function jian(j){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
@@ -77,6 +97,9 @@ function jian(j){
     jisuan();
 }
 
+/**
+ * 计算菜的数量以及总价
+ */
 function jisuan(){
   var amount=$(".amount");
   var dd=$(".dd");
@@ -92,6 +115,9 @@ function jisuan(){
   $(".price").html(sumPrice);
 }
 
+/**
+ * 生成订单详情对象,并调用u方法更新订单详情
+ */
 function upda() {
     var tables=$("table").size();
     for(var i=0;i<tables;i++){
@@ -108,6 +134,10 @@ function upda() {
     }
 }
 
+/**
+ * 更新订单详情
+ * @param data
+ */
 function u(data){
     $.ajax({
         "url":"IndentDetails/updateDetails",
@@ -145,35 +175,39 @@ function dele(detailsId){
     });
 }
 
+/**
+ * 结账时跳转页面
+ * @param tableId
+ */
 function jie(tableId){
     location.href="orderDetails?tableId="+tableId;
 }
 
+/**
+ * 生成订单详情对象,并调用add()，添加订单详情
+ * @param d_indentId
+ */
 function addDetails(d_indentId) {
     var tables=$("table").size();
-    /*
-    dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
-            detailscount:$("table:eq("+i+") .amount").html(),//数量
-            */
-    var data={
-        dCuisineid:2,//菜品编号
-        detailscount:2,//数量
-        dIndentid:d_indentId
-    }
-    add(data);
     for(var i=0;i<tables;i++){
         var data={
-            dCuisineid:2,//菜品编号
-            detailscount:2,//数量
+            dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
+            detailscount:$("table:eq("+i+") .amount").html(),//数量
             dIndentid:d_indentId
         }
         add(data);
         if(i==tables-1){
             alert("下单成功!!");
+
+            location.href="OrderTableUpadte/1";
         }
     }
 }
 
+/**
+ * 添加订单详情
+ * @param data
+ */
 function add(data){
     $.ajax({
         "url":"IndentDetails/addDetails",
@@ -182,7 +216,7 @@ function add(data){
         "async":false,
         "dataType":"JSON",
         "success":function () {
-            alert("欧克了");
+
         },
         "error":function (result) {
             alert("添加错误2!!");
@@ -190,15 +224,18 @@ function add(data){
     });
 }
 
-function addIndent(){
+/**
+ * 添加订单,返回一个订单编号,并调用addDetails(),进行订单详情的添加
+ */
+function addIndent(tableId){
     $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn");
     $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
     $("input[name=j]").removeClass("gray_btn").addClass("orange_btn").attr("disabled","false").removeAttr("disabled");
 
     var data={
-        iTableid:1,//所属桌号id
-        indentcomment:"无",//备注
-        totalmoney:100 //订单总金额
+        iTableid:tableId,//所属桌号id
+        indentcomment:$(".note").val(),//备注
+        totalmoney:$(".price").html() //订单总金额
     }
     $.ajax({
         "url":"IndentDetails/addIndent",

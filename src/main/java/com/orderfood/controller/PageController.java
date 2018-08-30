@@ -13,7 +13,7 @@ public class PageController {
     public ModelAndView goXuanzhuo(String tableId){
         ModelAndView model=new ModelAndView("page/tablesdetails");
         model.addObject("tableId",3);
-        model.addObject("statu",0);
+        model.addObject("statu",1);
         return model;
     }
 

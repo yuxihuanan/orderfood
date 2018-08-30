@@ -6,10 +6,12 @@ import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class IndentDetailsServiceImpl implements IndentDetailsService {
 
     @Autowired
@@ -89,6 +91,7 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      * @param r_cuisineId
      * @return
      */
+    @Transactional
     @Override
     public int updateStockByRecipeid(Integer r_cuisineId) {
         return indentDetailsMapper.updateStockByRecipeid(r_cuisineId);

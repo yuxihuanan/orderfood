@@ -65,7 +65,7 @@ public class OrderFoodTableController {
      * OrdermealShow
      * @return
      */
-    private Integer Zhuohao;
+    private static Integer Zhuohao;
     @RequestMapping("OrdermealShow")
     public ModelAndView OrdermealShow(){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
@@ -115,14 +115,14 @@ public class OrderFoodTableController {
      * 修改桌子信息
      * @return int
      */
-    @RequestMapping("OrderTableUpadte/{tableid}/{tablenumber}/{tablestatus}")
-    public String OrderTableUpadte(@PathVariable Integer tableid,@PathVariable Integer tablenumber,@PathVariable Integer tablestatus){
+    @RequestMapping("OrderTableUpadte/{tablestatus}")
+    public String OrderTableUpadte(@PathVariable("tablestatus") Integer tablestatus){
         OrderfoodTable orderfoodTable=new OrderfoodTable();
-        orderfoodTable.setTableid(tableid);
-        orderfoodTable.setTablenumber(tablenumber);
+        orderfoodTable.setTableid(Zhuohao);
+        orderfoodTable.setTablenumber(Zhuohao);
         orderfoodTable.setTablestatus(tablestatus);
         int res=cashierService.Choosetable(orderfoodTable);
-        return "redirect:/OrdermealShow";
+        return "redirect:/OrdrTableShow";
     }
     @ResponseBody
     @RequestMapping("tableshow")
@@ -142,14 +142,18 @@ public class OrderFoodTableController {
     @RequestMapping("TableDetailsShow")
     public ModelAndView TableDetailsShow(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
-        String info=RedisUtil.getRu().get("lyx"+Zhuohao);
-        System.out.println(info);
-        List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
-        System.out.println(JSON.toJSONString(list));
-        modelAndView.addObject("CusineCade",list);
         modelAndView.addObject("tableId",Zhuohao);
         modelAndView.addObject("statu",0);
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "getTableDetailsShow",produces = "text/plain;charset=utf-8")
+    public String getTableDetailsShow(){
+        String info=RedisUtil.getRu().get("lyx"+Zhuohao);
+        System.out.println(info);
+        List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
+        return JSON.toJSONString(list);
     }
 
     @RequestMapping("ZaiyongZhuo")
@@ -159,6 +163,7 @@ public class OrderFoodTableController {
     public ModelAndView ZaiyongZhuo(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
         modelAndView.addObject("statu",1);
+        modelAndView.addObject("tableId",Zhuohao);
         return modelAndView;
     }
 }

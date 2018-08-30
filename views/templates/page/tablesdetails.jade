@@ -29,7 +29,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .sub_but
         ul#hid_ul.action_btn
           li
-            input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent()')
+            input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent(#{tableId})')
           li
             input.orange_btn(type='button', value='更新订单',name='up' onclick='upda()')
           li
@@ -42,10 +42,10 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         if(#{statu}==0){
           $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
           $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          //init("TableDetailsShow");
+          init2("getTableDetailsShow");
         }else{
           $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          init("IndentDetails/getDetail");
+          init("IndentDetails/getDetail",#{tableId});
         }
 
 

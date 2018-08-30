@@ -1,21 +1,17 @@
-var indentId;  //订单编号
-$(function () {
+function init(tableId){
     $.ajax({
         "url":"IndentDetails/getDetail",
         "type":"post",
-        "data":"tableId=3",
+        "data":"tableId="+tableId,
         "dataType":"JSON",
         "success":function (result) {
-            indentId=result[0].dIndentid;
             $(result).each(function () {
                 $(".content").append("<table class=\"order_list\">" +
                     "<tr>" +
                     "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
                     "<input name='d_cuisineId' type='hidden' value='"+this.dCuisineid+"'/>"+
-                    "<td class=\"name\">"+this.cuisine.cuisinename+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
-                    "</tr>" +
-                    "<tr>" +
-                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"amount\" style='width: 100%'>"+this.detailscount+"份</span></td>" +
+                    "<td class=\"name\">"+this.cuisine.cuisinename+"</td>" +
+                    "<td class=\"name\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"amount\" style='width: 100%'>"+this.detailscount+"份</span></td>" +
                     "</tr>" +
                     "</table>");
             });
@@ -25,8 +21,7 @@ $(function () {
             alert("网络错误!!");
         }
     });
-});
-
+}
 
 function jisuan(){
     var amount=$(".amount");
@@ -44,5 +39,10 @@ function jisuan(){
 }
 
 function zhifubao(){
+    u();
     /*location.href="http://localhost:8080/index";*/
+}
+
+function u(){
+    location.href="OrderTableUpadte/0";
 }
