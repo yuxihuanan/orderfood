@@ -43,7 +43,6 @@ public class OrderFoodTableController {
     public ModelAndView MymenmShow(){
         ModelAndView modelAndView=new ModelAndView("page/Mymenu");
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
-        System.out.println(info);
         List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
         List<myMeum> list1=list;
         for (int i = 0; i < list.size()-1; i++) {
@@ -55,7 +54,6 @@ public class OrderFoodTableController {
                 }
                 j++;
             }
-            System.out.println(list.get(i).getName()+"   "+list.get(i).getPrice()+"      "+list.get(i).getNum());
         }
         modelAndView.addObject("myMeum",list);
         return modelAndView;
@@ -65,7 +63,7 @@ public class OrderFoodTableController {
      * OrdermealShow
      * @return
      */
-    private static Integer Zhuohao;
+    private Integer Zhuohao;
     @RequestMapping("OrdermealShow")
     public ModelAndView OrdermealShow(){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
@@ -83,6 +81,7 @@ public class OrderFoodTableController {
     @RequestMapping("OrdermealShow/{id}")
     public String OrdermealShow(@PathVariable Integer id){
         this.Zhuohao=id;
+        System.out.println(this.Zhuohao);
         return "redirect:/OrdermealShow";
     }
 
@@ -151,19 +150,25 @@ public class OrderFoodTableController {
     @RequestMapping(value = "getTableDetailsShow",produces = "text/plain;charset=utf-8")
     public String getTableDetailsShow(){
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
-        System.out.println(info);
         List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
         return JSON.toJSONString(list);
     }
 
-    @RequestMapping("ZaiyongZhuo")
+    @RequestMapping("ZaiyongZhuo/{id}")
     /**
      * 加入桌子有人的话就进订单页面
      */
-    public ModelAndView ZaiyongZhuo(){
+    public String ZaiyongZhuo(@PathVariable Integer id){
+        this.Zhuohao=id;
+        System.out.println(Zhuohao);
+        return "redirect:/ZaiyongZhuoShow";
+    }
+    @RequestMapping("ZaiyongZhuoShow")
+    public ModelAndView ZaiyongZhuoShow(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
         modelAndView.addObject("statu",1);
         modelAndView.addObject("tableId",Zhuohao);
         return modelAndView;
     }
+
 }
