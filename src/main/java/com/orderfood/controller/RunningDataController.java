@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.*;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 收支流水
  */
@@ -18,8 +21,12 @@ public class RunningDataController {
     @Autowired
     private RunningDataService runningDataService;
     @RequestMapping(value = "selectrunningDatapage", produces = "text/plain;charset=utf-8")
-    private ModelAndView selectRunningDatapage(){
-        model.setViewName("item/Item");
+    private ModelAndView selectRunningDatapage(HttpServletRequest request){
+        if(null==request.getSession().getAttribute("user")){
+            model.setViewName("login");
+        }else {
+            model.setViewName("item/Item");
+        }
         return model;
     }
     /**

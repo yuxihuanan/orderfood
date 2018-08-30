@@ -34,7 +34,7 @@ t3.`roleName`
  INNER JOIN orderfood_employee_role t3
  ON t1.`j_roleId`=t3.`roleId`
  <trim prefix="where" prefixOverrides="and">
-     <if test="roleId!=null and roleId!=''">
+     <if test="roleId!=null and roleId!='' and roleId!=0">
         and t3.roleId =#{roleId}
      </if>
  </trim>

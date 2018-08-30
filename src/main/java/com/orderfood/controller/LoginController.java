@@ -1,33 +1,33 @@
 package com.orderfood.controller;
 
+import com.orderfood.config.CacheConfiguration;
 import com.orderfood.pojo.OrderfoodEmployee;
-import com.orderfood.pojo.OrderfoodJurisdiction;
 import com.orderfood.service.LoginService;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.fastjson.*;
+import redis.clients.jedis.Jedis;
+
 @Controller
 public class LoginController {
     @Resource(name="loginService")
     private LoginService login;
     private ModelAndView model=new ModelAndView();
 
+    private CacheConfiguration cacheConfiguration;
+
     /**
      * 首页获取菜单
      * @return
      */
     @ResponseBody
-    @RequestMapping( value = "indextion",produces = "text/plain;charset=utf-8")
-    public String indextion(Integer roleId){
-        System.out.println(JSON.toJSONString(login.GetJurisdiction(roleId)));
+    @RequestMapping( value = "indexMenu",produces = "text/plain;charset=utf-8")
+    public String indextion(Integer roleId,HttpServletRequest request){
         return JSON.toJSONString(login.GetJurisdiction(roleId));
     }
 
@@ -36,8 +36,9 @@ public class LoginController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "index",produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "shouye",produces = "text/plain;charset=utf-8")
 public ModelAndView index(HttpServletRequest request){
+        System.out.println(request.getSession().getAttribute("user"));
     if(request.getSession().getAttribute("user")==null) {
             model.setViewName("login");
     }else{
@@ -58,6 +59,9 @@ public ModelAndView index(HttpServletRequest request){
     {
             OrderfoodEmployee employee1=login.AdminLogin(employee);
             request.getSession().setAttribute("user",employee1);
+        //Jedis jedis=new Jedis();
+//        jedis.set("user",JSON.toJSONString(employee1));
+//        System.out.println(jedis.get("user"));
             return JSON.toJSONString(employee1);
     }
 
@@ -86,5 +90,11 @@ public ModelAndView index(HttpServletRequest request){
             request.getSession().removeAttribute("user");
             model.setViewName("login");
             return model;
+    }
+
+    @RequestMapping("index1")
+    public ModelAndView index1(){
+        model.setViewName("index1");
+        return model;
     }
 }

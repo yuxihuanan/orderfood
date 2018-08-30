@@ -69,8 +69,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 span
                 | 收支说明
       .dataprice
-         span
-         span
+
 script(src='js/jquery-3.3.1.min.js')
 script(type='text/javascript').
                   $(function () {
@@ -82,6 +81,9 @@ script(type='text/javascript').
                   });
                   function selectRunningData(){
                       var data=$("#data").serialize();
+                      $(".mian_b_bg tr:gt(0)").remove();
+                      $(".dataprice").empty();
+                      $()
                       var str="";
                       $.ajax({
                           "url":"selectrunningData",
@@ -93,8 +95,8 @@ script(type='text/javascript').
                                   var shou=0;
                                   var zhi=0;
                                   var zong=0;
+                                  var suan="";
                                   $(result).each(function () {
-                                      $(".mian_b_bg tr:gt(0)").remove();
                                      str+="<tr></tr>\n" +
                                          "                  <td>"+this.dataid+"</td>\n" +
                                          "                  <td>"+this.datastatement+"</td>\n" +
@@ -108,21 +110,37 @@ script(type='text/javascript').
                                          zhi+=this.dataprice;
                                      }
                                   });
-                                  zong=shou-zhi;
-                                  if(zong>=0){
-                                            $(".dataprice span:eq(0)").html("盈利");
-                                            $(".dataprice span:eq(1)").html(zong.toFixed(2)+"元");
-                                  }else{
-                                      Math.abs(zong);
-                                      $(".dataprice span:eq(0)").html("亏损");
-                                      $(".dataprice span:eq(1)").html(Math.abs(zong).toFixed(2) + "元");
+                                  if($("#datastatement").val().trim()=='收'){
+                                      suan+="<span id='shou'>总收入</span>：<span id='shouprice'>"+shou+"</span><br/>";
+                                      $(".dataprice").append(suan);
                                   }
+                                  if($("#datastatement").val().trim()=='支'){
+                                      suan+="<span id='zhi'>总支出</span>：<span id='zhiprice'>"+zhi+"</span><br/>";
+                                      $(".dataprice").append(suan);
+                                  }
+                                  if($("#datastatement").val().trim()=="") {
+                                      suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
+                                      suan+="<span id='zhi'>总支出</span>：<span id='zhiprice'>"+zhi+"</span><br/>";
+                                      zong = shou - zhi;
+                                      if (zong >= 0) {
+                                          suan+="<span id='zong'>盈利</span>：<span id='zongprice'>"+zong+"</span><br/>";
+                                          $(".dataprice").append(suan);
+                                          $(".dataprice #zong").css({color: 'green', fontSize: '50px'});
+                                      } else {
+                                          suan += "<span id='zong'>亏&nbsp;损</span>：<span id='zongprice'>" + Math.abs(zong); + "</span><br/>";
+                                          $(".dataprice").append(suan);
+                                          $(".dataprice #zong").css({color: 'red', fontSize: '50px'});
+                                      }
+                                  }
+                                  $(".dataprice #shou").css({color: 'blue', fontSize: '50px'});
+                                  $(".dataprice #zhi").css({color: 'yellow', fontSize: '50px'});
+
                                   var startDate = new Date(Date.parse($("[name=startDate]").val()));
                                   var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
-                                  alert((startDate>stopDate));
-                                  if(startDate>stopDate) {
-                                      alert($("[name=startDate]").val());
-                                  }
+                                  //alert((startDate>stopDate));
+                                  // if(startDate>stopDate) {
+                                  //     alert($("[name=startDate]").val());
+                                  // }
                                   $(".mian_b_bg").append(str);
                                   }
                               },

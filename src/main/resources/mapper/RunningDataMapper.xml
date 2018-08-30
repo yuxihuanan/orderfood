@@ -22,8 +22,11 @@ SELECT
      <if test="runningData.datastatement!=null and runningData.datastatement!=''">
          and dataStatement=#{runningData.datastatement}
      </if>
-     <if test="runningData.startDate!=null and runningData.startDate!='' and runningData.stopDate!=null and runningData.stopDate!=''">
+     <if test="runningData.startDate!=null and runningData.startDate!=''">
+         <if test="runningData.stopDate!=null and runningData.stopDate!=''">
        and createDate  BETWEEN #{runningData.startDate} AND #{runningData.stopDate}
+         </if>
+         and createDate  BETWEEN #{runningData.startDate} AND now()
      </if>
  </trim>
     </select>
