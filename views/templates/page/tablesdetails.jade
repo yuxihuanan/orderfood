@@ -29,15 +29,23 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .sub_but
         ul#hid_ul.action_btn
           li
-            input.orange_btn(type='button', value='全单催菜')
+            input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent()')
           li
-            input.gray_btn(type='button', value='桌面清台')
+            input.orange_btn(type='button', value='更新订单',name='up' onclick='upda()')
           li
-            input.orange_btn(type='button', value='更新订单' onclick='upda()')
-
+            input.orange_btn(type='button', value='结账',name='j' onclick='jie(#{tableId})')
 
       script(src='/js/jquery-1.7.1.min.js')
       script(src='/js/tablesdetails.js')
-      script(type='text/javaScript')
+      script(type='text/javaScript').
+        //说明还没有下单
+        if(#{statu}==0){
+          $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          //init("TableDetailsShow");
+        }else{
+          $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          init("IndentDetails/getDetail");
+        }
 
 

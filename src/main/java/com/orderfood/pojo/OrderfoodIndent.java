@@ -1,8 +1,10 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表实体类
@@ -13,8 +15,6 @@ public class OrderfoodIndent implements Serializable {
     private String indentcode;//订单号
 
     private Integer iTableid;//所属桌号
-    @Transient
-    private OrderfoodTable table;//选桌对象
 
     private String createdate;//创建时间
 
@@ -22,27 +22,18 @@ public class OrderfoodIndent implements Serializable {
 
     private Float totalmoney;//订单总金额
 
+    @Transient
+    private List<OrderfoodIndentDetails> details; //订单详情
+
+    @Transient
+    private OrderfoodTable orderfoodTable;//桌台详请
+
+    @Transient
+    private OrderfoodEmployee orderfoodEmployee; //员工详请
+
     private Float netmoney;//实付总金额
 
     private Integer iEmployeeid;//服务员 员工id
-    @Transient
-    private OrderfoodEmployee employee;//服务员对象
-
-    public OrderfoodTable getTable() {
-        return table;
-    }
-
-    public void setTable(OrderfoodTable table) {
-        this.table = table;
-    }
-
-    public OrderfoodEmployee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(OrderfoodEmployee employee) {
-        this.employee = employee;
-    }
 
     public OrderfoodIndent(Integer indentid, String indentcode, Integer iTableid, String createdate, String indentcomment, Float totalmoney, Float netmoney, Integer iEmployeeid) {
         this.indentid = indentid;
@@ -121,5 +112,29 @@ public class OrderfoodIndent implements Serializable {
 
     public void setiEmployeeid(Integer iEmployeeid) {
         this.iEmployeeid = iEmployeeid;
+    }
+
+    public List<OrderfoodIndentDetails> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderfoodIndentDetails> details) {
+        this.details = details;
+    }
+
+    public OrderfoodTable getOrderfoodTable() {
+        return orderfoodTable;
+    }
+
+    public void setOrderfoodTable(OrderfoodTable orderfoodTable) {
+        this.orderfoodTable = orderfoodTable;
+    }
+
+    public OrderfoodEmployee getOrderfoodEmployee() {
+        return orderfoodEmployee;
+    }
+
+    public void setOrderfoodEmployee(OrderfoodEmployee orderfoodEmployee) {
+        this.orderfoodEmployee = orderfoodEmployee;
     }
 }

@@ -13,6 +13,14 @@ public class PageController {
     public ModelAndView goXuanzhuo(String tableId){
         ModelAndView model=new ModelAndView("page/tablesdetails");
         model.addObject("tableId",3);
+        model.addObject("statu",0);
+        return model;
+    }
+
+    @RequestMapping("orderDetails")
+    public ModelAndView goOrderDetails(String tableId){
+        ModelAndView model=new ModelAndView("page/orderdetails");
+        model.addObject("tableId",tableId);
         return model;
     }
 }

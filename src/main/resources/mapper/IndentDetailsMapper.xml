@@ -26,6 +26,57 @@
         </association>
     </resultMap>
 
+    <resultMap id="tableDetails" type="com.orderfood.pojo.OrderfoodIndent">
+        <id property="indentid" column="indentId"/>
+        <result property="indentcode" column="indentCode"/>
+        <result property="iTableid" column="i_tableId"/>
+        <result property="createdate" column="createDate"/>
+        <result property="indentcomment" column="indentComment"/>
+        <result property="totalmoney" column="totalmoney"/>
+        <result property="netmoney" column="netmoney"/>
+        <result property="iEmployeeid" column="i_employeeId"/>
+        <association property="orderfoodTable" javaType="com.orderfood.pojo.OrderfoodTable">
+            <id property="tableid" column="tableId" />
+            <result property="tablenumber" column="tableNumber"/>
+            <result property="tablestatus" column="tableStatus"/>
+        </association>
+        <association property="orderfoodEmployee" javaType="com.orderfood.pojo.OrderfoodEmployee">
+            <id property="employeeid" column="employeeId"/>
+            <result property="employeename" column="employeeName"/>
+            <result property="age" column="age"/>
+            <result property="username" column="userName"/>
+            <result property="password" column="password"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+            <result property="phone" column="phone"/>
+            <result property="createdate" column="createDate"/>
+            <result property="eRoleid" column="e_roleId"/>
+        </association>
+        <collection property="details" ofType="com.orderfood.pojo.OrderfoodIndentDetails">
+            <id property="detailsid" column="detailsId"/>
+            <result property="dCuisineid" column="d_cuisineId"/>
+            <result property="detailscount" column="detailsCount"/>
+            <result property="dIndentid" column="d_indentId"/>
+            <association property="cuisine" javaType="com.orderfood.pojo.OrderfoodCuisine">
+                <id property="cuisineid" column="cuisineId"/>
+                <result property="cuisinename" column="cuisineName"/>
+                <result property="price" column="price"/>
+                <result property="cuisineacronym" column="cuisineAcronym"/>
+                <result property="cuisineidentify" column="cuisineIdentify"/>
+                <result property="cClassifyid" column="c_classifyId"/>
+            </association>
+        </collection>
+
+    </resultMap>
+
+    <insert id="addIndent" parameterType="com.orderfood.pojo.OrderfoodIndent">
+        INSERT INTO `orderfood_indent` VALUES(NULL,#{indentcode},#{iTableid},NULL,#{indentcomment},#{totalmoney},null,1)
+    </insert>
+    
+    <insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        INSERT INTO `orderfood_indent_details` VALUES(NULL,#{dCuisineid},#{detailscount},#{dIndentid})
+    </insert>
+    
     <select id="getDetail" resultMap="ds">
       SELECT * FROM `orderfood_indent` i INNER JOIN `orderfood_indent_details` d
 	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
@@ -40,7 +91,20 @@
         DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsId}
     </delete>
 
-    <!--<insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">-->
-        <!--INSERT INTO `orderfood_indent_details` VALUES(NULL,#{dCuisineid},#{},#{})-->
-    <!--</insert>-->
+    <select id="getDetailByTableId" resultMap="tableDetails">
+        SELECT * FROM `orderfood_indent` i INNER JOIN `orderfood_indent_details` d
+	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
+	          ON d.`d_cuisineId`=c.`cuisineId` INNER JOIN `orderfood_table` t
+	          ON i.`i_tableId`=t.`tableId`
+	          WHERE i.`i_tableId`=#{tableId}
+    </select>
+
+    <select id="getDetailsIdByIndentCode" resultType="Integer">
+        SELECT i.`indentId` FROM `orderfood_indent` i WHERE i.`indentCode`=#{indentCode}
+    </select>
+
+    <update id="updateStockByRecipeid">
+        UPDATE `orderfood_stock` s,`orderfood_recipe` r SET s.stockWeight=(s.stockWeight-r.recipeWeight)
+	      WHERE s.`stockId`=r.`r_stockId` AND r.`r_cuisineId`=#{r_cuisineId}
+    </update>
 </mapper>

@@ -63,6 +63,9 @@ dependencies {
     compile 'io.springfox:springfox-swagger2'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     compile 'com.alibaba:fastjson:1.2.49'
+    // https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java
+    compile group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '3.3.49.ALL'
+
 }
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {
