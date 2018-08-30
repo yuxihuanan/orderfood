@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.CargoMapper">
+    <resultMap id="OrderfoodCargo" type="com.orderfood.pojo.OrderfoodCargo">
+        <id property="cargoid" column="cargoId"/>
+        <result property="cStockid" column="c_stockId"/>
+        <result property="cargoprice" column="cargoPrice"/>
+        <result property="cargoweight" column="cargoWeight"/>
+        <association property="stock" javaType="com.orderfood.pojo.OrderfoodStock">
+            <id property="stockid" column="stockId"/>
+            <result property="stockname" column="stockName"/>
+            <result property="stockweight" column="stockWeight"/>
+            <result property="stockunit" column="stockUnit"/>
+        </association>
+    </resultMap>
+
+    <select id="getAllCargo" resultMap="OrderfoodCargo">
+      SELECT * FROM orderfood_cargo cargo INNER JOIN orderfood_stock stock ON cargo.`c_stockId`=stock.`stockId`
+    </select>
+    <select id="SelectCargo" parameterType="Integer" resultMap="OrderfoodCargo">
+      SELECT * FROM orderfood_cargo cargo
+      INNER JOIN orderfood_stock stock
+      ON cargo.`c_stockId`=stock.`stockId`
+      where cargo.cargoId=#{cargoid}
+    </select>
+    <update id="UpdateCargo" parameterType="com.orderfood.pojo.OrderfoodCargo">
+        UPDATE orderfood_cargo SET c_stockId=#{cStockid},cargoPrice=#{cargoprice},cargoWeight=#{cargoweight} WHERE cargoId=#{cargoid}
+    </update>
+    <insert id="InsRunData" parameterType="com.orderfood.pojo.OrderfoodRunningData">
+        INSERT INTO orderfood_running_data VALUES(NULL,#{dataprice},'支',NOW(),#{datacomment})
+    </insert>
+    <insert id="InsertCargo" parameterType="com.orderfood.pojo.OrderfoodCargo">
+        INSERT INTO orderfood_cargo VALUES(NULL,#{cargoprice},#{cargoweight},#{cStockid})
+    </insert>
+    <select id="selRawStock" resultType="java.lang.Float">
+        SELECT SUM(cargo.`cargoWeight`)
+          FROM orderfood_cargo cargo
+            RIGHT JOIN orderfood_stock stock
+              ON cargo.`c_stockId`=stock.`stockId`
+          WHERE stock.`stockId`=#{stockid}
+    </select>
+</mapper>
