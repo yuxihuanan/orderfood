@@ -66,8 +66,9 @@ public class OrderFoodTableController {
      */
     private Integer Zhuohao;
     private Integer status;
+    private Integer detailId;
     @RequestMapping("OrdermealShow")
-    public ModelAndView OrdermealShow(int statu){
+    public ModelAndView OrdermealShow(Integer statu,Integer detailId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         List lists=new ArrayList();
@@ -75,6 +76,7 @@ public class OrderFoodTableController {
         modelAndView.addObject("zhuanhao",false);
         modelAndView.addObject("dingdan",lists);
         this.status=statu;
+        this.detailId=detailId;
         return modelAndView;
     }
 
@@ -86,7 +88,7 @@ public class OrderFoodTableController {
     @RequestMapping("OrdermealShow/{id}")
     public String OrdermealShow(@PathVariable Integer id){
         this.Zhuohao=id;
-        return "redirect:/OrdermealShow?statu=0";
+        return "redirect:/OrdermealShow?statu=0&detailId=0";
     }
 
     /**
@@ -123,6 +125,7 @@ public class OrderFoodTableController {
         orderfoodTable.setTableid(Zhuohao);
         orderfoodTable.setTablenumber(Zhuohao);
         orderfoodTable.setTablestatus(tablestatus);
+        RedisUtil.getRu().del("lyx"+Zhuohao);
         int res=cashierService.Choosetable(orderfoodTable);
         return "redirect:/OrdrTableShow";
     }
@@ -146,6 +149,7 @@ public class OrderFoodTableController {
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
         modelAndView.addObject("tableId",Zhuohao);
         modelAndView.addObject("statu",status);
+        modelAndView.addObject("detailId",detailId);
         System.out.println(status);
         return modelAndView;
     }
@@ -154,7 +158,6 @@ public class OrderFoodTableController {
     @RequestMapping(value = "getTableDetailsShow",produces = "text/plain;charset=utf-8")
     public String getTableDetailsShow(){
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
-        RedisUtil.getRu().del("lyx"+Zhuohao);
         List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
         return JSON.toJSONString(list);
     }
@@ -184,7 +187,6 @@ public class OrderFoodTableController {
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
-        RedisUtil.getRu().del("lyx"+Zhuohao);
         List<myMeum> lists=JSONObject.parseArray(info,myMeum.class);
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);

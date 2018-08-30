@@ -80,11 +80,17 @@
     <select id="getDetail" resultMap="ds">
       SELECT * FROM `orderfood_indent` i INNER JOIN `orderfood_indent_details` d
 	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
-	          ON d.`d_cuisineId`=c.`cuisineId` WHERE i.`i_tableId`=#{tableId}
+	          ON d.`d_cuisineId`=c.`cuisineId` WHERE i.`i_tableId`=#{tableId} and i.`indentId`=(
+			SELECT MAX(indentId) FROM `orderfood_indent` WHERE `i_tableId`=#{tableId} ORDER BY createDate DESC
+	          )
     </select>
 
     <update id="updateDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
         UPDATE `orderfood_indent_details` d SET d.`detailsCount`=#{detailscount} WHERE d.`detailsId`=#{detailsid}
+    </update>
+
+    <update id="updateDetailsByDetail" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        UPDATE `orderfood_indent_details` d SET d.`detailsCount`=d.`detailsCount`+#{detailscount} WHERE d.`detailsId`=#{detailsid}
     </update>
 
     <delete id="deleteDetaiils">
@@ -107,4 +113,8 @@
         UPDATE `orderfood_stock` s,`orderfood_recipe` r SET s.stockWeight=(s.stockWeight-r.recipeWeight)
 	      WHERE s.`stockId`=r.`r_stockId` AND r.`r_cuisineId`=#{r_cuisineId}
     </update>
+
+    <select id="ExistDetail" parameterType="com.orderfood.pojo.OrderfoodIndentDetails" resultType="String">
+        SELECT detailsId FROM `orderfood_indent_details` WHERE d_cuisineId=#{dCuisineid} AND d_indentId=#{dIndentid}
+    </select>
 </mapper>

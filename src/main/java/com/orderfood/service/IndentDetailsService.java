@@ -60,4 +60,5 @@ public interface IndentDetailsService {
      * @return
      */
     int updateStockByRecipeid(Integer r_cuisineId);
+
 }

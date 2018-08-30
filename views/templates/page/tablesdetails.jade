@@ -8,11 +8,11 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     link(href='css/style.css', type='text/css', rel='stylesheet')
     title 桌台详情
     header
-      a.return(href='#')
+      a.return(href='javaScript:void(OrdrTableShow)')
         img(src='img/return.png')
       h1 桌台详情
       p
-    p.state 已下单
+    p.state ***
     .content
     .footer-space
     .bottom
@@ -29,11 +29,17 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .sub_but
         ul#hid_ul.action_btn
           li
-            input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent(#{tableId})')
+            input.orange_btn(type='button', value='返回选桌' onclick='retu()')
           li
-            input.orange_btn(type='button', value='更新订单',name='up' onclick='upda()')
+            input.orange_btn(type='button', value='更新订单',name='up' onclick='upda(#{statu},#{detailId})')
+          li
+            input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent(#{tableId})')
+        ul.action_btn
+          li
+            input.orange_btn(type='button', value='添加菜品' onclick='addCuisine()')
           li
             input.orange_btn(type='button', value='结账',name='j' onclick='jie(#{tableId})')
+
 
       script(src='/js/jquery-1.7.1.min.js')
       script(src='/js/tablesdetails.js')
@@ -42,9 +48,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         if(#{statu}==0){
           $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
           $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          $(".state").html("订单确认");
           init2("getTableDetailsShow");
+        }else if(#{statu}==2){
+          $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          init2("getTableDetailsShow");
+          $(".state").html("订单添加");
         }else{
           $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+          $(".state").html("已下单");
           init("IndentDetails/getDetail",#{tableId});
         }
 

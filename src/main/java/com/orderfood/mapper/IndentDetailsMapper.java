@@ -31,6 +31,13 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
     int updateDetails(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
+     * 更新已经存在的详情的数量
+     * @param orderfoodIndentDetails
+     * @return
+     */
+    int updateDetailsByDetail(OrderfoodIndentDetails orderfoodIndentDetails);
+
+    /**
      * 根据所传入的id删除订单详情表中的id
      * @param detailsId
      * @return
@@ -70,4 +77,11 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
      * @return
      */
     int updateStockByRecipeid(@Param("r_cuisineId") Integer r_cuisineId);
+
+    /**
+     * 通过订单id 和 菜品id 判断该菜品是否存在,存在则返回详情id,并更新菜品数量，否则则添加该菜品
+     * @param orderfoodIndentDetails
+     * @return
+     */
+    String ExistDetail(OrderfoodIndentDetails orderfoodIndentDetails);
 }

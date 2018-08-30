@@ -26,6 +26,9 @@ function init(url,tableId) {
                     "</table>");
             });
             jisuan();
+            setTimeout(function () {
+                $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+            },120000);
         },
         "error":function () {
             alert("网络错误!");
@@ -118,18 +121,26 @@ function jisuan(){
 /**
  * 生成订单详情对象,并调用u方法更新订单详情
  */
-function upda() {
-    var tables=$("table").size();
-    for(var i=0;i<tables;i++){
-        var data={
-            detailsid:$("table:eq("+i+") [name=detailsid]").val(),//订单详情编号
-            dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
-            detailscount:$("table:eq("+i+") .amount").html(),//数量
-            dIndentid:indentId
-        }
-        u(data);
-        if(i==tables-1){
-            alert("订单更新成功!!");
+function upda(statu,detailId) {
+    if(statu==2){
+        alert(detailId);
+        setTimeout(function () {
+            $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+        },120000);
+        addDetails(detailId);
+    }else{
+        var tables=$("table").size();
+        for(var i=0;i<tables;i++){
+            var data={
+                detailsid:$("table:eq("+i+") [name=detailsid]").val(),//订单详情编号
+                dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
+                detailscount:$("table:eq("+i+") .amount").html(),//数量
+                dIndentid:indentId
+            }
+            u(data);
+            if(i==tables-1){
+                alert("订单更新成功!!");
+            }
         }
     }
 }
@@ -198,7 +209,6 @@ function addDetails(d_indentId) {
         add(data);
         if(i==tables-1){
             alert("下单成功!!");
-
             location.href="OrderTableUpadte/1";
         }
     }
@@ -225,7 +235,7 @@ function add(data){
 }
 
 /**
- * 添加订单,返回一个订单编号,并调用addDetails(),进行订单详情的添加
+ * 添加订单,返回一个订单编号id,并调用addDetails(),进行订单详情的添加
  */
 function addIndent(tableId){
     $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn");
@@ -250,4 +260,20 @@ function addIndent(tableId){
             alert("添加错误1!!");
         }
     });
+}
+
+/**
+ * 添加菜品
+ */
+function addCuisine(){
+    $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
+    alert(indentId);
+    location.href="OrdermealShow?statu=2&detailId="+indentId;
+}
+
+/**
+ * 返回选桌页面
+ */
+function retu(){
+    location.href="OrdrTableShow";
 }
