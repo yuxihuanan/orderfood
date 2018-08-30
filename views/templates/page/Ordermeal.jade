@@ -9,15 +9,16 @@ html
       var jsons=new Array();
       function add(id) {
           var datajson={
+              id:$(id).prev().prev().prev().prev().text(),
               name:$(id).prev().prev().prev().text(),
-              price:$(id).prev().prev().text()
+              price:$(id).prev().prev().text(),
+              num:1
           }
           jsons.push(datajson)
           $(".amount span").text(jsons.length)
       }
       function dianji() {
           console.info(JSON.stringify(jsons))
-            alert(JSON.stringify(jsons))
           $.ajax({
                "url": "AddMyMeum",
                "data": {
@@ -48,8 +49,9 @@ html
         each item in foodCuisine
           li
             img(src='img/food_01.png')
+            h4.CuisineId=item.cuisineid
             h4.cuisinename=item.cuisinename
-            p.price=item.price+"元/份"
+            p.price=item.price
             p.discount
               span 推荐
             a.add(href='javaScirpt:void(0)' onclick="add(this)")
