@@ -74,7 +74,46 @@ public class RedisUtil {
         }
         return value;
     }
+    /**
+     * <p>通过key向指定的value值追加值</p>
+     * @param key
+     * @param str
+     * @return 成功返回 添加后value的长度 失败 返回 添加的 value 的长度  异常返回0L
+     */
+    public Long append(String key ,String str){
+        Jedis jedis = null;
+        Long res = null;
+        try {
+            jedis = pool.getResource();
+            res = jedis.append(key, str);
+        } catch (Exception e) {
 
+            LOGGER.error(e.getMessage());
+            return 0L;
+        } finally {
+            returnResource(pool, jedis);
+        }
+        return res;
+    }
+
+    /**
+     * <p>删除指定的key,也可以传入一个包含key的数组</p>
+     * @param keys 一个key  也可以使 string 数组
+     * @return 返回删除成功的个数
+     */
+    public Long del(String...keys){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.del(keys);
+        } catch (Exception e) {
+
+            LOGGER.error(e.getMessage());
+            return 0L;
+        } finally {
+            returnResource(pool, jedis);
+        }
+    }
 
         /**
          * 返还到连接池

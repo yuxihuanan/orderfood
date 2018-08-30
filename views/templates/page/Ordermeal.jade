@@ -36,14 +36,17 @@ html
     title 快速点餐
   body
     header
-      a.return(href='#')
+      a.return(href='OrdrTableShow')
         img(src='img/return.png')
       p.switch
         a.selected(href='OrdermealShow') 快速点餐
         a(href='ThemenuorderShow') 菜谱点餐
     a.amount(href="javaScript:void(0)" onclick="dianji()")
       | 已点
-      span 0
+      if !zhuanhao
+       span=dingdan.size()
+      else
+       span 0
     .content
       ul.menu
         each item in foodCuisine

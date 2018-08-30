@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -64,12 +65,16 @@ public class OrderFoodTableController {
      * @return
      */
     private Integer Zhuohao;
+    private Integer status;
     @RequestMapping("OrdermealShow")
-    public ModelAndView OrdermealShow(){
+    public ModelAndView OrdermealShow(int statu){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
+        List lists=new ArrayList();
         modelAndView.addObject("foodCuisine",list);
-        modelAndView.addObject("zhuanhao",Zhuohao);
+        modelAndView.addObject("zhuanhao",false);
+        modelAndView.addObject("dingdan",lists);
+        this.status=statu;
         return modelAndView;
     }
 
@@ -81,8 +86,7 @@ public class OrderFoodTableController {
     @RequestMapping("OrdermealShow/{id}")
     public String OrdermealShow(@PathVariable Integer id){
         this.Zhuohao=id;
-        System.out.println(this.Zhuohao);
-        return "redirect:/OrdermealShow";
+        return "redirect:/OrdermealShow?statu=0";
     }
 
     /**
@@ -94,7 +98,6 @@ public class OrderFoodTableController {
     @RequestMapping("AddMyMeum")
     public String MymenuShow(String jsonArray){
        String res=RedisUtil.getRu().set("lyx"+Zhuohao,jsonArray);
-       System.out.println(res);
        return JSON.toJSONString(res);
     }
     /**
@@ -142,7 +145,8 @@ public class OrderFoodTableController {
     public ModelAndView TableDetailsShow(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
         modelAndView.addObject("tableId",Zhuohao);
-        modelAndView.addObject("statu",0);
+        modelAndView.addObject("statu",status);
+        System.out.println(status);
         return modelAndView;
     }
 
@@ -150,19 +154,24 @@ public class OrderFoodTableController {
     @RequestMapping(value = "getTableDetailsShow",produces = "text/plain;charset=utf-8")
     public String getTableDetailsShow(){
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
+        RedisUtil.getRu().del("lyx"+Zhuohao);
         List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
         return JSON.toJSONString(list);
     }
 
     @RequestMapping("ZaiyongZhuo/{id}")
     /**
-     * 加入桌子有人的话就进订单页面
+     * 获取桌子id
      */
     public String ZaiyongZhuo(@PathVariable Integer id){
         this.Zhuohao=id;
-        System.out.println(Zhuohao);
         return "redirect:/ZaiyongZhuoShow";
     }
+
+    /**
+     * 加入桌子有人的话就进订单页面
+     * @return
+     */
     @RequestMapping("ZaiyongZhuoShow")
     public ModelAndView ZaiyongZhuoShow(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
@@ -170,5 +179,16 @@ public class OrderFoodTableController {
         modelAndView.addObject("tableId",Zhuohao);
         return modelAndView;
     }
-
+    @RequestMapping("OrdermealShowTwo")
+    public ModelAndView OrdermealShowTwo(){
+        ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
+        List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
+        String info=RedisUtil.getRu().get("lyx"+Zhuohao);
+        RedisUtil.getRu().del("lyx"+Zhuohao);
+        List<myMeum> lists=JSONObject.parseArray(info,myMeum.class);
+        modelAndView.addObject("foodCuisine",list);
+        modelAndView.addObject("zhuanhao",false);
+        modelAndView.addObject("dingdan",lists);
+        return modelAndView;
+    }
 }
