@@ -4,17 +4,48 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     meta(http-equiv='Content-Type', content='text/html; charset=gb2312')
     title 世尊家具综合管理系统
     link(rel='stylesheet', type='text/css', href='css/index.css')
+    script(src='js/jquery-3.3.1.min.js')
+  script(type='text/javascript').
+      function login(){
+          if($('[name=username]').val().trim()==''){
+              alert('用户名不能为空哦~');
+          }else if($('[name=password]').val().trim()==''){
+              alert('密码不能为空哦~');
+          }else if($('input[name=password]').val().trim().length<6){
+              alert('密码长度不能低于6位哦~');
+          }else{
+              var data=$('#data').serialize();
+              $.ajax({
+                  'url': 'loginorder',
+                  'dataType': 'json',
+                  'data': data,
+                  'type': 'post',
+                  'success': function (result) {
+                      if(result!=null){
+                          alert('登录成功！');
+                          location.href='shouye';
+                      }else{
+                          alert('登录失败！');
+                      }
+                  },
+                  'error': function () {
+                      alert('服务器异常');
+                  }
+              });
+          }
+      }
   body(style='background:#000;')
     .png.login_logo
       img(src='images/logo_03.png', alt='')
+
     .login
+     form(id='data')
       .login_1
-        input(name='', type='text')
+        input(name='username', type='text')
       .login_2
-        input(name='', type='password')
+        input(name='password', type='password')
       .login_3
         input(name='', type='checkbox', value='')
       .login_4.png
-        a(href='index-x.html')
+        a(href='javaScript:void(0)',onclick='login()')
           img(src='images/login_08.jpg')
-    script(src='/common.js')

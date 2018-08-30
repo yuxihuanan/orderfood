@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.LoginMapper">
+        <resultMap id="jurisdiction" type="com.orderfood.pojo.OrderfoodJurisdiction">
+                <result column="j_roleId" property="jRoleid"></result>
+                <result column="j_classifyid" property="jClassifyid"></result>
+            <association property="role" javaType="com.orderfood.pojo.OrderfoodEmployeeRole">
+                <id column="roleId" property="roleid"></id>
+                <result column="roleName" property="rolename"></result>
+            </association>
+            <association property="classify" javaType="com.orderfood.pojo.OrderfoodMenu">
+                <id column="menuId" property="menuid"></id>
+                <result column="menuName" property="menuname"></result>
+                <result column="parentId" property="parentid"></result>
+                <result column="parentName" property="parentname"></result>
+                <result column="menuUrl" property="menuurl"></result>
+            </association>
+        </resultMap>
+
+    <select id="GetJurisdiction" resultMap="jurisdiction">
+        SELECT t1.`j_roleId`,
+t1.`j_classifyId`,
+t2.`menuId`,
+t2.`menuName`,
+t2.`parentId`,
+t2.`menuUrl`,
+t3.`roleId`,
+(SELECT menuName FROM orderfood_menu WHERE menuId=t2.`parentId`) AS 'parentName',
+t3.`roleName`
+ FROM
+ orderfood_jurisdiction t1
+ INNER JOIN orderfood_menu t2
+ ON t1.`j_classifyId`=t2.`menuId`
+ INNER JOIN orderfood_employee_role t3
+ ON t1.`j_roleId`=t3.`roleId`
+ <trim prefix="where" prefixOverrides="and">
+     <if test="roleId!=null and roleId!='' and roleId!=0">
+        and t3.roleId =#{roleId}
+     </if>
+ </trim>
+ ORDER BY t2.`menuId`
+    </select>
+</mapper>

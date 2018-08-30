@@ -14,6 +14,16 @@ public class OrderfoodMenu implements Serializable {
 
     private String menuurl;//导航Url
 
+    private String parentname;//父级导航名称
+
+    public String getParentname() {
+        return parentname;
+    }
+
+    public void setParentname(String parentname) {
+        this.parentname = parentname;
+    }
+
     public OrderfoodMenu(Integer menuid, String menuname, Integer parentid, String menuurl) {
         this.menuid = menuid;
         this.menuname = menuname;

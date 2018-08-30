@@ -13,7 +13,7 @@ spring:
     port: 3306
     url: jdbc:mysql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: djg345
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
     maxActive: 20
@@ -42,9 +42,9 @@ spring:
     timeout: 0
   jade4j:
     caching: false
-    prefix: file:D:\orderfood\views\templates\
+    prefix: file:E:\OrderFoodSys\orderfood\views\templates\
   resources:
-    static-locations: file:D:\orderfood\views\static\
+    static-locations: file:E:\OrderFoodSys\orderfood\views\static\
 
 ---
 spring:
@@ -77,7 +77,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: foobared
+    password: 123456
     pool:
       max-active: 8
       max-wait: -1
@@ -86,9 +86,9 @@ spring:
     timeout: 0
   jade4j:
     caching: false
-    prefix: file:D:\orderfood\views\templates\
+    prefix: file:E:\OrderFoodSys\orderfood\views\templates\
   resources:
-    static-locations: file:D:\orderfood\views\static\
+    static-locations: file:E:\OrderFoodSys\orderfood\views\static\
 ---
 mybatis:
     type-aliases-package: com.platform.api.model.entity

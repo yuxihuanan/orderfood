@@ -2,7 +2,7 @@
 html(xmlns='http://www.w3.org/1999/xhtml')
   head
     title 无标题页
-    link(rel='stylesheet', type='text/css', href='../css/index.css')
+    link(rel='stylesheet', type='text/css', href='css/index.css')
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -23,10 +23,22 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 | 订单记录
       .mian_b
         .mian_b1
-          p.mian_b1_sousuo
-            input(name='', type='text')
-            p.main_b1_a3
-          a(href='#', title='搜索')
+          form( method='post' id='data')
+           span.cl 状态：
+           p.mian_b1_sousuo
+             select(name='datastatement',id='datastatement')
+                option(value='')='全部'
+                option(value='收')='收'
+                option(value='支')='支'
+           span.cl 开始：
+           p.mian_b1_sousuo
+
+             input(name='startDate', type='date')
+           span.cl 截止：
+           p.mian_b1_sousuo
+
+             input(name='stopDate', type='date')
+          a(href='javaScript:void(0)', title='搜索',onclick='selectRunningData()')
             p.mian_b1_a3
           a(href='#', title='最后')
             p.mian_b1_a4
@@ -41,70 +53,118 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
           tbody
             tr
-              td.mian_b_bg_lm(width='8%')
-                span
-                | 项目编号
-              td.mian_b_bg_lm(width='20%')
-                span
-                | 项目名称
               td.mian_b_bg_lm(width='10%')
                 span
-                | 项目类别
+                | 收支编号
               td.mian_b_bg_lm(width='10%')
                 span
-                | 所属客户
+                | 收支状态
               td.mian_b_bg_lm(width='10%')
                 span
-                | 项目状态
-              td.mian_b_bg_lm(width='8%')
-                span
-                | 创建人
-              td.mian_b_bg_lm(width='8%')
+                | 收支流水
+              td.mian_b_bg_lm(width='15%')
                 span
                 | 创建时间
-              td.mian_b_bg_lm(colspan='2')
+              td.mian_b_bg_lm(width='55%')
                 span
-                | 操作
-            tr
-              td
-                | hr1001
-              td
-                | 沙发订做项目
-              td
-                | 沙发
-              td
-                | 吴先生
-              td
-                | 新项目
-              td
-                | 总经理
-              td
-                | 2012-3-16
-              td.mian_b_icon_02(width='8%')
-                a(href='ItemDetail.jade') 查看
-            tr
-              td.mian_b_bg_lm(width='8%')
-                span
-                | 项目编号
-              td.mian_b_bg_lm(width='20%')
-                span
-                | 项目名称
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 项目类别
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 所属客户
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 项目状态
-              td.mian_b_bg_lm(width='8%')
-                span
-                | 创建人
-              td.mian_b_bg_lm(width='8%')
-                span
-                | 创建时间
-              td.mian_b_bg_lm(colspan='2')
-                span
-                | 操作
-    script(src='/common.js')
+                | 收支说明
+      .dataprice
+
+  script(src='/js/jquery-3.3.1.min.js')
+  script(type='text/javascript').
+      $(function () {
+          $("#datastatement").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '1px 0 0 0px',
+              background: 'transparent'
+          });
+          $("input").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '1px 0 0 0px',
+              background: 'transparent'
+          });
+          $(".mian_b1_sousuo").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '13px 0 0 30px',
+              float: 'left',
+              background: 'images/sousuo_28.gif'
+          });
+          $(".cl").css({height: '26px', width: '50px', float: 'left', margin: '15px 5px 5px 15px '});
+          selectRunningData();
+      });
+      function selectRunningData() {
+          var data = $("#data").serialize();
+          $(".mian_b_bg tr:gt(0)").remove();
+          $(".dataprice").empty();
+          var str = "";
+          $.ajax({
+              "url": "selectrunningData",
+              "data": data,
+              "dataType": "json",
+              "type": "post",
+              "success": function (result) {
+                  if (null != result) {
+                      var shou = 0;
+                      var zhi = 0;
+                      var zong = 0;
+                      var suan = "";
+                      $(result).each(function () {
+                          str += "<tr></tr>\n" +
+                              "                  <td>" + this.dataid + "</td>\n" +
+                              "                  <td>" + this.datastatement + "</td>\n" +
+                              "                  <td>" + this.dataprice + "</td>\n" +
+                              "                  <td>" + this.createdate + "</td>\n" +
+                              "                  <td>" + this.datacomment + "</td>" +
+                              "</tr>";
+                          if (this.datastatement == '收') {
+                              shou += this.dataprice;
+                          } else if (this.datastatement == '支') {
+                              zhi += this.dataprice;
+                          }
+                      });
+                      if ($("#datastatement").val().trim() == '收') {
+                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
+                          $(".dataprice").append(suan);
+                      }
+                      if ($("#datastatement").val().trim() == '支') {
+                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
+                          $(".dataprice").append(suan);
+                      }
+                      if ($("#datastatement").val().trim() == "") {
+                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
+                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
+                          zong = shou - zhi;
+                          if (zong >= 0) {
+                              suan += "<span id='zong'>盈利</span>：<span id='zongprice'>" + zong + "</span><br/>";
+                              $(".dataprice").append(suan);
+                              $(".dataprice #zong").css({color: 'green', fontSize: '50px'});
+                          } else {
+                              suan += "<span id='zong'>亏&nbsp;损</span>：<span id='zongprice'>" + Math.abs(zong);
+                              +"</span><br/>";
+                              $(".dataprice").append(suan);
+                              $(".dataprice #zong").css({color: 'red', fontSize: '50px'});
+                          }
+                      }
+                      $(".dataprice #shou").css({color: 'blue', fontSize: '50px'});
+                      $(".dataprice #zhi").css({color: 'yellow', fontSize: '50px'});
+
+                      var startDate = new Date(Date.parse($("[name=startDate]").val()));
+                      var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
+                      //alert((startDate>stopDate));
+                      // if(startDate>stopDate) {
+                      //     alert($("[name=startDate]").val());
+                      // }
+                      $(".mian_b_bg").append(str);
+                  }
+              },
+              "error": function () {
+                  alert("服务器异常！");
+              }
+          });
+      }
