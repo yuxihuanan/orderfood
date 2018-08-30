@@ -39,6 +39,10 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
              input(name='stopDate', type='date')
           a(href='javaScript:void(0)', title='搜索',onclick='selectRunningData()')
+          p.mian_b1_sousuo
+            input(name='', type='text')
+            p.main_b1_a3
+          a(href='#', title='搜索')
             p.mian_b1_a3
           a(href='#', title='最后')
             p.mian_b1_a4
@@ -83,7 +87,6 @@ script(type='text/javascript').
                       var data=$("#data").serialize();
                       $(".mian_b_bg tr:gt(0)").remove();
                       $(".dataprice").empty();
-                      $()
                       var str="";
                       $.ajax({
                           "url":"selectrunningData",

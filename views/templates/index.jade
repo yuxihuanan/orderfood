@@ -5,6 +5,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
         link(rel='stylesheet', type='text/css', href='css/index.css')
         script(src='js/jquery-3.3.1.min.js')
+        link(rel='stylesheet', type='text/css', href='css/index.css')
+        script(src='js/jquery-3.3.1.min.js')
         script(type='text/javascript').
             function pr(_id)
             {
@@ -374,121 +376,123 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     document.getElementById("dTitle").style.display="none";
                 }
             }
-
-    body
-        div(style='width: 1430px; height: 100%;')
-            .mian_r(onmousemove='r(22)', onmouseout='r_1(22)')
-                #22.mian_r_bj.png(style='display: none;', onmousemove='r(22)', onmouseout='r_1(22)')
-                    div
-                        a(href='#')
-                            img(src='images\r_icon_03.png')
-                        a(href='#')
-                            img(src='images\r_icon_06.png')
-                        a(href='#')
-                            img(src='images\r_icon_08.png')
-                        a(href='#')
-                            img(src='images\r_icon_10.png')
-            table(height='100%', width='1425', border='0', cellpadding='0', cellspacing='0', style='overflow: hidden;')
-                tbody
-                    tr
-                        td(colspan='2', height='52')
-                            div
-                                #header
-                                    .header01
-                                        p.logo
-                                            a(href='index-x.jade')
-                                                img(src='images/logo_03.gif', alt='')
-                                        p.right_01
-                                            img(src='images/pic_06.gif', alt='')
-                                        p.right_02
-                                            | 您好，
-                                            span=user.employeename
-                                               | ，欢迎登录！
-                                            a(href='die')
-                                               | [注销]
-                    tr
-                        td(width='190', valign='top', style='background: url(images/lift_bj_02.gif) repeat-y;', background='images/lift_bj_02.gif ')
-                            .side(style='position: absolute;')
-                                ul#nav
-                                    //li#xx1.y_css(onmouseover='show(1)', onmouseout='hidden1(1)')
-                                    //    a(href='rsxz/Employlee.jade', onclick="changeIcon('HR')", target='mainFrame', onmousedown="javascript:pr('xx1')")
-                                    //        span
-                                    //        p.icon_01
-                                    //            | 收银管理
-                                    //li#xx2.y_css
-                                    //    a(href='notice/NoticeClass.jade', onclick="changeIcon('Notice')", target='mainFrame', onmousedown="javascript:pr('xx2')", onmouseover='show(2)', onmouseout='hidden1(2)')
-                                    //        span
-                                    //        p.icon_10
-                                    //            | 员工管理
-                                    //li#xx3.y_css
-                                    //    a(href='knowledge/KnowLedgeClass.jade', target='mainFrame', onclick="changeIcon('KnowLedge')", onmousedown="javascript:pr('xx3')", onmouseover='show(3)', onmouseout='hidden1(3)')
-                                    //        span
-                                    //        p.icon_02
-                                    //            | 菜品管理
-                                    //li#xx4.y_css
-                                    //    a(href='task/MoveTaskApply.jade', onclick="changeIcon('Task')", target='mainFrame', onmousedown="javascript:pr('xx4')", onmouseover='show(4)', onmouseout='hidden1(4)')
-                                    //        span
-                                    //        p.icon_04
-                                    //            | 用料管理
-                                    //li#xx5.y_css
-                                    //    a(href='client/OrderManager.jade', onclick="changeIcon('Order')", target='mainFrame', onmousedown="javascript:pr('xx5')", onmouseover='show(5)', onmouseout='hidden1(5)')
-                                    //        span
-                                    //        p.icon_05
-                                    //            | 库存管理
-                                    //li#xx6.y_css
-                                    //    a(href='item/Item.jade', onclick="changeIcon('Item')", target='mainFrame', onmousedown="javascript:pr('xx6')", onmouseover='show(6)', onmouseout='hidden1(6)')
-                                    //        span
-                                    //        p.icon_07
-                                    //            | 数据管理
-                        td(width='1215', valign='top')
-                            #dTitle(style='float:left; margin-left:30px;')
-                                img(src='images/shouye.jpg', alt='', style='margin-top:5px')
-                            div(style='text-align: right; margin-right: 15px; float: right')
-                                img(src='images/middil_05.gif', alt='')
-                                a(href='login.jade')
-                                    img(alt='', src='images/middil_06.gif')
-                            iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame' src='selectrunningDatapage')
-                        td(width='5', valign='top', style='position: relative;', height='93%')
-                 div(style='text-align:center;')
+  body
+    div(style='width: 1430px; height: 100%;')
+      .mian_r(onmousemove='r(22)', onmouseout='r_1(22)')
+        #22.mian_r_bj.png(style='display: none;', onmousemove='r(22)', onmouseout='r_1(22)')
+          div
+            a(href='#')
+              img(src='images\r_icon_03.png')
+            a(href='#')
+              img(src='images\r_icon_06.png')
+            a(href='#')
+              img(src='images\r_icon_08.png')
+            a(href='#')
+              img(src='images\r_icon_10.png')
+      table(height='100%', width='1425', border='0', cellpadding='0', cellspacing='0', style='overflow: hidden;')
+        tbody
+          tr
+            td(colspan='2', height='52')
+              div
+                #header
+                  .header01
+                    p.logo
+                      a(href='index-x.jade')
+                        img(src='images/logo_03.gif', alt='')
+                    p.right_01
+                      img(src='images/pic_06.gif', alt='')
+                    p.right_02
+                      | 您好，
+                      span happy
+                      | ，欢迎登录！
+          tr
+            td(width='190', valign='top', style='background: url(images/lift_bj_02.gif) repeat-y;', background='images/lift_bj_02.gif ')
+              .side(style='position: absolute;')
+                ul#nav
+                  li#xx1.y_css(onmouseover='show(1)', onmouseout='hidden1(1)')
+                    a(href='rsxz/Employlee.jade', onclick="changeIcon('HR')", target='mainFrame', onmousedown="javascript:pr('xx1')")
+                      span
+                      p.icon_01
+                        | 收银管理
+                  li#xx2.y_css
+                    a(href='notice/NoticeClass.jade', onclick="changeIcon('Notice')", target='mainFrame', onmousedown="javascript:pr('xx2')", onmouseover='show(2)', onmouseout='hidden1(2)')
+                      span
+                      p.icon_10
+                        | 员工管理
+                  li#xx3.y_css
+                    a(href='knowledge/KnowLedgeClass.jade', target='mainFrame', onclick="changeIcon('KnowLedge')", onmousedown="javascript:pr('xx3')", onmouseover='show(3)', onmouseout='hidden1(3)')
+                      span
+                      p.icon_02
+                        | 菜品管理
+                  li#xx4.y_css
+                    a(href='task/MoveTaskApply.jade', onclick="changeIcon('Task')", target='mainFrame', onmousedown="javascript:pr('xx4')", onmouseover='show(4)', onmouseout='hidden1(4)')
+                      span
+                      p.icon_04
+                        | 用料管理
+                  li#xx5.y_css
+                    a(href='CargoController/toCargo', onclick="changeIcon('Order')", target='mainFrame', onmousedown="javascript:pr('xx5')", onmouseover='show(5)', onmouseout='hidden1(5)')
+                      span
+                      p.icon_05
+                        | 库存管理
+                  li#xx6.y_css
+                    a(href='item/Item.jade', onclick="changeIcon('Item')", target='mainFrame', onmousedown="javascript:pr('xx6')", onmouseover='show(6)', onmouseout='hidden1(6)')
+                      span
+                      p.icon_07
+                        | 数据管理
+            td(width='1215', valign='top')
+              #dTitle(style='float:left; margin-left:30px;')
+                img(src='images/shouye.jpg', alt='', style='margin-top:5px')
+              div(style='text-align: right; margin-right: 15px; float: right')
+                img(src='images/middil_05.gif', alt='')
+                a(href='login.jade')
+                  img(alt='', src='images/middil_06.gif')
+              iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame', src='selectrunningDatapage')
+            td(width='5', valign='top', style='position: relative;', height='93%')
+    div(style='text-align:center;')
     script(type='text/javascript').
-                $(function () {
-                    jurisdiction();
-                    $.get("OrderTableUpadte","",function (data) {
-                        //alert(data);
-                    });
+            $(function () {
+                $.get("OrderTableUpadte","",function (data) {
+                    //alert(data);
+                })
+            });
+            script(type = 'text/javascript').$(function () {
+                jurisdiction();
+                $.get("OrderTableUpadte", "", function (data) {
+                    //alert(data);
                 });
-                function jurisdiction(){
-                    var str="";
-                    var count=1;
-                    var roleId='#{user.eRoleid}';
-                    $.ajax({
-                        "url":"indexMenu",
-                        data:'roleId='+roleId,
-                        "dataType":"json",
-                        "type":"post",
-                        "success":function (result) {
-                            if(result!=null) {
-                                for (var i = 0; i < result.length - 1; i++) {
-                                    for (var j = i + 1; j < result.length;) {
-                                        if (result[i].classify.parentid == result[j].classify.parentid) {
-                                            result.splice(j,1);
-                                            continue;
-                                        }
-                                        j++;
+            });
+            function jurisdiction() {
+                var str = "";
+                var count = 1;
+                var roleId = '#{user.eRoleid}';
+                $.ajax({
+                    "url": "indexMenu",
+                    data: 'roleId=' + roleId,
+                    "dataType": "json",
+                    "type": "post",
+                    "success": function (result) {
+                        if (result != null) {
+                            for (var i = 0; i < result.length - 1; i++) {
+                                for (var j = i + 1; j < result.length;) {
+                                    if (result[i].classify.parentid == result[j].classify.parentid) {
+                                        result.splice(j, 1);
+                                        continue;
                                     }
-                                    str += "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(1)\" onmouseout=\"hidden1(1)\">" +
-                                        "<a href=\"rsxz/Employlee.jade\" onclick=\"changeIcon('HR')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">" +
-                                        "<span></span>\n" +
-                                        "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
-                                        "</a>" +
-                                        "</li>";
-                                    count++;
+                                    j++;
                                 }
-                                    $("#nav").append(str);
-                                }
-                        },
-                        "error":function(){
-                            alert("服务器异常！");
+                                str += "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(1)\" onmouseout=\"hidden1(1)\">" +
+                                    "<a href=\"rsxz/Employlee.jade\" onclick=\"changeIcon('HR')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">" +
+                                    "<span></span>\n" +
+                                    "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
+                                    "</a>" +
+                                    "</li>";
+                                count++;
+                            }
+                            $("#nav").append(str);
                         }
-                    })
-                }
+                    },
+                    "error": function () {
+                        alert("服务器异常！");
+                    }
+                })
+            }

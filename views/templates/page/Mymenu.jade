@@ -6,6 +6,96 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     link(href='css/reset1.css', type='text/css', rel='stylesheet')
     link(href='css/style.css', type='text/css', rel='stylesheet')
+    script(src="js/jquery-1.7.1.min.js")
+    script.
+        $(function () {
+            suan();
+        });
+        function jia(data) {
+            var jia=parseInt($(data).next().text());
+            var price=parseFloat($(data).parent().prev().prev().text());
+            var jianqian=price/jia;
+            $(data).next().text(jia+1);
+            $(data).parent().prev().prev().text(jianqian*(jia+1));
+            suan();
+        }
+        function jian(data) {
+            var jian=parseInt($(data).prev().text());
+            if (jian==0) {
+            alert("再点小心老子揍你")
+                return;
+            }
+            $(data).prev().text(jian-1);
+            var price = parseFloat($(data).parent().prev().prev().text());
+            var jianqian = price / jian;
+            $(data).next().text(jian - 1);
+            $(data).parent().prev().prev().text(jianqian * (jian - 1));
+            suan();
+        }
+        function suan() {
+                var price=0;
+                var amount=0;
+                for(var i=0;i<$(".price").length;i++){
+                    var number=$(".price").eq(i).text();
+                    price=parseFloat(price)+parseFloat(number);
+                }
+                for (var i = 0; i < $(".amount").length; i++) {
+                    var number = $(".amount").eq(i).text();
+                    amount = parseFloat(amount) + parseFloat(number);
+                }
+                $(".shulian").text(amount);
+                $(".jiaqian").text(price);
+        }
+        function xiadan(data) {
+            var shulian=$(".shulian").text();
+            var jiaqian=$(".jiaqian").text();
+            var meumId=[];
+            var meumName=[];
+            var price=[];
+            var amount=[];
+            for (var i = 0; i < $(data).parent().parent().parent().parent().find(".meumId").text().length; i++) {
+                meumId.push($(".meumId").eq(i).text());
+            }
+            for (var i = 0; i < $(data).parent().parent().parent().parent().find(".meumname").text().length; i++) {
+                var mmm=$(".meumname").eq(i).text();
+                if(mmm==""){
+                    continue;
+                }
+                meumName.push(mmm);
+            }
+            for (var i = 0; i < $(data).parent().parent().parent().parent().find(".meumprice").find(".price").text().length; i++) {
+                var ppp=$(".price").eq(i).text();
+                if(ppp==""){
+                    continue;
+                }
+                price.push(ppp);
+            }
+            for (var i = 0; i < $(data).parent().parent().parent().parent().find(".meumprice").find(".amount").text().length; i++) {
+                amount.push($(".amount").eq(i).text());
+            }
+            var sss=[];
+            for (var i = 0; i < meumId.length; i++) {
+                sss.push({
+                    id:meumId[i],
+                    name:meumName[i],
+                    num:amount[i],
+                    price:price[i]
+                })
+            }
+            console.info(sss)
+            alert(JSON.stringify(sss))
+            $.ajax({
+                "url":"tableshow",
+                "data":{
+                    sss:JSON.stringify(sss)
+                },
+                "dataType": "json",
+                "type": "post",
+                "success": function (data) {
+                    window.location.href="TableDetailsShow";
+                }
+            })
+        }
     title 我的菜单
     header
       a.return(href='#')
@@ -16,161 +106,33 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     .content
       table.order_list
         tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 挂炉蜜汁叉烧
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 大盘鸡
-            td
-              span.dis_price 折扣价
-            td
-          tr
-            td 38.0/份
-            td.discount 26.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
-      table.order_list
-        tbody
-          tr
-            td.name 水煮牛肉
-            td
-              span.dis_price 未优惠
-            td
-          tr
-            td 38.0/份
-            td.discount 38.0元/份
-            td.m_num
-              span.count +
-              span.amount 1
-              span.count -
-          tr
-            td.edit
-              a(href='#')
-                img(src='img/edit.png')
-              | 少辣
-            td
-            td
+            each mm in myMeum
+              tr
+                td.meumname=mm.name
+                td
+                  span.meumId=mm.id
+                td
+              tr.meumprice
+                td.price=mm.price*mm.num
+                td.discount
+                td.m_num
+                  span.count(onclick="jia(this)") +
+                  span.amount=mm.num
+                  span.count(onclick="jian(this)") -
+              tr
+                td.edit
+                td
+                td
     .footer-space
     .bottom
       .bottom_1
         form
-          input.note(type='text', value='备注')
-        p.total
-          | 合计：
-          span ￥536.0
-          |  共
-          span 8
-          | 菜
-      .bottom_2.action_btn
-        input.left.green_btn(type='button', value='保存订单')
-        a.right.orange_btn(href='tables details.html') 确认下单
+            input.note(type='text', value='备注')
+            p.total
+              | 合计：
+              span.jiaqian
+              |  共
+              span.shulian
+              | 菜
+          .bottom_2.action_btn
+            a.right.orange_btn(onclick="xiadan(this)" href='javaScript:void(0)') 确认下单

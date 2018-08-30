@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.OrderfoodIndentMapper">
+
+    <resultMap id="ds" type="com.orderfood.pojo.OrderfoodIndent">
+            <id property="indentid" column="indentId"/>
+            <result property="indentcode" column="indentCode"/>
+            <result property="iTableid" column="i_tableId"/>
+            <result property="createdate" column="createDate"/>
+            <result property="indentcomment" column="indentComment"/>
+            <result property="totalmoney" column="totalmoney"/>
+            <result property="netmoney" column="netmoney"/>
+            <result property="iEmployeeid" column="i_employeeId"/>
+            <association property="table" javaType="com.orderfood.pojo.OrderfoodTable">
+                <id property="tableid" column="tableId"/>
+                <result property="tablenumber" column="tableNumber"/>
+                <result property="tablestatus" column="tableStatus"/>
+            </association>
+            <association property="employee" javaType="com.orderfood.pojo.OrderfoodEmployee">
+                <id property="employeeid" column="employeeId"></id>
+                <result property="employeename" column="employeeName"></result>
+                <result property="age" column="age"></result>
+                <result property="username" column="userName"></result>
+                <result property="password" column="passWord"></result>
+                <result property="eRoleid" column="eRoleId"></result>
+                <result property="sex" column="sex"></result>
+                <result property="address" column="address"></result>
+                <result property="phone" column="phone"></result>
+                <result property="createdate" column="createDate"></result>
+            </association>
+    </resultMap>
+    <resultMap id="ids" type="com.orderfood.pojo.OrderfoodIndentDetails">
+    <id property="detailsid" column="detailsId"/>
+    <result property="dCuisineid" column="d_cuisineId"/>
+    <result property="detailscount" column="detailsCount"/>
+    <result property="dIndentid" column="d_indentId"/>
+    <association property="cuisine" javaType="com.orderfood.pojo.OrderfoodCuisine">
+        <id property="cuisineid" column="cuisineId"/>
+        <result property="cuisinename" column="cuisineName"/>
+        <result property="price" column="price"/>
+        <result property="cuisineacronym" column="cuisineAcronym"/>
+        <result property="cuisineidentify" column="cuisineIdentify"/>
+        <result property="cClassifyid" column="c_classifyId"/>
+    </association>
+   <association property="indent" javaType="com.orderfood.pojo.OrderfoodIndent">
+       <id property="indentid" column="indentId"/>
+       <result property="indentcode" column="indentCode"/>
+       <result property="iTableid" column="i_tableId"/>
+       <result property="createdate" column="createDate"/>
+       <result property="indentcomment" column="indentComment"/>
+       <result property="totalmoney" column="totalmoney"/>
+       <result property="netmoney" column="netmoney"/>
+       <result property="iEmployeeid" column="i_employeeId"/>
+   </association>
+    </resultMap>
+
+    <select id="getAll" resultMap="ds">
+        SELECT * FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.`i_employeeId`=e1.employeeId
+    </select>
+
+    <select id="getInfo" resultMap="ds" >
+                SELECT * FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.indentCode=#{indentId} AND i1.`i_employeeId`=e1.employeeId
+    </select>
+
+    <delete id="delIndent">
+        DELETE FROM orderfood_indent WHERE indentId=#{indentId}
+    </delete>
+
+    <select id="getDetails" resultMap="ids">
+       SELECT * FROM orderfood_indent_details ds,orderfood_cuisine cs,orderfood_indent i WHERE ds.`d_cuisineId`=cs.`cuisineId` AND ds.`d_indentId`=#{id}
+    </select>
+</mapper>
