@@ -39,10 +39,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
              input(name='stopDate', type='date')
           a(href='javaScript:void(0)', title='搜索',onclick='selectRunningData()')
-          p.mian_b1_sousuo
-            input(name='', type='text')
-            p.main_b1_a3
-          a(href='#', title='搜索')
             p.mian_b1_a3
           a(href='#', title='最后')
             p.mian_b1_a4
@@ -74,81 +70,101 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 | 收支说明
       .dataprice
 
-script(src='js/jquery-3.3.1.min.js')
-script(type='text/javascript').
-                  $(function () {
-                      $("#datastatement").css({border:'0',height:'22px',width:'140px',margin:'1px 0 0 0px',background:'transparent'});
-                      $("input").css({border:'0',height:'22px',width:'140px',margin:'1px 0 0 0px',background:'transparent'});
-                      $(".mian_b1_sousuo").css({border:'0',height:'22px',width:'140px',margin:'13px 0 0 30px',float:'left',background:'images/sousuo_28.gif'});
-                      $(".cl").css({height:'26px',width:'50px',float:'left',margin:'15px 5px 5px 15px '});
-                      selectRunningData();
-                  });
-                  function selectRunningData(){
-                      var data=$("#data").serialize();
-                      $(".mian_b_bg tr:gt(0)").remove();
-                      $(".dataprice").empty();
-                      var str="";
-                      $.ajax({
-                          "url":"selectrunningData",
-                          "data":data,
-                          "dataType":"json",
-                          "type":"post",
-                          "success":function (result) {
-                              if(null!=result){
-                                  var shou=0;
-                                  var zhi=0;
-                                  var zong=0;
-                                  var suan="";
-                                  $(result).each(function () {
-                                     str+="<tr></tr>\n" +
-                                         "                  <td>"+this.dataid+"</td>\n" +
-                                         "                  <td>"+this.datastatement+"</td>\n" +
-                                         "                  <td>"+this.dataprice+"</td>\n" +
-                                         "                  <td>"+this.createdate+"</td>\n" +
-                                         "                  <td>"+this.datacomment+"</td>" +
-                                         "</tr>";
-                                     if(this.datastatement=='收'){
-                                         shou+=this.dataprice;
-                                     }else if(this.datastatement=='支'){
-                                         zhi+=this.dataprice;
-                                     }
-                                  });
-                                  if($("#datastatement").val().trim()=='收'){
-                                      suan+="<span id='shou'>总收入</span>：<span id='shouprice'>"+shou+"</span><br/>";
-                                      $(".dataprice").append(suan);
-                                  }
-                                  if($("#datastatement").val().trim()=='支'){
-                                      suan+="<span id='zhi'>总支出</span>：<span id='zhiprice'>"+zhi+"</span><br/>";
-                                      $(".dataprice").append(suan);
-                                  }
-                                  if($("#datastatement").val().trim()=="") {
-                                      suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
-                                      suan+="<span id='zhi'>总支出</span>：<span id='zhiprice'>"+zhi+"</span><br/>";
-                                      zong = shou - zhi;
-                                      if (zong >= 0) {
-                                          suan+="<span id='zong'>盈利</span>：<span id='zongprice'>"+zong+"</span><br/>";
-                                          $(".dataprice").append(suan);
-                                          $(".dataprice #zong").css({color: 'green', fontSize: '50px'});
-                                      } else {
-                                          suan += "<span id='zong'>亏&nbsp;损</span>：<span id='zongprice'>" + Math.abs(zong); + "</span><br/>";
-                                          $(".dataprice").append(suan);
-                                          $(".dataprice #zong").css({color: 'red', fontSize: '50px'});
-                                      }
-                                  }
-                                  $(".dataprice #shou").css({color: 'blue', fontSize: '50px'});
-                                  $(".dataprice #zhi").css({color: 'yellow', fontSize: '50px'});
-
-                                  var startDate = new Date(Date.parse($("[name=startDate]").val()));
-                                  var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
-                                  //alert((startDate>stopDate));
-                                  // if(startDate>stopDate) {
-                                  //     alert($("[name=startDate]").val());
-                                  // }
-                                  $(".mian_b_bg").append(str);
-                                  }
-                              },
-                          "error":function () {
-                              alert("服务器异常！");
+  script(src='/js/jquery-3.3.1.min.js')
+  script(type='text/javascript').
+      $(function () {
+          $("#datastatement").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '1px 0 0 0px',
+              background: 'transparent'
+          });
+          $("input").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '1px 0 0 0px',
+              background: 'transparent'
+          });
+          $(".mian_b1_sousuo").css({
+              border: '0',
+              height: '22px',
+              width: '140px',
+              margin: '13px 0 0 30px',
+              float: 'left',
+              background: 'images/sousuo_28.gif'
+          });
+          $(".cl").css({height: '26px', width: '50px', float: 'left', margin: '15px 5px 5px 15px '});
+          selectRunningData();
+      });
+      function selectRunningData() {
+          var data = $("#data").serialize();
+          $(".mian_b_bg tr:gt(0)").remove();
+          $(".dataprice").empty();
+          var str = "";
+          $.ajax({
+              "url": "selectrunningData",
+              "data": data,
+              "dataType": "json",
+              "type": "post",
+              "success": function (result) {
+                  if (null != result) {
+                      var shou = 0;
+                      var zhi = 0;
+                      var zong = 0;
+                      var suan = "";
+                      $(result).each(function () {
+                          str += "<tr></tr>\n" +
+                              "                  <td>" + this.dataid + "</td>\n" +
+                              "                  <td>" + this.datastatement + "</td>\n" +
+                              "                  <td>" + this.dataprice + "</td>\n" +
+                              "                  <td>" + this.createdate + "</td>\n" +
+                              "                  <td>" + this.datacomment + "</td>" +
+                              "</tr>";
+                          if (this.datastatement == '收') {
+                              shou += this.dataprice;
+                          } else if (this.datastatement == '支') {
+                              zhi += this.dataprice;
                           }
                       });
-                    }
+                      if ($("#datastatement").val().trim() == '收') {
+                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
+                          $(".dataprice").append(suan);
+                      }
+                      if ($("#datastatement").val().trim() == '支') {
+                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
+                          $(".dataprice").append(suan);
+                      }
+                      if ($("#datastatement").val().trim() == "") {
+                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
+                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
+                          zong = shou - zhi;
+                          if (zong >= 0) {
+                              suan += "<span id='zong'>盈利</span>：<span id='zongprice'>" + zong + "</span><br/>";
+                              $(".dataprice").append(suan);
+                              $(".dataprice #zong").css({color: 'green', fontSize: '50px'});
+                          } else {
+                              suan += "<span id='zong'>亏&nbsp;损</span>：<span id='zongprice'>" + Math.abs(zong);
+                              +"</span><br/>";
+                              $(".dataprice").append(suan);
+                              $(".dataprice #zong").css({color: 'red', fontSize: '50px'});
+                          }
+                      }
+                      $(".dataprice #shou").css({color: 'blue', fontSize: '50px'});
+                      $(".dataprice #zhi").css({color: 'yellow', fontSize: '50px'});
+
+                      var startDate = new Date(Date.parse($("[name=startDate]").val()));
+                      var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
+                      //alert((startDate>stopDate));
+                      // if(startDate>stopDate) {
+                      //     alert($("[name=startDate]").val());
+                      // }
+                      $(".mian_b_bg").append(str);
+                  }
+              },
+              "error": function () {
+                  alert("服务器异常！");
+              }
+          });
+      }
