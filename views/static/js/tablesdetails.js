@@ -12,8 +12,8 @@ function init(url,tableId) {
         "data":"tableId="+tableId,
         "dataType":"JSON",
         "success":function (result) {
-            indentId=result[0].dIndentid;
             $(result).each(function () {
+                indentId=this.dIndentid
                 $(".content").append("<table class=\"order_list\">" +
                     "<tr>" +
                     "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
@@ -21,14 +21,12 @@ function init(url,tableId) {
                     "<td class=\"name\">"+this.cuisine.cuisinename+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
                     "</tr>" +
                     "<tr>" +
-                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" onclick='jian($(this))'>-</span></td>" +
+                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" name='jian' onclick='jian($(this))'>-</span></td>" +
                     "</tr>" +
                     "</table>");
             });
             jisuan();
-            setTimeout(function () {
-                $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-            },120000);
+            ustatu(parseInt(new Date().getTime())-parseInt(new Date(result[0].indent.createdate).getTime()));
         },
         "error":function () {
             alert("网络错误!");
@@ -119,14 +117,26 @@ function jisuan(){
 }
 
 /**
- * 生成订单详情对象,并调用u方法更新订单详情
+ * 使用jQuery定时函数,让更新菜单在俩分钟后禁用
  */
-function upda(statu,detailId) {
-    if(statu==2){
-        alert(detailId);
+function ustatu(time) {
+    if(time>=120000){
+        $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+        $("[name=jian]").hide();
+    }else{
         setTimeout(function () {
             $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-        },120000);
+            $("[name=jian]").hide();
+        },time);
+    }
+}
+/**
+ * 生成订单详情对象,并调用u方法更新订单详情
+ */
+
+function upda(statu,detailId) {
+    if(statu==2){
+        ustatu(119999);
         addDetails(detailId);
     }else{
         var tables=$("table").size();
@@ -209,6 +219,8 @@ function addDetails(d_indentId) {
         add(data);
         if(i==tables-1){
             alert("下单成功!!");
+            //下单成功调用定时函数
+            ustatu(119999);
             location.href="OrderTableUpadte/1";
         }
     }
@@ -267,7 +279,7 @@ function addIndent(tableId){
  */
 function addCuisine(){
     $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
-    alert(indentId);
+    $("[name=jian]").show();
     location.href="OrdermealShow?statu=2&detailId="+indentId;
 }
 

@@ -57,10 +57,9 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
         try {
 
             String s=indentDetailsMapper.ExistDetail(orderfoodIndentDetails);
-            String detailId=indentDetailsMapper.ExistDetail(orderfoodIndentDetails);
             //判断该订单详情是否存在,存在则在原来的基础上添加菜品的数量
-            if (!detailId.equals("0")) {
-                orderfoodIndentDetails.setDetailsid(Integer.parseInt(detailId));
+            if (s!=null) {
+                orderfoodIndentDetails.setDetailsid(Integer.parseInt(s));
                 indentDetailsMapper.updateDetailsByDetail(orderfoodIndentDetails);
             }else{
                 indentDetailsMapper.addDetails(orderfoodIndentDetails);
