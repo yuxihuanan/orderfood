@@ -5,6 +5,7 @@
 .gray_btn,.orange_btn,.green_btn,.blue_btn{ background:#ababab; width:70px; height:24px; line-height:24px; text-align:center; border:none; border-radius:3px; color:#fff; font-size:12px;}
 .blue_btn{ background:#1ac5d4;}
 .orange_btn{ background:#fd4505;}
+.orange_btn:hover{cursor: pointer;}
 .green_btn{ background:#a6b254;}
 /************************ 台况****************************************/
 html{ height:100%; width:100%; background: url(../img/bg.jpg); background-size:cover; background-attachment:fixed; }
@@ -94,6 +95,7 @@ ul.call li span{ color:#F30;}
 td.m_num{overflow:hidden;}
 td.m_num span{float:right;height:24px; line-height:22px; font-size:20px; margin-right:5px;}
 td.m_num span.count{ background:#7e2e14; border-radius:200px; width:24px; font-weight:bold; color:#fff; }
+td.m_num span.count:hover{cursor: pointer;}
 .bottom{  width:100%; position:fixed; bottom:0; left:0;}
 .bottom_1{ overflow:hidden; width:100%;  background:#ffefc2; padding:10px 5px; box-sizing:border-box;}
 .bottom_2{ background:#8b3519; width:100%;  overflow:hidden;  padding:10px 5px; box-sizing:border-box;}

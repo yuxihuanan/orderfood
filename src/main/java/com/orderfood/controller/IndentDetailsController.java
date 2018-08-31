@@ -6,12 +6,14 @@ import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentDetailsService;
 import com.orderfood.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Timer;
 
 @Controller
 @RequestMapping("IndentDetails")
@@ -48,8 +50,8 @@ public class IndentDetailsController {
      */
     @ResponseBody
     @RequestMapping("deleteDetaiils")
-    public String deleteDetaiils(Integer id){
-        return JSON.toJSONString(indentDetailsService.deleteDetaiils(id));
+    public String deleteDetaiils(OrderfoodIndentDetails orderfoodIndentDetails){
+        return JSON.toJSONString(indentDetailsService.deleteDetaiils(orderfoodIndentDetails));
     }
 
     /**
@@ -76,5 +78,16 @@ public class IndentDetailsController {
         indentDetailsService.addIndent(orderfoodIndent);
         //返回一个订单id
         return JSON.toJSONString(indentDetailsService.getDetailsIdByIndentCode(code));
+    }
+
+    /**
+     * 当订单为空时删除该订单
+     * @param indentid
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("deleteIndent")
+    public String deleteIndent(int indentid){
+        return JSON.toJSONString(indentDetailsService.deleteIndent(indentid));
     }
 }

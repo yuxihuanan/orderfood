@@ -93,8 +93,8 @@
         UPDATE `orderfood_indent_details` d SET d.`detailsCount`=d.`detailsCount`+#{detailscount} WHERE d.`detailsId`=#{detailsid}
     </update>
 
-    <delete id="deleteDetaiils">
-        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsId}
+    <delete id="deleteDetaiils" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsid}
     </delete>
 
     <select id="getDetailByTableId" resultMap="tableDetails">
@@ -109,12 +109,24 @@
         SELECT i.`indentId` FROM `orderfood_indent` i WHERE i.`indentCode`=#{indentCode}
     </select>
 
-    <update id="updateStockByRecipeid">
-        UPDATE `orderfood_stock` s,`orderfood_recipe` r SET s.stockWeight=(s.stockWeight-r.recipeWeight)
-	      WHERE s.`stockId`=r.`r_stockId` AND r.`r_cuisineId`=#{r_cuisineId}
+    <update id="updateStockByRecipeid" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+	      UPDATE `orderfood_stock` s,`orderfood_recipe` r
+	        <if test="detailsid!=null and detailsid!=''">
+                ,`orderfood_indent_details` d
+                SET s.stockWeight=(s.stockWeight-r.recipeWeight*(#{detailscount}-d.`detailsCount`))
+                WHERE s.`stockId`=r.`r_stockId` AND r.`r_cuisineId`=d.`d_cuisineId` AND r.`r_cuisineId`=#{dCuisineid} AND d.`detailsId`=#{detailsid}
+            </if>
+            <if test="detailsid==null or detailsid == ''">
+                SET s.stockWeight=(s.stockWeight-r.recipeWeight*(#{detailscount}))
+                WHERE s.`stockId`=r.`r_stockId` AND r.`r_cuisineId`=#{dCuisineid}
+            </if>
     </update>
 
     <select id="ExistDetail" parameterType="com.orderfood.pojo.OrderfoodIndentDetails" resultType="String">
         SELECT detailsId FROM `orderfood_indent_details` WHERE d_cuisineId=#{dCuisineid} AND d_indentId=#{dIndentid}
     </select>
+
+    <delete id="deleteIndent">
+        DELETE FROM `orderfood_indent` WHERE indentId=#{indentid}
+    </delete>
 </mapper>

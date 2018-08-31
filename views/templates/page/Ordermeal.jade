@@ -14,8 +14,16 @@ html
               price:$(id).prev().prev().text(),
               num:1
           }
+          var sssss=0;
           jsons.push(datajson)
-          $(".amount span").text(jsons.length)
+          var ass=parseInt($(".amount span").text());
+          if(ass!=0){
+              sssss = 1;
+              $(".amount span").text(ass+sssss)
+          }else{
+              $(".amount span").text(jsons.length + sssss)
+              sssss = 1;
+          }
       }
       function dianji() {
           console.info(JSON.stringify(jsons))

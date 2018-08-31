@@ -99,8 +99,18 @@ public class OrderFoodTableController {
     @ResponseBody
     @RequestMapping("AddMyMeum")
     public String MymenuShow(String jsonArray){
-       String res=RedisUtil.getRu().set("lyx"+Zhuohao,jsonArray);
-       return JSON.toJSONString(res);
+       String info=RedisUtil.getRu().get("lyx"+Zhuohao);
+       List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
+        System.out.println(JSON.toJSONString(list));
+       List<myMeum> lists=JSONObject.parseArray(jsonArray,myMeum.class);
+        System.out.println(JSON.toJSONString(lists));
+        if(list!=null){
+            for (myMeum item : list){
+                lists.add(item);
+            }
+        }
+       RedisUtil.getRu().set("lyx"+Zhuohao, JSON.toJSONString(lists));
+       return JSON.toJSONString(0);
     }
     /**
      * 菜谱点菜
@@ -183,14 +193,21 @@ public class OrderFoodTableController {
         return modelAndView;
     }
     @RequestMapping("OrdermealShowTwo")
-    public ModelAndView OrdermealShowTwo(){
+    public ModelAndView OrdermealShowTwo(Integer statu,Integer detailId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
         List<myMeum> lists=JSONObject.parseArray(info,myMeum.class);
+        List listss=new ArrayList();
+        if(lists==null){
+            modelAndView.addObject("dingdan",listss);
+        }else{
+            modelAndView.addObject("dingdan",lists);
+        }
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        modelAndView.addObject("dingdan",lists);
+        this.status=statu;
+        this.detailId=detailId;
         return modelAndView;
     }
 }
