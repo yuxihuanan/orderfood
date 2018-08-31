@@ -24,6 +24,11 @@ import java.util.List;
 @Controller
 public class CuisineClassifyController {
 
+
+
+
+   
+
    //页面中转 不要删
     @Resource(name="cuisineClassifyService")
     private CuisineClassifyService cuisineClassifyService;
