@@ -50,8 +50,8 @@ public class IndentDetailsController {
      */
     @ResponseBody
     @RequestMapping("deleteDetaiils")
-    public String deleteDetaiils(Integer id){
-        return JSON.toJSONString(indentDetailsService.deleteDetaiils(id));
+    public String deleteDetaiils(OrderfoodIndentDetails orderfoodIndentDetails){
+        return JSON.toJSONString(indentDetailsService.deleteDetaiils(orderfoodIndentDetails));
     }
 
     /**
@@ -62,7 +62,6 @@ public class IndentDetailsController {
     @RequestMapping("addDetails")
     public String addDetails(OrderfoodIndentDetails orderfoodIndentDetails){
         indentDetailsService.addDetails(orderfoodIndentDetails);
-        indentDetailsService.updateStockByRecipeid(orderfoodIndentDetails);
         return null;
     }
 
@@ -79,5 +78,16 @@ public class IndentDetailsController {
         indentDetailsService.addIndent(orderfoodIndent);
         //返回一个订单id
         return JSON.toJSONString(indentDetailsService.getDetailsIdByIndentCode(code));
+    }
+
+    /**
+     * 当订单为空时删除该订单
+     * @param indentid
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("deleteIndent")
+    public String deleteIndent(int indentid){
+        return JSON.toJSONString(indentDetailsService.deleteIndent(indentid));
     }
 }

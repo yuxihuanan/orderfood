@@ -22,10 +22,10 @@ public interface IndentDetailsService {
 
     /**
      * 根据所传入的id删除订单详情表中的id
-     * @param detailsId
+     * @param orderfoodIndentDetails
      * @return
      */
-    int deleteDetaiils(int detailsId);
+    int deleteDetaiils(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
      * 添加订单详情
@@ -55,9 +55,9 @@ public interface IndentDetailsService {
     int getDetailsIdByIndentCode(String indentCode);
 
     /**
-     * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param orderfoodIndentDetails
+     * 当订单为空时删除该订单
+     * @param indentid
      * @return
      */
-    int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails);
+    int deleteIndent(int indentid);
 }

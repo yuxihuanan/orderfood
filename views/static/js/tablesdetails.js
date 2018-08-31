@@ -1,6 +1,14 @@
 var indentId=0;  //订单编号
 
 /**
+ * 订单的撤回,取消订单
+ */
+function chehui(tableId){
+
+}
+
+
+/**
  * 当用户从正在使用的桌子进来时,调用此方法查看订单详情：statu=1
  * @param url
  * @param tableId
@@ -97,7 +105,8 @@ function jian(j,num){
         $("table:eq("+index+") .amount" ).html(parseInt($("table:eq("+index+") .amount" ).html())-1);
     }else{
         if(confirm("在减就没有了!")){
-            dele($("table:eq("+index+") [name=detailsid]").val());
+            $("table:eq("+index+") .amount" ).html(parseInt($("table:eq("+index+") .amount" ).html())-1);
+            dele(index);
             $("table:eq("+index+")").remove();
         }
     }
@@ -202,15 +211,25 @@ function u(data){
  * 删除菜品
  * @param detailsId
  */
-function dele(detailsId){
+function dele(index){
+    var data={
+        detailsid:$("table:eq("+index+") [name=detailsid]").val(),//订单详情编号
+        dCuisineid:$("table:eq("+index+") [name=d_cuisineId]").val(),//菜品编号
+        detailscount:$("table:eq("+index+") .amount").html(),//数量
+        dIndentid:indentId
+    }
     $.ajax({
         "url":"IndentDetails/deleteDetaiils",
         "type":"post",
-        "data":"id="+detailsId,
+        "data":data,
         "dataType":"JSON",
         "success":function (result) {
             if(result<0){
-                alert("数据库堵死!!!!")
+                alert("数据库堵死!!!!");
+            }else{
+                if($("table").length==0){
+                    deleteIndent();
+                }
             }
         },
         "error":function (result) {
@@ -265,6 +284,24 @@ function add(data){
         },
         "error":function (result) {
             alert("添加错误2!!");
+        }
+    });
+}
+
+function deleteIndent(){
+    alert(indentId);
+    $.ajax({
+        "url":"IndentDetails/deleteIndent",
+        "type":"post",
+        "data":"indentid="+indentId,
+        "dataType":"JSON",
+        "success":function (result) {
+            if(result>0){
+                location.href="OrderTableUpadte/0";
+            }
+        },
+        "error":function (result) {
+            alert("添加错误1!!");
         }
     });
 }

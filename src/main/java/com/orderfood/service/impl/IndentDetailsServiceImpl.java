@@ -34,17 +34,19 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      */
     @Override
     public int updateDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
+        int res=indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
         return indentDetailsMapper.updateDetails(orderfoodIndentDetails);
     }
 
     /**
      * 根据所传入的id删除订单详情表中的id
-     * @param detailsId
+     * @param orderfoodIndentDetails
      * @return
      */
     @Override
-    public int deleteDetaiils(int detailsId) {
-        return indentDetailsMapper.deleteDetaiils(detailsId);
+    public int deleteDetaiils(OrderfoodIndentDetails orderfoodIndentDetails) {
+        int res=indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
+        return indentDetailsMapper.deleteDetaiils(orderfoodIndentDetails);
     }
 
     /**
@@ -55,6 +57,7 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
     @Override
     public int addDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
         try {
+            int res=indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
             String s=indentDetailsMapper.ExistDetail(orderfoodIndentDetails);
             //判断该订单详情是否存在,存在则在原来的基础上添加菜品的数量
             if (s!=null) {
@@ -99,13 +102,12 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
     }
 
     /**
-     * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param orderfoodIndentDetails
+     * 当订单为空时删除该订单
+     * @param indentid
      * @return
      */
     @Override
-    public int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails) {
-        Thread thread=new Thread("");
-        return indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
+    public int deleteIndent(int indentid) {
+        return indentDetailsMapper.deleteIndent(indentid);
     }
 }

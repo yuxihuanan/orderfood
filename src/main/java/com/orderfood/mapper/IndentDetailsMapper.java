@@ -39,10 +39,10 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
 
     /**
      * 根据所传入的id删除订单详情表中的id
-     * @param detailsId
+     * @param orderfoodIndentDetails
      * @return
      */
-    int deleteDetaiils(@Param("detailsId") int detailsId);
+    int deleteDetaiils(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
      * 添加订单详情
@@ -73,7 +73,7 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
 
     /**
      * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param OrderfoodIndentDetails
+     * @param orderfoodIndentDetails
      * @return
      */
     int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails);
@@ -84,4 +84,11 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
      * @return
      */
     String ExistDetail(OrderfoodIndentDetails orderfoodIndentDetails);
+
+    /**
+     * 当订单为空时删除该订单
+     * @param indentid
+     * @return
+     */
+    int deleteIndent(@Param("indentid") int indentid);
 }
