@@ -99,8 +99,18 @@ public class OrderFoodTableController {
     @ResponseBody
     @RequestMapping("AddMyMeum")
     public String MymenuShow(String jsonArray){
-       String res=RedisUtil.getRu().set("lyx"+Zhuohao,jsonArray);
-       return JSON.toJSONString(res);
+       String info=RedisUtil.getRu().get("lyx"+Zhuohao);
+       List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
+        System.out.println(JSON.toJSONString(list));
+       List<myMeum> lists=JSONObject.parseArray(jsonArray,myMeum.class);
+        System.out.println(JSON.toJSONString(lists));
+        if(list!=null){
+            for (myMeum item : list){
+                lists.add(item);
+            }
+        }
+       RedisUtil.getRu().set("lyx"+Zhuohao, JSON.toJSONString(lists));
+       return JSON.toJSONString(0);
     }
     /**
      * 菜谱点菜
