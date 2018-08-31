@@ -56,9 +56,8 @@ public interface IndentDetailsService {
 
     /**
      * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param r_cuisineId
+     * @param orderfoodIndentDetails
      * @return
      */
-    int updateStockByRecipeid(Integer r_cuisineId);
-
+    int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails);
 }

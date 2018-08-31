@@ -193,14 +193,21 @@ public class OrderFoodTableController {
         return modelAndView;
     }
     @RequestMapping("OrdermealShowTwo")
-    public ModelAndView OrdermealShowTwo(){
+    public ModelAndView OrdermealShowTwo(Integer statu,Integer detailId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
         List<myMeum> lists=JSONObject.parseArray(info,myMeum.class);
+        List listss=new ArrayList();
+        if(lists==null){
+            modelAndView.addObject("dingdan",listss);
+        }else{
+            modelAndView.addObject("dingdan",lists);
+        }
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        modelAndView.addObject("dingdan",lists);
+        this.status=statu;
+        this.detailId=detailId;
         return modelAndView;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Timer;
 
 @Service
 @Transactional
@@ -53,9 +54,7 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      */
     @Override
     public int addDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
-        int res=indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails.getdCuisineid());
         try {
-
             String s=indentDetailsMapper.ExistDetail(orderfoodIndentDetails);
             //判断该订单详情是否存在,存在则在原来的基础上添加菜品的数量
             if (s!=null) {
@@ -101,12 +100,12 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
 
     /**
      * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param r_cuisineId
+     * @param orderfoodIndentDetails
      * @return
      */
-    @Transactional
     @Override
-    public int updateStockByRecipeid(Integer r_cuisineId) {
-        return indentDetailsMapper.updateStockByRecipeid(r_cuisineId);
+    public int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails) {
+        Thread thread=new Thread("");
+        return indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
     }
 }

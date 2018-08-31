@@ -1,4 +1,4 @@
-var indentId;  //订单编号
+var indentId=0;  //订单编号
 
 /**
  * 当用户从正在使用的桌子进来时,调用此方法查看订单详情：statu=1
@@ -21,7 +21,7 @@ function init(url,tableId) {
                     "<td class=\"name\">"+this.cuisine.cuisinename+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
                     "</tr>" +
                     "<tr>" +
-                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" name='jian' onclick='jian($(this))'>-</span></td>" +
+                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" name='jia' onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" name='jian' onclick='jian($(this),"+this.detailscount+")'>-</span></td>" +
                     "</tr>" +
                     "</table>");
             });
@@ -53,7 +53,7 @@ function init2(url) {
                     "<td class=\"name\">"+this.name+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
                     "</tr>" +
                     "<tr>" +
-                    "<td>"+this.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.num+"</span><span class=\"count\" onclick='jian($(this))'>-</span></td>" +
+                    "<td>"+this.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" onclick='jia($(this))'>+</span><span class=\"amount\">"+this.num+"</span><span class=\"count\" onclick='jian($(this),0)'>-</span></td>" +
                     "</tr>" +
                     "</table>");
             });
@@ -72,8 +72,10 @@ function init2(url) {
 function jia(j){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
-    if(number<10){
+    if(number<100){
         $("table:eq("+index+") .amount" ).html(parseInt($("table:eq("+index+") .amount" ).html())+1);
+        $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
+        $("table:eq("+index+") [name=jian]").show();
         jisuan();
     }else{
       alert("已经点的够多了!");
@@ -84,9 +86,13 @@ function jia(j){
  * 判断用户减菜的数量
  * @param j
  */
-function jian(j){
+function jian(j,num){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
+    if(number-1==num){
+        $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+        $("[name=jian]").hide();
+    }
     if(number-1>0){
         $("table:eq("+index+") .amount" ).html(parseInt($("table:eq("+index+") .amount" ).html())-1);
     }else{
@@ -127,9 +133,25 @@ function ustatu(time) {
         setTimeout(function () {
             $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
             $("[name=jian]").hide();
-        },time);
+        },120000-time);
     }
 }
+
+function updateTime(){
+    alert(indentId);
+    $.ajax({
+        "url":"",
+        "type":"post",
+        "data":"indentId="+indentId,
+        "success":function () {
+
+        },
+        "error":function () {
+            alert("更新时间错误");
+        },
+    });
+}
+
 /**
  * 生成订单详情对象,并调用u方法更新订单详情
  */
@@ -150,6 +172,7 @@ function upda(statu,detailId) {
             u(data);
             if(i==tables-1){
                 alert("订单更新成功!!");
+                location.href="OrdrTableShow";
             }
         }
     }
@@ -280,7 +303,12 @@ function addIndent(tableId){
 function addCuisine(){
     $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
     $("[name=jian]").show();
-    location.href="OrdermealShow?statu=2&detailId="+indentId;
+    if(indentId==0){
+        location.href="OrdermealShowTwo?statu=0&detailId="+indentId;
+    }else{
+        location.href="OrdermealShowTwo?statu=2&detailId="+indentId;
+    }
+
 }
 
 /**

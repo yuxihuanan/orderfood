@@ -6,12 +6,14 @@ import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentDetailsService;
 import com.orderfood.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Timer;
 
 @Controller
 @RequestMapping("IndentDetails")
@@ -60,6 +62,7 @@ public class IndentDetailsController {
     @RequestMapping("addDetails")
     public String addDetails(OrderfoodIndentDetails orderfoodIndentDetails){
         indentDetailsService.addDetails(orderfoodIndentDetails);
+        indentDetailsService.updateStockByRecipeid(orderfoodIndentDetails);
         return null;
     }
 

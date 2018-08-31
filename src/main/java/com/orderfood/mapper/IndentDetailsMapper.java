@@ -73,10 +73,10 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
 
     /**
      * 通过菜品id为条件让配方表与库存表进行映射，进行删减
-     * @param r_cuisineId
+     * @param OrderfoodIndentDetails
      * @return
      */
-    int updateStockByRecipeid(@Param("r_cuisineId") Integer r_cuisineId);
+    int updateStockByRecipeid(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
      * 通过订单id 和 菜品id 判断该菜品是否存在,存在则返回详情id,并更新菜品数量，否则则添加该菜品

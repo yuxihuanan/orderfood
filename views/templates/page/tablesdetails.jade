@@ -45,19 +45,21 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       script(src='/js/tablesdetails.js')
       script(type='text/javaScript').
         //说明还没有下单
-        if(#{statu}==0){
-          $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          $(".state").html("订单确认");
-          init2("getTableDetailsShow");
-        }else if(#{statu}==2){
-          $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          init2("getTableDetailsShow");
-          $(".state").html("订单添加");
-        }else{
-          $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-          $(".state").html("已下单");
-          init("IndentDetails/getDetail",#{tableId});
-        }
+        $(function(){
+          if(#{statu}==0){
+            $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+            $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+            $(".state").html("订单确认");
+            init2("getTableDetailsShow");
+          }else if(#{statu}==2){
+            $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+            init2("getTableDetailsShow");
+            $(".state").html("订单添加");
+          }else{
+            $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
+            $(".state").html("已下单");
+            init("IndentDetails/getDetail",#{tableId});
+          }
+        });
 
 
