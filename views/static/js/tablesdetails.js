@@ -1,4 +1,4 @@
-var indentId=0;  //订单编号
+var inId=0;  //订单编号
 
 /**
  * 订单的撤回,取消订单
@@ -20,8 +20,9 @@ function init(url,tableId) {
         "data":"tableId="+tableId,
         "dataType":"JSON",
         "success":function (result) {
+            inId=result[0].indent.indentid;
+            alert(inId);
             $(result).each(function () {
-                indentId=this.dIndentid
                 $(".content").append("<table class=\"order_list\">" +
                     "<tr>" +
                     "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
@@ -46,13 +47,14 @@ function init(url,tableId) {
  * 当用户使用订单页面访问过来时,加载此方法
  * @param url
  */
-function init2(url) {
+function init2(url,indentId) {
     $.ajax({
         "url":url,
         "type":"post",
-        "data":"tableId=3",
+        "data":"indentId="+inId,
         "dataType":"JSON",
         "success":function (result) {
+            inId=indentId;
             $(result).each(function () {
                 $(".content").append("<table class=\"order_list\">" +
                     "<tr>" +
@@ -147,11 +149,10 @@ function ustatu(time) {
 }
 
 function updateTime(){
-    alert(indentId);
     $.ajax({
         "url":"",
         "type":"post",
-        "data":"indentId="+indentId,
+        "data":"indentId="+inId,
         "success":function () {
 
         },
@@ -176,7 +177,7 @@ function upda(statu,detailId) {
                 detailsid:$("table:eq("+i+") [name=detailsid]").val(),//订单详情编号
                 dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
                 detailscount:$("table:eq("+i+") .amount").html(),//数量
-                dIndentid:indentId
+                dIndentid:inId
             }
             u(data);
             if(i==tables-1){
@@ -216,7 +217,7 @@ function dele(index){
         detailsid:$("table:eq("+index+") [name=detailsid]").val(),//订单详情编号
         dCuisineid:$("table:eq("+index+") [name=d_cuisineId]").val(),//菜品编号
         detailscount:$("table:eq("+index+") .amount").html(),//数量
-        dIndentid:indentId
+        dIndentid:inId
     }
     $.ajax({
         "url":"IndentDetails/deleteDetaiils",
@@ -289,11 +290,10 @@ function add(data){
 }
 
 function deleteIndent(){
-    alert(indentId);
     $.ajax({
         "url":"IndentDetails/deleteIndent",
         "type":"post",
-        "data":"indentid="+indentId,
+        "data":"indentid="+inId,
         "dataType":"JSON",
         "success":function (result) {
             if(result>0){
@@ -340,12 +340,11 @@ function addIndent(tableId){
 function addCuisine(){
     $("input[name=up]").removeClass("gray_btn").addClass("orange_btn").removeAttr("disabled");
     $("[name=jian]").show();
-    if(indentId==0){
-        location.href="OrdermealShowTwo?statu=0&detailId="+indentId;
+    if(inId==0){
+        location.href="OrdermealShowTwo?statu=0&indentId="+inId;
     }else{
-        location.href="OrdermealShowTwo?statu=2&detailId="+indentId;
+        location.href="OrdermealShowTwo?statu=2&indentId="+inId;
     }
-
 }
 
 /**
