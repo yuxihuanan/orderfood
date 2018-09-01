@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.CuisineClassifyMapper">
+
+    <resultMap type="com.orderfood.pojo.OrderfoodCuisine" id = "order">
+        <id property ="cuisineId"  column = "cuisineid"/>
+        <result property="cuisineName" column = "cuisinename"/>
+        <result property="price" column = "price"/>
+        <result property="cuisineAcronym" column = "cuisineacronym"/>
+        <result property="cuisineIdentify" column = "cuisineidentify"/>
+        <result property="cClassifyid" column = "c_classifyId"/>
+        <association property="classify" javaType="com.orderfood.pojo.OrderfoodCuisineClassify">
+            <id property = "classifyid" column = "classifyId"/>
+            <result property ="classifyname" column = "classifyName"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getAlls" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
+                SELECT * FROM orderfood_cuisine_classify
+    </select>
+
+
+    <select id="getAlldel" resultMap="order">
+       SELECT cuisineName as classifyname FROM orderfood_cuisine,orderfood_cuisine_classify WHERE  orderfood_cuisine.`c_classifyId` = orderfood_cuisine_classify.`classifyId`
+    </select>
+
+
+    <select id="SelectCuisineClassifyById" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
+    SELECT * FROM orderfood_cuisine_classify WHERE classifyName = #{classifyName}
+    </select>
+
+    <select id="getAllbyId" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
+        SELECT * FROM orderfood_cuisine_classify WHERE classifyId = #{classifyId}
+    </select>
+
+    <update id="upd">
+            UPDATE  orderfood_cuisine_classify SET classifyname  =#{classifyname} WHERE  classifyid  = #{classifyid}
+    </update>
+
+    <delete id="del" parameterType="Integer">
+     DELETE orderfood_cuisine,orderfood_cuisine_classify FROM orderfood_cuisine LEFT JOIN orderfood_cuisine_classify ON
+     orderfood_cuisine.`c_classifyId`=orderfood_cuisine_classify.`classifyId` WHERE orderfood_cuisine_classify.`classifyId`=#{orderfood_cuisine.`c_classifyId`}
+    </delete>
+
+
+    <delete id="delpiliang">
+     DELETE FROM orderfood_cuisine_classify  WHERE classifyId = #{classifyid}
+    </delete>
+
+
+
+    <update id="updateDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
+        UPDATE `orderfood_indent_details` d SET d.`detailsCount`=#{detailscount} WHERE d.`detailsId`=#{detailsid}
+    </update>
+
+    <delete id="deleteDetaiils">
+        DELETE FROM `orderfood_indent_details` WHERE detailsId=#{detailsid}
+    </delete>
+
+    <insert id="add">
+        INSERT INTO orderfood_cuisine_classify VALUE(NULL,#{classifyname})
+    </insert>
+
+    <!--<insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">-->
+        <!--INSERT INTO `orderfood_indent_details` VALUES(NULL,#{dCuisineid},#{},#{})-->
+    <!--</insert>-->
+</mapper>

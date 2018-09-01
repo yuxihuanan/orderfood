@@ -36,4 +36,36 @@ public interface CuisineClassifyService {
      * @return
      */
     public List<OrderfoodCuisineClassify> SelectCuisineClassify(OrderfoodCuisineClassify classify);
+
+
+
+    /**
+     * 查询菜品分类根据Id查询
+     * @param classifyName
+     * @return
+     */
+    public List<OrderfoodCuisineClassify> SelectCuisineClassifyById(String classifyName);
+
+
+    /**
+     * 菜品分类根据Id删除
+     * @param  classifyid
+     * @return
+     */
+    public  Integer del(Integer classifyid);
+
+    /**
+     * 菜品分类根据Id删除
+     * @param  orderfoodCuisineClassify
+     * @return
+     */
+    public  Integer add(OrderfoodCuisineClassify orderfoodCuisineClassify);
+
+
+
+    public  List<OrderfoodCuisineClassify> getAlls();
+    public  Integer upd(OrderfoodCuisineClassify orderfoodCuisineClassify);
+    public  List<OrderfoodCuisineClassify> getAllbyId(Integer id);
+    public  Integer delpiliang(Integer classifyid);
+
 }
