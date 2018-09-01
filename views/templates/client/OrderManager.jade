@@ -3,6 +3,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
   head
     title 无标题页
     link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(src='/js/jquery-1.7.1.min.js')script(src='/js/OrderManager.js')
+
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -17,102 +19,60 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             a(href='toAddOrder')
               p
                 | 入库管理
-          li
-            a(href='toOrderClass')
-              p
-                | 库存管理
       .mian_b
         .mian_b1
           a(href='toAddOrder', title='添加')
             p.mian_b1_a1
-          a(href='#', title='删除')
+          a(href='javascript:;', value='删除',onclick='manydel()')
             p.mian_b1_a2
           p.mian_b1_sousuo
-            input(name='', type='text')
-          a(href='#', title='搜索')
+            input(name='stockname', type='text')
+          a(href='javascript:;', title='搜索')
             p.mian_b1_a3
           a(href='#', title='最后')
             p.mian_b1_a4
-          a(href='#', title='下一页')
+          a(href='javascript:;', title='下一页')
             p.mian_b1_a5
           p.mian_b1_list
-            | 1 2 3 4……
-          a(href='#', title='上一页')
+          a(href='javascript:;', title='上一页')
             p.mian_b1_a6
           a(href='#', title='最前')
             p.mian_b1_a7
         table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
-          tbody
+          tbody#pageInfo
             tr
               td.mian_b_bg_lm(width='3%')
                 input(name='', type='checkbox', value='')
               td.mian_b_bg_lm(width='10%')
                 span
-                | 订单编号
+                | 库存编号
               td.mian_b_bg_lm(width='10%')
                 span
-                | 项目名称
+                | 原料名称
               td.mian_b_bg_lm(width='10%')
                 span
-                | 客户信息
+                | 单位价格
               td.mian_b_bg_lm(width='10%')
                 span
-                | 项目总额
+                | 单位数量
               td.mian_b_bg_lm(width='10%')
-                | 配送方式
+                | 单位
               td.mian_b_bg_lm(width='10%')
                 | 销售人员
-              td.mian_b_bg_lm(width='10%')
-                | 部门负责人
-              td.mian_b_bg_lm(width='10%')
-                | 创建时间
               td.mian_b_bg_lm(colspan='2')
                 span
                 | 操作
-            tr
-              td(width='3%')
-                input(name='', type='checkbox', value='')
-              td
-                | nr1001
-              td
-                | XXX项目
-              td
-                | XXX有限公司
-              td
-                | 200000.00
-              td 待提
-              td
-                | 吴菲菲
-              td
-                | XX经理
-              td 2012-3-15
-              td.mian_b_icon_01(width='5%')
-                a(href='AddOrder.jade') 编辑
-              td.mian_b_icon_02(width='5%')
-                a(href='OrderDetail.jade') 查看
-            tr
-              td.mian_b_bg_lm(width='3%')
-              td.mian_b_bg_lm
-                span
-                | 订单编号
-              td.mian_b_bg_lm
-                span
-                | 项目名称
-              td.mian_b_bg_lm
-                span
-                | 客户信息
-              td.mian_b_bg_lm
-                span
-                | 项目总额
-              td.mian_b_bg_lm
-                | 配送方式
-              td.mian_b_bg_lm
-                | 销售人员
-              td.mian_b_bg_lm
-                | 部门负责人
-              td.mian_b_bg_lm
-                | 创建时间
-              td.mian_b_bg_lm(colspan='2')
-                span
-                | 操作
-    script(src='/common.js')
+           // each item in cargo
+           //  tr
+           //    td(width='3%')
+           //      input(name='cargoid', type='checkbox', value=item.cargoid)
+           //    td=item.cargoid
+           //    td=item.stock.stockname
+           //    td=item.cargoprice
+           //    td=item.cargoweight
+           //    td=item.stock.stockunit
+           //    td.mian_b_icon_01(width='5%')
+           //      a(href='javascript:;',onclick='toEditor('+item.cargoid+')') 编辑
+           //    td.mian_b_icon_02(width='5%')
+           //      a(href='toOrderClass') 查看
+

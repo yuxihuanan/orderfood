@@ -3,6 +3,7 @@ package com.orderfood.service;
 
 import com.orderfood.pojo.OrderfoodCargo;
 import com.orderfood.pojo.OrderfoodRunningData;
+import com.orderfood.pojo.OrderfoodStock;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -56,8 +57,38 @@ public interface CargoService {
      */
     Integer InsertInfo(OrderfoodCargo cargo,OrderfoodRunningData runData);
     /**
-     * 根据原料主键查询该原料的目前数量
+     * 获取原料和单位
      * @return
      */
-    Float selRawStock(@Param(value = "stockid") Integer stockid);
+    List<OrderfoodStock> getUnitl();
+    /**
+     * 当前页的数据
+     * @param Start
+     * @param Size
+     * @return
+     */
+    List<OrderfoodCargo> findNewsPage(@Param(value = "Start") Integer Start,@Param(value = "Size") Integer Size);
+    /**
+     * 查询数据总条数
+     * @return
+     */
+    Integer findNewCont();
+    /**
+     * 根据原料名模糊查询数据
+     * @param stockname
+     * @return
+     */
+    List<OrderfoodCargo> findLike(@Param(value = "stockname") String stockname,@Param(value = "Start") Integer Start,@Param(value = "Size") Integer Size);
+    /**
+     * 根据原料名查数据条数
+     * @param stockname
+     * @return
+     */
+    Integer findLikeCount(@Param(value = "stockname") String stockname);
+    /**
+     * 查询某个原料的剩余总重量
+     * @param stockname
+     * @return
+     */
+    Float weightSum(@Param(value = "stockname") String stockname);
 }

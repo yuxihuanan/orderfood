@@ -3,6 +3,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
   head
     title 无标题页
     link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(src='/js/jquery-1.7.1.min.js')
+    script(src='/js/AddOrder.js')
+
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -11,31 +14,25 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         ul
           li
             a(href='toCargo')
-              p
-                | 出库管理
+              p 出库管理
           li
             a(href='toAddOrder')
-              p
-                | 入库管理
-          li
-            a(href='toOrderClass')
-              p
-                | 库存管理
+              p 入库管理
       .mian_b
         table.mian_b_bg_xz(width='100%', border='1', cellpadding='0', cellspacing='0')
           tbody
             tr
               td.mian_b_bg_lm(width='5%')  
-              td.mian_b_bg_lm(colspan='3') 新建订单
+              td.mian_b_bg_lm(colspan='3') 新建入库
             tr
               td  
-              td(width='15%', valign='top') 项目名称
+              td(width='15%', valign='top') 原料单价
               td(width='60%')
                 input#textfield.input_01(type='text', name='textfield')
               td(width='20%')  
             tr
               td  
-              td(valign='top') 订单编号
+              td(valign='top') 原料重量
               td
                 input#text7.input_01(type='text', name='textfield')
               td  
@@ -43,248 +40,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td  
               td(valign='top') 订单类别
               td
-                select
-                  option
-                    | 普通订单
-                  option
-                    | vip订单
-                  option
-                    | 临时订单
+                span 原料：
+                select#stockName
+                span 单位：
+                select#stockUnitl
+                    option(value='L') L
+                    option(value='KG') KG
+                span 收支明细：
+                textarea#datacomment
               td  
-            tr
-              td  
-              td(colspan='2') 客户信息 新增
-              td  
-            tr
-              td
-              td(colspan='3')
-                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
-                  tbody
-                    tr
-                      td(align='center') 客户编号
-                      td(align='center') 客户名称
-                      td(align='center') 客户类型
-                      td(align='center') 联系人
-                      td(align='center') 联系方式
-                      td(align='center') 客户属性
-                      td(align='center') 备注
-                      td 操作
-                    tr
-                      td(align='center')
-                        input#Text2.input_04(type='text')
-                      td(align='center')
-                        input#Text8.input_04(type='text')
-                      td(align='center')
-                        input#Text9.input_04(type='text')
-                      td(align='center')
-                        input#Text10.input_04(type='text')
-                      td(align='center')
-                        input#Text11.input_04(type='text')
-                      td(align='center')
-                        input#Text12.input_04(type='text')
-                      td(align='center')
-                        input#Text13.input_04(type='text')
-                      td 删除
-            tr
-              td  
-              td(valign='top', colspan='2') 项目概况 新增 
-              td  
-            tr
-              td  
-              td(colspan='3')
-                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
-                  tbody
-                    tr
-                      td(align='center') 设计风格
-                      td(align='center') 地理位置
-                      td(align='center') 人文环境
-                      td(align='center') 采光条件
-                      td 操作
-                    tr
-                      td(align='center')
-                        input#Text3.input_03(type='text')
-                      td(align='center')
-                        input#Text4.input_03(type='text')
-                      td(align='center')
-                        input#Text14.input_03(type='text')
-                      td(align='center')
-                        input#Text15.input_03(type='text')
-                      td 删除
-            tr
-              td  
-              td(valign='top', colspan='2') 订单信息—产品清单（零售、工程订单） 新增
-              td
-            tr
-              td  
-              td(colspan='3')
-                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
-                  tbody
-                    tr
-                      td(align='center') 产品编号
-                      td(align='center') 产品名称
-                      td(align='center') 数量
-                      td(align='center') 单位
-                      td(align='center') 单价
-                      td(align='center') 总额
-                      td(align='center') 备注
-                      td 操作
-                    tr
-                      td(align='center')
-                        input#Text5.input_04(type='text')
-                      td(align='center')
-                        input#Text6.input_04(type='text')
-                      td(align='center')
-                        input#Text16.input_04(type='text')
-                      td(align='center')
-                        input#Text17.input_04(type='text')
-                      td(align='center')
-                        input#Text18.input_04(type='text')
-                      td(align='center')
-                        input#Text19.input_04(type='text')
-                      td(align='center')
-                        input#Text20.input_04(type='text')
-                      td 删除
-            tr
-              td  
-              td(valign='top') 项目总额
-              td
-                input#text21.input_01(type='text', name='textfield')
-                |  元(人民币)
-              td  
-            tr
-              td  
-              td(valign='top') 大写
-              td(colspan='2')
-                input#text22.input_04(type='text', name='textfield')
-                |  百 
-                input#text23.input_04(type='text', name='textfield')
-                |  拾 
-                input#text24.input_04(type='text', name='textfield')
-                |  万 
-                input#text25.input_04(type='text', name='textfield')
-                |  仟 
-                input#text26.input_04(type='text', name='textfield')
-                |  佰 
-                input#text27.input_04(type='text', name='textfield')
-                |  拾 
-                input#text28.input_04(type='text', name='textfield')
-                |  元
-            tr
-              td  
-              td(valign='top', colspan='2') 付款方式 新增
-              td
-            tr
-              td  
-              td(colspan='3')
-                table(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='1')
-                  tbody
-                    tr
-                      td(width='10%', style='background-color:White', align='center') 编号
-                      td(width='15%', style='background-color:White', align='center') 付款阶段
-                      td(width='15%', style='background-color:White', align='center') 付款方式 
-                      td(width='15%', style='background-color:White', align='center') 付款比重
-                      td(width='10%', style='background-color:White', align='center') 付款进度
-                      td(width='10%', style='background-color:White', align='center') 备注
-                      td(width='5%', style='background-color:White', align='center') 操作
-                    tr
-                      td(style='background-color:White', align='center')
-                        input#text39.input_04(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text29.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text30.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text31.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text32.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text37.input_03(type='text', name='textfield')
-                      td(width='5%', style='background-color:White', align='center') 删除
-                    tr
-                      td(style='background-color:White', align='center')
-                        input#text40.input_04(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text33.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text34.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text35.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text36.input_03(type='text', name='textfield')
-                      td(style='background-color:White', align='center')
-                        input#text38.input_03(type='text', name='textfield')
-                      td(width='5%', style='background-color:White', align='center') 删除
-            tr
-              td  
-              td(valign='top', colspan='2') 配送方式
-              td
-            tr
-              td  
-              td(valign='top', colspan='3')
-                table.mian_b_bg_xz(width='100%', border='1', style='border-top:1px solid #fff; border-bottom:1px solid #fff;', cellpadding='0', cellspacing='0')
-                  tbody
-                    tr
-                      td(width='20%')
-                        input#Checkbox1(type='checkbox')
-                        | 送货
-                      td(width='20%')
-                        input#Checkbox2(type='checkbox')
-                        | 自提
-                      td(width='20%')
-                        input#Checkbox3(type='checkbox')
-                        | 待提
-                      td(width='40%')
-                        input#Checkbox4(type='checkbox')
-                        | 待办运输(运费共计 
-                        input#text41.input_04(type='text', name='textfield')
-                        | 人民币 )
-            tr
-              td  
-              td(valign='top') 备注
-              td
-                img(src='../images/123.png')
-              td
-            tr
-              td  
-              td(valign='top') 上传合同附件
-              td
-                input#File1(type='file')
-              td
-            tr
-              td  
-              td(valign='top') 上传客户资料附件
-              td
-                input#File2(type='file')
-              td
-            tr
-              td  
-              td(valign='top') 销售人员确认
-              td
-                input#text42.input_01(type='text', name='textfield')
-              td
-            tr
-              td  
-              td(valign='top') 部门负责人确认
-              td
-                input#text43.input_01(type='text', name='textfield')
-              td
-            tr
-              td  
-              td(valign='top') 日期
-              td
-                input#text44.input_04(type='text', name='textfield')
-                |  年
-                input#text45.input_04(type='text', name='textfield')
-                | 月
-                input#text46.input_04(type='text', name='textfield')
-                | 日
-              td
-            tr
-              td  
-              td  
-              td
-                div(align='center')
-                  img(src='..\images\bnt_03.gif', style='margin-right:10px;', width='80', height='22', onclick='javascript:window.history.go(-1);')
-                  img(src='..\images\bnt_05.gif', alt='', width='80', height='22', onclick='javascript:history.go(-1);')
-              td  
-    script(src='/common.js')
+
+                input(type='button' value='提交' onclick='insCargo()')
+

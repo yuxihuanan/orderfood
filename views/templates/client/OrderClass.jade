@@ -13,35 +13,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             a(href='toCargo')
               p
                 | 出库管理
-          li
-            a(href='toAddOrder')
-              p
-                | 入库管理
-          li
-            a(href='toOrderClass')
-              p
-                | 库存管理
-
-      .mian_b
-        .mian_b1
-          a(href='AddOrderClass.jade', title='添加')
-            p.mian_b1_a1
-          a(href='#', title='删除')
-            p.mian_b1_a2
-          p.mian_b1_sousuo
-            input(name='', type='text')
-          a(href='#', title='搜索')
-            p.mian_b1_a3
-          a(href='#', title='最后')
-            p.mian_b1_a4
-          a(href='#', title='下一页')
-            p.mian_b1_a5
-          p.mian_b1_list
-            | 1 2 3 4……
-          a(href='#', title='上一页')
-            p.mian_b1_a6
-          a(href='#', title='最前')
-            p.mian_b1_a7
         table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
           tbody
             tr
@@ -49,16 +20,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 input(name='', type='checkbox', value='')
               td.mian_b_bg_lm(width='15%')
                 span
-                | 类别名称
+                | 原料名称
               td.mian_b_bg_lm(width='35%')
                 span
-                | 类别备注
+                | 总重量
               td.mian_b_bg_lm(width='10%')
                 span
-                | 订单数量
-              td.mian_b_bg_lm(colspan='2')
-                span
-                | 操作
+                | 单位
             tr
               td
                 input(name='', type='checkbox', value='')
@@ -67,23 +35,5 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td
                 | 很一般的订单
               td
-                | 10个
-              td.mian_b_icon_01(width='8%')
-                a(href='AddOrderClass.jade') 编辑
-              td.mian_b_icon_02(width='8%')
-                a(href='OrderClassDetail.jade') 查看
-            tr
-              td.mian_b_bg_lm(width='3%')
-              td.mian_b_bg_lm(width='15%')
-                span
-                | 类别名称
-              td.mian_b_bg_lm(width='35%')
-                span
-                | 类别备注
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 订单数量
-              td.mian_b_bg_lm(colspan='2')
-                span
-                | 操作
-    script(src='/common.js')
+                |浏览
+
