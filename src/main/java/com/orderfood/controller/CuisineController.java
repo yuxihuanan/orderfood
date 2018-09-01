@@ -2,9 +2,11 @@ package com.orderfood.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.orderfood.pojo.OrderfoodCuisine;
+import com.orderfood.pojo.OrderfoodRecipe;
 import com.orderfood.service.CuisineService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,52 @@ public class CuisineController {
         model.addObject("users",cuisine.selectAll());
         return model;
     }
+
+
+
+
+    @RequestMapping("gocuisi")
+    public ModelAndView gocuisi(){
+        ModelAndView model=new ModelAndView("knowledge/Recipeadd");
+        model.addObject("si",cuisine.sine());
+        return model;
+    }
+
+    @RequestMapping("recipeadd")
+    public ModelAndView recipeadd(OrderfoodRecipe recipe){
+        ModelAndView model=new ModelAndView("knowledge/Recipeadd");
+        model.addObject("stock",cuisine.getRecipe());
+        model.addObject("si",cuisine.sine());
+        return model;
+    }
+
+    @RequestMapping("getStock")
+    public ModelAndView getStock(){
+        ModelAndView model=new ModelAndView("knowledge/Recipeadd");
+        model.addObject("stock",cuisine.getRecipe());
+        model.addObject("si",cuisine.sine());
+        return model;
+    }
+
+    @ResponseBody
+    @RequestMapping("recipe")
+    public String recipe(OrderfoodRecipe recipe){
+        return JSON.toJSONString(cuisine.Recipeadd(recipe));
+    }
+
+
+    @RequestMapping("goCui")
+    public String goCui(){
+        return JSON.toJSONString(cuisine.selectAll());
+    }
+
+    @RequestMapping("goRecipe")
+    public ModelAndView goRecipe(){
+        ModelAndView model=new ModelAndView("knowledge/RecipeManage");
+        model.addObject("users",cuisine.getRecipe());
+        return model;
+    }
+
 
     @RequestMapping("cuisineupd")
     public ModelAndView cuisineupd(Integer cuisineid){

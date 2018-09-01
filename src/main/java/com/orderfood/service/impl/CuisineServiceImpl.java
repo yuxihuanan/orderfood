@@ -4,6 +4,7 @@ import com.orderfood.mapper.CuisineMapper;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodRecipe;
+import com.orderfood.pojo.OrderfoodStock;
 import com.orderfood.service.CuisineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,26 @@ public class CuisineServiceImpl implements CuisineService {
     @Override
     public List<OrderfoodCuisineClassify> selectAl() {
         return cuisineMapper.selectAl();
+    }
+
+    @Override
+    public List<OrderfoodRecipe> getRecipe() {
+        return cuisineMapper.getRecipe();
+    }
+
+    @Override
+    public int Recipeadd(OrderfoodRecipe recipe) {
+        return cuisineMapper.Recipeadd(recipe);
+    }
+
+    @Override
+    public List<OrderfoodStock> getStock() {
+        return cuisineMapper.getStock();
+    }
+
+    @Override
+    public List<OrderfoodCuisine> sine() {
+        return cuisineMapper.sine();
     }
 }
 

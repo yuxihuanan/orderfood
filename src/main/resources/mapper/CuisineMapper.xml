@@ -26,4 +26,33 @@
     <select id="selectAl" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
         select * from orderfood_cuisine_classify
     </select>
+
+    <resultMap id="Recipe" type="com.orderfood.pojo.OrderfoodRecipe">
+        <id property="rRecipeid" column="r_recipeId"></id>
+        <result property="recipecontent" column="recipeContent"></result>
+        <result property="rStockid" column="r_stockId"></result>
+        <result property="recipeweight" column="recipeWeight"></result>
+        <result property="rCuisineid" column="r_cuisineId"></result>
+        <association property="cuisine" javaType="com.orderfood.pojo.OrderfoodCuisine">
+            <id property="cuisineid" column="cuisineId"></id>
+            <result property="cuisinename" column="cuisineName"></result>
+            <result property="price" column="price"></result>
+            <result property="cuisineacronym" column="cuisineAcronym"></result>
+            <result property="cuisineidentify" column="cuisineIdentify"></result>
+            <result property="cClassifyid" column="c_classifyId"></result>
+            <result property="picture" column="picture"></result>
+        </association>
+        <association property="stock" javaType="com.orderfood.pojo.OrderfoodStock">
+            <id property="stockid" column="stockId"></id>
+            <result property="stockname" column="stockName"></result>
+            <result property="stockweight" column="stockWeight"></result>
+            <result property="stockunit" column="stockUnit"></result>
+        </association>
+    </resultMap>
+    
+    <select id="getRecipe" resultMap="Recipe">
+        SELECT * FROM orderfood_stock o1,orderfood_cuisine o2,orderfood_recipe o3 WHERE o3.r_stockId=o1.stockId
+        AND
+        o3.r_cuisineId=o2.cuisineId
+    </select>
 </mapper>

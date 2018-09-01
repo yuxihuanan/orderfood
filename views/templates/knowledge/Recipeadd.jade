@@ -1,0 +1,95 @@
+﻿doctype transitional
+html(xmlns='http//www.w3.org/1999/xhtml')
+  head
+    title 添加配方
+    link(href='../css/index.css', rel='stylesheet', type='text/css')
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='LineManage.htm')
+              p
+                | 菜品配方
+        table.mian_b_bg_xz(width='100%', border='0', cellspacing='0', cellpadding='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')  
+              td.mian_b_bg_lm(colspan='3') 添加菜品配方
+            tr
+              td  
+              td(width='10%', valign='top') 配方声明：
+              td(width='55%')
+                input#recipecontent.input_01(name='recipecontent', type='text')
+              td(width='35%')
+            tr
+              td  
+              td(width='10%', valign='top') 配方原料：
+              td(width='55%')
+                select#rStockid(name='rStockid')
+                  each item in stock
+                    option(value='#{item.stockname}')=item.stock.stockname
+              td(width='35%')
+            tr
+              td  
+              td(width='10%', valign='top') 配方菜品名称：
+              td(width='55%')
+                select#stockunit(name='stockunit')
+                  each item in stock
+                    option(value='#{item.stockid}')=item.stock.stockunit
+            tr
+              td  
+              td(width='10%', valign='top') 配方剂量：
+              td(width='55%')
+                input#recipeweight.input_01(name='recipeweight', type='text')
+              td(width='35%')
+            tr
+              td  
+              td(width='10%', valign='top') 配方菜品名称：
+              td(width='55%')
+                select#rCuisineid(name='rCuisineid')
+                  each item in si
+                     option(value='#{item.cuisineid}')=item.cuisinename
+            tr
+              td  
+              td  
+              td
+                div(align='center')
+                    img(width='80', height='22', style='margin-right:10px;', src='..\images\bnt_03.gif' onclick='recipe()')
+                  img(width='80', height='22', onclick='javascript:history.go(-1);', alt='', src='..\images\bnt_05.gif')
+              td  
+script(src='/js/jquery-1.7.1.min.js')
+script(type='text/javascript').
+    
+
+    
+        function add() {
+            var rRecipeid = $("#rRecipeid").val();
+            var recipecontent = $("#recipecontent").val();
+            var stockid = $("#rStockid").val();
+            var recipeweight = $("#recipeweight").val();
+            var Cuisineid = $("#rCuisineid").val();
+            $.ajax({
+                "url": "recipe",
+                "dataType": "json",
+                "date":{
+                    "rRecipeid":rRecipeid,
+                    "recipecontent":recipecontent,
+                    "stockid":stockid,
+                    "recipeweight":recipeweight,
+                    "Cuisineid":Cuisineid
+                },
+                "type": "get",
+                "success": function (result) {
+                    if (result > 0) {
+                        alert("添加成功");
+                    } else {
+                        alert("添加失败");
+                    }
+                }
+            })
+        }
+
+    

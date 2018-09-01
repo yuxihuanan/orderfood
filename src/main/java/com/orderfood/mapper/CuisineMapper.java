@@ -1,8 +1,6 @@
 package com.orderfood.mapper;
 
-import com.orderfood.pojo.OrderfoodCuisine;
-import com.orderfood.pojo.OrderfoodCuisineClassify;
-import com.orderfood.pojo.OrderfoodEmployee;
+import com.orderfood.pojo.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +25,18 @@ public interface CuisineMapper extends CommonMapper<OrderfoodCuisine> {
     public List<OrderfoodCuisine> selectAll();
 
     public List<OrderfoodCuisineClassify> selectAl();
+
+    @Insert("INSERT INTO orderfood_recipe VALUES(NULL,recipeContent=#{recipe.recipecontent},r_stockId=#{recipe.rStockid},recipeWeight=#{recipe.recipeweight},r_cuisineId=#{recipe.rCuisineid})")
+    public int Recipeadd(@Param("recipe") OrderfoodRecipe recipe);
+
+
+    public List<OrderfoodRecipe> getRecipe();
+
+    @Select("select * from orderfood_stock")
+    public List<OrderfoodStock> getStock();
+
+
+    @Select("select * from orderfood_cuisine")
+    public List<OrderfoodCuisine> sine();
+
 }

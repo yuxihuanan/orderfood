@@ -16,6 +16,26 @@ public class OrderfoodRecipe implements Serializable {
 
     private Integer rCuisineid;//菜品id
 
+    private OrderfoodCuisine cuisine; //菜品管理
+
+    private OrderfoodStock stock;// 原料管理
+
+    public OrderfoodCuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(OrderfoodCuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public OrderfoodStock getStock() {
+        return stock;
+    }
+
+    public void setStock(OrderfoodStock stock) {
+        this.stock = stock;
+    }
+
     public OrderfoodRecipe(Integer rRecipeid, String recipecontent, Integer rStockid, Float recipeweight, Integer rCuisineid) {
         this.rRecipeid = rRecipeid;
         this.recipecontent = recipecontent;
