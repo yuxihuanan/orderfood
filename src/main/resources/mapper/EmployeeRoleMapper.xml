@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.orderfood.mapper.EmployeeRodeMapper">
 
-
-    <select id="getAllRo" parameterType="com.orderfood.pojo.OrderfoodEmployeeRole">
+    <select id="getAllRo" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
              SELECT * FROM orderfood_employee_role
     </select>
     <delete id="delRo" parameterType="Integer">
@@ -15,4 +15,7 @@
     <update id="updRo" parameterType="com.orderfood.pojo.OrderfoodEmployeeRole">
             UPDATE orderfood_employee_role SET roleName = #{rolename} WHERE roleId = #{roleid}
     </update>
+    <select id="selRo" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
+            SELECT * FROM orderfood_employee_role WHERE roleId = #{roleid}
+    </select>
 </mapper>

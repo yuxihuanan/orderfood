@@ -21,16 +21,19 @@
     <select id="getAllEm" resultMap="Em">
               SELECT * FROM orderfood_employee em,orderfood_employee_role ro WHERE em.`e_roleId`=ro.`roleId`
     </select>
-    <delete id="delEm" parameterType="Integer">
+    <delete id="delesc" parameterType="Integer">
               DELETE FROM orderfood_employee WHERE employeeId = #{employeeid}
     </delete>
     <insert id="addEm" parameterType="com.orderfood.pojo.OrderfoodEmployee">
-              INSERT INTO orderfood_employee VALUES (NULL,#{employeename},#{age},#{username},#{password},#{eRoleid},#{sex},#{address},#{phone},#{createdate})
+              INSERT INTO orderfood_employee VALUES (NULL,#{employeename},#{age},#{username},#{password},#{eRoleid},#{sex},#{address},#{phone},NOW())
     </insert>
     <update id="updEm" parameterType="com.orderfood.pojo.OrderfoodEmployee">
-            UPDATE orderfood_employee SET employeeName = #{employeename},age=#{age},userName=#{username},`password`=#{password},e_roleId = #{eRoleid},sex=#{sex},address=,#{address},phone=#{phone},createDate=#{createdate}) WHERE employeeId = #{employeeid}
+            UPDATE orderfood_employee SET employeeName = #{employeename},age=#{age},userName=#{username},`password`=#{password},e_roleId = #{eRoleid},sex=#{sex},address=#{address},phone=#{phone},createDate=#{createdate} WHERE employeeId = #{employeeid}
     </update>
     <select id="selEm" resultMap="Em">
           SELECT * FROM orderfood_employee WHERE employeeId = #{employeeid}
+    </select>
+    <select id="selTwo" resultMap="Em">
+        SELECT * FROM orderfood_employee em,orderfood_employee_role ro WHERE em.`e_roleId`=ro.`roleId` and em.employeeName LIKE concat ('%',#{employeename},'%')
     </select>
 </mapper>

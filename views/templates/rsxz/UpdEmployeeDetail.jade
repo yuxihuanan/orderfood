@@ -1,0 +1,77 @@
+doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+    head
+        title 修改角色
+        link(rel='stylesheet', type='text/css', href='/css/index.css')
+        script(src='/js/jquery-1.7.1.min.js')
+        script(language='javascript', type='text/javascript').
+            function upd(){
+                var rolename = $("#rolename").val().trim();
+                var roleid = $("#roleid").val().trim();
+                if(rolename.length==0){
+                    alert("请输入角色名称");
+                }else{
+                    $.ajax({
+                        "url": "/employeeRoUpd",
+                        "dataType": "json",
+                        "type": "post",
+                        "data": {
+                            rolename:rolename,
+                            roleid:roleid
+                        },
+                        "success": function (result) {
+                            if (result == 1) {
+                                alert("修改成功");
+                                location.href = "/employeeRodeAll";
+                            } else {
+                                alert("修改失败");
+                            }
+                        }
+                    });
+                }
+            }
+    body.mian_bj
+        from#One(method='post')
+            .mian_top_01
+                .mian_top_r
+                .mian_top_l
+                .mian_top_c
+                    ul
+                        li
+                            a(href='Employlee.jade')
+                                p 选台
+                        li
+                            a(href='RSEventApply.jade')
+                                p 点菜
+                        li
+                            a(href='RSEventApply.jade')
+                                p 下单
+                        li
+                            a(href='RSEventApply.jade')
+                                p 修改订单
+                        li
+                            a(href='RSEventApply.jade')
+                                p 结账
+                .mian_b
+                    table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr
+                                td.mian_b_bg_lm(width='5%')
+                                td.mian_b_bg_lm(colspan='4') 修改角色信息
+                    table.mian_b_bg_xz(width='100%', border='1', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr(style='background-color: White; height: 30px;')
+                                td(colspan='8') 基本信息
+                            tr(style='background-color: White; height: 30px;')
+                                td(style='width: 8%;', align='center') 角色名称
+                            tr(style='display:none')
+                                td
+                                    input#roleid(type='text',style='border: 0px; width: 100px;',value='#{orderfoodEmployeeRole.roleid}')
+                            tr(style='background-color: White; height: 30px;')
+                                td
+                                    input#rolename(type='text',style='border: 0px; width: 1000px;',value='#{orderfoodEmployeeRole.rolename}')
+                            tr(style='background-color: White; height: 30px;')
+                                td(align='center', colspan='8')
+                                    img(src='/images/bnt_03.gif', style='margin-right: 10px;', width='80', height='22' onclick="upd()")
+                                    a(href='employeeAll')
+                                        img(src='/images/bnt_05.gif', alt='', width='80', height='22')
