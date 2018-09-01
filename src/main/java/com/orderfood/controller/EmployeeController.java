@@ -1,6 +1,8 @@
 package com.orderfood.controller;
 
 import com.orderfood.pojo.OrderfoodEmployee;
+import com.orderfood.pojo.OrderfoodEmployeeRole;
+import com.orderfood.service.EmployeeRoleService;
 import com.orderfood.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-
     /**
      * 查询全部员工
      * @return
@@ -116,5 +117,17 @@ public class EmployeeController {
         OrderfoodEmployee orderfoodEmployee=employeeService.selEm(id);
         mode2.addObject("orderfoodEmployee",orderfoodEmployee);
         return mode2;
+    }
+
+    /**
+     * 传角色id
+     * @param eRoleid
+     * @return
+     */
+    @RequestMapping("employeeDel/{eRoleid}")
+    public ModelAndView Employdel(@PathVariable(value = "eRoleid") int eRoleid){
+        ModelAndView mode3=new ModelAndView("rsxz/Employlee");
+        mode3.addObject("orderfoodEmployee",employeeService.del(eRoleid));
+        return mode3;
     }
 }

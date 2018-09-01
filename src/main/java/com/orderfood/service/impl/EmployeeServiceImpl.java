@@ -83,8 +83,17 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeMapper.deleteByExample(example);
         } catch (Exception e){
             e.printStackTrace();
-            return 0;
         }
         return 1;
+    }
+
+    /**
+     * 删除角色关联员工
+     * @param eRoleid
+     * @return
+     */
+    @Override
+    public int del(int eRoleid) {
+        return employeeMapper.del(eRoleid);
     }
 }

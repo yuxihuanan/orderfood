@@ -31,7 +31,7 @@
             UPDATE orderfood_employee SET employeeName = #{employeename},age=#{age},userName=#{username},`password`=#{password},e_roleId = #{eRoleid},sex=#{sex},address=#{address},phone=#{phone},createDate=#{createdate} WHERE employeeId = #{employeeid}
     </update>
     <select id="selEm" resultMap="Em">
-          SELECT * FROM orderfood_employee WHERE employeeId = #{employeeid}
+          SELECT * FROM orderfood_employee em,orderfood_employee_role ro WHERE  em.`e_roleId`=ro.`roleId` and employeeId = #{employeeid}
     </select>
     <select id="selTwo" resultMap="Em">
         SELECT * FROM orderfood_employee em,orderfood_employee_role ro WHERE em.`e_roleId`=ro.`roleId` and em.employeeName LIKE concat ('%',#{employeename},'%')

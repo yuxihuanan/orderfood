@@ -121,13 +121,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 td
                   input#age(name='age' type='text',style='border: 0px; width: 100px;',value="#{orderfoodEmployee.age}")
                 td
-                  select#e_roleId(name='eRoleid' style='width: 80px;')
-                    option(value='1') 店长
-                    option(value='2') 服务员
-                    option(value='3') 库管员
-                    option(value='4') 收银员
-                    option(value='5') 管理员
-                    option(value='7') 清洁员
+                        select#e_roleId(name='eRoleid' style='width: 80px;')
+                    each item in orderfoodEmployee
+                         option=item.orderfoodEmployeeRole.rolename
                 td
                   input#userName(name='username' type='text', style='border: 0px; width: 100px;',value="#{orderfoodEmployee.username}")
                 td
