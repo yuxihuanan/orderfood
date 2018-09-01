@@ -65,6 +65,18 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.49'
     // https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java
     compile group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '3.3.49.ALL'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-activemq
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '2.0.4.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework/spring-jms
+    compile group: 'org.springframework', name: 'spring-jms', version: '5.0.8.RELEASE'
+    // https://mvnrepository.com/artifact/javax.jms/jms
+    compile group: 'javax.jms', name: 'jms', version: '1.1'
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-core
+    compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-pool
+    compile group: 'org.apache.activemq', name: 'activemq-pool', version: '5.15.5'
+    // https://mvnrepository.com/artifact/cz.mallat.uasparser/uasparser
+    compile group: 'cz.mallat.uasparser', name: 'uasparser', version: '0.6.2'
 
 }
 gradle.projectsEvaluated {
