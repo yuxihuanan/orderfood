@@ -1,0 +1,125 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 菜品管理
+    link(rel='stylesheet', type='text/css', href='/css/index.css')
+    script(type='text/javascript', src='/js/jquery-1.7.1.min.js')
+    script.
+        function getAll() {
+            var cuisineacronym = $("#cuisineacronym").val();
+            $(".mian_b_lb").empty();
+            $.ajax({
+                "url": "getAll/" + cuisineacronym,
+                "dataType": "json",
+                "type": "post",
+                "success": function (result) {
+                    $(".mian_b_lb").append("<tr><td>菜品名称</td><td>菜品价格</td><td>首字母缩写</td><td>菜品标识</td><td>菜品分类</td></tr>");
+                   $(result).each(function () {
+                       var ify = "";
+                       if (this.cuisineidentify == 1) {
+                           ify = "普通菜";
+                       } else if (this.cuisineacronym == 2) {
+                           ify = "热门菜";
+                       } else if (this.cuisineacronym == 3) {
+                           ify = "促销菜";
+                       }
+                       $(".mian_b_lb").append("<tr><td>" + this.cuisinename + "</td><td>" + this.price + "</td><td>" + this.cuisineacronym + "</td><td>" + ify + "</td><td> " + this.classify.classifyname + "</td></tr>")
+                   })
+                }
+            });
+        }
+        function del(cuisineId){
+            $.ajax({
+                "url": "del/" + cuisineId,
+                "dataType": "json",
+                "type": "get",
+                "success": function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        $("tr").empty();
+                        show();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            })
+        }
+        function add() {
+            window.location.href='cuiadd';
+        }
+        function upd(cuisineid) {
+            window.location.href='cuisineupd?cuisineid='+cuisineid;
+        }
+        function show() {
+            window.location.href = 'cuisine';
+        }
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='javascript:void(0)' onclick='show()')
+              p
+                | 菜品管理
+      .mian_b
+        .mian_b1
+          p.mian_b1_sousuo
+            input(id='cuisineacronym', type='text')
+          a(href='javascript:void(0)', onclick='getAll()' title='搜索')
+            p.mian_b1_a3
+          a(href='#', title='最后')
+            p.mian_b1_a4
+          a(href='#', title='下一页')
+            p.mian_b1_a5
+          p.mian_b1_list
+            | 1 2 3 4……
+          a(href='#', title='上一页')
+            p.mian_b1_a6
+          a(href='#', title='最前')
+            p.mian_b1_a7
+        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='1%')
+              td.mian_b_bg_lm(width='89%')
+                  | 菜品列表
+              td.mian_b_bg_lm(width='10%')
+                  | 操作
+            tr
+              td
+              td
+                table.mian_b_lb(width='100%', border='0', cellspacing='0', cellpadding='0')
+                  tbody
+                    each item in users
+                      tr
+                        td(valign='top')
+                            img( rowspan='3' id='pictureshow',width='100', height='100', style='vertical-align: text-top;',src='#{item.picture}')
+                        td(valign='top')
+                          ='菜名 ：'+item.cuisinename
+                        td(valign='top')
+                          = '价格：'+item.price
+                        td(valign='top')
+                          =' 首字母缩写：'+item.cuisineacronym
+                        td(valign='top')
+                          if(item.cuisineidentify==0)
+                            = '菜品标识：普通菜'
+                          else if(item.cuisineidentify == 1)
+                            = '菜品标识：热门菜'
+                          else if(item.cuisineidentify == 2)
+                            = '菜品标识：促销菜'
+                        td(valign='top')
+                          ='所属菜类：'+item.classify.classifyname
+                        td
+                            button(type='button' onclick='del('+item.cuisineid+')') 删除
+                        td
+                            button(type='button' onclick='upd('+item.cuisineid+')') 修改
+                td
+                  button(type='button' onclick='add()' ) 添加
+              tr
+                td.mian_b_bg_lm(width='1%')
+                td.mian_b_bg_lm(width='89%')
+                    | 菜品管理
+                td.mian_b_bg_lm(width='10%')
+                    | 操作

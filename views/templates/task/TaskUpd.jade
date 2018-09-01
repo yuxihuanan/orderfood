@@ -1,0 +1,95 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 添加原料
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(type='text/javascript', src='js/jquery-1.7.1.min.js')
+    script.
+        function tiao() {
+            window.location.href='stocklogin'
+        }
+        function InsertStock() {
+            var stockName = $("#stockName").val();
+            var stockWeight = $("#stockWeight").val();
+            var stockUnit = $("#stockUnit").val();
+            var a="";
+            // if (stockUnit='千克'){
+            //     a='KG';
+            // }else if(stockUnit='升') {
+            //     a='L';
+            // }
+            $.ajax({
+                "url": "InsertStock",
+                "data":{
+                    'stockname':stockName,
+                    'stockweight':stockWeight,
+                    'stockunit':stockUnit
+                },
+                "dataType": "json",
+                "type": "post",
+                "success": function (result) {
+                    if (result > 0) {
+                        alert("添加成功");
+                        //location.href="stocklogin";
+                        $("#stockName").val("");
+                        $("#stockWeight").val("");
+                        $("#stockUnit").val("");
+
+                    } else {
+                        alert("添加失败");
+                    }
+                }
+            })
+        }
+
+        function qin() {
+            $("#stockName").val("");
+            $("#stockWeight").val("");
+            $("#stockUnit").val("");
+        }
+
+
+
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='stocklogin')
+              p
+                | 原料管理
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')  
+              td.mian_b_bg_lm(colspan='3') 添加原料
+            tr
+              td  
+              td(width='10%', valign='top') 原料名称：
+              td(width='55%')
+                input#stockName.input_01(type='text', name='cuisineName')
+              td(width='35%')  
+            tr
+              td  
+              td(valign='top') 原料总量：
+              td
+                input#stockWeight.input_01(type='text', name='price')
+              td
+            tr
+              td
+              td(valign='top') 原料单位：
+              td
+                select#stockUnit
+                  option(value='KG') 千克
+                  option(value='L') 升
+            tr
+              td  
+              td  
+              td
+                div(align='center')
+                  button(type='button' onclick='InsertStock()') 提交
+                    button(type='button' onclick='qin()') 重置
+              td  

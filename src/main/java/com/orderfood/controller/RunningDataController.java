@@ -1,5 +1,6 @@
 package com.orderfood.controller;
 
+import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodRunningData;
 import com.orderfood.service.RunningDataService;
 import com.orderfood.service.impl.RunningDataServiceImpl;
@@ -22,9 +23,10 @@ public class RunningDataController {
     private RunningDataService runningDataService;
     @RequestMapping(value = "selectrunningDatapage", produces = "text/plain;charset=utf-8")
     private ModelAndView selectRunningDatapage(HttpServletRequest request){
-        if(null==request.getSession().getAttribute("user")){
+        OrderfoodEmployee employee=(OrderfoodEmployee) request.getSession().getAttribute("user");
+        if(null==employee || employee.geteRoleid()!=1){
             model.setViewName("login");
-        }else {
+        }else{
             model.setViewName("item/Item");
         }
         return model;

@@ -2,11 +2,12 @@ package com.orderfood.mapper;
 
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodEmployeeRole;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository("employeeRodeMapper")
 public interface EmployeeRodeMapper extends CommonMapper<OrderfoodEmployee> {
     /**
      * 查询全部角色
@@ -32,5 +33,12 @@ public interface EmployeeRodeMapper extends CommonMapper<OrderfoodEmployee> {
      * 修改角色
      * @param orderfoodEmployeeRole
      */
-    void updRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
+    int updRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
+
+    /**
+     * 根据id查询员工信息
+     * @param roleid
+     * @return
+     */
+    OrderfoodEmployeeRole selRo(@Param("roleid") Integer roleid);
 }

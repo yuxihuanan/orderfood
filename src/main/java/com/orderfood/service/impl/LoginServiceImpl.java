@@ -1,8 +1,11 @@
 package com.orderfood.service.impl;
 
+import com.orderfood.mapper.CommonMapper;
 import com.orderfood.mapper.LoginMapper;
+import com.orderfood.mapper.MenuMapper;
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodJurisdiction;
+import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,9 @@ import java.util.List;
 public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginMapper loginMapper;
+
+    @Autowired
+    private MenuMapper menuMapper;
     /**
      * 登录
      * @param employee
@@ -36,5 +42,15 @@ public class LoginServiceImpl implements LoginService {
      */
     public List<OrderfoodJurisdiction> GetJurisdiction(Integer roleId) {
             return loginMapper.GetJurisdiction(roleId);
+    }
+
+    /**
+     * 查询导航
+     * @param menu
+     * @return
+     */
+    public List<OrderfoodMenu> selectMenu(OrderfoodMenu menu)
+    {
+        return menuMapper.selectMenu(menu);
     }
 }

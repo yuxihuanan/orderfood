@@ -40,4 +40,16 @@ t3.`roleName`
  </trim>
  ORDER BY t2.`menuId`
     </select>
+
+    <select id="selectMenu" resultType="com.orderfood.pojo.OrderfoodMenu">
+    SELECT * FROM orderfood_menu
+     <trim prefix="where" prefixOverrides="and | or">
+         <if test="menu.parentid!=null and menu.parentid!=''">
+             and parentId=#{menu.parentId}
+         </if>
+         <if test="menu.parentid!=null and menu.parentid!=''">
+             and menuId=#{menu.menuid}
+         </if>
+     </trim>
+    </select>
 </mapper>

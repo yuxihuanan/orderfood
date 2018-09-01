@@ -2,8 +2,11 @@ package com.orderfood.controller;
 
 import com.orderfood.config.CacheConfiguration;
 import com.orderfood.pojo.OrderfoodEmployee;
+import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,11 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson.*;
 import redis.clients.jedis.Jedis;
 
+import java.util.List;
+
 @Controller
 public class LoginController {
     @Resource(name="loginService")
     private LoginService login;
     private ModelAndView model=new ModelAndView();
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private CacheConfiguration cacheConfiguration;
 
@@ -92,9 +99,24 @@ public ModelAndView index(HttpServletRequest request){
             return model;
     }
 
+    /**
+     * 去首页
+     * @return
+     */
     @RequestMapping("index1")
     public ModelAndView index1(){
         model.setViewName("index1");
         return model;
+    }
+
+    /**
+     * 首页跳转其他页面
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "jump",produces = "text/plain;charset=utf-8")
+    public String tiaozhuan(OrderfoodMenu menu){
+        List<OrderfoodMenu> menus = login.selectMenu(menu);
+        return JSON.toJSONString(menus);
     }
 }

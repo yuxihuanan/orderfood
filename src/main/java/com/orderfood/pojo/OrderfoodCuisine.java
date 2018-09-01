@@ -1,5 +1,6 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -17,6 +18,27 @@ public class OrderfoodCuisine implements Serializable {
     private Integer cuisineidentify;//菜品标识
 
     private Integer cClassifyid;//所属菜品分类
+
+    @Transient
+    private OrderfoodCuisineClassify classify; //菜品分类
+
+    public OrderfoodCuisineClassify getClassify() {
+        return classify;
+    }
+
+    public void setClassify(OrderfoodCuisineClassify classify) {
+        this.classify = classify;
+    }
+
+    private String picture;//图片
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
         this.cuisineid = cuisineid;

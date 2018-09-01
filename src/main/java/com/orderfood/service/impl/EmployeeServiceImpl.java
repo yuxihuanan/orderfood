@@ -5,6 +5,7 @@ import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 @Service("employeeService")
@@ -19,16 +20,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<OrderfoodEmployee> getAllEm() {
         return employeeMapper.getAllEm();
-    }
-
-    /**
-     * 根据员工id删除员工
-     * @param employeeid
-     * @return
-     */
-    @Override
-    public int delEm(int employeeid) {
-        return employeeMapper.delEm(employeeid);
     }
 
     /**
@@ -48,12 +39,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public int updEm(OrderfoodEmployee orderfoodEmployee) {
-        try {
+//        try {
             employeeMapper.updEm(orderfoodEmployee);
-        } catch (Exception e) {
-            return 0;
-        }
-        return 1;
+//        } catch (Exception e) {
+//        return 0;
+//    }
+        return employeeMapper.updEm(orderfoodEmployee);
     }
 
     /**
@@ -62,7 +53,38 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     @Override
-    public int selEm(int employeeid) {
+    public OrderfoodEmployee selEm(int employeeid) {
         return employeeMapper.selEm(employeeid);
+    }
+
+    /**
+     * 根据姓名条件查
+     * @param employeename
+     * @return
+     */
+    @Override
+    public List<OrderfoodEmployee> selTwo(String employeename){
+        System.out.println("哈哈哈哈："+employeename);
+        return employeeMapper.selTwo(employeename);
+    }
+
+    /**
+     * 批量删除
+     * @param objects
+     * @return
+     * @throws RuntimeException
+     */
+    @Override
+    public int delesc(List<Object> objects) throws RuntimeException {
+        System.out.println(objects);
+        try {
+            Example example = new Example(OrderfoodEmployee.class);
+            example.createCriteria().andIn("employeeid",objects);
+            employeeMapper.deleteByExample(example);
+        } catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
     }
 }

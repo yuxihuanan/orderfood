@@ -1,0 +1,157 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 添加菜品
+    link(rel='stylesheet', type='text/css', href='/css/index.css')
+    style.
+      #price{
+        width : 198px;
+        height : 18px
+      }
+      #cuisineidentify{
+        width: 198px;
+        height: 18px
+      }
+      #cClassifyid{
+        width: 198px;
+        height: 18px
+      }
+      #cuisineName{
+        width: 198px;
+        height: 18px
+      }
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='NoticeClass.jade')
+              p
+                | 菜品管理
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+
+          tbody
+              tr
+                td.mian_b_bg_lm(width='5%')  
+                td.mian_b_bg_lm(colspan='3') 修改菜品
+              tr(style='display:none')
+                 td  
+                 td(width='10%', valign='top') 菜品编号：
+                 td(width='55%')
+                     input(id='cuisineId' type='text' value='#{updd.cuisineid}')
+                 td(width='35%')
+              tr
+                td  
+                td(width='10%', valign='top') 菜品名称：
+                td(width='55%')
+                    input(id='cuisineName' type='text' value='#{updd.cuisinename}')
+                td(width='35%')  
+              tr
+                td  
+                td(valign='top') 价格：
+                td
+                    input(id='price' type='text' value=updd.price)
+                td
+                tr
+                td
+                td(valign='top') 添加缩写
+                    input(id='cuisineacronym' type='text' value='#{updd.cuisineacronym}')
+              tr
+                td  
+                td(valign='middle') 选择菜类：
+                td
+                  table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+                    tbody
+                      tr
+                        td(colspan='2')
+                            input#Checkbox3( type='checkbox' name='putong')
+                            | 普通菜
+                            input#Checkbox4(type='checkbox' name='remen')
+                            | 热门菜
+                            input#Checkbox5(type='checkbox' name='cuxiao')
+                            | 促销菜 
+              tr
+                td  
+                td(valign='top') 菜品分类：
+                   select#cClassifyid
+                        each item in users
+                            if(updd.cClassifyid==item.cClassifyid)
+                                option(value='#{item.classifyid}' checked='checked' )=item.classifyname
+                          option(value='#{item.classifyid}')=item.classifyname
+                td  
+              tr
+                td  
+                td  
+                td
+                    div(align='center')
+                     button(type='button' onclick='upd()') 修改
+                     button(type='button' onclick='') 重置
+                td  
+
+
+
+script(src='/js/jquery-1.7.1.min.js')
+script(type='text/javascript').
+    $(function () {
+        var s='#{updd.cuisineidentify}';
+        if(s=0){
+            $("input[name=putong]").attr("checked","checked");
+        }else if (s = 1) {
+            $("input[name=remen]").attr("checked","checked");
+        } else if (s = 2) {
+            $("input[name=cuxiao]").attr("checked","checked");
+        }
+    });
+    function upd() {
+        var cuisineId = $("#cuisineId").val();
+        var cuisineName = $("#cuisineName").val();
+        var price = $("#price").val();
+        var cuisineacronym = $("#cuisineacronym").val();
+        var cClassifyid = $("#cClassifyid").val();
+        var a;
+        if ($("#Checkbox3").prop("checked")) {
+            a=0;
+        }else if($("#Checkbox4").prop("checked")){
+            a=1;
+        }else if($("#Checkbox5").prop("checked")){
+            a=2;
+        }
+
+        if (cuisineName == null || cuisineName == "") {
+            alert("菜品名称不能为空");
+            return;
+        } else if (price == null || price == "") {
+            alert("价格不能为空");
+            return;
+        } else if (cuisineacronym == null || cuisineacronym == "") {
+            alert("首字母缩写不能为空");
+            return;
+        }
+        $.ajax({
+            "url": "cuisneupdd",
+            "dataType": "json",
+            "data": {
+                "cuisineid":cuisineId,
+                "cuisinename": cuisineName,
+                "price": price,
+                "cuisineacronym": cuisineacronym,
+                "cuisineidentify": a,
+                "cClassifyid": cClassifyid
+            },
+            "type": "get",
+            "success": function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    show();
+                } else {
+                    alert("修改失败");
+                }
+            }
+        })
+    }
+    function show() {
+        window.location.href='cuisine';
+    }
