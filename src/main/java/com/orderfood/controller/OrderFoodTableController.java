@@ -57,6 +57,8 @@ public class OrderFoodTableController {
             }
         }
         modelAndView.addObject("myMeum",list);
+        modelAndView.addObject("statu",statu);
+        modelAndView.addObject("indentId",indentId);
         return modelAndView;
     }
     /**
@@ -65,7 +67,7 @@ public class OrderFoodTableController {
      * @return
      */
     private Integer Zhuohao;  //桌号
-    private Integer status;   //状态
+    private Integer statu;   //状态
     private Integer indentId; //订单编号
     @RequestMapping("OrdermealShow")
     public ModelAndView OrdermealShow(Integer statu,Integer indentId){
@@ -75,7 +77,7 @@ public class OrderFoodTableController {
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
         modelAndView.addObject("dingdan",lists);
-        this.status=statu;
+        this.statu=statu;
         this.indentId=indentId;
         return modelAndView;
     }
@@ -128,7 +130,7 @@ public class OrderFoodTableController {
         }
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        this.status=statu;
+        this.statu=statu;
         this.indentId=indentId;
         return modelAndView;
     }
@@ -166,7 +168,7 @@ public class OrderFoodTableController {
     public ModelAndView TableDetailsShow(){
         ModelAndView modelAndView=new ModelAndView("page/tablesdetails");
         modelAndView.addObject("tableId",Zhuohao);
-        modelAndView.addObject("statu",status);
+        modelAndView.addObject("statu",statu);
         modelAndView.addObject("indentId",indentId);
         return modelAndView;
     }
@@ -203,7 +205,7 @@ public class OrderFoodTableController {
     @RequestMapping("OrdermealShowTwo")
     public ModelAndView OrdermealShowTwo(Integer statu,Integer indentId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
-        this.status=statu;
+        this.statu=statu;
         this.indentId=indentId;
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
