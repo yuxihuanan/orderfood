@@ -4,7 +4,9 @@ import com.orderfood.config.CacheConfiguration;
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,8 @@ public class LoginController {
     @Resource(name="loginService")
     private LoginService login;
     private ModelAndView model=new ModelAndView();
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private CacheConfiguration cacheConfiguration;
 
