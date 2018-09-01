@@ -57,6 +57,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           }else if(#{statu}==2){
             $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
             init2("getTableDetailsShow");
+            flagAdd=true;
             $(".state").html("订单添加");
           }else{
             $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");

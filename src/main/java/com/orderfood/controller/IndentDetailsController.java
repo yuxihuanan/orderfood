@@ -5,15 +5,11 @@ import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentDetailsService;
 import com.orderfood.util.CommonUtil;
+import com.orderfood.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Timer;
 
 @Controller
 @RequestMapping("IndentDetails")
@@ -29,7 +25,6 @@ public class IndentDetailsController {
     @ResponseBody
     @RequestMapping(value = "getDetail",produces = "text/plain;charset=utf-8")
     public String getDetail(String tableId){
-
         CommonUtil.IndentCode();
         return JSON.toJSONString(indentDetailsService.getDetail(tableId));
     }
