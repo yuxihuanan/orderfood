@@ -1,5 +1,6 @@
 package com.orderfood.service.impl;
 
+import com.orderfood.mapper.CuisineMapper;
 import com.orderfood.mapper.OrderFoodTableMapper;
 import com.orderfood.mapper.OrderfoodTableCuisineMapper;
 import com.orderfood.pojo.OrderfoodCuisine;
@@ -15,7 +16,7 @@ public class CashierServiceImpl implements CashierService {
     @Autowired
     private OrderFoodTableMapper orderFoodTableMapper;
     @Autowired
-    private OrderfoodTableCuisineMapper orderfoodTableCuisineMapper;
+    private CuisineMapper cuisineMapper;
     @Override
     /**
      * 查看所有桌号
@@ -39,7 +40,7 @@ public class CashierServiceImpl implements CashierService {
      */
     @Override
     public List<OrderfoodCuisine> getOrderfoodCuisineAll() {
-        return orderfoodTableCuisineMapper.selectAll();
+        return cuisineMapper.selectAll();
     }
 
     @Override

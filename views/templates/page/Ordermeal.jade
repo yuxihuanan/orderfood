@@ -17,7 +17,6 @@ html
           var sssss=0;
           jsons.push(datajson)
           var ass=parseInt($(".amount span").text());
-          alert(ass);
           if(ass!=0){
               sssss = 1;
               $(".amount span").text(ass+sssss)
@@ -60,7 +59,7 @@ html
       ul.menu
         each item in foodCuisine
           li
-            img(src='img/food_01.png')
+            img(src=""+item.picture+"")
             h4.CuisineId=item.cuisineid
             h4.cuisinename=item.cuisinename
             p.price=item.price

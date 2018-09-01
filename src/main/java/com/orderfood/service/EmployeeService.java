@@ -17,13 +17,6 @@ public interface EmployeeService {
     List<OrderfoodEmployee> getAllEm();
 
     /**
-     * 根据员工编号删除员工
-     * @param employeeid
-     * @return
-     */
-    int delEm(int employeeid);
-
-    /**
      * 添加员工
      * @param orderfoodEmployee
      * @return
@@ -41,5 +34,19 @@ public interface EmployeeService {
      * @param employeeid
      * @return
      */
-    int selEm(int employeeid);
+    OrderfoodEmployee selEm(int employeeid);
+
+    /**
+     * 根据姓名条件查
+     * @param employeename
+     * @return
+     */
+    List<OrderfoodEmployee> selTwo(String employeename);
+
+    /**
+     * 批量删除
+     * @param objects
+     * @return
+     */
+    int delesc(List<Object> objects);
 }

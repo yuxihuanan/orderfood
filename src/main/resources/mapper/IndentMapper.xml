@@ -11,12 +11,12 @@
             <result property="totalmoney" column="totalmoney"/>
             <result property="netmoney" column="netmoney"/>
             <result property="iEmployeeid" column="i_employeeId"/>
-            <association property="table" javaType="com.orderfood.pojo.OrderfoodTable">
+            <association property="orderfoodTable" javaType="com.orderfood.pojo.OrderfoodTable">
                 <id property="tableid" column="tableId"/>
                 <result property="tablenumber" column="tableNumber"/>
                 <result property="tablestatus" column="tableStatus"/>
             </association>
-            <association property="employee" javaType="com.orderfood.pojo.OrderfoodEmployee">
+            <association property="orderfoodEmployee" javaType="com.orderfood.pojo.OrderfoodEmployee">
                 <id property="employeeid" column="employeeId"></id>
                 <result property="employeename" column="employeeName"></result>
                 <result property="age" column="age"></result>

@@ -14,6 +14,16 @@ public class OrderfoodCargo implements Serializable {
     private Float cargoprice;//每个单位价格
 
     private Float cargoweight;//重量
+    private Float weightCount;//总重量
+
+    public Float getWeightCount() {
+        return weightCount;
+    }
+
+    public void setWeightCount(Float weightCount) {
+        this.weightCount = weightCount;
+    }
+
     @Transient
     private OrderfoodStock stock;//原料表
 

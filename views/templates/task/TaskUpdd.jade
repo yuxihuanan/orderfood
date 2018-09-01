@@ -1,0 +1,113 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 修改原料
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(type='text/javascript', src='js/jquery-1.7.1.min.js')
+    script.
+        $(function () {
+            getId();
+        })
+        function tiao() {
+            window.location.href='stocklogin'
+        }
+        function getId(id) {
+            var id = location.search.substring(4,1000);
+            $.ajax({
+                "url":"getId/"+id,
+                "dataType":"json",
+                "type":"post",
+                "success": function (result) {
+                     $(".input_01").val(result.stockname);
+                     $("#stockWeight").val(result.stockweight);
+                     var a=$("#stockUnit").val(result.stockunit);
+                     alert(a.val());
+                     var b;
+                     if (a.val()=='L'){
+                         b="升";
+                     } else if (a.val()=='KG'){
+                         b="千克";
+                     }
+                    var b=$("#stockUnit").val(b);
+                }
+            })
+        }
+
+
+
+        function qin() {
+            $("#stockName").val("")
+        }
+
+
+        function UpdateStock() {
+            var id = location.search.substring(4,1000);
+            var stockName = $("#stockName").val();
+            var stockWeight = $("#stockWeight").val();
+            alert(id)
+            alert(stockName);
+            alert(stockWeight);
+            $.ajax({
+                "url": "UpdateStock",
+                "data": {
+                    stockid:id,
+                    stockname: stockName,
+                    stockweight: stockWeight
+                },
+                "dataType": "json",
+                "type": "post",
+                "success": function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        location.href="stocklogin";
+
+                    } else {
+                        alert("修改失败");
+                    }
+                }
+            })
+        }
+
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='stocklogin')
+              p
+                | 原料管理
+      .mian_b
+        table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
+          tbody
+            tr
+              td.mian_b_bg_lm(width='5%')  
+              td.mian_b_bg_lm(colspan='3') 修改原料
+            tr
+              td  
+              td(width='10%', valign='top') 原料名称：
+              td(width='55%')
+                input#stockName.input_01(type='text', name='cuisineName')
+              td(width='35%')  
+            tr
+              td  
+              td(valign='top') 原料总量：
+              td
+                input#stockWeight.input_01(type='text', name='price',readonly='readonly' disabled='disabled')
+              td
+            tr
+              td
+              td(valign='top') 原料单位：
+              td
+                input#stockUnit.input_01(type='text', name='price',readonly='readonly',disabled='disabled')
+
+
+            tr
+              td  
+              td  
+              td
+                div(align='center')
+                  button(type='button' onclick='UpdateStock()') 保存
+                  button(type='button' onclick='qin()') 重置
+              td  

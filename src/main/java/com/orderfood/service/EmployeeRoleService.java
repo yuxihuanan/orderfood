@@ -2,9 +2,12 @@ package com.orderfood.service;
 
 
 import com.orderfood.pojo.OrderfoodEmployeeRole;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EmployeeRoleService {
     /**
      * 查询角色信息
@@ -31,4 +34,11 @@ public interface EmployeeRoleService {
      * @param orderfoodEmployeeRole
      */
     int updRo(OrderfoodEmployeeRole orderfoodEmployeeRole);
+
+    /**
+     * 根据id查询角色信息
+     * @param roleid
+     * @return
+     */
+    OrderfoodEmployeeRole selRo(Integer roleid);
 }

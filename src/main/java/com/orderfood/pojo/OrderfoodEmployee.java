@@ -2,6 +2,8 @@ package com.orderfood.pojo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +12,7 @@ import java.util.Date;
  * 员工表实体类
  */
 public class OrderfoodEmployee implements Serializable {
+
     private Integer employeeid;//员工编号
 
     private String employeename;//姓名

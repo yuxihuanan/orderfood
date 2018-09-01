@@ -1,6 +1,5 @@
 var indentId=0;  //订单编号
-var flagD=false; //如果俩分钟到了之后设置为true;
-var flag=false;//判断是否修改过菜品数量
+
 /**
  * 订单的撤回,取消订单
  */
@@ -8,12 +7,6 @@ function chehui(tableId){
 
 }
 
-/**
- * 判断当前的订单详情是否有进行过修改
- */
-function fag(){
-
-}
 
 /**
  * 当用户从正在使用的桌子进来时,调用此方法查看订单详情：statu=1
@@ -28,16 +21,15 @@ function init(url,tableId) {
         "dataType":"JSON",
         "success":function (result) {
             $(result).each(function () {
-                indentId=this.dIndentid;
+                indentId=this.dIndentid
                 $(".content").append("<table class=\"order_list\">" +
                     "<tr>" +
                     "<input name='detailsid' type='hidden' value='"+this.detailsid+"'/>"+
                     "<input name='d_cuisineId' type='hidden' value='"+this.dCuisineid+"'/>"+
-                    "<input name='sta' type='hidden' value='0'/>"+  //sta=1时,为修改过的,0为没有
                     "<td class=\"name\">"+this.cuisine.cuisinename+"</td><td><span class=\"dis_price\">未优惠</span></td><td></td>" +
                     "</tr>" +
                     "<tr>" +
-                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" name='jia' onclick='jia($(this),"+this.detailscount+")'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" name='jian' onclick='jian($(this),"+this.detailscount+")'>-</span></td>" +
+                    "<td>"+this.cuisine.price+"/份</td><td class=\"discount\"><span class='dd'>"+this.cuisine.price+"</span>元/份</td><td class=\"m_num\"><span class=\"count\" name='jia' onclick='jia($(this))'>+</span><span class=\"amount\">"+this.detailscount+"</span><span class=\"count\" name='jian' onclick='jian($(this),"+this.detailscount+")'>-</span></td>" +
                     "</tr>" +
                     "</table>");
             });
@@ -85,7 +77,7 @@ function init2(url) {
  * 判断用户加菜的数量
  * @param j
  */
-function jia(j,num){
+function jia(j){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
     if(number<100){
@@ -96,11 +88,6 @@ function jia(j,num){
     }else{
       alert("已经点的够多了!");
     }
-    if($("table:eq("+index+") .amount" ).html()==num){
-        $("table:eq("+index+") [name=sta]" ).val(0);
-    }else{
-        $("table:eq("+index+") [name=sta]" ).val(1);
-    }
 }
 
 /**
@@ -110,8 +97,7 @@ function jia(j,num){
 function jian(j,num){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
-    alert(1);
-    if(number-1==num&&flagD==true){
+    if(number-1==num){
         $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
         $("[name=jian]").hide();
     }
@@ -123,11 +109,6 @@ function jian(j,num){
             dele(index);
             $("table:eq("+index+")").remove();
         }
-    }
-    if($("table:eq("+index+") .amount" ).html()==num){
-        $("table:eq("+index+") [name=sta]" ).val(0);
-    }else{
-        $("table:eq("+index+") [name=sta]" ).val(1);
     }
     jisuan();
 }
@@ -163,7 +144,6 @@ function ustatu(time) {
             $("[name=jian]").hide();
         },120000-time);
     }
-    flagD=true;
 }
 
 function updateTime(){
@@ -190,32 +170,18 @@ function upda(statu,detailId) {
         ustatu(119999);
         addDetails(detailId);
     }else{
-        var s=$("[name=sta]");
-        alert(s.length);
-        //判断是否有修改
-        for(var i=0;i<s.length;i++){
-            if(s[i].value==1){
-                flag=true;
-                break;
+        var tables=$("table").size();
+        for(var i=0;i<tables;i++){
+            var data={
+                detailsid:$("table:eq("+i+") [name=detailsid]").val(),//订单详情编号
+                dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
+                detailscount:$("table:eq("+i+") .amount").html(),//数量
+                dIndentid:indentId
             }
-            if(i==s.length-1){
-                alert("您还没有对菜品进行更新!!");
-            }
-        }
-        if(flag) {
-            var tables=$("table").size();
-            for(var i=0;i<tables;i++){
-                var data={
-                    detailsid:$("table:eq("+i+") [name=detailsid]").val(),//订单详情编号
-                    dCuisineid:$("table:eq("+i+") [name=d_cuisineId]").val(),//菜品编号
-                    detailscount:$("table:eq("+i+") .amount").html(),//数量
-                    dIndentid:indentId
-                }
-                u(data);
-                if(i==tables-1){
-                    alert("订单更新成功!!");
-                    location.href="OrdrTableShow";
-                }
+            u(data);
+            if(i==tables-1){
+                alert("订单更新成功!!");
+                location.href="OrdrTableShow";
             }
         }
     }
@@ -322,9 +288,6 @@ function add(data){
     });
 }
 
-/**
- * 删除订单
- */
 function deleteIndent(){
     alert(indentId);
     $.ajax({

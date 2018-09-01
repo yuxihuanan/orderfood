@@ -4,7 +4,9 @@ package com.orderfood.service.impl;
 import com.orderfood.mapper.CargoMapper;
 import com.orderfood.pojo.OrderfoodCargo;
 import com.orderfood.pojo.OrderfoodRunningData;
+import com.orderfood.pojo.OrderfoodStock;
 import com.orderfood.service.CargoService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.Resource;
 import java.util.List;
 @Service("cargoService")
 public class CargoServiceImpl implements CargoService {
@@ -69,8 +70,6 @@ public class CargoServiceImpl implements CargoService {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); // 事物隔离级别，开启新事务，这样会比较安全些。
         TransactionStatus status = transactionManager.getTransaction(def);
-        int res=0;
-        if (cargo!=null&&runData!=null) {
             try {
             this.txIns(cargo,runData);
             } catch (Exception e) {
@@ -78,22 +77,37 @@ public class CargoServiceImpl implements CargoService {
                 e.printStackTrace();
                 return 0;
             }
-        }else{
-            return 0;
-        }
         transactionManager.commit(status);
-        return res;
+        return 1;
+    }
+    @Override
+    public List<OrderfoodStock> getUnitl() {
+        return cargoMapper.getUnitl();
     }
 
     @Override
-    public Float selRawStock(Integer stockid) {
-        Float rs=0.00f;
-        if(stockid!=null&&stockid!=0){
-            rs=cargoMapper.selRawStock(stockid);
-        }else {
-            return 0f;
-        }
-        return rs;
+    public List<OrderfoodCargo> findNewsPage(Integer Start, Integer Size) {
+        return cargoMapper.findNewsPage(Start,Size);
+    }
+
+    @Override
+    public Integer findNewCont() {
+        return cargoMapper.findNewCont();
+    }
+
+    @Override
+    public List<OrderfoodCargo> findLike(String stockname, @Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size) {
+        return cargoMapper.findLike(stockname,Start,Size);
+    }
+
+    @Override
+    public Integer findLikeCount(String stockname) {
+        return cargoMapper.findLikeCount(stockname);
+    }
+
+    @Override
+    public Float weightSum(String stockname) {
+        return cargoMapper.weightSum(stockname);
     }
 
     public Integer txIns(OrderfoodCargo cargo,OrderfoodRunningData runData){

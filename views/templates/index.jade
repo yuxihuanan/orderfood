@@ -413,7 +413,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                 img(src='images/middil_05.gif', alt='')
                                 a(href='login.jade')
                                     img(alt='', src='images/middil_06.gif')
-                            iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame', src='selectrunningDatapage  ')
+                            iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame', src='selectrunningDatapage')
                         td(width='5', valign='top', style='position: relative;', height='93%')
         div(style='text-align:center;')
     script(type = 'text/javascript').
@@ -432,6 +432,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         "success": function (result) {
                             if (result != null) {
                                 for (var i = 0; i < result.length - 1; i++) {
+
                                     for (var j = i + 1; j < result.length;) {
                                         if (result[i].classify.parentid == result[j].classify.parentid) {
                                             result.splice(j, 1);
@@ -439,9 +440,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                         }
                                         j++;
                                     }
-                                    str += "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(1)\" onmouseout=\"hidden1(1)\">" +
-                                        "<a href=\"rsxz/Employlee.jade\" onclick=\"changeIcon('HR')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">" +
-                                        "<span></span>\n" +
+                                    str += "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show("+count+")\" onmouseout=\"hidden1("+count+")\">";
+                                    if (result[i].classify.menuurl=="") {
+                                        str += "<a href='index1' class='chang' onclick=\"changeIcon('" + result[i].classify.parentid + "','" + count + "')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                    } else {
+                                        str += "<a href='" + result[i].classify.menuurl + "' onclick=\"changeIcon('" + result[i].classify.parentid + "','" + count + "')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                    }
+                                        str+="<span></span>\n" +
                                         "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
                                         "</a>" +
                                         "</li>";
@@ -454,4 +459,41 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                             alert("服务器异常！");
                         }
                     });
+                    }
+                    function changeIcon(parentid,count) {
+                        var str="<ul>";
+                        $("#xx" + count + "~ul").remove();
+                        $.ajax({
+                            "url": "jump",
+                            'data': {
+                                "parentid":parentid
+                            },
+                            "dataType": "json",
+                            "type": "post",
+                            "success": function (result) {
+                                            if(null!=result){
+                                                for(var i=0;i<result.length;i++){
+                                                    str+="<li class='xiala'>";
+                                                    if(result[i].menuurl==null ||result[i].menuurl=='') {
+                                                        str += "<a href='index1' target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                                    }else{
+                                                        str += "<a href='"+result[i].menuurl+"' target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                                    }
+                                                    str+="<span></span>\n" +
+                                                    "<p class='gongneng'>" + result[i].menuname + "</p>"+
+                                                    "</a>" +
+                                                    "</li>";
+                                                    // $("#mainFrame").attr("src",result[i].menuurl);
+                                                    // return;
+                                                }
+                                                str+="</ul>";
+                                                $("#xx" + count + "").after(str);
+                                            }
+                                $(".gongneng:not(:last)").css({borderBottom: "1px #eeeeee solid"});
+                                $("#xx" + count + "~ul").slideDown("slow").siblings("ul").slideUp("slow");
+                            },
+                            "error": function () {
+                                alert("服务器异常！");
+                            }
+                        });
                     }

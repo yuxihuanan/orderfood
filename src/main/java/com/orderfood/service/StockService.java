@@ -2,6 +2,7 @@ package com.orderfood.service;
 
 
 import com.orderfood.pojo.OrderfoodStock;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -36,4 +37,37 @@ public interface StockService {
      * @return
      */
     public List<OrderfoodStock> SelectStock(OrderfoodStock stock);
+
+    /**
+     * 根据原料名称查询
+     * @param stock
+     * @return
+     */
+    public List<OrderfoodStock> SelectStockName(OrderfoodStock stock);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public int del(int id);
+
+    /**
+     * 按原料名称模糊查询
+     * @param stockName
+     * @return
+     */
+    public List<OrderfoodStock> getInfo(@Param("stockName") String stockName);
+
+    /**
+     * 按id查询
+     * @param id
+     * @return
+     */
+    public OrderfoodStock getId(@Param("id") int id);
+
+    /**
+     * 批量删除
+     */
+    public int delesc(List<Object> obj);
 }

@@ -2,6 +2,7 @@ package com.orderfood.mapper;
 
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodStaffRole;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -16,13 +17,6 @@ public interface EmployeeMapper extends CommonMapper<OrderfoodEmployee> {
     List<OrderfoodEmployee> getAllEm();
 
     /**
-     * 根据员工编号删除员工
-     * @param employeeid
-     * @return
-     */
-    int delEm(int employeeid);
-
-    /**
      * 添加员工
      * @param orderfoodEmployee
      * @return
@@ -33,12 +27,26 @@ public interface EmployeeMapper extends CommonMapper<OrderfoodEmployee> {
      * 修改员工信息
      * @param orderfoodEmployee
      */
-    void updEm(OrderfoodEmployee orderfoodEmployee);
+    int updEm(OrderfoodEmployee orderfoodEmployee);
 
     /**
      * 根据id查询员工信息
      * @param employeeid
      * @return
      */
-    int selEm(int employeeid);
+    OrderfoodEmployee selEm(int employeeid);
+
+    /**
+     * 根据姓名条件查
+     * @param employeename
+     * @return
+     */
+    List<OrderfoodEmployee> selTwo(@Param("employeename") String employeename);
+
+    /**
+     * 批量删除
+     * @param objects
+     * @return
+     */
+    int delesc(List<Object> objects);
 }
