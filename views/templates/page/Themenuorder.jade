@@ -57,23 +57,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       else
           span 0
     ul.classes
-      li 主厨推荐
-      li.choosed
-        | 招 牌 菜
-        //span.sub
-      li 新品推荐
-      li 经典热菜
-      li 正宗川菜
-      li 水产海鲜
-      li 精品小食
-      li 精美凉菜
-      li 主    食
-      li 面    食
-      li 酒水饮料
+        li.choosed
+            | 招 牌 菜
+            //span.sub
     ul.dishes
       each item in foodCuisine
         li
-          img(src='img/food_01.png')
+          img(src=""+item.picture+"")
           h4.CuisineId=item.cuisineid
           h4.cuisinename=item.cuisinename
           p.price=item.price
