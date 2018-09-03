@@ -7,6 +7,7 @@ import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodTable;
 import com.orderfood.pojo.myMeum;
 import com.orderfood.service.CashierService;
+import com.orderfood.service.CuisineClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,11 @@ import java.util.List;
 public class OrderFoodTableController {
     @Autowired
     private CashierService cashierService;//配置service实现
+    @Autowired
+    private CuisineClassifyService cuisineClassifyService;
+    private Integer Zhuohao;  //桌号
+    private Integer statu;   //状态
+    private Integer indentId; //订单编号
     @RequestMapping("OrdrTableShow")
     /**
      * @Author LYX
@@ -66,9 +72,6 @@ public class OrderFoodTableController {
      * OrdermealShow
      * @return
      */
-    private Integer Zhuohao;  //桌号
-    private Integer statu;   //状态
-    private Integer indentId; //订单编号
     @RequestMapping("OrdermealShow")
     public ModelAndView OrdermealShow(Integer statu,Integer indentId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
@@ -128,10 +131,11 @@ public class OrderFoodTableController {
         }else{
             modelAndView.addObject("dingdan",lists);
         }
+        modelAndView.addObject("list",cuisineClassifyService.getAlls());
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        this.statu=statu;
-        this.indentId=indentId;
+//        this.statu=statu;
+//        this.indentId=indentId;
         return modelAndView;
     }
     /**

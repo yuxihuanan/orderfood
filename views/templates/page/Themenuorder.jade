@@ -26,7 +26,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 $(".amount span").text(jsons.length + sssss)
                 sssss = 1;
             }
-            alert(JSON.stringify(jsons))
         }
         function dianji() {
             console.info(JSON.stringify(jsons))
@@ -43,12 +42,18 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
             })
         }
+        $(function () {
+            $("li").click(function () {
+                $(this).addClass("choosed");
+                $(this).siblings().removeClass("choosed");
+            })
+        })
     title 菜谱点餐
     header
       a.return(href='OrdrTableShow')
         img(src='img/return.png')
       p.switch
-        a(href='OrdermealShow') 快速点餐
+        a(href='OrdermealShowTwo') 快速点餐
         a.selected(href='ThemenuorderShow') 菜谱点餐
     a.amount(href="javaScript:void(0)" onclick="dianji()")
       | 已点
@@ -60,6 +65,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         li.choosed
             | 招 牌 菜
             //span.sub
+        each item in list
+            li=item.classifyname
     ul.dishes
       each item in foodCuisine
         li
