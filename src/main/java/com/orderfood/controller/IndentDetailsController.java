@@ -91,8 +91,10 @@ public class IndentDetailsController {
      * 打印订单
      * @return
      */
-    public String dayinIndent(String tableId,int sta){
-        PrintUtil.print(indentDetailsService.getDetailByTableId(tableId),sta);
+    @ResponseBody
+    @RequestMapping("dayinIndent")
+    public String dayinIndent(String indentId,int sta){
+        PrintUtil.print(indentDetailsService.getDetailByTableId(indentId),sta);
         return "1";
     }
 }

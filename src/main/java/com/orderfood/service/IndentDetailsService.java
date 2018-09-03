@@ -35,10 +35,10 @@ public interface IndentDetailsService {
     int addDetails(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
-     * 通过桌号，获得订单的信息
+     * 通过订单编号，获得订单的信息
      * @return
      */
-    OrderfoodIndent getDetailByTableId(String tableId);
+    OrderfoodIndent getDetailByTableId(String indentId);
 
     /**
      * 下单时生成一个订单

@@ -90,7 +90,6 @@ function jia(j,num){
     }
     if(number<100){
         $("table:eq("+index+") .amount" ).html(parseInt($("table:eq("+index+") .amount" ).html())+1);
-
         $("table:eq("+index+") [name=jian]").show();
         jisuan();
     }else{
@@ -110,6 +109,7 @@ function jia(j,num){
 function jian(j,num){
     var index=j.parent().parent().parent().parent().index();
     var number=$("table:eq("+index+") .amount" ).html();
+    console.log(flagD);
     if(number-1==num&&flagD==true){
         $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
         $("[name=jian]").hide();
@@ -146,7 +146,7 @@ function deleteCache(cuisineid){
         "data":"cuisineid="+cuisineid,
         "success":function () {
             if($("table").length==0){
-                deleteIndent();
+                location.href="OrderTableUpadte/0";
             }
         },
         "error":function () {
@@ -181,13 +181,15 @@ function ustatu(time) {
     if(time>=120000){
         $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
         $("[name=jian]").hide();
+        flagD=true;
     }else{
         setTimeout(function () {
             $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
             $("[name=jian]").hide();
+            flagD=true;
         },120000-time);
     }
-    flagD=true;
+
 }
 
 function updateTime(){
@@ -424,12 +426,14 @@ function retu(){
     location.href="OrdrTableShow";
 }
 
-function dayin(tableId){
+function dayin(indentId){
     $.ajax({
-        "url":"dayinIndent",
+        "url":"IndentDetails/dayinIndent",
         "type":"post",
-        "data":"tableId="+tableId+"&sta=0",
+        "data":"indentId="+indentId+"&sta=1",
+        "dataType":"JSON",
         "success":function () {
+            alert(1);
             u();
         },
         "error":function () {

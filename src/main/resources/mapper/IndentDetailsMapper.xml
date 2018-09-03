@@ -101,8 +101,9 @@
         SELECT * FROM `orderfood_indent` i INNER JOIN `orderfood_indent_details` d
 	          ON i.`indentId`=d.`d_indentId` INNER JOIN `orderfood_cuisine` c
 	          ON d.`d_cuisineId`=c.`cuisineId` INNER JOIN `orderfood_table` t
-	          ON i.`i_tableId`=t.`tableId`
-	          WHERE i.`i_tableId`=#{tableId}
+	          ON i.`i_tableId`=t.`tableId` INNER JOIN `orderfood_employee` e
+	          ON i.`i_employeeId`=e.`employeeId`
+	          WHERE i.`indentId`=#{indentId}
     </select>
 
     <select id="getDetailsIdByIndentCode" resultType="Integer">

@@ -86,8 +86,8 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      * @return
      */
     @Override
-    public OrderfoodIndent getDetailByTableId(String tableId) {
-        return indentDetailsMapper.getDetailByTableId(tableId);
+    public OrderfoodIndent getDetailByTableId(String indentId) {
+        return indentDetailsMapper.getDetailByTableId(indentId);
     }
 
     /**

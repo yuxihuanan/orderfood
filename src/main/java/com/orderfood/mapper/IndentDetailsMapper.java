@@ -52,10 +52,10 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
     int addDetails(OrderfoodIndentDetails orderfoodIndentDetails);
 
     /**
-     * 通过桌号，获得订单的信息
+     * 通过订单编号，获得订单的信息
      * @return
      */
-    OrderfoodIndent getDetailByTableId(@Param("tableId") String tableId);
+    OrderfoodIndent getDetailByTableId(@Param("indentId") String indentId);
 
     /**
      * 下单时生成一个订单
