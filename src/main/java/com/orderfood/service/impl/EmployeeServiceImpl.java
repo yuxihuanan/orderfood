@@ -86,4 +86,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return 1;
     }
+
+    /**
+     * 删除角色关联员工
+     * @param eRoleid
+     * @return
+     */
+    @Override
+    public int del(int eRoleid) {
+        return employeeMapper.del(eRoleid);
+    }
 }

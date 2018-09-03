@@ -49,4 +49,11 @@ public interface EmployeeService {
      * @return
      */
     int delesc(List<Object> objects);
+
+    /**
+     * 删除角色关联员工
+     * @param eRoleid
+     * @return
+     */
+    int del(int eRoleid);
 }

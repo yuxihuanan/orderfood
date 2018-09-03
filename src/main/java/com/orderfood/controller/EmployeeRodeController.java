@@ -1,6 +1,7 @@
 package com.orderfood.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodEmployeeRole;
 import com.orderfood.service.EmployeeRoleService;
 
@@ -25,6 +26,16 @@ public class EmployeeRodeController {
         ModelAndView model=new ModelAndView("rsxz/EmployeeDetail");
         model.addObject("employeesdetail",employeeRoleService.getAllRo());
         return model;
+    }
+
+    /**
+     * 查询全部角色
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "EmployeeselAll",produces = "text/html;charset=UTF-8")
+    public String EmployeeselAll(){
+       return JSON.toJSONString(employeeRoleService.selAll());
     }
 
     /**

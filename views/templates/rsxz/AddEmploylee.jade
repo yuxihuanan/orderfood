@@ -55,10 +55,11 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         }
         function selAll() {
             $.ajax({
-                "url": "/EmployeeselAll",
+                "url": "EmployeeselAll",
                 "dataType": "json",
                 "type": "post",
                 "success": function (result) {
+                    alert(2);
                     $(result).each(function () {
                         $("#e_roleId").append("<option value='" + this.roleid + "'>"+ this.rolename + "</option>");
                     })

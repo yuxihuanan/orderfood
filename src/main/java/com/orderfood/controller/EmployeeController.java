@@ -119,4 +119,16 @@ public class EmployeeController {
         mode2.addObject("orderfoodEmployee",orderfoodEmployee);
         return mode2;
     }
+
+    /**
+     * 传角色id
+     * @param eRoleid
+     * @return
+     */
+    @RequestMapping("employeeDel/{eRoleid}")
+    public ModelAndView Employdel(@PathVariable(value = "eRoleid") int eRoleid){
+        ModelAndView mode3=new ModelAndView("rsxz/Employlee");
+        mode3.addObject("orderfoodEmployee",employeeService.del(eRoleid));
+        return mode3;
+    }
 }
