@@ -111,23 +111,12 @@ public class EmployeeController {
      * @param id
      * @return
      */
-    @RequestMapping("employeeUpdpage/{id}")
-    public ModelAndView EmployeeUpd(@PathVariable(value = "id") Integer id){
+    @RequestMapping("employeeUpdpage")
+    public ModelAndView EmployeeUpd(Integer id){
+        System.out.print(id);
         ModelAndView mode2 = new ModelAndView("rsxz/UpdEmploylee");
         OrderfoodEmployee orderfoodEmployee=employeeService.selEm(id);
         mode2.addObject("orderfoodEmployee",orderfoodEmployee);
         return mode2;
-    }
-
-    /**
-     * 传角色id
-     * @param eRoleid
-     * @return
-     */
-    @RequestMapping("employeeDel/{eRoleid}")
-    public ModelAndView Employdel(@PathVariable(value = "eRoleid") int eRoleid){
-        ModelAndView mode3=new ModelAndView("rsxz/Employlee");
-        mode3.addObject("orderfoodEmployee",employeeService.del(eRoleid));
-        return mode3;
     }
 }

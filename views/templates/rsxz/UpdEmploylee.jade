@@ -6,10 +6,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(src='/js/jquery-1.7.1.min.js')
     script(language='javascript', type='text/javascript').
       $(function () {
-          var Ro='#{orderfoodEmployee.eRoleid}';
-          $("#e_roleId").val(Ro);
           var sex = '#{orderfoodEmployee.sex}';
           $("#sex").val(sex);
+          selAll();
       })
       function upd() {
           var employeeid = $("#employeeid").val().trim();
@@ -38,7 +37,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               alert("请输入入店时间");
           } else {
               var employeeid='#{orderfoodEmployee.employeeid}';
-              alert(employeeid+"  "+employeename+" "+age+" "+username+" "+password+" "+eRoleid+" "+sex+" "+address+" "+phone+" "+createdate);
               $.ajax({
                   "url": "/employeeUpd",
                   "dataType": "json",
@@ -66,6 +64,25 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               });
           }
       }
+        function selAll() {
+            var Ro = '#{orderfoodEmployee.eRoleid}';
+            $.ajax({
+                "url":"/EmployeeselAll",
+                "dataType":"json",
+                "type":"post",
+                "success":function (result) {
+                    var flg="";
+                    $(result).each(function () {
+                        if(Ro==this.roleid) {
+                            flg += "<option value='" + this.roleid + "' selected='selected'>" + this.rolename + "</option>";
+                        }else{
+                            flg += "<option value='" + this.roleid + "'>" + this.rolename + "</option>";
+                        }
+                    })
+                    $("#e_roleId").append(flg);
+                }
+            });
+        }
   body.mian_bj
     from#One(method='post')
       .mian_top_01
@@ -121,9 +138,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 td
                   input#age(name='age' type='text',style='border: 0px; width: 100px;',value="#{orderfoodEmployee.age}")
                 td
-                        select#e_roleId(name='eRoleid' style='width: 80px;')
-                    each item in orderfoodEmployee
-                         option=item.orderfoodEmployeeRole.rolename
+                    select(id='e_roleId')
                 td
                   input#userName(name='username' type='text', style='border: 0px; width: 100px;',value="#{orderfoodEmployee.username}")
                 td

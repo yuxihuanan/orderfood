@@ -53,6 +53,21 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 });
             }
         }
+        function selAll() {
+            $.ajax({
+                "url": "/EmployeeselAll",
+                "dataType": "json",
+                "type": "post",
+                "success": function (result) {
+                    $(result).each(function () {
+                        $("#e_roleId").append("<option value='" + this.roleid + "'>"+ this.rolename + "</option>");
+                    })
+                }
+            });
+        }
+        $(function () {
+            selAll();
+        })
   body.mian_bj
     from#One(method='post')
       .mian_top_01
@@ -61,20 +76,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .mian_top_c
           ul
             li
-              a(href='Employlee.jade')
-                p 选台
-            li
-              a(href='RSEventApply.jade')
-                p 点菜
-            li
-              a(href='RSEventApply.jade')
-                p 下单
-            li
-              a(href='RSEventApply.jade')
-                p 修改订单
-            li
-              a(href='RSEventApply.jade')
-                p 结账
+              a(href='employeeAll')
+                p 员工管理
         .mian_b
           table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
             tbody
@@ -104,13 +107,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 td
                   input#age(type='text',style='border: 0px; width: 100px;')
                 td
-                  select#e_roleId(style='width: 80px;')
-                    option(value='1') 店长
-                    option(value='2') 服务员
-                    option(value='3') 库管员
-                    option(value='4') 收银员
-                    option(value='5') 管理员
-                    option(value='7') 清洁员
+                    select(id='e_roleId')
                 td
                   input#userName(type='text', style='border: 0px; width: 100px;')
                 td

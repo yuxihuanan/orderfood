@@ -6,9 +6,15 @@
     <select id="getAllRo" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
              SELECT * FROM orderfood_employee_role
     </select>
+    <select id="selAll" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
+              SELECT * FROM orderfood_employee_role
+    </select>
     <delete id="delRo" parameterType="Integer">
               DELETE FROM orderfood_employee_role WHERE roleId = #{roleid}
     </delete>
+    <update id="updEm" parameterType="Integer">
+        UPDATE `orderfood_employee` SET e_roleId=2 WHERE e_roleId= #{roleid}
+    </update>
     <insert id="addRo" parameterType="com.orderfood.pojo.OrderfoodEmployeeRole">
               INSERT INTO orderfood_employee_role VALUES(NULL,#{rolename})
     </insert>

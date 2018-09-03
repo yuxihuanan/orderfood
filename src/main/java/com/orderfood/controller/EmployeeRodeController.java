@@ -35,7 +35,7 @@ public class EmployeeRodeController {
     @ResponseBody
     @RequestMapping("employeeRoDel/{roleid}")
     public String EmployRoDel(@PathVariable(value = "roleid") int roleid){
-        return JSON.toJSONString(employeeRoleService.delRo(roleid));
+        return JSON.toJSONString(employeeRoleService.delAndUpd(roleid));
     }
 
     /**
@@ -61,7 +61,21 @@ public class EmployeeRodeController {
     }
 
     /**
-     * 跳转添加员工
+     * 传修改对象
+     * @param roleid
+     * @return
+     */
+    @RequestMapping("employeeRoUpdpage")
+    public ModelAndView EmployeeUpd(Integer roleid){
+        System.out.println(roleid);
+        ModelAndView mode4 = new ModelAndView("rsxz/UpdEmployeeDetail");
+        OrderfoodEmployeeRole orderfoodEmployeeRole=employeeRoleService.selRo(roleid);
+        mode4.addObject("orderfoodEmployeeRole",orderfoodEmployeeRole);
+        return mode4;
+    }
+
+    /**
+     * 跳转添加角色
      * @return
      */
     @RequestMapping("employeeRoAddpage")

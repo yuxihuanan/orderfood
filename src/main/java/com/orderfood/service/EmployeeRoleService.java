@@ -23,6 +23,20 @@ public interface EmployeeRoleService {
     int delRo(int roleid);
 
     /**
+     * 根据id修改关联员工角色为服务员
+     * @param roleid
+     * @return
+     */
+    int updEm(int roleid);
+
+    /**
+     * 删除角色时同时重置属于该角色的角色为服务员
+     * @param roleid
+     * @return
+     */
+    int delAndUpd(@Param(value = "roleid")int roleid);
+
+    /**
      * 添加角色信息
      * @param orderfoodEmployeeRole
      * @return
@@ -41,4 +55,10 @@ public interface EmployeeRoleService {
      * @return
      */
     OrderfoodEmployeeRole selRo(Integer roleid);
+
+    /**
+     * 查询全部角色
+     * @return
+     */
+    List<OrderfoodEmployeeRole> selAll();
 }

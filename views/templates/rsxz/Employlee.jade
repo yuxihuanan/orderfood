@@ -78,6 +78,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               }
           });
       }
+
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -135,7 +136,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     td=item.phone
                     td=item.createdate
                     td.mian_b_icon_01(width='5%')
-                      a(href='employeeUpdpage/#{item.employeeid}') 编辑
+                      a(href='employeeUpdpage?id=#{item.employeeid}') 编辑
             tr
               td.mian_b_bg_lm(width='3%')
               td.mian_b_bg_lm(width='10%')

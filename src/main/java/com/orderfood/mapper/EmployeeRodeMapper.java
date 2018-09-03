@@ -20,7 +20,21 @@ public interface EmployeeRodeMapper extends CommonMapper<OrderfoodEmployee> {
      * @param roleid
      * @return
      */
-    int delRo(int roleid);
+    int delRo(@Param(value = "roleid") int roleid);
+
+    /**
+     * 根据id修改关联员工角色为服务员
+     * @param roleid
+     * @return
+     */
+    int updEm(@Param(value = "roleid")int roleid);
+
+    /**
+     * 删除角色时同时重置属于该角色的角色为服务员
+     * @param roleid
+     * @return
+     */
+    int delAndUpd(@Param(value = "roleid")int roleid);
 
     /**
      * 添加角色
@@ -41,4 +55,10 @@ public interface EmployeeRodeMapper extends CommonMapper<OrderfoodEmployee> {
      * @return
      */
     OrderfoodEmployeeRole selRo(@Param("roleid") Integer roleid);
+
+    /**
+     * 查所有角色名称
+     * @return
+     */
+    List<OrderfoodEmployeeRole> selAll();
 }

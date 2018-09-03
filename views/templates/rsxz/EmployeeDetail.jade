@@ -26,7 +26,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 "success": function (result) {
                     if (result == 1) {
                         alert("删除成功");
-                        location.href = "employeeDel/"+#{check_val}+"";
+                        location.href = "employeeAll";
                     } else {
                         alert("删除失败");
                     }
@@ -53,13 +53,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           tbody
             tr
               td.mian_b_bg_lm(width='3%')
-                input(name='', type='checkbox', value='')
+
               td.mian_b_bg_lm(width='10%')
                 span
-                | 工号
+                | 编号
               td.mian_b_bg_lm(width='10%')
                 span
-                | 员工姓名
+                | 角色名称
               td.mian_b_bg_lm(colspan='2')
                 span
                 | 操作
@@ -70,15 +70,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   td=item.roleid
                   td=item.rolename
                   td.mian_b_icon_01(width='5%')
-                    a(href='employeeRoUpdpage/#{item.roleid}') 编辑
+                    a(href='employeeRoUpdpage?roleid=#{item.roleid}') 编辑
             tr
               td.mian_b_bg_lm(width='3%')
               td.mian_b_bg_lm(width='10%')
                 span
-                | 工号
+                | 编号
               td.mian_b_bg_lm(width='5%')
                 span
-                | 员工名称
+                | 角色名称
               td.mian_b_bg_lm(colspan='2')
                 span
                 | 操作
