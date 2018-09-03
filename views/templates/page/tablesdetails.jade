@@ -31,12 +31,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li
             input.orange_btn(type='button', value='返回选桌' onclick='retu()')
           li
-            input.orange_btn(type='button', value='更新订单',name='up' onclick='upda(#{statu},#{detailId})')
+            input.orange_btn(type='button', value='更新订单',name='up' onclick='upda(#{statu},#{indentId})')
           li
             input.orange_btn(type='button', value='确定下单',name='sure' onclick='addIndent(#{tableId})')
         ul.action_btn
           li
-            input.orange_btn(type='button', value='添加菜品' onclick='addCuisine()')
+            input.orange_btn(type='button', value='添加菜品' onclick='addCuisine(#{statu})')
           li
             input.orange_btn(type='button', value='结账',name='j' onclick='jie(#{tableId})')
           li
@@ -49,15 +49,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       script(type='text/javaScript').
         //说明还没有下单
         $(function(){
+          sta=#{statu}
           if(#{statu}==0){
             $("input[name=up]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
             $("input[name=j]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
             $(".state").html("订单确认");
-            init2("getTableDetailsShow");
+            init2("getTableDetailsShow",#{indentId});
           }else if(#{statu}==2){
             $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");
-            init2("getTableDetailsShow");
-            flagAdd=true;
+            init2("getTableDetailsShow",#{indentId});
             $(".state").html("订单添加");
           }else{
             $("input[name=sure]").removeClass("orange_btn").addClass("gray_btn").attr("disabled","disabled");

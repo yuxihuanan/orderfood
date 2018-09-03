@@ -43,6 +43,21 @@ function zhifubao(){
     /*location.href="http://localhost:8080/index";*/
 }
 
+function xianjin(tableId){
+    $.ajax({
+        "url":"dayinIndent",
+        "type":"post",
+        "data":"tableId="+tableId+"&sta=0",
+        "success":function () {
+            u();
+        },
+        "error":function () {
+            alert("打印机坏了!!")
+        }
+    });
+    /*location.href="http://localhost:8080/index";*/
+}
+
 function u(){
     location.href="OrderTableUpadte/0";
 }

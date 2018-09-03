@@ -13,7 +13,7 @@ spring:
     port: 3306
     url: jdbc:mysql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: 123456
+    password: 971205
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
     maxActive: 20
@@ -40,11 +40,19 @@ spring:
       max-idle: 8
       min-idle: 0
     timeout: 0
+  activemq:
+    broker-url: tcp://127.0.0.1:61616?jms.optimizeAcknowledge=true&jms.optimizeAcknowledgeTimeOut=30000&jms.redeliveryPolicy.maximumRedeliveries=10
+    user: admin
+    password: admin
+#    packages:
+#     trust-all: true
+  jms:
+    pub-sub-domain: false
   jade4j:
     caching: false
-    prefix: file:E:\orderfood\views\templates\
+    prefix: file:F:\orderfood\views\templates\
   resources:
-    static-locations: file:E:\orderfood\views\static\
+    static-locations: file:F:\orderfood\views\static\
 
 ---
 spring:

@@ -5,6 +5,7 @@ import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentDetailsService;
 import com.orderfood.util.CommonUtil;
+import com.orderfood.util.PrintUtil;
 import com.orderfood.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,5 +85,16 @@ public class IndentDetailsController {
     @RequestMapping("deleteIndent")
     public String deleteIndent(int indentid){
         return JSON.toJSONString(indentDetailsService.deleteIndent(indentid));
+    }
+
+    /**
+     * 打印订单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("dayinIndent")
+    public String dayinIndent(String indentId,int sta){
+        PrintUtil.print(indentDetailsService.getDetailByTableId(indentId),sta);
+        return "1";
     }
 }

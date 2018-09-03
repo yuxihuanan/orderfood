@@ -66,7 +66,6 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
     public int addDetails(OrderfoodIndentDetails orderfoodIndentDetails) {
         try {
             mqUtils.sendQueueMessage("updateStock",orderfoodIndentDetails);
-//            int res=indentDetailsMapper.updateStockByRecipeid(orderfoodIndentDetails);
             String s=indentDetailsMapper.ExistDetail(orderfoodIndentDetails);
             //判断该订单详情是否存在,存在则在原来的基础上添加菜品的数量
             if (s!=null) {
@@ -87,8 +86,8 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
      * @return
      */
     @Override
-    public OrderfoodIndent getDetailByTableId(String tableId) {
-        return indentDetailsMapper.getDetailByTableId(tableId);
+    public OrderfoodIndent getDetailByTableId(String indentId) {
+        return indentDetailsMapper.getDetailByTableId(indentId);
     }
 
     /**

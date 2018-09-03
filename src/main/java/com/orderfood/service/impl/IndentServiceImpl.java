@@ -4,8 +4,11 @@ import com.orderfood.mapper.OrderfoodIndentMapper;
 import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -54,4 +57,20 @@ public class IndentServiceImpl implements IndentService {
     public List<OrderfoodIndentDetails> getDetails(Integer d_intdentId) {
         return indentMapper.getDetails(d_intdentId);
     }
+
+    @Override
+    @Transactional
+    public int delesc(List<Object> obj) throws RuntimeException{
+
+        try {
+            Example example=new Example(OrderfoodIndent.class);
+            example.createCriteria().andIn("indentid",obj);
+            this.indentMapper.deleteByExample(example);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
+    }
+
 }

@@ -40,4 +40,6 @@ public interface OrderfoodIndentMapper extends CommonMapper<OrderfoodIndent> {
      */
     List<OrderfoodIndentDetails> getDetails(@Param("id")Integer d_intdentId);
 
+    int delesc(List<Object> obj);
+
 }

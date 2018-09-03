@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orderfood.mapper.OrderfooddaoMapper">
+
+    <select id="getAll" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
+      SELECT * FROM orderfood_employee_role
+    </select>
+    <select id="getMen" resultType="com.orderfood.pojo.OrderfoodMenu">
+        SELECT * FROM orderfood_menu where parentid=#{id}
+    </select>
+    <select id="getNot" resultType="com.orderfood.pojo.OrderfoodMenu">
+        SELECT * FROM orderfood_menu where parentid !=#{id}
+    </select>
+    <delete id="del" parameterType="Integer">
+        DELETE FROM orderfood_jurisdiction WHERE j_roleId=#{j_roleId} AND j_classifyId=#{j_classifyId}
+    </delete>
+    <insert id="insJurisdiction" parameterType="com.orderfood.pojo.OrderfoodJurisdiction">
+        INSERT INTO `orderfood_jurisdiction` VALUES(#{jRoleid},#{jClassifyid})
+    </insert>
+</mapper>
