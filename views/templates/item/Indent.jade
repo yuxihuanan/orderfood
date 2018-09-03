@@ -1,111 +1,128 @@
 ﻿doctype transitional
 html(xmlns='http://www.w3.org/1999/xhtml')
-  head
-    title 订单记录
-    link(rel='stylesheet', type='text/css', href='../css/index.css')
-    script(type='text/javascript', src='/js/jquery-1.7.1.min.js').
+    head
+        title 订单记录
+        link(rel='stylesheet', type='text/css', href='../css/index.css')
+        script(type='text/javascript', src='/js/jquery-1.7.1.min.js').
 
-  body.mian_bj
-    .mian_top_01
-      .mian_top_r
-      .mian_top_l
-      .mian_top_c
-        ul
-          li
-            a(href='Item.jade')
-              p
-                | 收支流水
-          li
-            a(href='TaskAllo.jade')
-              p
-                | 收支统计
-          li
-            a(href='TaskProShow.jade')
-              p
-                | 订单记录
-      .mian_b
-        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0' )
-          input(type='text',id="indentId")
-          button( onclick='getInfo()')搜索
-          button(onclick='back()')返回
-          tbody.tb
-            tr
-              td
-                span
-                | 订单号
-              td
-                span
-                | 桌号
-              td
-                span
-                | 创建时间
-              td
-                span
-                | 订单备注
-              td
-                span
-                | 订单总金额
-              td
-                span
-                | 实付总金额
-              td
-                span
-                | 服务员
-              td
-                span
-                | 操作
-              each item in indent
-                tr
-                  td=item.indentcode
-                  td=item.orderfoodTable.tablenumber
-                  td=item.createdate
-                  td=item.indentcomment
-                  td=item.totalmoney
-                  td=item.netmoney
-                  td=item.orderfoodEmployee.employeename
-                  td.mian_b_icon_01(width='8%')
-                    a(href='javascript:void(0)' onclick='del('+item.indentid+')') 删除
-                  td.mian_b_icon_02(width='8%')
-                    a(href='javascript:void(0)' onclick='ds('+item.indentid+')') 查看详情
-    script.
-        function getInfo() {
-            $(".mian_b_bg").html(" ");
-            var id=$("#indentId").val();
-            $.ajax({
-                'url':'getInfo/'+id,
-                'dataType':'JSON',
-                'type':'post',
-                'success':function (result) {
-                    var str="<tr><td>订单号</td><td>桌号</td><td>创建时间</td><td>订单备注</td><td>订单总金额</td><td>实付总金额</td><td>服务员</td></tr>";
-                    $(result).each(function () {
-                        str+="<tr><td>"+this.indentcode+"</td><td>"+this.orderfoodTable.tablenumber+"</td><td>"+this.createdate+"</td><td>"+this.indentcomment+"</td><td>"+this.totalmoney+"</td><td>"+this.netmoney+"</td><td>"+this.orderfoodEmployee.employeename+"</td></tr>";
-                    })
-                    $(".mian_b_bg").append(str);
-                }
-            })
-        }
-        function back() {
-            window.location.href='getAll';
-        }
-        function ds(id) {
-            window.location.href='tail?id='+id;
-        }
-        function del(id) {
-            if(confirm("确定要删除吗？")==true){
+    body.mian_bj
+        .mian_top_01
+            .mian_top_r
+            .mian_top_l
+            .mian_top_c
+                ul
+                    li
+                        a(href='Indent/getAll')
+                            p
+                                | 订单记录
+            .mian_b
+                table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0' )
+                    input(type='text',id="indentId")
+                    button( onclick='getInfo()')搜索
+                    button( onclick='getdel()')批量删除
+                    tbody.tb
+                        tr
+                            td
+                                span
+                                | 订单号
+                            td
+                                span
+                                | 桌号
+                            td
+                                span
+                                | 创建时间
+                            td
+                                span
+                                | 订单备注
+                            td
+                                span
+                                | 订单总金额
+                            td
+                                span
+                                | 实付总金额
+                            td
+                                span
+                                | 服务员
+                            td
+                                span
+                                | 操作
+                            each item in indent
+                                tr
+                                    td
+                                        input(name='indent',type='checkbox',value=item.indentid)
+                                tr
+                                    td=item.indentcode
+                                    td=item.orderfoodTable.tablenumber
+                                    td=item.createdate
+                                    td=item.indentcomment
+                                    td=item.totalmoney
+                                    td=item.netmoney
+                                    td=item.orderfoodEmployee.employeename
+                                    td.mian_b_icon_01(width='8%')
+                                        a(href='javascript:void(0)' onclick='del('+item.indentid+')') 删除
+                                    td.mian_b_icon_02(width='8%')
+                                        a(href='javascript:void(0)' onclick='ds('+item.indentid+')') 查看详情
+        script.
+            function getInfo() {
+                $(".mian_b_bg").html(" ");
+                var id=$("#indentId").val();
                 $.ajax({
-                    'url': 'del/' + id,
-                    'dataType': 'JSON',
-                    'type': 'post',
-                    'success': function (result) {
-                        if (result > 0) {
-                            alert("删除成功")
-                            window.location.href='getAll';
-                        } else {
-                            alert("删除失败")
-                        }
+                    'url':'getInfo/'+id,
+                    'dataType':'JSON',
+                    'type':'post',
+                    'success':function (result) {
+                        var str="<tr><td>订单号</td><td>桌号</td><td>创建时间</td><td>订单备注</td><td>订单总金额</td><td>实付总金额</td><td>服务员</td></tr>";
+                        $(result).each(function () {
+                            str+="<tr style='border-top:1px #DFE2E6 solid'><td>"+this.indentcode+"</td><td>"+this.orderfoodTable.tablenumber+"</td><td>"+this.createdate+"</td><td>"+this.indentcomment+"</td><td>"+this.totalmoney+"</td><td>"+this.netmoney+"</td><td>"+this.orderfoodEmployee.employeename+"</td></tr>";
+                        })
+                        $(".mian_b_bg").append(str);
                     }
                 })
             }
+            function ds(id) {
+                window.location.href='tail?id='+id;
+            }
+            function del(id) {
+                if (confirm("确定要删除吗？") == true) {
+                    $.ajax({
+                        'url': 'del/' + id,
+                        'dataType': 'JSON',
+                        'type': 'post',
+                        'success': function (result) {
+                            if (result > 0) {
+                                alert("删除成功")
+                                window.location.href = 'getAll';
+                            } else {
+                                alert("删除失败")
+                            }
+                        }
+                    })
+                }
+            }
+            function getdel() {
+                var checkbox_value = [];
+                var obj=document.getElementsByName("indent")
+                for(var k in obj){
+                    if (obj[k].checked)
+                        checkbox_value.push(obj[k].value)
+                }
+                alert(checkbox_value);
+                $.ajax({
+                    "url": "getdel",
+                    "dataType": "json",
+                    "type": "post",
+                    "data":{
+                        'arrays[]':checkbox_value
+                    },
+                    "success": function (result) {
+                        if (result > 0) {
+                            alert("删除成功")
+                            window.location.href = 'getAll';
+                        } else {
+                            alert("删除失败");
+                        }
+                    },
 
+                });
+            }
 
-        }

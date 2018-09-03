@@ -1,0 +1,116 @@
+﻿doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title 无标题页
+    link(rel='stylesheet', type='text/css', href='../css/index.css')
+    script(type='text/javascript', src='/js/jquery-1.7.1.min.js').
+  body.mian_bj
+    .mian_top_01
+      .mian_top_r
+      .mian_top_l
+      .mian_top_c
+        ul
+          li
+            a(href='Item.jade')
+              p
+                | 权限管理
+
+      .mian_b
+        div
+          select.sel( onchange='getMen()')
+              each item in dao
+                option(value='#{item.roleid}')
+                   =item.rolename
+        table.mian_b_bg_xz(width='100%', border='1', cellpadding='0', cellspacing='0')
+    script.
+        $(function () {
+            getMen();
+        })
+        /*
+        *查询已有权限
+        */
+        function getMen() {
+           var id=$(".sel").val();
+           $(".mian_b_bg_xz").html("");
+            $.ajax({
+                'url':'getMen/'+id,
+                'dataType':'JSON',
+                'type':'post',
+                'success':function (result) {
+                    var str = "<tr><td>已有权限</td><td>操作</td></tr>"
+                    $(result).each(function () {
+                        str+="<tr><td>"+this.menuname+"</td><td><a href='javascript:void(0)' onclick='del("+id+","+this.menuid+")'>删除</a></td></tr>"
+                    })
+                    $(".mian_b_bg_xz").append(str)
+                }
+            })
+                getNot();
+        }
+        /*
+        *查询未有权限
+         */
+        function getNot(){
+            var id = $(".sel").val();
+            $(".mian_b_bg_xz").html("");
+            $.ajax({
+                'url': 'getNot/' + id,
+                'dataType': 'JSON',
+                'type': 'post',
+                'success': function (result) {
+                    var str = "<tr><td>未有权限</td><td>操作</td></tr>"
+                    $(result).each(function () {
+                        str += "<tr><td>" + this.menuname + "</td><td><a href='javascript:void(0)' onclick='insert("+id+","+this.menuid+")'>编辑</a></td></tr>"
+                    })
+                    $(".mian_b_bg_xz").append(str)
+                }
+            })
+
+        }
+        /*
+        * 删除权限
+        */
+        function del(id,menuid) {
+            $.ajax({
+                'url': 'del/'+parseInt(id)+'/'+parseInt(menuid),
+                'dataType': 'JSON',
+                'type': 'post',
+                'success':
+                    function (result) {
+                        if (result > 0) {
+                            alert("删除成功")
+                            getMen();
+                        } else {
+                            alert("删除失败")
+                        }
+                }
+            })
+
+        }
+        /**
+        *添加权限
+         */
+        function insert(id, menuid) {
+            $.ajax({
+                'url': 'insJurisdiction' ,
+                'dataType': 'JSON',
+                'data':{
+                    jRoleid:parseInt(id),
+                    jClassifyid:parseInt(menuid)
+                },
+                'type': 'post',
+                'success':
+                    function (result) {
+                        if (result > 0) {
+                            alert("添加成功")
+                            getMen();
+                        } else {
+                            alert("添加失败")
+                        }
+                    }
+            })
+        }
+
+
+
+
+

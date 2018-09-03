@@ -34,4 +34,6 @@ public interface IndentService {
      * @return
      */
     List<OrderfoodIndentDetails> getDetails(Integer d_indentId);
+
+    int delesc(List<Object> obj);
 }
