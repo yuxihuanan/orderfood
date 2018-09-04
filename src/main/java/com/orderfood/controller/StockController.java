@@ -25,8 +25,8 @@ public class StockController {
     }
 
     @ResponseBody
-    @RequestMapping("del/{id}")
-    public String del(@PathVariable("id") int id){
+    @RequestMapping("dell/{id}")
+    public String del(@PathVariable("id") Integer id){
         System.out.print(id);
         int res=stockService.del(id);
         return JSON.toJSONString(res) ;
@@ -37,8 +37,6 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "getInfo/{intdentName}",produces="text/plain;charset=utf-8")
     public String getDetail(@PathVariable("intdentName") String intdentName){
-        System.out.print(stockService.getInfo(intdentName));
-        System.out.print(intdentName);
         return JSON.toJSONString(stockService.getInfo(intdentName));
     }
 
