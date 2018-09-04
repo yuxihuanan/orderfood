@@ -138,6 +138,17 @@ public class OrderFoodTableController {
 //        this.indentId=indentId;
         return modelAndView;
     }
+
+    /**
+     * 获取到菜单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getOrderFoodss",produces = "text/plain;charset=utf-8")
+    public String getOrderFood(){
+        List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
+        return JSON.toJSONString(list);
+    }
     /**
      * @Author LYX
      * 修改桌子信息
