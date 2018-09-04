@@ -1,6 +1,7 @@
 package com.orderfood.service.impl;
 
 import com.orderfood.mapper.CuisineMapper;
+import com.orderfood.mapper.RepiceMapper;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodRecipe;
@@ -18,57 +19,92 @@ public class CuisineServiceImpl implements CuisineService {
     @Autowired
     private CuisineMapper cuisineMapper;
 
-    @Override
+    @Autowired
+    private RepiceMapper repiceMapper;
+    /**
+     * 删除菜品
+     * @param id
+     * @return
+     */
     public int Cuisinedel(int id) {
         return cuisineMapper.cuisinedel(id);
     }
 
-    @Override
+    /**
+     * 新增菜品
+     * @param cuisin
+     * @return
+     */
     public int Cuisineadd(OrderfoodCuisine cuisin) {
         return cuisineMapper.insert(cuisin);
     }
 
-    @Override
+    /**
+     * 修改菜品
+     * @param cuisn
+     * @return
+     */
     public int Cuisineupdd(OrderfoodCuisine cuisn) {
         return cuisineMapper.cuisineupdd(cuisn);
     }
 
-    @Override
+    /**
+     * 根据id查询
+     * @param cuisineid
+     * @return
+     */
     public OrderfoodCuisine getOne(Integer cuisineid) {
         return cuisineMapper.getOne(cuisineid);
     }
 
-    @Override
-    public OrderfoodCuisine getAll(String cuisinename) {
-        return cuisineMapper.getAll(cuisinename);
+    /**
+     * 根据首字母查询菜品
+     * @return
+     */
+    public List<OrderfoodCuisine> getAll(String cuisineacronym) {
+        return cuisineMapper.getAll(cuisineacronym);
     }
 
-    @Override
+    /**
+     * 查询菜品
+     * @return
+     */
     public List<OrderfoodCuisine> selectAll() {
         return cuisineMapper.selectAll();
     }
 
-    @Override
+    /**
+     * 查询菜品分类
+     * @return
+     */
     public List<OrderfoodCuisineClassify> selectAl() {
         return cuisineMapper.selectAl();
     }
 
-    @Override
-    public List<OrderfoodRecipe> getRecipe() {
-        return cuisineMapper.getRecipe();
+    /**
+     * 查询菜品配方
+     */
+    public OrderfoodCuisine getRecipe(Integer cuisineid) {
+        return cuisineMapper.getRecipe(cuisineid);
     }
 
-    @Override
+    /**
+     *添加菜品配方
+     */
     public int Recipeadd(OrderfoodRecipe recipe) {
-        return cuisineMapper.Recipeadd(recipe);
+        return repiceMapper.insert(recipe);
     }
 
-    @Override
+    /**
+     * 查询菜品原料
+     */
     public List<OrderfoodStock> getStock() {
         return cuisineMapper.getStock();
     }
 
-    @Override
+    /**
+     * 查询菜品
+     */
     public List<OrderfoodCuisine> sine() {
         return cuisineMapper.sine();
     }

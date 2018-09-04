@@ -47,7 +47,7 @@ t3.`roleName`
          <if test="menu.parentid!=null and menu.parentid!=''">
              and parentId=#{menu.parentId}
          </if>
-         <if test="menu.parentid!=null and menu.parentid!=''">
+         <if test="menu.menuid!=null and menu.menuid!=''">
              and menuId=#{menu.menuid}
          </if>
      </trim>

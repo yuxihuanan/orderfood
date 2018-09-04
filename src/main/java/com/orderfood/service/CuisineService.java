@@ -14,7 +14,7 @@ import java.util.List;
 public interface CuisineService {
 
     /**
-     * 修改菜品
+     * 删除菜品
      * @param id
      * @return
      */
@@ -40,19 +40,20 @@ public interface CuisineService {
      * @param cuisineid
      * @return
      */
-
     OrderfoodCuisine getOne(Integer cuisineid);
+
     /**
      * 根据首字母查询菜品
      * @return
      */
-    OrderfoodCuisine getAll(String cuisineacronym);
+    List<OrderfoodCuisine> getAll(String cuisineacronym);
 
     /**
      * 查询菜品
      * @return
      */
     public List<OrderfoodCuisine> selectAll();
+
     /**
      * 查询菜品分类
      * @return
@@ -63,7 +64,7 @@ public interface CuisineService {
     /**
      * 查询菜品配方
      */
-    public List<OrderfoodRecipe> getRecipe();
+    public OrderfoodCuisine getRecipe(Integer cuisineid);
 
     /**
      *添加菜品配方

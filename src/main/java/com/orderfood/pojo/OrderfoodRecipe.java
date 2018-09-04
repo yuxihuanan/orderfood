@@ -1,5 +1,6 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -15,9 +16,9 @@ public class OrderfoodRecipe implements Serializable {
     private Float recipeweight;//配料剂量
 
     private Integer rCuisineid;//菜品id
-
+    @Transient
     private OrderfoodCuisine cuisine; //菜品管理
-
+    @Transient
     private OrderfoodStock stock;// 原料管理
 
     public OrderfoodCuisine getCuisine() {
