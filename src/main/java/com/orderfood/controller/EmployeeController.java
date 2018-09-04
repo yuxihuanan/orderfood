@@ -61,7 +61,6 @@ public class EmployeeController {
     @ResponseBody
     @RequestMapping(value = "EmploySel/{employeename}",produces = "text/html;charset=UTF-8")
     public String EmploySel(@PathVariable(value = "employeename")String employeename){
-        System.out.println(JSON.toJSONString(employeeService.selTwo(employeename)));
         return JSON.toJSONString(employeeService.selTwo(employeename));
     }
 
@@ -76,7 +75,6 @@ public class EmployeeController {
         List<Object> list = new ArrayList<Object>();
         int i = 0;
         for (i=0;i<arrays.length;i++){
-            System.out.print(arrays[i]);
             list.add(arrays[i]);
         }
        int a= employeeService.delesc(list);
@@ -113,7 +111,6 @@ public class EmployeeController {
      */
     @RequestMapping("employeeUpdpage")
     public ModelAndView EmployeeUpd(Integer id){
-        System.out.print(id);
         ModelAndView mode2 = new ModelAndView("rsxz/UpdEmploylee");
         OrderfoodEmployee orderfoodEmployee=employeeService.selEm(id);
         mode2.addObject("orderfoodEmployee",orderfoodEmployee);
