@@ -2,26 +2,54 @@ var indentId;  //订单编号
 $(function () {
 
     getAlls();
-    C1 = window.location.href.split("=")[1];
-    $("#classifyid").val(C1)
+    aa();
+    $(".stockName").attr("disabled","disabled");
+    $(".stockName3").click(function () {
+        $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background:"#eeeeee"});
+    })
 });
 
 
+function  upda(id) {
+    alert(1)
+   $("#"+id+"").next().find("input").removeAttr("disabled").css({background:"#eeeeee"})
+}
+
+
+
+
 function aa() {
-    $(".name").parent().dblclick(function () {
-        $(this).find(" .name").css({background: "#eeeeee"}).removeAttr("disabled");
+    $(".stockName").parent().dblclick(function () {
+        $(this).find(".stockName").css({background: "#eeeeee"}).removeAttr("disabled");
     });
-    $(".name").attr("disabled", "disabled");
-    $(".name").css({background: "transparent"}).blur(function () {
-        $(this).attr("disabled", "disabled").css({background: "transparent"});
+    $(".stockName").attr("disabled","disabled");
+    $(".stockName").css({background:"transparent"}).blur(function (){
+        $(this).attr("disabled","disabled").css({background:"transparent"});
         var id = $(this).parent().prev().html();
         var name = $(this).val();
-        alert(id)
-        alert(name)
-        upd(id, name);
+        upd(id,name);
     });
 }
 
+function upd(id,name) {
+    $.ajax({
+        "url":"upds",
+        "dataType":"JSON",
+        "type":"post",
+        "data":{
+            classifyid:id,
+            classifyname:name
+        },
+        "success":function (result) {
+            if(result>0){
+                alert("修改成功")
+                getAlls();
+            }else{
+                alert("修改失败");
+            }
+        }
+    });
+}
 function getAlls() {
 
     $.ajax({
@@ -31,14 +59,29 @@ function getAlls() {
         "success": function (result) {
             $("table").html("");
             $(result).each(function () {
-                $("table").append("<tr><td><input type='checkbox' name='del' value="+this.classifyid+"></td><td>" + this.classifyid+ "</td><td><input value='"+this.classifyname+"' class='name'/></td><td><a href='javascript:void(0)' onclick='del("+this.classifyid+")'>删除</a></td><td><a href='javascript:void(0)' onclick='updval(\""+this.classifyname+"\")'>修改</a></td></td>")
+                $("table").append("<tr><td><input type='checkbox'  name='del'   value="+this.classifyid+"  ></td><td  id='"+this.classifyid+"'>" + this.classifyid+ "</td><td><input value='"+this.classifyname+"' class='stockName' /></td><td><a href='javascript:void(0)' onclick='del("+this.classifyid+")'>删除</a></td><td><a href='javascript:void(0)'  class='stockName3' onclick='upda("+this.classifyid+")'>修改</a></td></td>")
             })
             aa()
         }
     })
 }
 
-
+function getcaibyfen() {
+    var name = $("#grade").val();
+    alert(name);
+    $.ajax({
+        "url": "getcaibyfen/"+name,
+        "dataType": "Json",
+        "type":"post",
+        "success": function (result) {
+            $("table").html("");
+            $(result).each(function () {
+                $("table").append("<tr><td>"+this.cuisinename+"</td></tr>");
+            })
+            aa()
+        }
+    })
+}
 
 
 
@@ -103,7 +146,7 @@ function del(classifyid) {
     var msg = "您真的确定要删除吗？或许从表还有数据，清谨慎考虑\n\n请确认！";
     if (confirm(msg)==true){
         $.ajax({
-            "url":"del/"+classifyid,
+            "url":"delss/"+classifyid,
             "dataType":"json",
             "success":function (result) {
                 if (result>0){
@@ -120,10 +163,9 @@ function del(classifyid) {
     }
 }
 
+
 function  go() {
     window.location.href="go";
-
-
 }
 
 function add() {
@@ -148,9 +190,6 @@ function add() {
             },
         })
     }
-
-
-
 }
 
 function  fanhui() {
@@ -162,9 +201,7 @@ function ad() {
 }
 
 
-function  upd(classifyid) {
-    window.location.href="biaoganxiangmuList2?classifyid="+classifyid;
-}
+
 
 
 function getId() {
@@ -191,27 +228,19 @@ function getAllbyId() {
     })
 }
 
-function upd(id,name) {
-    alert(id)
-    alert(name)
-    var  a = $("#shijian").val();
-    $.ajax({
-        "url":"upd",
-        "dataType":"Json",
-        "type":"post",
-        "data":{
-            'classifyid':id,
-            'classifyname':name
-        },
-        "success":function (result) {
-            if(result>0){
-                alert("修改成功")
-            }else{
-                alert("修改失败");
-            }
-        },
-    });
+
+
+function quanxuan(){
+
+    var allcheck=document.getElementById("allcheck");
+    var choice=document.getElementsByName("del");
+    alert(allcheck)
+    alert(choice)
+    for(var i=0;i<choice.length;i++){
+        choice[i].checked=allcheck.checked;
+    }
 }
+
 
 
 

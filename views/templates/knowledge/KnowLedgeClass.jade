@@ -5,7 +5,17 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     link(rel='stylesheet', type='text/css', href='../css/index.css')
 
 
-
+select#grade(name='grade')
+    option(value='招牌') 招牌
+    option(value='新品推荐') 新品推荐
+    option(value='经典热菜') 经典热菜
+    option(value='正宗川菜') 正宗川菜
+    option(value='水产海鲜') 水产海鲜
+    option(value='精品小食') 精品小食
+    option(value='精美凉菜') 精美凉菜
+    option(value='主食') 主食
+    option(value='面食') 面食
+    input(type='submit', value='查询', onclick='getcaibyfen()')
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -16,17 +26,23 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             a(href='fanhui')
               p
                 | 菜品分类
+
       .mian_b
         .mian_b1
           p.mian_b1_sousuo
             input(name='', type='text' id='name')
+
           a(onclick="index()" href="javascript:void(0);" )
 
             p.mian_b1_a3
 
 
-          input(type='submit', value='添加分类', onclick='go()' id="tian")
+          input(type='submit', value='添加分类', onclick='go()' id="tian" )
           input(type='submit', value='批量删除', onclick='delpiliang()' id="tian1")
+          input(type='checkbox', value='全选', onclick='quanxuan()' id="allcheck")
+
+
+
           input#classifyid(type='hidden')
 
           a(href='javascript:void(0);', title='最后')

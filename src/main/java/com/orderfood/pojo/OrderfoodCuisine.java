@@ -22,6 +22,8 @@ public class OrderfoodCuisine implements Serializable {
     @Transient
     private OrderfoodCuisineClassify classify; //菜品分类
 
+
+
     public OrderfoodCuisineClassify getClassify() {
         return classify;
     }
@@ -40,13 +42,14 @@ public class OrderfoodCuisine implements Serializable {
         this.picture = picture;
     }
 
-    public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
+    public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid,OrderfoodCuisineClassify classify) {
         this.cuisineid = cuisineid;
         this.cuisinename = cuisinename;
         this.price = price;
         this.cuisineacronym = cuisineacronym;
         this.cuisineidentify = cuisineidentify;
         this.cClassifyid = cClassifyid;
+        this.classify = classify;
     }
 
     public OrderfoodCuisine() {

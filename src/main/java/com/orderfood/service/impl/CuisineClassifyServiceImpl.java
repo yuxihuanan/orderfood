@@ -1,19 +1,21 @@
 package com.orderfood.service.impl;
 
-import com.orderfood.mapper.CuisineClassifyMapper;
-import com.orderfood.pojo.OrderfoodCuisine;
+
+import com.orderfood.mapper.EmployeeRodeMapper;
 import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.service.CuisineClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.orderfood.mapper.CuisinrifyMapper;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service("cuisineClassifyService")
 public class CuisineClassifyServiceImpl implements CuisineClassifyService {
 
     @Autowired
-    private CuisineClassifyMapper cuisineClassifyMapper;
+    private CuisinrifyMapper cuisineClassifyMapper;
 
     @Override
     public Integer InsertCuisineClassify(OrderfoodCuisineClassify classify) {
@@ -42,8 +44,8 @@ public class CuisineClassifyServiceImpl implements CuisineClassifyService {
     }
 
     @Override
-    public Integer del(Integer classifyid) {
-        return cuisineClassifyMapper.del(classifyid);
+    public Integer delss(Integer classifyid) {
+        return cuisineClassifyMapper.delss(classifyid);
     }
 
     @Override
@@ -73,5 +75,8 @@ public class CuisineClassifyServiceImpl implements CuisineClassifyService {
         return cuisineClassifyMapper.delpiliang(classifyid);
     }
 
-
+    @Override
+    public List<OrderfoodCuisineClassify> getcaibyfen(String names) {
+        return cuisineClassifyMapper.getcaibyfen(names);
+    }
 }
