@@ -2,6 +2,7 @@ package com.orderfood.service;
 
 import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +36,24 @@ public interface IndentService {
      */
     List<OrderfoodIndentDetails> getDetails(Integer d_indentId);
 
+    /**
+     * 批量删除
+     * @param obj
+     * @return
+     */
     int delesc(List<Object> obj);
+
+    /**
+     * 当前页的数据
+     * @param Start
+     * @param Size
+     * @return
+     */
+    List<OrderfoodIndentDetails> indentPage(@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
+
+    /**
+     * 查询数据总条数
+     * @return
+     */
+    Integer indentCount();
 }

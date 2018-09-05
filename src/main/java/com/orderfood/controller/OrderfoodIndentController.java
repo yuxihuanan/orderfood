@@ -2,7 +2,9 @@ package com.orderfood.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.orderfood.pojo.CargoPage;
 import com.orderfood.pojo.OrderfoodIndent;
+import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.service.IndentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,6 +83,36 @@ public class OrderfoodIndentController {
             list.add(arrays[i]);
         }
         return JSON.toJSONString(indentService.delesc(list));
+    }
+
+    @ResponseBody
+    @RequestMapping("getPageCount")
+    public String getPageCount(){
+        Integer totalCount=indentService.indentCount();
+        Integer Count=totalCount/8;
+        Integer PageCount=0;
+        PageCount=totalCount%8==0?Count:Count+1;
+        return JSON.toJSONString(PageCount);
+    }
+    @ResponseBody
+    @RequestMapping(value = "indentLike/{pageNow}",produces = "text/html;charset=UTF-8")
+    public String indentLike(@PathVariable(value = "pageNow") String pageNow){
+        //获取当前页数
+        //获取数据总条数
+        Integer totalCount=indentService.indentCount();
+        CargoPage cargoPage=null;
+        List<OrderfoodIndentDetails> list=new ArrayList<OrderfoodIndentDetails>();
+        Integer pageNo=Integer.parseInt(pageNow);
+        if(pageNo>0){
+            cargoPage=new CargoPage(pageNo,totalCount);
+            list=this.indentService.indentPage(cargoPage.getStartPos(),cargoPage.getPageSize());
+
+        }else {
+            cargoPage =new CargoPage(1,totalCount);
+            list=this.indentService.indentPage(cargoPage.getStartPos(),cargoPage.getPageSize());
+        }
+        System.out.println(JSON.toJSONString(list));
+        return JSON.toJSONString(list);
     }
 
 }
