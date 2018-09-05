@@ -9,7 +9,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(src="js/jquery-1.7.1.min.js")
     script.
         var jsons=new Array();
-        function add(id) {
+        function adds(id) {
             var datajson={
                 id:$(id).prev().prev().prev().prev().text(),
                 name:$(id).prev().prev().prev().text(),
@@ -43,11 +43,40 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             })
         }
         $(function () {
-            $("li").click(function () {
+            $(".classes li").click(function () {
                 $(this).addClass("choosed");
                 $(this).siblings().removeClass("choosed");
+                haha(this)
             })
         })
+        function haha(data) {
+            var asa=$(data).find("span").text();
+            $.ajax({
+                "url":"getOrderFoodss",
+                "dataType":"JSON",
+                "type":"post",
+                "success":function (result) {
+                    $(".dishes").html("");
+                    var ss="";
+                    $(result).each(function () {
+                        if(asa==null||asa==""){
+                            ss += "<li>\n" +
+                                "          <img src=" + this.picture + ">\n<h4 calss='CuisineId'>" + this.cuisineid + "</h4><h4 calss='cuisinename'>" + this.cuisinename + "</h4>\<p calss='price'>" + this.price + "</p>\n" +
+                                "          <p class='discount'><span>推荐</span></p>" +
+                                "<a class='add' href='javaScirpt:void(0)' onclick='adds(this)'><img src='img/add.png'></img></a>"
+                        }
+                        if(this.cClassifyid==asa){
+                            ss += "<li>\n" +
+                                "          <img src="+this.picture+">\n<h4 calss='CuisineId'>"+ this.cuisineid + "</h4><h4 calss='cuisinename'>" + this.cuisinename + "</h4>\<p calss='price'>" + this.price + "</p>\n" +
+                                "          <p class='discount'><span>推荐</span></p>" +
+                                "<a class='add' href='javaScirpt:void(0)' onclick='adds(this)'><img src='img/add.png'></img></a>"
+                        }
+                    })
+                    ss+="</li>"
+                    $(".dishes").append(ss);
+                }
+            })
+        }
     title 菜谱点餐
     header
       a.return(href='OrdrTableShow')
@@ -67,6 +96,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             //span.sub
         each item in list
             li=item.classifyname
+                span(style="display:none")=item.classifyid
     ul.dishes
       each item in foodCuisine
         li
@@ -76,7 +106,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           p.price=item.price
           p.discount
             span 推荐
-          a.add(href='javaScirpt:void(0)' onclick="add(this)")
+          a.add(href='javaScirpt:void(0)' onclick="adds(this)")
             img(src='img/add.png')
     .footer-space
     footer

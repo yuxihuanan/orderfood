@@ -14,11 +14,10 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             var sex = $("#sex").val().trim();
             var address = $("#address").val().trim();
             var phone = $("#phone").val().trim();
-            alert(eRoleid);
             if(employeename.length==0){
                 alert("请输入姓名")
-            }else if(age.length==0){
-                alert("请输入年龄")
+            }else if(age<18||age>40){
+                alert("请输入正确年龄")
             }else if(username.length==0){
                 alert("请输入账户")
             }else if(password.length==0){
@@ -59,7 +58,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 "dataType": "json",
                 "type": "post",
                 "success": function (result) {
-                    alert(2);
                     $(result).each(function () {
                         $("#e_roleId").append("<option value='" + this.roleid + "'>"+ this.rolename + "</option>");
                     })
@@ -106,7 +104,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     option(value='1') 男
                     option(value='0') 女
                 td
-                  input#age(type='text',style='border: 0px; width: 100px;')
+                  input#age(type='text',style='border: 0px; width: 100px;',onkeyup="value=value.replace(/[^\d]/g,'')",placeholder="请输入数字")
                 td
                     select(id='e_roleId')
                 td

@@ -52,7 +52,7 @@ public interface CuisineClassifyService {
      * @param  classifyid
      * @return
      */
-    public  Integer del(Integer classifyid);
+    public  Integer delss(Integer classifyid);
 
     /**
      * 菜品分类根据Id删除
@@ -67,5 +67,5 @@ public interface CuisineClassifyService {
     public  Integer upd(OrderfoodCuisineClassify orderfoodCuisineClassify);
     public  List<OrderfoodCuisineClassify> getAllbyId(Integer id);
     public  Integer delpiliang(Integer classifyid);
-
+    public  List<OrderfoodCuisineClassify> getcaibyfen(String names);
 }

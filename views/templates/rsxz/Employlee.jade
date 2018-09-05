@@ -31,23 +31,34 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   "dataType": "json",
                   "type": "post",
                   "success": function (result) {
+                      var str = "<tr>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"3%\"></td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"10%\"><span></span><工号></工号></td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"10%\"><span></span>员工姓名</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"5%\"><span></span>性别</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"5%\"><span></span>年龄</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"10%\"><span></span>员工职位</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"10%\"><span></span>手机</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" width=\"10%\"><span></span>入职时间</td>\n" +
+                          "  <td class=\"mian_b_bg_lm\" colspan=\"2\"><span></span><操作></操作></td>\n" +
+                          "</tr>"
                       $(result).each(function () {
                           str+="<tr>"+
                               "              <td>" +
-                              "                <input name='', type='checkbox', value=''/>" +
+                              "                <input name='test', type='checkbox', value="+this.employeeid+"/>" +
                               "              <td>" + this.employeeid +
                               "</td>" +
                               "              <td>"+this.employeename+"</td>" +
                               "              <td>" +this.sexs + "</td>"+
+                              "              <td>" +this.age + "</td>"+
                               "              <td> "+this.orderfoodEmployeeRole.rolename+"</td>" +
                               "              <td>" + this.phone + "</td>" +
                               "              <td>" + this.createdate + "</td>" +
                               "              <td class='mian_b_icon_01' style='width=5%'>" +
-                              "               <a href=employeeUpdpage/#{"+this.employeeid+"}'> 编辑</a>"+
+                              "               <a href=employeeUpdpage?id="+this.employeeid+"> 编辑</a>"+
                               "</td>" +
                               "            </tr>";
                       });
-                      alert(str);
                       $("#xun").append(str);
                   }
               })
@@ -56,11 +67,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       function getdel() {
           var checkbox_value = [];
           var obj = document.getElementsByName("test")
+
           for (var k in obj) {
               if (obj[k].checked)
                   checkbox_value.push(obj[k].value)
           }
-          alert(checkbox_value);
+
           $.ajax({
               "url": "/delesc",
               "dataType": "json",
@@ -69,12 +81,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   'arrays[]': checkbox_value
               },
               "success": function (result) {
-                  if (result > 0) {
-                      alert("删除成功")
-                      window.location.href = 'employeeAll';
-                  } else {
-                      alert("删除失败");
-                  }
+                      if (result > 0) {
+                          alert("删除成功")
+                          window.location.href = 'employeeAll';
+                      } else {
+                          alert("删除失败");
+                      }
               }
           });
       }
@@ -103,7 +115,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           tbody#xun
             tr
               td.mian_b_bg_lm(width='3%')
-                input(name='', type='checkbox', value='')
+
               td.mian_b_bg_lm(width='10%')
                 span
                 | <工号></工号>
@@ -113,6 +125,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td.mian_b_bg_lm(width='5%')
                 span
                 | 性别
+              td.mian_b_bg_lm(width='5%')
+                span
+                | 年龄
               td.mian_b_bg_lm(width='10%')
                 span
                 | 员工职位
@@ -132,6 +147,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     td=item.employeeid
                     td=item.employeename
                     td=item.sexs
+                    td=item.age
                     td=item.orderfoodEmployeeRole.rolename
                     td=item.phone
                     td=item.createdate
@@ -145,6 +161,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td.mian_b_bg_lm(width='5%')
                 span
                 | 员工名称
+              td.mian_b_bg_lm(width='10%')
+                span
+                | 性别
               td.mian_b_bg_lm(width='10%')
                 span
                 | 性别

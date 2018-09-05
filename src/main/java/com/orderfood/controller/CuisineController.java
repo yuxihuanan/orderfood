@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodRecipe;
 import com.orderfood.service.CuisineService;
-import javafx.application.Application;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContext.*;
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -131,7 +128,7 @@ public class CuisineController {
                         //将路径传入picture对象
                         cuisin.setPicture("/images/" + newFileName);
                         cuisin.setCuisineidentify(0);
-
+                        cuisine.Cuisineupdd(cuisin);
                     } catch (IllegalStateException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -148,7 +145,6 @@ public class CuisineController {
                 }
             }
         }
-        cuisine.Cuisineupdd(cuisin);
         return goCuisine();
     }
     @RequestMapping( "getOne/{cuisineid}")

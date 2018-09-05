@@ -9,6 +9,7 @@ import com.orderfood.service.CuisineClassifyService;
 import com.orderfood.service.EmployeeService;
 import com.orderfood.service.StockService;
 import org.apache.ibatis.binding.MapperMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import java.util.List;
 public class CuisineClassifyController {
 
    //页面中转 不要删
-    @Resource(name="cuisineClassifyService")
+    @Autowired
     private CuisineClassifyService cuisineClassifyService;
     @RequestMapping("cuisineClassifyAll")
     public ModelAndView SelectStock(OrderfoodCuisineClassify orderfoodCuisineClassify) {
@@ -51,9 +52,9 @@ public class CuisineClassifyController {
 
     //删除
     @ResponseBody
-    @RequestMapping(value = "del/{classifyid}")
-    public String del(@PathVariable(value= "classifyid") Integer classifyid) {
-            return JSON.toJSONString(cuisineClassifyService.del(classifyid));
+    @RequestMapping(value = "delss/{classifyid}")
+    public String delss(@PathVariable(value= "classifyid") Integer classifyid) {
+            return JSON.toJSONString(cuisineClassifyService.delss(classifyid));
     }
 
 
@@ -101,26 +102,24 @@ public class CuisineClassifyController {
     @ResponseBody
     @RequestMapping(value = "getAlls",produces = "text/plain;charset=utf-8")
     public String getAlls() {
-        return JSON.toJSONString(cuisineClassifyService.getAlls());
+        List<OrderfoodCuisineClassify> list=cuisineClassifyService.getAlls();
+        return JSON.toJSONString(list);
     }
 
 
 //更新
     @ResponseBody
-    @RequestMapping(value = "upd",produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "upds",produces = "text/plain;charset=utf-8")
     public String upd(OrderfoodCuisineClassify orderfoodCuisineClassify) {
         return JSON.toJSONString(cuisineClassifyService.upd(orderfoodCuisineClassify));
     }
 
-    private class SqlConnection {
-    }
 
-    private class SqlTransaction {
-    }
 
-    private class DataBaseConnection {
-    }
-
-    private static class ConnectionManager {
+    //更新
+    @ResponseBody
+    @RequestMapping(value = "getcaibyfen/{names}",produces = "text/plain;charset=utf-8")
+    public String getcaibyfen(@PathVariable(value = "names") String names) {
+        return JSON.toJSONString(cuisineClassifyService.getcaibyfen(names));
     }
 }

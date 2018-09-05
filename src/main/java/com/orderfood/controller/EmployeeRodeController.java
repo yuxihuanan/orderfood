@@ -78,7 +78,6 @@ public class EmployeeRodeController {
      */
     @RequestMapping("employeeRoUpdpage")
     public ModelAndView EmployeeUpd(Integer roleid){
-        System.out.println(roleid);
         ModelAndView mode4 = new ModelAndView("rsxz/UpdEmployeeDetail");
         OrderfoodEmployeeRole orderfoodEmployeeRole=employeeRoleService.selRo(roleid);
         mode4.addObject("orderfoodEmployeeRole",orderfoodEmployeeRole);

@@ -14,7 +14,7 @@ public interface CuisineMapper extends CommonMapper<OrderfoodCuisine> {
     @Update("update orderfood_cuisine set picture=#{picture}, cuisinename=#{cuisinename},price=#{price},cuisineacronym=#{cuisineacronym},cuisineidentify=#{cuisineidentify},c_classifyId=#{cClassifyid}  where cuisineid=#{cuisineid} ")
     public int cuisineupdd(OrderfoodCuisine cuisn);
 
-    @Insert("insert into orderfood_cuisine values(null,cuisinename=#{cuisin.cuisinename},price=#{cuisin.price},cuisineacronym=#{cuisin.cuisineacronym},cuisineIdentify=#{cuisineidentify},c_classifyid=#{cuisin.cClassifyid},picture=#{cuisin.picture})")
+    @Insert("insert into orderfood_cuisine values(null,cuisinename=#{cuisin.cuisinename},price=#{cuisin.price},cuisineacronym=#{cuisin.cuisineacronym},cuisineIdentify=#{cuisin.cuisineidentify},c_classifyid=#{cuisin.cClassifyid},picture=#{cuisin.picture})")
     public int cuisineadd(@Param("cuisin") OrderfoodCuisine cuisin);
 
     //@Select("select c_classifyId,cuisineId,cuisineName,price,cuisineAcronym,cuisineIdentify,picture from orderfood_cuisine where cuisineid=#{cuisineid}")
