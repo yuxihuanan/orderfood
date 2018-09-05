@@ -10,7 +10,6 @@ $(function () {
     first();
     last();
     selClick();
-
 })
 function manydel() {
     var flag=confirm("确定删除吗？");
@@ -47,6 +46,7 @@ function toEditor(Cargoid) {
 }
 function CargoPageInfo(pageno) {
     pageNow=pageno;
+    page=pageno;
     $("#pageInfo tr:gt(0)").remove();
     $(".mian_b1_list div:eq("+(pageNow-1)+")").css("background-color","gray").siblings().css("background-color","#D3D3D3");
     $.ajax({
@@ -65,7 +65,6 @@ function CargoPageInfo(pageno) {
                     "  <td>"+this.cargoweight+"</td>\n" +
                     "  <td>"+this.stock.stockunit+"</td>\n" +
                     "  <td class=\"mian_b_icon_01\" width=\"5%\"><a href=\"javascript:;\" onclick='toEditor("+this.cargoid+")'>编辑</a></td>\n" +
-
                     "</tr>");
             })
         }
@@ -97,6 +96,7 @@ function previous() {
         $("#pageInfo tr:gt(0)").remove();
         page-=1;
         $(".mian_b1_list div:eq("+(pageNow-1)+")").css("background-color","gray").siblings().css("background-color","#D3D3D3");
+        if(page==0)page=1;
         CargoPageInfo(page);
     })
 }
@@ -126,6 +126,7 @@ function pageCount() {
             for (var i=0;i<CargoPageCount;i++)
             {
                     $(".mian_b1_list").append("<div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'><a href='javascript:;' onclick='CargoPageInfo("+(i+1)+")'>"+(i+1)+"</a></div>");
+
                     $(".mian_b1_list div:eq(0)").css("background-color","gray");
             }
 
