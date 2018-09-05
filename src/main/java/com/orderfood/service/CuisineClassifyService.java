@@ -2,6 +2,7 @@ package com.orderfood.service;
 
 
 import com.orderfood.pojo.OrderfoodCuisineClassify;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -68,4 +69,9 @@ public interface CuisineClassifyService {
     public  List<OrderfoodCuisineClassify> getAllbyId(Integer id);
     public  Integer delpiliang(Integer classifyid);
     public  List<OrderfoodCuisineClassify> getcaibyfen(String names);
+
+    //得到全部的分类个数
+    Integer getAllCount();
+    //分类得到数据
+    List<OrderfoodCuisineClassify> getTiao(@Param("pageIndexss")Integer pageIndexss, @Param("pageSizess")Integer pageSizess);
 }

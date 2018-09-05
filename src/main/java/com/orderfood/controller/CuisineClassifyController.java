@@ -1,9 +1,7 @@
 package com.orderfood.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.orderfood.pojo.OrderfoodCuisineClassify;
-import com.orderfood.pojo.OrderfoodIndentDetails;
-import com.orderfood.pojo.OrderfoodStock;
+import com.orderfood.pojo.*;
 import com.orderfood.service.CargoService;
 import com.orderfood.service.CuisineClassifyService;
 import com.orderfood.service.EmployeeService;
@@ -19,6 +17,7 @@ import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.Resource;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -100,10 +99,14 @@ public class CuisineClassifyController {
 
     //查询
     @ResponseBody
-    @RequestMapping(value = "getAlls",produces = "text/plain;charset=utf-8")
-    public String getAlls() {
-        List<OrderfoodCuisineClassify> list=cuisineClassifyService.getAlls();
-        return JSON.toJSONString(list);
+    @RequestMapping(value = "getAlls/{pageIndexss}",produces = "text/plain;charset=utf-8")
+    public String getAlls(@PathVariable(value= "pageIndexss") Integer pageIndexss) {
+     CuisineClassifyPage ccp = new CuisineClassifyPage();
+     ccp.setPageIndexss(pageIndexss);
+     ccp.setStudentCount(cuisineClassifyService.getAllCount());
+     ccp.setStuss(cuisineClassifyService.getTiao((ccp.getPageIndexss()-1)*ccp.getPageSizess(),ccp.getPageSizess()));
+     List<OrderfoodCuisineClassify> cuisineClassifies = ccp.getStuss();
+     return JSON.toJSONString(ccp);
     }
 
 
@@ -122,4 +125,8 @@ public class CuisineClassifyController {
     public String getcaibyfen(@PathVariable(value = "names") String names) {
         return JSON.toJSONString(cuisineClassifyService.getcaibyfen(names));
     }
+
+
+
+
 }

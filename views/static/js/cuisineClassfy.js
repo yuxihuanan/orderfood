@@ -1,7 +1,7 @@
 var indentId;  //订单编号
 $(function () {
 
-    getAlls();
+    getAlls(1);
     aa();
     $(".stockName").attr("disabled","disabled");
     $(".stockName3").click(function () {
@@ -50,21 +50,33 @@ function upd(id,name) {
         }
     });
 }
-function getAlls() {
-
+function getAlls(pageIndexss) {
     $.ajax({
-        "url": "getAlls",
+        "url": "getAlls/"+pageIndexss,
+        "data":"pageIndexss="+pageIndexss,
         "dataType": "Json",
         "type":"post",
         "success": function (result) {
             $("table").html("");
-            $(result).each(function () {
-                $("table").append("<tr><td><input type='checkbox'  name='del'   value="+this.classifyid+"  ></td><td  id='"+this.classifyid+"'>" + this.classifyid+ "</td><td><input value='"+this.classifyname+"' class='stockName' /></td><td><a href='javascript:void(0)' onclick='del("+this.classifyid+")'>删除</a></td><td><a href='javascript:void(0)'  class='stockName3' onclick='upda("+this.classifyid+")'>修改</a></td></td>")
+            $(result.stuss).each(function () {
+                $("table").append("<tr><td><input type='checkbox' name='del' value="+this.classifyid+"  ></td><td  id='"+this.classifyid+"'>" + this.classifyid+ "</td><td><input value='"+this.classifyname+"' class='stockName' /></td><td><a href='javascript:void(0)' onclick='del("+this.classifyid+")'>删除</a></td><td><a href='javascript:void(0)'  class='stockName3' onclick='upda("+this.classifyid+")'>修改</a></td></td>")
             })
-            aa()
+            aa();
+            $("table").append
+  ("<div id=\"sy\"><button id=\"shouye_id\" type=\"button\" onclick=\"getAlls(1)\">首页</button></div>"+
+  "<div id=\"syy\" ><button id=\"shangyiye_id\" type=\"button\"  onclick=getAlls("+(parseInt(result.pageIndexss)-1)+") >上一页</button></div>"+
+  "<div id=\"xyy\" ><button id=\"xiayiye_id\" type=\"button\"  onclick=\"getAlls("+(parseInt(result.pageIndexss)+1)+")\"  >下一页</button></div>"+
+  "<div id=\"wy\"><button id=\"weiye_id\" type=\"button\"  onclick=\"getAlls("+result.pageSumss+")\"  >尾页</button></div>"+
+  "<div id=\"sum\">共"+result.pageSumss+"页</div> ");
         }
+
     })
+
 }
+
+
+
+
 
 function getcaibyfen() {
     var name = $("#grade").val();
@@ -91,6 +103,7 @@ function delpiliang(){
     if (confirm(msg)==true){
         $("input[name='del']:checked").each(function(){
             checkbox_value.push($(this).val());
+            alert(checkbox_value)
         });
         if(checkbox_value.length<=0){
             alert("你还没选择任何内容");
@@ -100,14 +113,14 @@ function delpiliang(){
                 "dataType":"json",
                 "type":"get",
                 "success":function(result){
+                    alert(result)
                     if(result>0){
                         alert("删除成功")
-                        getAlls();
+                        getAlls(1);
                     }else{
                         alert("删除失败");
                     }
                 },
-
             });
         }
         return true;
@@ -239,6 +252,8 @@ function quanxuan(){
     for(var i=0;i<choice.length;i++){
         choice[i].checked=allcheck.checked;
     }
+
+
 }
 
 
