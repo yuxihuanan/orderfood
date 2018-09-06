@@ -17,17 +17,7 @@ public class OrderfoodRecipe implements Serializable {
 
     private Integer rCuisineid;//菜品id
     @Transient
-    private OrderfoodCuisine cuisine; //菜品管理
-    @Transient
     private OrderfoodStock stock;// 原料管理
-
-    public OrderfoodCuisine getCuisine() {
-        return cuisine;
-    }
-
-    public void setCuisine(OrderfoodCuisine cuisine) {
-        this.cuisine = cuisine;
-    }
 
     public OrderfoodStock getStock() {
         return stock;

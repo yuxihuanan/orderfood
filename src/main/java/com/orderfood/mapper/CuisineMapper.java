@@ -23,6 +23,9 @@ public interface CuisineMapper extends CommonMapper<OrderfoodCuisine> {
     public List<OrderfoodCuisine> getAll(@Param("cuisineacronym") String cuisineacronym);
 
 
+
+
+
     /*
      *查询全部菜品
      */
@@ -61,5 +64,11 @@ public interface CuisineMapper extends CommonMapper<OrderfoodCuisine> {
      */
     @Select("select * from orderfood_cuisine")
     public List<OrderfoodCuisine> sine();
+
+
+    //得到全部的分类个数
+    Integer getAllCount();
+    //分类得到数据
+    List<OrderfoodCuisine> getTiao(@Param("pageIndexss")Integer pageIndexss, @Param("pageSizess")Integer pageSizess);
 
 }

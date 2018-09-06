@@ -4,4 +4,10 @@
     <insert id="Recipeadd">
         INSERT INTO orderfood_recipe VALUES(NULL,recipeContent=#{recipe.recipecontent},r_stockId=#{recipe.rStockid},recipeWeight=#{recipe.recipeweight},r_cuisineId=#{recipe.rCuisineid})
     </insert>
+    <update id="updRecipe">
+        update orderfood_recipe set recipeWeight=#{recipe.recipeweight} where r_recipeId=#{recipe.rRecipeid}
+    </update>
+    <delete id="delRecipe">
+        delete from orderfood_recipe where r_recipeId=#{recipe.rRecipeid}
+    </delete>
 </mapper>

@@ -3,7 +3,9 @@ package com.orderfood.controller;
 import com.alibaba.fastjson.JSON;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodRecipe;
+import com.orderfood.pojo.OrderfoodStock;
 import com.orderfood.service.CuisineService;
+import io.swagger.models.auth.In;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -116,7 +118,7 @@ public class CuisineController {
                     System.out.println(request.getServletPath() );
                     System.out.println(application.getRealPath(newFileName));
                     //File newFile = new File("/images/" + newFileName);
-                    File newFile = new File("E:/OrderFoodSys/orderfood/views/static/images/" +newFileName);
+                    File newFile = new File("D:/orderfood/views/static/images/" +newFileName);
 
                     //7.判断File对象是否存在，如果不存在创建文件
                     if (!newFile.exists()) {
@@ -158,6 +160,7 @@ public class CuisineController {
         System.out.println(JSON.toJSONString(cuisine.getAll(cuisineacronym)));
         return JSON.toJSONString(cuisine.getAll(cuisineacronym));
     }
+
 
 
 
@@ -237,4 +240,27 @@ public class CuisineController {
         }
         return goCuisine();
     }
+    @ResponseBody
+    @RequestMapping("updRecipe")
+    public String UpdRecipe(OrderfoodRecipe recipe){
+        recipe.setRecipeweight(recipe.getRecipeweight()/1000);
+        return JSON.toJSONString(cuisine.updRecipe(recipe));
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "delRecipe/{rRecipeid}")
+    public String delRecipe(@PathVariable(value = "rRecipeid") Integer [] rRecipeid){
+        int count=0;
+        for (Integer i: rRecipeid) {
+            cuisine.delRecipe(i);
+            count++;
+        }
+        if(count==rRecipeid.length){
+            return JSON.toJSONString("1");
+        }
+        return JSON.toJSONString("0");
+    }
+
 }

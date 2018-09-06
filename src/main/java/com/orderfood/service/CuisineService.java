@@ -5,6 +5,7 @@ import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodRecipe;
 import com.orderfood.pojo.OrderfoodStock;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -80,6 +81,22 @@ public interface CuisineService {
      * 查询菜品
      */
     public List<OrderfoodCuisine> sine();
+
+
+    /**
+     * 修改配方
+     */
+    public int updRecipe(OrderfoodRecipe recipe);
+
+    /**
+     * 批量删除
+     */
+    public int delRecipe(Integer rRecipeid);
+
+    //得到全部的分类个数
+    Integer getAllCount();
+    //分类得到数据
+    List<OrderfoodCuisine> getTiao(@Param("pageIndexss")Integer pageIndexss, @Param("pageSizess")Integer pageSizess);
 
 
 }

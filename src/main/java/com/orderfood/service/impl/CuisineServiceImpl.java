@@ -7,6 +7,7 @@ import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodRecipe;
 import com.orderfood.pojo.OrderfoodStock;
 import com.orderfood.service.CuisineService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +108,26 @@ public class CuisineServiceImpl implements CuisineService {
      */
     public List<OrderfoodCuisine> sine() {
         return cuisineMapper.sine();
+    }
+
+    @Override
+    public int updRecipe(OrderfoodRecipe recipe) {
+        return repiceMapper.updRecipe(recipe);
+    }
+
+    @Override
+    public int delRecipe(Integer rRecipeid) {
+        return repiceMapper.delRecipe(rRecipeid);
+    }
+
+    @Override
+    public Integer getAllCount() {
+        return cuisineMapper.getAllCount();
+    }
+
+    @Override
+    public List<OrderfoodCuisine> getTiao(Integer pageIndexss, Integer pageSizess) {
+        return cuisineMapper.getTiao(pageIndexss,pageSizess);
     }
 }
 
