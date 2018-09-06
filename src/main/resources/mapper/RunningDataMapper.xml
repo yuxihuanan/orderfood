@@ -30,4 +30,47 @@ SELECT
      </if>
  </trim>
     </select>
+
+
+
+    <select id="SelectRunningDataPages" resultMap="runningdata">
+        SELECT
+        dataId,
+        dataPrice,
+        dataStatement,
+        createDate,
+        dataComment
+        FROM
+        orderfood_running_data
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="runningData.datastatement!=null and runningData.datastatement!=''">
+                and dataStatement=#{runningData.datastatement}
+            </if>
+            <if test="runningData.startDate!=null and runningData.startDate!=''">
+                <if test="runningData.stopDate!=null and runningData.stopDate!=''">
+                    and createDate  BETWEEN #{runningData.startDate} AND #{runningData.stopDate}
+                </if>
+                and createDate  BETWEEN #{runningData.startDate} AND now()
+            </if>
+        </trim>
+        LIMIT #{page.startPos},#{page.pageSize}
+    </select>
+
+    <select id="RunningDataCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(0)
+        FROM
+          orderfood_running_data
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="runningData.datastatement!=null and runningData.datastatement!=''">
+                and dataStatement=#{runningData.datastatement}
+            </if>
+            <if test="runningData.startDate!=null and runningData.startDate!=''">
+                <if test="runningData.stopDate!=null and runningData.stopDate!=''">
+                    and createDate  BETWEEN #{runningData.startDate} AND #{runningData.stopDate}
+                </if>
+                and createDate  BETWEEN #{runningData.startDate} AND now()
+            </if>
+        </trim>
+    </select>
 </mapper>

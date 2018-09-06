@@ -1,6 +1,7 @@
 package com.orderfood.service.impl;
 
 import com.orderfood.mapper.RunningDataMapper;
+import com.orderfood.pojo.CargoPage;
 import com.orderfood.pojo.OrderfoodRunningData;
 import com.orderfood.service.RunningDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,23 @@ public class RunningDataServiceImpl implements RunningDataService {
      */
     public List<OrderfoodRunningData> SelectRunningData(OrderfoodRunningData runningData) {
         return runningDataMapper.SelectRunningData(runningData);
+    }
+
+    /**
+     * 分页查询收支流水
+     * @param runningData
+     * @param page
+     * @return
+     */
+    public List<OrderfoodRunningData> SelectRunningDataPages(OrderfoodRunningData runningData, CargoPage page) {
+        return runningDataMapper.SelectRunningDataPages(runningData,page);
+    }
+
+    /**
+     * 查询收支流水总数
+     * @return
+     */
+    public Integer RunningDataCount( OrderfoodRunningData runningData) {
+        return runningDataMapper.RunningDataCount(runningData);
     }
 }

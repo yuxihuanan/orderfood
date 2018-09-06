@@ -1,5 +1,6 @@
 package com.orderfood.controller;
 
+import com.orderfood.pojo.CargoPage;
 import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodRunningData;
 import com.orderfood.service.RunningDataService;
@@ -8,12 +9,12 @@ import jxl.CellView;
 import jxl.SheetSettings;
 import jxl.Workbook;
 import jxl.format.Alignment;
-import jxl.write.Label;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
+import jxl.format.ScriptStyle;
+import jxl.format.UnderlineStyle;
+import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +36,12 @@ public class RunningDataController {
     private ModelAndView model=new ModelAndView();
     @Autowired
     private RunningDataService runningDataService;
+
+    /**
+     * 跳转收支流水页面
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "selectrunningDatapage", produces = "text/plain;charset=utf-8")
     private ModelAndView selectRunningDatapage(HttpServletRequest request){
         OrderfoodEmployee employee=(OrderfoodEmployee) request.getSession().getAttribute("user");
@@ -87,7 +94,7 @@ public class RunningDataController {
             Integer count=0;
             CellView cellView = new CellView();
             cellView.setAutosize(true); //设置自动大小
-            cellView.setSize(10);
+            cellView.setSize(20);
             int sheets = book.getSheets().length;
 //            if (sheets == 0) {
 //                sheet = book.createSheet("第1页", 0);
@@ -99,7 +106,19 @@ public class RunningDataController {
 //                    sheet = book.getSheet(sheets-1);
 //                }
 
-                sheet = book.createSheet("第1页", 0);
+
+// 编写文字样式
+            WritableFont font = new WritableFont(
+                    WritableFont.createFont("宋体"),	// 字体
+                    20,					// 字号
+                    WritableFont.NO_BOLD,			// 加粗样式
+                    false,  				// 斜体
+                    UnderlineStyle.NO_UNDERLINE,	        // 下划线样式
+                    Colour.RED,				// 字体颜色
+                    ScriptStyle.NORMAL_SCRIPT		// 脚本风格
+            );
+
+            sheet = book.createSheet("第1页", 0);
                 for (int i = 0; i < itemList.size(); i++) {
                 count++;
                 // 2.创建sheet并设置冻结前两行
@@ -125,5 +144,35 @@ public class RunningDataController {
             e.printStackTrace();
         }
             return "0";
+    }
+
+
+
+    /**
+     * 分页查询收支流水
+     * @param runningData
+     * @param pagenow
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "selectrunningDataPages/{pagenow}",produces = "text/plain;charset=utf-8")
+    public String SelectRunningDataPages(OrderfoodRunningData runningData,@PathVariable("pagenow") Integer pagenow){
+        CargoPage page=new CargoPage(pagenow,runningDataService.RunningDataCount(runningData));
+        page.setPageSize(4);
+        return JSON.toJSONString(runningDataService.SelectRunningDataPages(runningData,page));
+    }
+
+    /**
+     * 查询总页数
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("RunningDataCount")
+    public String RunningDataCount(OrderfoodRunningData runningData){
+        CargoPage page=new CargoPage(1,runningDataService.RunningDataCount(runningData));
+        page.setPageSize(4);
+        page.setTotalCount(runningDataService.RunningDataCount(runningData));
+        System.out.println(page.getTotalPageCount());
+        return JSON.toJSONString(page.getTotalPageCount());
     }
 }
