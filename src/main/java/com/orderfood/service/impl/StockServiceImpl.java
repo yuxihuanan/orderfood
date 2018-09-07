@@ -75,13 +75,13 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<OrderfoodStock> stockPage(Integer Start, Integer Size) {
-        return stockMapper.stockPage(Start,Size);
+    public List<OrderfoodStock> stockPage(String stockName,Integer Start, Integer Size) {
+        return stockMapper.stockPage(stockName,Start,Size);
     }
 
     @Override
-    public Integer stockCont() {
-        return stockMapper.stockCont();
+    public Integer stockCont(String stockName) {
+        return stockMapper.stockCont(stockName);
     }
 
 }

@@ -93,20 +93,20 @@ public class StockController {
 
     @ResponseBody
     @RequestMapping(value = "StockInfo/{pageNow}",produces = "text/html;charset=UTF-8")
-    public String ShowCargoInfo(@PathVariable(value = "pageNow") String pageNow){
+    public String ShowCargoInfo(@PathVariable(value = "pageNow") String pageNow,String stockName){
         //获取当前页数
         //获取数据总条数
         System.out.println(pageNow);
-        Integer totalCount=stockService.stockCont();
+        Integer totalCount=stockService.stockCont(stockName);
         CargoPage cargoPage=null;
         List<OrderfoodStock> list=new ArrayList<OrderfoodStock>();
         Integer pageNo=Integer.parseInt(pageNow);
         if(pageNo>0){
             cargoPage=new CargoPage(pageNo,totalCount);
-            list=this.stockService.stockPage(cargoPage.getStartPos(),cargoPage.getPageSize());
+            list=this.stockService.stockPage(stockName,cargoPage.getStartPos(),cargoPage.getPageSize());
         }else {
             cargoPage =new CargoPage(1,totalCount);
-            list=this.stockService.stockPage(cargoPage.getStartPos(),cargoPage.getPageSize());
+            list=this.stockService.stockPage(stockName,cargoPage.getStartPos(),cargoPage.getPageSize());
         }
         System.out.println(JSON.toJSONString(list));
         return JSON.toJSONString(list);
@@ -114,8 +114,8 @@ public class StockController {
 
     @ResponseBody
     @RequestMapping("getPageCount")
-    public String getPageCount(){
-        Integer totalCount=stockService.stockCont();
+    public String getPageCount(String stockName){
+        Integer totalCount=stockService.stockCont(stockName);
         Integer Count=totalCount/8;
         Integer PageCount=0;
         PageCount=totalCount%8==0?Count:Count+1;

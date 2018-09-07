@@ -78,10 +78,10 @@ public interface StockService {
      * @param Size
      * @return
      */
-    List<OrderfoodStock> stockPage(@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
+    List<OrderfoodStock> stockPage(String stockName,@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
     /**
      * 查询数据总条数
      * @return
      */
-    Integer stockCont();
+    Integer stockCont(String stockName);
 }

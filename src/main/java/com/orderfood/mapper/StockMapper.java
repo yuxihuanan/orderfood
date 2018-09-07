@@ -59,10 +59,10 @@ public interface StockMapper extends CommonMapper<OrderfoodStock> {
      * @param Size
      * @return
      */
-    List<OrderfoodStock> stockPage(@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
+    List<OrderfoodStock> stockPage(@Param(value = "stockName") String stockName,@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
     /**
      * 查询数据总条数
      * @return
      */
-    Integer stockCont();
+    Integer stockCont(@Param(value = "stockName") String stockName);
 }

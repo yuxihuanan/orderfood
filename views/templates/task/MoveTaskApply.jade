@@ -5,6 +5,11 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         link(rel='stylesheet', type='text/css', href='css/index.css')
         script(type='text/javascript', src='js/jquery-1.7.1.min.js')
         script.
+            var page = 1;
+            var CargoPageCount = 0;
+            var CargoLikepageCount = 0;
+            var pageNow = 0;
+            var j=0;
             function dell(id, liang) {
                 var liang = parseFloat(liang);
                 if (liang != 0.0 && liang != 0) {
@@ -29,15 +34,33 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 //});
 
             }
+
+
+
+            function first() {
+                $("a[title='最前']").click(function () {
+                    $("#pageInfo tr:gt(0)").remove();
+                    page = 1;
+                    pageNow = page;
+                    fy(page);
+                })
+            }
+            function last() {
+                $("a[title='最后']").click(function () {
+                    $("#pageInfo tr:gt(0)").remove();
+                    page = CargoPageCount;
+                    pageNow = page;
+                    fy(page);
+                })
+            }
             
-            
-            
-            
-            
-            function fy() {
+
+
+            function fy(pagethis) {
+                var data = $("#stockName").val().trim();
                     $.ajax({
-                        "url": "RunningDataCount",
-                        "data": data,
+                        "url": "getPageCount",
+                        "data": "stockName="+data,
                         "dataType": "json",
                         "type": "post",
                         "success": function (result) {
@@ -52,7 +75,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                     $(".mian_b1_list").empty();
                                     for (var i = pagethis - 1; i <= CargoPageCount; i++) {
                                         if (j < 3) {
-                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='fy(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                                             j++;
                                         }
                                     }
@@ -66,7 +89,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                     $(".mian_b1_list").empty();
                                     for (var i = pagethis - 2; i <= CargoPageCount; i++) {
                                         if (j < 3) {
-                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='fy(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                                             j++;
                                         }
                                     }
@@ -75,7 +98,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                 if (CargoPageCount < 3) {
                                     $(".mian_b1_list").empty();
                                     for (var i = 1; i <= CargoPageCount; i++) {
-                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='fy(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                                     }
                                     $(".mian_b1_list a:eq(1) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
                                 }
@@ -84,18 +107,58 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                 if (CargoPageCount >= 3) {
                                     $(".mian_b1_list").empty();
                                     for (var i = 1; i <= 3; i++) {
-                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='fy(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                                     }
                                     $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
                                 } else {
                                     $(".mian_b1_list").empty();
                                     for (var i = 1; i <= CargoPageCount; i++) {
-                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='fy(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                                     }
                                     $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
                                 }
                             }
-                        }
+
+
+                            $("#tb tr:gt(0)").remove();
+                            $.ajax({
+                                "url": "StockInfo/" + pagethis,
+                                "dataType": "json",
+                                "data": "stockName="+data,
+                                "type": "post",
+                                "success": function (result) {
+                                    $(result).each(function () {
+                                        $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                                        //$(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='indent'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a></td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                                    });
+                                    aa();
+                                    $(".stockName").attr("disabled", "disabled");
+                                    $(".stockName5").click(function () {
+                                        $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
+                                    });
+
+                                    $(".stockName3").click(function () {
+                                        $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
+                                    });
+                                    $(".dl").click(function () {
+                                        var a = $(this).parent().next().next().next().text();
+                                        if (a != 0.0 && a != 0) {
+                                            var flag = alert("食材还有剩余，不能删除555")
+                                            $(this).removeAttr("checked");
+                                            //window.location.href = 'stocklogin';
+                                        }
+                                    });
+                                    $(".ladl").click(function () {
+                                        var a = $(this).parent().next().next().next().text();
+                                        if (a != 0.0 && a != 0) {
+                                            var flag = alert("食材还有剩余，不能删除444")
+                                            $(this).removeAttr("checked");
+                                            //window.location.href = 'stocklogin';
+                                        }
+                                    });
+                                }
+                                    });
+                                }
                             });
                             }
 
@@ -120,8 +183,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         "success": function (result) {
                             if (result > 0) {
                                 alert("删除成功");
-                                getInfo()
-                                //window.location.reload();
+                                fy(page);
                             } else {
                                 alert("删除失败");
                             }
@@ -155,7 +217,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     "success": function (result) {
                         if (result > 0) {
                             alert("删除成功")
-                            window.location.href = 'stocklogin';
+                            fy(page);
                         } else {
                             alert("删除失败");
                         }
@@ -175,35 +237,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             }
 
 
-            function getInfo() {
-                $(".mian_b_bg").html("");
-                $("#lala").html("")
-                var stockName = $("#stockName").val();
-                $.ajax({
-                    'url': 'getInfo/' + stockName,
-                    'dataType': 'JSON',
-                    'type': 'post',
-                    'success': function (result) {
-                        $(".mian_b_bg").append("<tr style='background:#eeeeee'><td class='mian_b_bg_lm' width='5%'><span></span></td><td class='mian_b_bg_lm' width='10%'>原料ID<span></span></td><td class='mian_b_bg_lm' width='10%'>原料名称<span></span></td><td class='mian_b_bg_lm' width='10%'>原料总量<span></span></td><td class='mian_b_bg_lm' width='10%'>原料单位<span></span></td><td colspan='4' class='mian_b_bg_lm' width='10%'>操作<span></span></td></tr>")
-                        $(result).each(function () {
-                            $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
-                        });
-                        aa();
-                        $(".ladl").click(function () {
-                            var a = $(this).parent().next().next().next().text();
-                            alert(a)
-                            if (a != 0.0 && a != 0) {
-                                var flag = alert("食材还有剩余，不能删除222")
-                                $(this).removeAttr("checked");
-                                //window.location.href = 'stocklogin';
-                            }
-                        })
 
-                    }
-
-
-                })
-            }
 
             function bianji(id) {
                 //$(".stockName3").click(function () {
@@ -229,52 +263,21 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
             $(function () {
                 aa();
-                StockInfo(page);
-                pageCount();
-                next();
-                previous();
+                //StockInfo(page);
 
 
-                $(".stockName").attr("disabled", "disabled");
-                $(".stockName5").click(function () {
-                    $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
-                });
-
-                $(".stockName3").click(function () {
-                    $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
-                });
-
-                $(".dl").click(function () {
-                    var a = $(this).parent().next().next().next().text();
-                    if (a != 0.0 && a != 0) {
-                        var flag = alert("食材还有剩余，不能删除555")
-                        $(this).removeAttr("checked");
-                        //window.location.href = 'stocklogin';
-                    }
-                })
-
-                $(".ladl").click(function () {
-                    var a = $(this).parent().next().next().next().text();
-                    if (a != 0.0 && a != 0) {
-                        var flag = alert("食材还有剩余，不能删除444")
-                        $(this).removeAttr("checked");
-                        //window.location.href = 'stocklogin';
-                    }
-                })
 
 
+              // pageCount();
+               next();
+               previous();
+               fy(page);
+               first();
+               last();
             });
 
 
-            // function jemp(id){
-            //         var a = $(id).parent().next().next().next().text();
-            //         alert(a)
-            //         if (a != 0.0 && a != 0) {
-            //             var flag = alert("食材还有剩余，不能删除222")
-            //             $(id).removeAttr("checkbox");
-            //             //window.location.href = 'stocklogin';
-            //         }
-            // }
+
             function aa() {
                 $(".stockName").parent().dblclick(function () {
                     $(this).find(" .stockName").css({background: "#eeeeee"}).removeAttr("disabled");
@@ -288,21 +291,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 });
             }
 
-            function bb(idOfStock) {
-                //   var a=parseInt(idOfStock);
-                // $(".stockName2").parent().find(".stockName").css({background: "#eeeeee"}).removeAttr("disabled");
-                // $("input[class='stockName']");
-                // $(".stockName2")
-                // $(".stockName").css({background: "transparent"}).blur(function () {
-                //     $(this).attr("disabled", "disabled").css({background: "transparent"});
-                //     var id = $(this).parent().prev().html();
-                //     var name = $(this).val();
-                //     alert(id);
-                //     alert(name);
-                //     UpdateStock(id, name);
-                // });
 
-            }
 
             function UpdateStock(id, name) {
                 $.ajax({
@@ -328,78 +317,34 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
 
 
-            var page = 1;
-            var CargoPageCount = 0;
-            var CargoLikepageCount = 0;
-            var pageNow = 0;
 
             function next() {
-                $("button[name='next']").click(function () {
+                $("a[title='下一页']").click(function () {
                     $(".tb tr:gt(0)").remove();
                     page += 1;
                     if (page >= CargoPageCount) page = CargoPageCount
-                    StockInfo(page);
+                    fy(page);
                 })
             }
 
 
             function previous() {
-                $("button[name='previous']").click(function () {
+                $("a[title='上一页']").click(function () {
                     $(".tb tr:gt(0)").remove();
                     page -= 1;
                     if (page <= 0) page = 1;
                     if (page >= CargoPageCount) page = CargoPageCount
-                    StockInfo(page);
+                    fy(page);
                 })
             }
 
 
-            function StockInfo(pageno) {
-                pageNow = pageno;
-                $("#tb tr:gt(0)").remove();
-                $.ajax({
-                    "url": "StockInfo/" + pageno,
-                    "dataType": "json",
-                    "type": "post",
-                    "success": function (result) {
-                        $(result).each(function () {
-                            $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
-                            //$(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='indent'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a></td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
-                        });
-                        aa();
-
-                        $(".indent").click(function () {
-                            var a = $(this).parent().next().next().next().text();
-                            if (a != 0.0 && a != 0) {
-                                var flag = alert("食材还有剩余，不能删除222");
-                                $(this).removeAttr("checked");
-                                //window.location.href = 'stocklogin';
-                            }
-                        });
-                    }
-                });
-
-            }
 
 
 
 
-            function pageCount() {
-                $.ajax({
-                    "url": "getPageCount",
-                    "dataType": "json",
-                    "type": "post",
-                    "success": function (result) {
-                        CargoPageCount = parseInt(result);
-                        alert(CargoPageCount);
-                        // for (var i = 0; i < CargoPageCount; i++) {
-                        //     $(".ddd").append("<div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'><a href='javascript:;' onclick='CargoPageInfo(" + (i + 1) + ")'>" + (i + 1) + "</a></div>");
-                        // }
 
-                    }
 
-                })
-            }
 
 
 
@@ -422,9 +367,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 .mian_b1
                     p.mian_b1_a1
                         button(onclick='task()' style='width:80px;height:30px' ) 添加
-                    p.mian_b1_sousuo
-                        input(id='stockName', type='tex闪t')
-                    button(value='搜索' onclick='getInfo()' style='width:80px;padding-left:20px;margin:11px;height:30px;text-align:center')查询
+                    p.mian_b1_sousuo(style='height:25px')
+                        input(id='stockName', type='text' style='width:137px')
+                    button(value='搜索' onclick='fy(1)' style='width:80px;padding-left:20px;margin:11px;height:30px;text-align:center') 查询
                     button(onclick='getdel()' style='width:80px;height:30px') 批量删除
 
                     a(href='#', title='最后')
