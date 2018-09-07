@@ -231,7 +231,7 @@ function selectRunningDataPages(pagethis) {
     if(j>=3){
         j=0;
     }
-        if (pagethis > 2) {
+        if (pagethis >= 2) {
         if(pagethis<CargoPageCount){
             $(".mian_b1_list").empty();
             for (var i=pagethis-1;i<=CargoPageCount;i++)
@@ -247,7 +247,7 @@ function selectRunningDataPages(pagethis) {
             $(".mian_b1_list a:eq(" + (pagethis - 1) + ") div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
         }
         if(CargoPageCount==pagethis){
-            if (CargoPageCount > 3) {
+            if (CargoPageCount >= 3) {
                 $(".mian_b1_list").empty();
                 for (var i = pagethis - 2; i <= CargoPageCount; i++) {
                     if (j < 3) {
@@ -259,14 +259,14 @@ function selectRunningDataPages(pagethis) {
             }
             if(CargoPageCount < 3) {
                 $(".mian_b1_list").empty();
-                for (var i = 1; i < 3; i++) {
+                for (var i = 1; i <= CargoPageCount; i++) {
                     $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                 }
                 $(".mian_b1_list a:eq(1) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
             }
             }
         if(pagethis==1) {
-            if (CargoPageCount > 3) {
+            if (CargoPageCount >= 3) {
                 $(".mian_b1_list").empty();
                 for (var i = 1; i <= 3; i++) {
                     $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
@@ -274,7 +274,7 @@ function selectRunningDataPages(pagethis) {
                 $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
             }else{
                 $(".mian_b1_list").empty();
-                for (var i = 1; i < 3; i++) {
+                for (var i = 1; i <= CargoPageCount; i++) {
                     $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
                 }
                 $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");

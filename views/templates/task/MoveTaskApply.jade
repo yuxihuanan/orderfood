@@ -1,169 +1,103 @@
 ﻿doctype transitional
 html(xmlns='http://www.w3.org/1999/xhtml')
-  head
-    title 原料首页
-    link(rel='stylesheet', type='text/css', href='css/index.css')
-    script(type='text/javascript', src='js/jquery-1.7.1.min.js')
-    script.
-      function dell(id,liang) {
-          var liang=parseFloat(liang);
-              if (liang!=0.0 && liang!=0) {
-                  alert("请不要浪费食材！！!!!！")
-                  return;
-              } else {
-                  $.ajax({
-                      "url": "dell/" + id,
-                      "dataType": "JSON",
-                      "type": "post",
-                      "success": function (result) {
-                          if (result > 0) {
-                              alert("删除成功");
-                              //getInfo()
-                              window.location.reload();
-                          } else {
-                              alert("删除失败");
-                          }
-                      }
-                  })
-              }
-          //});
-
-      }
-
-
-      function delll(id, liang) {
-          var liang = parseFloat(liang);
-          if (liang != 0.0 && liang != 0) {
-              alert("请不要浪费食材！！！")
-              return;
-          } else {
-              $.ajax({
-                  "url": "dell/" + id,
-                  "dataType": "JSON",
-                  "type": "post",
-                  "success": function (result) {
-                      if (result > 0) {
-                          alert("删除成功");
-                          getInfo()
-                          //window.location.reload();
-                      } else {
-                          alert("删除失败");
-                      }
-                  }
-              })
-          }
-          //});
-
-      }
-
-
-
-      function getdel() {
-
-
-
-          var checkbox_value = [];
-          var obj = document.getElementsByName("indent")
-
-
-          for (var k in obj) {
-              if (obj[k].checked)
-                  checkbox_value.push(obj[k].value)
-          }
-
-          $.ajax({
-              "url": "getdel",
-              "dataType": "json",
-              "type": "post",
-              "data": {
-                  'arrays[]': checkbox_value
-              },
-              "success": function (result) {
-                  if (result > 0) {
-                      alert("删除成功")
-                      window.location.href = 'stocklogin';
-                  } else {
-                      alert("删除失败");
-                  }
-              },
-
-          });
-      }
-
-      function del() {
-          $("input[name=all]").click(function () {
-              if (this.checked) {
-                  $("#tb :checkbox").prop("checked", true);
-              } else {
-                  $("#tb :checkbox").prop("checked", false);
-              }
-          });
-      }
-
-
-
-
-      function getInfo(){
-         $(".mian_b_bg").html("");
-         $("#lala").html("")
-          var stockName = $("#stockName").val();
-          $.ajax({
-              'url': 'getInfo/' + stockName,
-              'dataType': 'JSON',
-              'type': 'post',
-              'success': function (result) {
-                      $(".mian_b_bg").append("<tr style='background:#eeeeee'><td class='mian_b_bg_lm' width='5%'><span></span></td><td class='mian_b_bg_lm' width='10%'>原料ID<span></span></td><td class='mian_b_bg_lm' width='10%'>原料名称<span></span></td><td class='mian_b_bg_lm' width='10%'>原料总量<span></span></td><td class='mian_b_bg_lm' width='10%'>原料单位<span></span></td><td colspan='4' class='mian_b_bg_lm' width='10%'>操作<span></span></td></tr>")
-                  $(result).each(function () {
-                      $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' id='dl' onclick='jemp(this)'  name='indent' value='"+this.stockid+"'></td><td id='"+this.stockid+"'>"+this.stockid+"</td><td><input class='stockName' value='"+this.stockname+"' style='border:white'></td><td>"+this.stockweight+"</td><td>"+this.stockunit+"</td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' class='stockName3' onclick='bianji("+this.stockid+")'>编辑</a></td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' onclick='delll("+this.stockid+","+this.stockweight+")'>删除</a></td></tr>")
-                  });
-                  aa();
-              }
-          })
-      }
-      function bianji(id) {
-          //$(".stockName3").click(function () {
-              //var a=$("#"+id+"").next().next().text();
-                  $("#"+id+"").next().find("input").removeAttr("disabled").css({background: "#eeeeee"});
-          //});
-      }
-
-
-        function task() {
-            window.location.href='task'
-        }
-
-      function selectAll(checkbox) {
-          $('input[type=checkbox]').prop('checked', $(checkbox).prop('checked'));
-      }
-      function upd(id) {
-          window.location.href = 'upd?id='+id;
-          $(this).parent();
-      }
-
-
-
-
-        $(function () {
-            aa();
-
-
-            $(".stockName").attr("disabled", "disabled");
-            $(".stockName5").click(function () {
-                $(this).parent().prev().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
-            });
-
-            $(".stockName3").click(function () {
-                $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
-            });
-
-            $(".dl").click(function () {
-                var a= $(this).parent().next().next().next().text();
-                if (a!=0.0&&a!=0) {
-                    var flag=alert("食材还有剩余，不能删除")
-                    $(this).removeAttr("checked");
-                    //window.location.href = 'stocklogin';
+    head
+        title 原料首页
+        link(rel='stylesheet', type='text/css', href='css/index.css')
+        script(type='text/javascript', src='js/jquery-1.7.1.min.js')
+        script.
+            function dell(id, liang) {
+                var liang = parseFloat(liang);
+                if (liang != 0.0 && liang != 0) {
+                    alert("请不要浪费食材！！!!!！")
+                    return;
+                } else {
+                    $.ajax({
+                        "url": "dell/" + id,
+                        "dataType": "JSON",
+                        "type": "post",
+                        "success": function (result) {
+                            if (result > 0) {
+                                alert("删除成功");
+                                //getInfo()
+                                window.location.reload();
+                            } else {
+                                alert("删除失败");
+                            }
+                        }
+                    })
                 }
-            })
+                //});
+
+            }
+            
+            
+            
+            
+            
+            function fy() {
+                    $.ajax({
+                        "url": "RunningDataCount",
+                        "data": data,
+                        "dataType": "json",
+                        "type": "post",
+                        "success": function (result) {
+                            CargoPageCount = parseInt(result);
+                            pageNow = page;
+                            page = pagethis;
+                            if (j >= 3) {
+                                j = 0;
+                            }
+                            if (pagethis >= 2) {
+                                if (pagethis < CargoPageCount) {
+                                    $(".mian_b1_list").empty();
+                                    for (var i = pagethis - 1; i <= CargoPageCount; i++) {
+                                        if (j < 3) {
+                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                            j++;
+                                        }
+                                    }
+                                    $(".mian_b1_list a:eq(1) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                                }
+                            } else {
+                                $(".mian_b1_list a:eq(" + (pagethis - 1) + ") div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                            }
+                            if (CargoPageCount == pagethis) {
+                                if (CargoPageCount >= 3) {
+                                    $(".mian_b1_list").empty();
+                                    for (var i = pagethis - 2; i <= CargoPageCount; i++) {
+                                        if (j < 3) {
+                                            $(".mian_b1_list").append("<a href='javascript:void(0)' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                            j++;
+                                        }
+                                    }
+                                    $(".mian_b1_list a:eq(2) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                                }
+                                if (CargoPageCount < 3) {
+                                    $(".mian_b1_list").empty();
+                                    for (var i = 1; i <= CargoPageCount; i++) {
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                    }
+                                    $(".mian_b1_list a:eq(1) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                                }
+                            }
+                            if (pagethis == 1) {
+                                if (CargoPageCount >= 3) {
+                                    $(".mian_b1_list").empty();
+                                    for (var i = 1; i <= 3; i++) {
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                    }
+                                    $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                                } else {
+                                    $(".mian_b1_list").empty();
+                                    for (var i = 1; i <= CargoPageCount; i++) {
+                                        $(".mian_b1_list").append("<a href='javascript:void(0);' onclick='selectRunningDataPages(" + (i) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i) + "</div></a>");
+                                    }
+                                    $(".mian_b1_list a:eq(0) div").css("background-color", "gray").parent().siblings().find(" div").css("background-color", "#D3D3D3");
+                                }
+                            }
+                        }
+                            });
+                            }
 
 
 
@@ -171,123 +105,384 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
 
 
-        });
 
 
-        function jemp(id){
-                var a = $(id).parent().next().next().next().text();
-                if (a != 0.0 && a != 0) {
-                    var flag = alert("食材还有剩余，不能删除222")
-                    $(this).removeAttr("checked");
-                    //window.location.href = 'stocklogin';
+            function delll(id, liang) {
+                var liang = parseFloat(liang);
+                if (liang != 0.0 && liang != 0) {
+                    alert("请不要浪费食材！！！")
+                    return;
+                } else {
+                    $.ajax({
+                        "url": "dell/" + id,
+                        "dataType": "JSON",
+                        "type": "post",
+                        "success": function (result) {
+                            if (result > 0) {
+                                alert("删除成功");
+                                getInfo()
+                                //window.location.reload();
+                            } else {
+                                alert("删除失败");
+                            }
+                        }
+                    })
                 }
-        }
-        function aa() {
-            $(".stockName").parent().dblclick(function () {
-                $(this).find(" .stockName").css({background: "#eeeeee"}).removeAttr("disabled");
-            });
-            $(".stockName").attr("disabled", "disabled");
-            $(".stockName").css({background: "transparent"}).blur(function () {
-                $(this).attr("disabled", "disabled").css({background: "transparent"});
-                var id = $(this).parent().prev().html();
-                var name = $(this).val();
-                UpdateStock(id, name);
-            });
-        }
+                //});
 
-      function bb(idOfStock) {
-          //   var a=parseInt(idOfStock);
-          // $(".stockName2").parent().find(".stockName").css({background: "#eeeeee"}).removeAttr("disabled");
-          // $("input[class='stockName']");
-          // $(".stockName2")
-          // $(".stockName").css({background: "transparent"}).blur(function () {
-          //     $(this).attr("disabled", "disabled").css({background: "transparent"});
-          //     var id = $(this).parent().prev().html();
-          //     var name = $(this).val();
-          //     alert(id);
-          //     alert(name);
-          //     UpdateStock(id, name);
-          // });
+            }
 
-      }
-      function UpdateStock(id,name) {
-          $.ajax({
-              "url": "UpdateStock",
-              "data": {
-                  stockid: id,
-                  stockname: name
-              },
-              "dataType": "json",
-              "type": "post",
-              "success": function (result) {
-                  if (result > 0) {
-                      alert("修改成功");
-                  } else {
-                      alert("修改失败");
-                  }
-              }
-          })
-      }
-    body.mian_bj
-    .mian_top_01
-      .mian_top_r
-      .mian_top_l
-      .mian_top_c
-        ul
-          li
-            a(href='')
-              p 原料管理
-      .mian_b
-        .mian_b1
-          p.mian_b1_a1
-            button(onclick='task()' style='width:80px;height:30px' )添加
-          p.mian_b1_sousuo
-            input(id='stockName', type='tex闪t')
-          button(value='搜索' onclick='getInfo()' style='width:80px;padding-left:20px;margin:11px;height:30px;text-align:center')查询
-          button(onclick='getdel()' style='width:80px;height:30px')批量删除
-        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
-          tbody#tb
-            tr
-              td.mian_b_bg_lm(width='5%')
-                span
-                // input(type='checkbox' name='all' id="allcheck"  onclick="selectAll(this);" )
-                //| 全选
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 原料ID
-               // input(name='', type='checkbox', value='')
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 原料名称
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 原料总量
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 原料单位
-              td.mian_b_bg_lm(colspan='4' width='10%')
-                span
-                | 操作
-              each item in users
-                tr(id='trr')
-                div(id='lala')
-                    //(style='display:none')
-                  td
-                    input.dl(type='checkbox' name='indent' value=item.stockid )
-                  td.sid=item.stockid
-                  td
-                    //input.stockName2(id='stockName',value=item.stockname style='border:1px solid red;' type='text')
-                    input.stockName(id='stockName',value=item.stockname style='border:none;' type='text')
-                  //td#sname=item.stockname
-                  td=item.stockweight
-                  td=item.stockunit
-                  td(width='4%')
-                  td.mian_b_icon_01(width='1%')
-                    a(href='javascript:void(0)' class='stockName5')编辑
-                    //a(href='javascript:void(0)' onclick='upd('+item.stockid+')') 编辑
-                  td(width='4%')
-                  td.mian_b_icon_01(width='1%')
-                    a(href='javascript:void(0)' onclick='dell('+item.stockid+','+item.stockweight+') ' class='san')删除
+
+            function getdel() {
+
+
+                var checkbox_value = [];
+                var obj = document.getElementsByName("indent")
+
+
+                for (var k in obj) {
+                    if (obj[k].checked)
+                        checkbox_value.push(obj[k].value)
+                }
+
+                $.ajax({
+                    "url": "getdel",
+                    "dataType": "json",
+                    "type": "post",
+                    "data": {
+                        'arrays[]': checkbox_value
+                    },
+                    "success": function (result) {
+                        if (result > 0) {
+                            alert("删除成功")
+                            window.location.href = 'stocklogin';
+                        } else {
+                            alert("删除失败");
+                        }
+                    },
+
+                });
+            }
+
+            function del() {
+                $("input[name=all]").click(function () {
+                    if (this.checked) {
+                        $("#tb :checkbox").prop("checked", true);
+                    } else {
+                        $("#tb :checkbox").prop("checked", false);
+                    }
+                });
+            }
+
+
+            function getInfo() {
+                $(".mian_b_bg").html("");
+                $("#lala").html("")
+                var stockName = $("#stockName").val();
+                $.ajax({
+                    'url': 'getInfo/' + stockName,
+                    'dataType': 'JSON',
+                    'type': 'post',
+                    'success': function (result) {
+                        $(".mian_b_bg").append("<tr style='background:#eeeeee'><td class='mian_b_bg_lm' width='5%'><span></span></td><td class='mian_b_bg_lm' width='10%'>原料ID<span></span></td><td class='mian_b_bg_lm' width='10%'>原料名称<span></span></td><td class='mian_b_bg_lm' width='10%'>原料总量<span></span></td><td class='mian_b_bg_lm' width='10%'>原料单位<span></span></td><td colspan='4' class='mian_b_bg_lm' width='10%'>操作<span></span></td></tr>")
+                        $(result).each(function () {
+                            $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                        });
+                        aa();
+                        $(".ladl").click(function () {
+                            var a = $(this).parent().next().next().next().text();
+                            alert(a)
+                            if (a != 0.0 && a != 0) {
+                                var flag = alert("食材还有剩余，不能删除222")
+                                $(this).removeAttr("checked");
+                                //window.location.href = 'stocklogin';
+                            }
+                        })
+
+                    }
+
+
+                })
+            }
+
+            function bianji(id) {
+                //$(".stockName3").click(function () {
+                //var a=$("#"+id+"").next().next().text();
+                $("#" + id + "").next().find("input").removeAttr("disabled").css({background: "#eeeeee"});
+                //});
+            }
+
+
+            function task() {
+                window.location.href = 'task'
+            }
+
+            function selectAll(checkbox) {
+                $('input[type=checkbox]').prop('checked', $(checkbox).prop('checked'));
+            }
+
+            function upd(id) {
+                window.location.href = 'upd?id=' + id;
+                $(this).parent();
+            }
+
+
+            $(function () {
+                aa();
+                StockInfo(page);
+                pageCount();
+                next();
+                previous();
+
+
+                $(".stockName").attr("disabled", "disabled");
+                $(".stockName5").click(function () {
+                    $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
+                });
+
+                $(".stockName3").click(function () {
+                    $(this).parent().prev().prev().prev().find("input").removeAttr("disabled").css({background: "#eeeeee"});
+                });
+
+                $(".dl").click(function () {
+                    var a = $(this).parent().next().next().next().text();
+                    if (a != 0.0 && a != 0) {
+                        var flag = alert("食材还有剩余，不能删除555")
+                        $(this).removeAttr("checked");
+                        //window.location.href = 'stocklogin';
+                    }
+                })
+
+                $(".ladl").click(function () {
+                    var a = $(this).parent().next().next().next().text();
+                    if (a != 0.0 && a != 0) {
+                        var flag = alert("食材还有剩余，不能删除444")
+                        $(this).removeAttr("checked");
+                        //window.location.href = 'stocklogin';
+                    }
+                })
+
+
+            });
+
+
+            // function jemp(id){
+            //         var a = $(id).parent().next().next().next().text();
+            //         alert(a)
+            //         if (a != 0.0 && a != 0) {
+            //             var flag = alert("食材还有剩余，不能删除222")
+            //             $(id).removeAttr("checkbox");
+            //             //window.location.href = 'stocklogin';
+            //         }
+            // }
+            function aa() {
+                $(".stockName").parent().dblclick(function () {
+                    $(this).find(" .stockName").css({background: "#eeeeee"}).removeAttr("disabled");
+                });
+                $(".stockName").attr("disabled", "disabled");
+                $(".stockName").css({background: "transparent"}).blur(function () {
+                    $(this).attr("disabled", "disabled").css({background: "transparent"});
+                    var id = $(this).parent().prev().html();
+                    var name = $(this).val();
+                    UpdateStock(id, name);
+                });
+            }
+
+            function bb(idOfStock) {
+                //   var a=parseInt(idOfStock);
+                // $(".stockName2").parent().find(".stockName").css({background: "#eeeeee"}).removeAttr("disabled");
+                // $("input[class='stockName']");
+                // $(".stockName2")
+                // $(".stockName").css({background: "transparent"}).blur(function () {
+                //     $(this).attr("disabled", "disabled").css({background: "transparent"});
+                //     var id = $(this).parent().prev().html();
+                //     var name = $(this).val();
+                //     alert(id);
+                //     alert(name);
+                //     UpdateStock(id, name);
+                // });
+
+            }
+
+            function UpdateStock(id, name) {
+                $.ajax({
+                    "url": "UpdateStock",
+                    "data": {
+                        stockid: id,
+                        stockname: name
+                    },
+                    "dataType": "json",
+                    "type": "post",
+                    "success": function (result) {
+                        if (result > 0) {
+                            alert("修改成功");
+                        } else {
+                            alert("修改失败");
+                        }
+                    }
+                })
+            }
+
+
+
+
+
+
+            var page = 1;
+            var CargoPageCount = 0;
+            var CargoLikepageCount = 0;
+            var pageNow = 0;
+
+            function next() {
+                $("button[name='next']").click(function () {
+                    $(".tb tr:gt(0)").remove();
+                    page += 1;
+                    if (page >= CargoPageCount) page = CargoPageCount
+                    StockInfo(page);
+                })
+            }
+
+
+            function previous() {
+                $("button[name='previous']").click(function () {
+                    $(".tb tr:gt(0)").remove();
+                    page -= 1;
+                    if (page <= 0) page = 1;
+                    if (page >= CargoPageCount) page = CargoPageCount
+                    StockInfo(page);
+                })
+            }
+
+
+            function StockInfo(pageno) {
+                pageNow = pageno;
+                $("#tb tr:gt(0)").remove();
+                $.ajax({
+                    "url": "StockInfo/" + pageno,
+                    "dataType": "json",
+                    "type": "post",
+                    "success": function (result) {
+                        $(result).each(function () {
+                            $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                            //$(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='indent'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a></td><td width='4%'></td><td class='mian_b_icon_01' (width='1%')><a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                        });
+                        aa();
+
+                        $(".indent").click(function () {
+                            var a = $(this).parent().next().next().next().text();
+                            if (a != 0.0 && a != 0) {
+                                var flag = alert("食材还有剩余，不能删除222");
+                                $(this).removeAttr("checked");
+                                //window.location.href = 'stocklogin';
+                            }
+                        });
+                    }
+                });
+
+            }
+
+
+
+
+            function pageCount() {
+                $.ajax({
+                    "url": "getPageCount",
+                    "dataType": "json",
+                    "type": "post",
+                    "success": function (result) {
+                        CargoPageCount = parseInt(result);
+                        alert(CargoPageCount);
+                        // for (var i = 0; i < CargoPageCount; i++) {
+                        //     $(".ddd").append("<div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'><a href='javascript:;' onclick='CargoPageInfo(" + (i + 1) + ")'>" + (i + 1) + "</a></div>");
+                        // }
+
+                    }
+
+                })
+            }
+
+
+
+
+
+
+
+
+
+        body.mian_bj
+        .mian_top_01
+            .mian_top_r
+            .mian_top_l
+            .mian_top_c
+                ul
+                    li
+                        a(href='')
+                            p 原料管理
+            .mian_b
+                .mian_b1
+                    p.mian_b1_a1
+                        button(onclick='task()' style='width:80px;height:30px' ) 添加
+                    p.mian_b1_sousuo
+                        input(id='stockName', type='tex闪t')
+                    button(value='搜索' onclick='getInfo()' style='width:80px;padding-left:20px;margin:11px;height:30px;text-align:center')查询
+                    button(onclick='getdel()' style='width:80px;height:30px') 批量删除
+
+                    a(href='#', title='最后')
+                        p.mian_b1_a4
+                    a(href='#', title='下一页')
+                        p.mian_b1_a5
+                    p.mian_b1_list
+                    a(href='#', title='上一页')
+                        p.mian_b1_a6
+                    a(href='#', title='最前')
+                        p.mian_b1_a7
+
+                table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+                    tbody#tb
+                        tr
+                            td.mian_b_bg_lm(width='5%')
+                                span
+                                // input(type='checkbox' name='all' id="allcheck"  onclick="selectAll(this);" )
+                                //| 全选
+                            td.mian_b_bg_lm(width='10%')
+                                span
+                                | 原料ID
+                            // input(name='', type='checkbox', value='')
+                            td.mian_b_bg_lm(width='10%')
+                                span
+                                | 原料名称
+                            td.mian_b_bg_lm(width='10%')
+                                span
+                                | 原料总量
+                            td.mian_b_bg_lm(width='10%')
+                                span
+                                | 原料单位
+                            td.mian_b_bg_lm(colspan='4' width='10%')
+                                span
+                                | 操作
+                            each item in users
+                                tr(id='trr')
+                                div(id='lala')
+                                    //(style='display:none')
+                                td
+                                    input.dl(type='checkbox' name='indent'  value=item.stockid )
+                                td.sid=item.stockid
+                                td
+                                    //input.stockName2(id='stockName',value=item.stockname style='border:1px solid red;' type='text')
+                                    input.stockName(id='stockName',value=item.stockname style='border:none;' type='text')
+                                //td#sname=item.stockname
+                                td=item.stockweight
+                                td=item.stockunit
+                                td(width='10%')
+                                    a(href='javascript:void(0)' class='stockName5') 编辑
+                                    | &nbsp;| &nbsp;
+                                    a(href='javascript:void(0)' onclick='dell(' + item.stockid + ',' + item.stockweight + ') ' class='san')删除
+                                //td(width='1%')
+                                //  a(href='javascript:void(0)' class='stockName5') 编辑
+                                //  //a(href='javascript:void(0)' onclick='upd('+item.stockid+')') 编辑
+                                //td(width='4%')
+                                //td(width='1%')
+                                //  a(href='javascript:void(0)' onclick='dell('+item.stockid+','+item.stockweight+') ' class='san')删除
 
 
 
