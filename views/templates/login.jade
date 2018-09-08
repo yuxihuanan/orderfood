@@ -40,8 +40,6 @@ script(type='text/javascript').
         } else if ($('[name=password]').val().trim().length < 6) {
             alert('密码长度不能低于6位哦~');
         } else {
-            var roleid = '#{roleId}';
-            alert(roleid);
             var data = $('#data').serialize();
             $.ajax({
                 'url':'/loginorder',

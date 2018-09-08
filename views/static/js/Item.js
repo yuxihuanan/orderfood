@@ -32,8 +32,6 @@ $(function () {
     previous();
     first();
     last();
-
-
 });
 
 function next() {
@@ -66,6 +64,7 @@ function first() {
         selectRunningDataPages(page);
     })
 }
+
 function last() {
     $("a[title='最后']").click(function () {
         $("#pageInfo tr:gt(0)").remove();
@@ -74,53 +73,10 @@ function last() {
         selectRunningDataPages(page);
     })
 }
-// function pageCount() {
-//     var data = $("#data").serialize();
-//     $(".mian_b1_list").empty();
-//     $.ajax({
-//         "url":"RunningDataCount",
-//         "data":data,
-//         "dataType":"json",
-//         "type":"post",
-//         "success":function (result) {
-//             CargoPageCount=parseInt(result);
-//             selectRunningDataPages(page);
-//             //selectRunningDataPages(page,CargoPageCount);
-//             // for (var i=0;i<CargoPageCount;i++)
-//             // {
-//             //     if(i<3) {
-//             //         $(".mian_b1_list").append("<a href='javascript:;' onclick='selectRunningDataPages(" + (i + 1) + ")'><div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'>" + (i + 1) + "</div></a>");
-//             //         $(".mian_b1_list div:eq(0)").css("background-color", "gray");
-//             //     }
-//             // }
-//         }
-//     });
-// }
-
-
-
-
-
 
 function selectRunningData(){
     var data = $("#data").serialize();
     var str = "";
-    var date=new Date();
-    var startDate = new Date(Date.parse($("[name=startDate]").val()));
-    var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
-    if($("[name=stopDate]").val()!='' && $("[name=startDate]").val()==''){
-        alert("请选择开始时间！");
-    }else if(startDate>date){
-        alert("开始时间不能超过当前时间哦");
-        $("[name=startDate]").val("");
-    }else if (startDate!=null && stopDate > date) {
-        alert("结束时间不能超过当前时间哦");
-        $("[name=stopDate]").val("");
-    }else if (startDate > stopDate) {
-        alert("截止时间不能低于开始时间呢！");
-        $("[name=stopDate]").val("");
-    }else {
-        $(".dataprice").empty();
         $.ajax({
             "url": "selectrunningData",
             "data": data,
@@ -170,11 +126,9 @@ function selectRunningData(){
                 alert("服务器异常！");
             }
         });
-    }
 }
 
 function exports() {
-
     $("#export").attr("disabled", true);
     var data = $("#data").serialize();
     var str = "";
@@ -217,8 +171,25 @@ function exports() {
 }
 
 function selectRunningDataPages(pagethis) {
-    var data = $("#data").serialize();
     var str = "";
+    pageNow=page;
+    page=pagethis;
+    var date=new Date();
+    var startDate = new Date(Date.parse($("[name=startDate]").val()));
+    var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
+    if($("[name=stopDate]").val()!='' && $("[name=startDate]").val()==''){
+        alert("请选择开始时间！");
+    }else if(startDate>date){
+        alert("开始时间不能超过当前时间哦");
+        $("[name=startDate]").val("");
+    }else if (startDate!=null && stopDate > date) {
+        alert("结束时间不能超过当前时间哦");
+        $("[name=stopDate]").val("");
+    }else if (startDate > stopDate) {
+        alert("截止时间不能低于开始时间呢！");
+        $("[name=stopDate]").val("");
+    }else{
+        var data = $("#data").serialize();
     $.ajax({
         "url":"RunningDataCount",
         "data":data,
@@ -226,8 +197,6 @@ function selectRunningDataPages(pagethis) {
         "type":"post",
         "success":function (result) {
             CargoPageCount=parseInt(result);
-    pageNow=page;
-    page=pagethis;
     if(j>=3){
         j=0;
     }
@@ -281,23 +250,6 @@ function selectRunningDataPages(pagethis) {
             }
         }
 
-    var date=new Date();
-    var startDate = new Date(Date.parse($("[name=startDate]").val()));
-    var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
-    if($("[name=stopDate]").val()!='' && $("[name=startDate]").val()==''){
-        alert("请选择开始时间！");
-    }else if(startDate>date){
-        alert("开始时间不能超过当前时间哦");
-        $("[name=startDate]").val("");
-    }else if (startDate!=null && stopDate > date) {
-        alert("结束时间不能超过当前时间哦");
-        $("[name=stopDate]").val("");
-    }else if (startDate > stopDate) {
-        alert("截止时间不能低于开始时间呢！");
-        $("[name=stopDate]").val("");
-    }else {
-        $(".mian_b_bg tr:gt(0)").remove();
-        $(".dataprice").empty();
         $.ajax({
             "url": "selectrunningDataPages/"+pagethis,
             "data": data,
@@ -305,6 +257,8 @@ function selectRunningDataPages(pagethis) {
             "type": "post",
             "success": function (result) {
                 if (null != result) {
+                    $(".mian_b_bg tr:gt(0)").remove();
+                    $(".dataprice").empty();
                     var shou = 0;
                     var zhi = 0;
                     var zong = 0;
@@ -320,7 +274,6 @@ function selectRunningDataPages(pagethis) {
                     });
                     $(".mian_b_bg").append(str);
                     selectRunningData();
-
                 }
             },
             "error": function () {
@@ -328,6 +281,6 @@ function selectRunningDataPages(pagethis) {
             }
         });
     }
-        }
     });
+        }
 }
