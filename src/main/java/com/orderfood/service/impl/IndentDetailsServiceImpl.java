@@ -2,8 +2,11 @@ package com.orderfood.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.orderfood.mapper.IndentDetailsMapper;
+import com.orderfood.mapper.OrderFoodTableMapper;
+import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
+import com.orderfood.pojo.OrderfoodTable;
 import com.orderfood.service.IndentDetailsService;
 import com.orderfood.util.MqUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
 
     @Autowired
     private IndentDetailsMapper indentDetailsMapper;
+
+    @Autowired
+    private OrderFoodTableMapper orderFoodTableMapper;
 
     /**
      * 根据tableId获得所有的在此桌的订单，并根据日期拿到最新的订单
@@ -118,6 +124,55 @@ public class IndentDetailsServiceImpl implements IndentDetailsService {
     @Override
     public int deleteIndent(int indentid) {
         return indentDetailsMapper.deleteIndent(indentid);
+    }
+
+    /**
+     * 得到所有的菜单分类以及菜品
+     * @param classifyId
+     * @return
+     */
+    @Override
+    public List<OrderfoodCuisineClassify> getAllClassify(Integer classifyId) {
+        return indentDetailsMapper.getAllClassify(classifyId);
+    }
+
+    /**
+     * 通过用户手机号获得其所有的订单
+     * @param phone
+     * @return
+     */
+    @Override
+    public List<OrderfoodIndent> getAllIndentsByPhone(String phone) {
+        return indentDetailsMapper.getAllIndentsByPhone(phone);
+    }
+
+    /**
+     * 通过手机号查询用户编号
+     * @param phone
+     * @return
+     */
+    @Override
+    public Integer getUserIdByPhone(String phone) {
+        return indentDetailsMapper.getUserIdByPhone(phone);
+    }
+
+    /**
+     * 得到所有的桌子信息
+     * @return
+     */
+    @Override
+    public List<OrderfoodTable> getAllTables() {
+        return orderFoodTableMapper.selectAll();
+    }
+
+    /**
+     * 更新桌子的状态
+     * @param orderfoodTable
+     * @return
+     */
+    @Override
+    public int updateTableStatu(OrderfoodTable orderfoodTable) {
+        return orderFoodTableMapper.updateByPrimaryKeySelective(orderfoodTable);
     }
 
     /**

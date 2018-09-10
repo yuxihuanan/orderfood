@@ -31,9 +31,14 @@ public class OrderfoodIndent implements Serializable {
     @Transient
     private OrderfoodEmployee orderfoodEmployee; //员工详请
 
+    @Transient
+    private OrderfoodUser orderfoodUser; //用户信息
+
     private Float netmoney;//实付总金额
 
     private Integer iEmployeeid;//服务员 员工id
+
+    private Integer userId=0; //客户编号
 
     public OrderfoodIndent(Integer indentid, String indentcode, Integer iTableid, String createdate, String indentcomment, Float totalmoney, Float netmoney, Integer iEmployeeid) {
         this.indentid = indentid;
@@ -136,5 +141,21 @@ public class OrderfoodIndent implements Serializable {
 
     public void setOrderfoodEmployee(OrderfoodEmployee orderfoodEmployee) {
         this.orderfoodEmployee = orderfoodEmployee;
+    }
+
+    public OrderfoodUser getOrderfoodUser() {
+        return orderfoodUser;
+    }
+
+    public void setOrderfoodUser(OrderfoodUser orderfoodUser) {
+        this.orderfoodUser = orderfoodUser;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

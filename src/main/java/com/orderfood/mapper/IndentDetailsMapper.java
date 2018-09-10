@@ -1,5 +1,6 @@
 package com.orderfood.mapper;
 
+import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
 import org.apache.ibatis.annotations.Param;
@@ -91,4 +92,24 @@ public interface IndentDetailsMapper extends CommonMapper<OrderfoodIndentDetails
      * @return
      */
     int deleteIndent(@Param("indentid") int indentid);
+
+    /**
+     * 拿到所有的菜品
+     * @return
+     */
+    List<OrderfoodCuisineClassify> getAllClassify(@Param("classifyId") Integer classifyId);
+
+    /**
+     * 通过用户手机号获得其所有的订单
+     * @param phone
+     * @return
+     */
+    List<OrderfoodIndent> getAllIndentsByPhone(@Param("phone") String phone);
+
+    /**
+     * 通过手机号查询用户编号
+     * @param phone
+     * @return
+     */
+    Integer getUserIdByPhone(@Param("phone") String phone);
 }

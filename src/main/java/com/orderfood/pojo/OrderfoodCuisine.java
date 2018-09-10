@@ -20,6 +20,9 @@ public class OrderfoodCuisine implements Serializable {
     private Integer cClassifyid;//所属菜品分类
 
     @Transient
+    private Integer count=0;// 小程序所需
+
+    @Transient
     private OrderfoodCuisineClassify classify; //菜品分类
 
 
@@ -102,5 +105,13 @@ public class OrderfoodCuisine implements Serializable {
 
     public void setcClassifyid(Integer cClassifyid) {
         this.cClassifyid = cClassifyid;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

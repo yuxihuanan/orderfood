@@ -1,7 +1,9 @@
 package com.orderfood.service;
 
+import com.orderfood.pojo.OrderfoodCuisineClassify;
 import com.orderfood.pojo.OrderfoodIndent;
 import com.orderfood.pojo.OrderfoodIndentDetails;
+import com.orderfood.pojo.OrderfoodTable;
 
 import java.util.List;
 
@@ -60,4 +62,36 @@ public interface IndentDetailsService {
      * @return
      */
     int deleteIndent(int indentid);
+
+    /**
+     * 拿到所有的菜品
+     * @return
+     */
+    List<OrderfoodCuisineClassify> getAllClassify(Integer classifyId);
+
+    /**
+     * 通过用户手机号获得其所有的订单
+     * @param phone
+     * @return
+     */
+    List<OrderfoodIndent> getAllIndentsByPhone(String phone);
+
+    /**
+     * 通过手机号查询用户编号
+     * @param phone
+     * @return
+     */
+    Integer getUserIdByPhone(String phone);
+
+    /**
+     * 得到所有的桌子
+     * @return
+     */
+    List<OrderfoodTable> getAllTables();
+
+    /**
+     * 更新桌子的状态
+     * @return
+     */
+    int updateTableStatu(OrderfoodTable orderfoodTable);
 }

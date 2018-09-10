@@ -66,11 +66,55 @@
                 <result property="cClassifyid" column="c_classifyId"/>
             </association>
         </collection>
+    </resultMap>
 
+    <resultMap id="classify" type="com.orderfood.pojo.OrderfoodCuisineClassify">
+        <id property="classifyid" column="classifyId"/>
+        <result property="classifyname" column="classifyName"/>
+        <result property="suoxie" column="suoxie" />
+        <collection property="cuss" ofType="com.orderfood.pojo.OrderfoodCuisine">
+            <id property="cuisineid" column="cuisineId"></id>
+            <result property="cuisinename" column="cuisineName"></result>
+            <result property="price" column="price"></result>
+            <result property="cuisineacronym" column="cuisineAcronym"></result>
+            <result property="cuisineidentify" column="cuisineIdentify"></result>
+            <result property="cClassifyid" column="c_classifyId"></result>
+            <result property="picture" column="picture"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="userDetails" type="com.orderfood.pojo.OrderfoodIndent">
+        <id property="indentid" column="indentId"/>
+        <result property="indentcode" column="indentCode"/>
+        <result property="iTableid" column="i_tableId"/>
+        <result property="createdate" column="createDate"/>
+        <result property="indentcomment" column="indentComment"/>
+        <result property="totalmoney" column="totalmoney"/>
+        <result property="netmoney" column="netmoney"/>
+        <result property="iEmployeeid" column="i_employeeId"/>
+        <association property="orderfoodUser" javaType="com.orderfood.pojo.OrderfoodUser">
+            <id property="user_id" column="user_id"/>
+            <result property="user_name" column="user_name"/>
+            <result property="user_phone" column="user_phone"/>
+        </association>
+        <collection property="details" ofType="com.orderfood.pojo.OrderfoodIndentDetails">
+            <id property="detailsid" column="detailsId"/>
+            <result property="dCuisineid" column="d_cuisineId"/>
+            <result property="detailscount" column="detailsCount"/>
+            <result property="dIndentid" column="d_indentId"/>
+            <association property="cuisine" javaType="com.orderfood.pojo.OrderfoodCuisine">
+                <id property="cuisineid" column="cuisineId"/>
+                <result property="cuisinename" column="cuisineName"/>
+                <result property="price" column="price"/>
+                <result property="cuisineacronym" column="cuisineAcronym"/>
+                <result property="cuisineidentify" column="cuisineIdentify"/>
+                <result property="cClassifyid" column="c_classifyId"/>
+            </association>
+        </collection>
     </resultMap>
 
     <insert id="addIndent" parameterType="com.orderfood.pojo.OrderfoodIndent">
-        INSERT INTO `orderfood_indent` VALUES(NULL,#{indentcode},#{iTableid},DEFAULT,#{indentcomment},#{totalmoney},null,1)
+        INSERT INTO `orderfood_indent` VALUES(NULL,#{indentcode},#{iTableid},DEFAULT,#{indentcomment},#{totalmoney},null,1,#{userId})
     </insert>
     
     <insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">
@@ -130,4 +174,25 @@
     <delete id="deleteIndent">
         DELETE FROM `orderfood_indent` WHERE indentId=#{indentid}
     </delete>
+
+    <select id="getAllClassify" resultMap="classify">
+        SELECT * FROM `orderfood_cuisine_classify` f INNER JOIN `orderfood_cuisine` c ON c.`c_classifyId`=f.`classifyId`
+        <where>
+            <if test="classifyId!=null and classifyId!=''">
+                WHERE f.`classifyId`=#{classifyId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllIndentsByPhone" resultMap="userDetails">
+        SELECT * FROM `orderfood_indent` i
+	      INNER JOIN `orderfood_indent_details` d ON i.`indentId`=d.`d_indentId`
+	      INNER JOIN `orderfood_user` u ON i.`i_userId`=u.`user_id`
+	      INNER JOIN `orderfood_cuisine` c ON d.`d_cuisineId`=c.`cuisineId`
+	      WHERE u.`user_phone`=#{phone}
+    </select>
+
+    <select id="getUserIdByPhone" resultType="Integer">
+        SELECT * FROM `orderfood_user` WHERE user_phone=#{phone}
+    </select>
 </mapper>
