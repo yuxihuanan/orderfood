@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.orderfood.mapper.CuisineClassifyMapper">
+<mapper namespace="com.orderfood.mapper.CuisinrifyMapper">
 
-    <resultMap type="com.orderfood.pojo.OrderfoodCuisine" id = "order">
-        <id property ="cuisineId"  column = "cuisineid"/>
-        <result property="cuisineName" column = "cuisinename"/>
-        <result property="price" column = "price"/>
-        <result property="cuisineAcronym" column = "cuisineacronym"/>
-        <result property="cuisineIdentify" column = "cuisineidentify"/>
-        <result property="cClassifyid" column = "c_classifyId"/>
+    <resultMap type="com.orderfood.pojo.OrderfoodCuisine" id="foodCuisine">
+        <id property="cuisineid" column="cuisineId"/>
+        <result property="cuisinename" column="cuisineName"/>
+        <result property="price" column="price"/>
+        <result property="cuisineacronym" column="cuisineAcronym"/>
+        <result property="cuisineidentify" column="cuisineIdentify"/>
+        <result property="cClassifyid" column="c_classifyId"/>
         <association property="classify" javaType="com.orderfood.pojo.OrderfoodCuisineClassify">
-            <id property = "classifyid" column = "classifyId"/>
-            <result property ="classifyname" column = "classifyName"/>
+            <id property="classifyid" column="classifyId"/>
+            <result property="classifyname" column="classifyName"/>
         </association>
     </resultMap>
 
+
+    <resultMap id="ofc" type="com.orderfood.pojo.OrderfoodCuisineClassify" >
+        <id column="classifyId" property="classifyid"></id>
+        <result column="classifyName" property="classifyname"></result>
+    </resultMap>
+
+    <select id="SelectCuisineClassifyById" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
+    SELECT * FROM orderfood_cuisine_classify WHERE classifyName = #{classifyName}
+    </select>
 
     <select id="getAlls" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
                 SELECT * FROM orderfood_cuisine_classify
     </select>
 
+     <select id="getcaibyfen" resultMap="foodCuisine">
+     SELECT * FROM orderfood_cuisine_classify,orderfood_cuisine   WHERE orderfood_cuisine_classify.`classifyName` = #{classifyName} AND orderfood_cuisine.`cuisineId` = orderfood_cuisine_classify.`classifyId`
+     </select>
 
-    <select id="getAlldel" resultMap="order">
-       SELECT cuisineName as classifyname FROM orderfood_cuisine,orderfood_cuisine_classify WHERE  orderfood_cuisine.`c_classifyId` = orderfood_cuisine_classify.`classifyId`
-    </select>
-
-
-    <select id="SelectCuisineClassifyById" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
-    SELECT * FROM orderfood_cuisine_classify WHERE classifyName = #{classifyName}
-    </select>
 
     <select id="getAllbyId" resultType="com.orderfood.pojo.OrderfoodCuisineClassify">
         SELECT * FROM orderfood_cuisine_classify WHERE classifyId = #{classifyId}
     </select>
 
     <update id="upd">
-            UPDATE  orderfood_cuisine_classify SET classifyname  =#{classifyname} WHERE  classifyid  = #{classifyid}
+            UPDATE  orderfood_cuisine_classify SET classifyName=#{classifyname} WHERE  classifyId =#{classifyid}
     </update>
 
-    <delete id="del" parameterType="Integer">
-     DELETE orderfood_cuisine,orderfood_cuisine_classify FROM orderfood_cuisine LEFT JOIN orderfood_cuisine_classify ON
-     orderfood_cuisine.`c_classifyId`=orderfood_cuisine_classify.`classifyId` WHERE orderfood_cuisine_classify.`classifyId`=#{orderfood_cuisine.`c_classifyId`}
+    <delete id="delss" parameterType="Integer">
+     DELETE orderfood_cuisine,orderfood_cuisine_classify
+      FROM orderfood_cuisine
+      LEFT JOIN orderfood_cuisine_classify ON
+     orderfood_cuisine.`c_classifyId`=orderfood_cuisine_classify.`classifyId`
+     WHERE orderfood_cuisine_classify.`classifyId`=#{orderfood_cuisine.`c_classifyId`}
     </delete>
 
 
@@ -61,6 +68,17 @@
     <insert id="add">
         INSERT INTO orderfood_cuisine_classify VALUE(NULL,#{classifyname})
     </insert>
+
+
+
+    <select id="getAllCount" resultType="Integer">
+     	SELECT COUNT(1) FROM orderfood_cuisine_classify
+  </select>
+
+
+    <select id="getTiao" resultMap="ofc">
+     	SELECT * FROM orderfood_cuisine_classify LIMIT #{pageIndexss},#{pageSizess}
+  </select>
 
     <!--<insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">-->
         <!--INSERT INTO `orderfood_indent_details` VALUES(NULL,#{dCuisineid},#{},#{})-->

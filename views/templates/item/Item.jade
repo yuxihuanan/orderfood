@@ -1,7 +1,7 @@
 ﻿doctype transitional
 html(xmlns='http://www.w3.org/1999/xhtml')
   head
-    title 无标题页
+    title 收支流水
     link(rel='stylesheet', type='text/css', href='css/index.css')
   body.mian_bj
     .mian_top_01
@@ -25,19 +25,19 @@ html(xmlns='http://www.w3.org/1999/xhtml')
            span.cl 开始：
            p.mian_b1_sousuo
 
-             input(name='startDate', type='date')
+             input(name='startDate', class='date', type='date')
            span.cl 截止：
            p.mian_b1_sousuo
 
-             input(name='stopDate', type='date')
-          a(href='javaScript:void(0)', title='搜索',onclick='selectRunningData()')
+             input(name='stopDate', class='date', type='date')
+          a(href='javaScript:void(0)', title='搜索',onclick='selectRunningDataPages(1)')
             p.mian_b1_a3
+          input(type='button' id='export' onclick='exports()' value='打印')
           a(href='#', title='最后')
             p.mian_b1_a4
           a(href='#', title='下一页')
             p.mian_b1_a5
           p.mian_b1_list
-            | 1 2 3 4……
           a(href='#', title='上一页')
             p.mian_b1_a6
           a(href='#', title='最前')
@@ -62,101 +62,5 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 | 收支说明
       .dataprice
 
-  script(src='/js/jquery-3.3.1.min.js')
-  script(type='text/javascript').
-      $(function () {
-          $("#datastatement").css({
-              border: '0',
-              height: '22px',
-              width: '140px',
-              margin: '1px 0 0 0px',
-              background: 'transparent'
-          });
-          $("input").css({
-              border: '0',
-              height: '22px',
-              width: '140px',
-              margin: '1px 0 0 0px',
-              background: 'transparent'
-          });
-          $(".mian_b1_sousuo").css({
-              border: '0',
-              height: '22px',
-              width: '140px',
-              margin: '13px 0 0 30px',
-              float: 'left',
-              background: 'images/sousuo_28.gif'
-          });
-          $(".cl").css({height: '26px', width: '50px', float: 'left', margin: '15px 5px 5px 15px '});
-          selectRunningData();
-      });
-      function selectRunningData() {
-          var data = $("#data").serialize();
-          $(".mian_b_bg tr:gt(0)").remove();
-          $(".dataprice").empty();
-          var str = "";
-          $.ajax({
-              "url": "selectrunningData",
-              "data": data,
-              "dataType": "json",
-              "type": "post",
-              "success": function (result) {
-                  if (null != result) {
-                      var shou = 0;
-                      var zhi = 0;
-                      var zong = 0;
-                      var suan = "";
-                      $(result).each(function () {
-                          str += "<tr></tr>\n" +
-                              "                  <td>" + this.dataid + "</td>\n" +
-                              "                  <td>" + this.datastatement + "</td>\n" +
-                              "                  <td>" + this.dataprice + "</td>\n" +
-                              "                  <td>" + this.createdate + "</td>\n" +
-                              "                  <td>" + this.datacomment + "</td>" +
-                              "</tr>";
-                          if (this.datastatement == '收') {
-                              shou += this.dataprice;
-                          } else if (this.datastatement == '支') {
-                              zhi += this.dataprice;
-                          }
-                      });
-                      if ($("#datastatement").val().trim() == '收') {
-                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
-                          $(".dataprice").append(suan);
-                      }
-                      if ($("#datastatement").val().trim() == '支') {
-                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
-                          $(".dataprice").append(suan);
-                      }
-                      if ($("#datastatement").val().trim() == "") {
-                          suan += "<span id='shou'>总收入</span>：<span id='shouprice'>" + shou + "</span><br/>";
-                          suan += "<span id='zhi'>总支出</span>：<span id='zhiprice'>" + zhi + "</span><br/>";
-                          zong = shou - zhi;
-                          if (zong >= 0) {
-                              suan += "<span id='zong'>盈利</span>：<span id='zongprice'>" + zong + "</span><br/>";
-                              $(".dataprice").append(suan);
-                              $(".dataprice #zong").css({color: 'green', fontSize: '50px'});
-                          } else {
-                              suan += "<span id='zong'>亏&nbsp;损</span>：<span id='zongprice'>" + Math.abs(zong);
-                              +"</span><br/>";
-                              $(".dataprice").append(suan);
-                              $(".dataprice #zong").css({color: 'red', fontSize: '50px'});
-                          }
-                      }
-                      $(".dataprice #shou").css({color: 'blue', fontSize: '50px'});
-                      $(".dataprice #zhi").css({color: 'yellow', fontSize: '50px'});
-
-                      var startDate = new Date(Date.parse($("[name=startDate]").val()));
-                      var stopDate = new Date(Date.parse($("[name=stopDate]").val()));
-                      //alert((startDate>stopDate));
-                      // if(startDate>stopDate) {
-                      //     alert($("[name=startDate]").val());
-                      // }
-                      $(".mian_b_bg").append(str);
-                  }
-              },
-              "error": function () {
-                  alert("服务器异常！");
-              }
-          });
-      }
+script(src='/js/jquery-3.3.1.min.js')
+script(src='/js/Item.js')

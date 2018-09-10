@@ -1,11 +1,10 @@
 package com.orderfood.controller;
 
-import com.orderfood.config.CacheConfiguration;
 import com.orderfood.pojo.OrderfoodEmployee;
+import com.orderfood.pojo.OrderfoodJurisdiction;
 import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import com.alibaba.fastjson.*;
-import redis.clients.jedis.Jedis;
 
 import java.util.List;
 
@@ -25,8 +24,6 @@ public class LoginController {
     private ModelAndView model=new ModelAndView();
     @Autowired
     private RedisTemplate redisTemplate;
-
-    private CacheConfiguration cacheConfiguration;
 
     /**
      * 首页获取菜单
@@ -45,7 +42,6 @@ public class LoginController {
      */
     @RequestMapping(value = "shouye",produces = "text/plain;charset=utf-8")
 public ModelAndView index(HttpServletRequest request){
-        System.out.println(request.getSession().getAttribute("user"));
     if(request.getSession().getAttribute("user")==null) {
             model.setViewName("login");
     }else{
@@ -64,11 +60,11 @@ public ModelAndView index(HttpServletRequest request){
     @RequestMapping(value = "loginorder",produces = "text/plain;charset=utf-8")
     public String  Login(OrderfoodEmployee employee,HttpServletRequest request)
     {
-            OrderfoodEmployee employee1=login.AdminLogin(employee);
-            request.getSession().setAttribute("user",employee1);
-        //Jedis jedis=new Jedis();
-//        jedis.set("user",JSON.toJSONString(employee1));
-//        System.out.println(jedis.get("user"));
+        OrderfoodEmployee employee1=new OrderfoodEmployee();
+        if(employee!=null) {
+             employee1= login.AdminLogin(employee);
+            request.getSession().setAttribute("user", employee1);
+        }
             return JSON.toJSONString(employee1);
     }
 
@@ -79,7 +75,7 @@ public ModelAndView index(HttpServletRequest request){
      */
     @RequestMapping(value = "login",produces = "text/plain;charset=utf-8")
     public ModelAndView loginPage(HttpServletRequest request){
-        if(null==request.getSession().getAttribute("user")){
+        if(request.getSession().getAttribute("user")==null){
             model.setViewName("login");
         }else{
             model.setViewName("index");

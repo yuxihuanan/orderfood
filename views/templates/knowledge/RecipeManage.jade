@@ -1,104 +1,137 @@
 ﻿doctype transitional
 html(xmlns='http://www.w3.org/1999/xhtml')
-  head
-    title 无标题页
-    link(rel='stylesheet', type='text/css', href='../css/index.css')
-    script(language='javascript', type='text/javascript').
-      function click1(num){
-      if(document.getElementById(num).style.display=="block")
-      {
-      document.getElementById(num).style.display="none";
-      }
-      else
-      {
-      document.getElementById(num).style.display="block";
-      }
-      }
-  body.mian_bj
-    .mian_top_01
-      .mian_top_r
-      .mian_top_l
-      .mian_top_c
-        ul
-          li
-            a(href='Employlee.jade')
-              p
-                | 菜品配方
-      .mian_b
-        .mian_b1
-          a(href='#', title='删除')
-            p.mian_b1_a2
-          a(href='javascript:void(0)' onclick='add()') 添加
-        table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
-          tbody
-            tr#search(style='display: none;')
-              td(colspan='8', style='height: 35px; background-color: #DBDBDB;margin-left:20px')
-                select
-                  option
-                    | 性别
-                  option
-                    | 男
-                  option
-                    | 女
-                select
-                  option
-                    | 所属部门
-                  option
-                    | 软装部
-                  option
-                    | 人事部
-                select
-                  option
-                    | 状态
-                  option
-                    | 在职
-                  option
-                    | 离职
-                input.input_03(name='', type='text', value='工号、姓名、职位、手机')
-                input.input_03(name='', type='text', value='起始日期')
-                |  - 
-                input.input_03(name='', type='text', value='结束日期')
-              td(colspan='3', style='height: 35px; background-color: #DBDBDB;')
-                a(href='#', title='高级搜索')
-                  p.mian_b1_a8(onclick="click('search');")
-            tr
-              td.mian_b_bg_lm(width='3%')
-                input(name='', type='checkbox', value='')
-              td.mian_b_bg_lm(width='15%')
-                span
-                | 菜品名称
-              td.mian_b_bg_lm(width='15%')
-                span
-                | 配方声明
-              td.mian_b_bg_lm(width='15%')
-                span
-                | 配料剂量
-              td.mian_b_bg_lm(width='15%')
-                span
-                | 原料名称
-            each item in users
-                  tr
-                    td
-                      input(name='', type='checkbox', value='')
-                    td=item.cuisine.cuisinename
-                    td=item.recipecontent
-                    td=item.recipeweight
-                    td=item.stock.stockname
-            tr
-              td.mian_b_bg_lm(width='3%')
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 菜品名称
-              td.mian_b_bg_lm(width='5%')
-                span
-                | 配方声明
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 配方剂量
-              td.mian_b_bg_lm(width='10%')
-                span
-                | 原料名称
-      script.
-        function add() {
-            window.location.href='recipeadd';
+    head
+        title 无标题页
+        link(rel='stylesheet', type='text/css', href='/css/index.css')
+        script(type='text/javascript', src='/js/jquery.1.12.4.min.js')
+        script(language='javascript', type='text/javascript').
+            function click1(num) {
+                if (document.getElementById(num).style.display == "block") {
+                    document.getElementById(num).style.display = "none";
+                }
+                else {
+                    document.getElementById(num).style.display = "block";
+                }
+            }
+    body.mian_bj
+        .mian_top_01
+            .mian_top_r
+            .mian_top_l
+            .mian_top_c
+                ul
+                    li
+                        a(href='javaScript:void(0)')
+                            p= '《' + users.cuisinename + '》配方'
+            .mian_b
+                .mian_b1
+                    a(href='/cuisinecontroller/recipeadd/' + users.cuisineid, title='添加')
+                        p.mian_b1_a1
+                    a(href='javascript:void(0)', title='删除', onclick='delRecipe()')
+                        p.mian_b1_a2
+                table.mian_b_bg(width='100%', border='0', cellpadding='0', cellspacing='0')
+                    tbody
+                        tr#search(style='display: none;')
+                            td(colspan='8', style='height: 35px; background-color: #DBDBDB;margin-left:20px')
+                            td(colspan='3', style='height: 35px; background-color: #DBDBDB;')
+                                a(href='#', title='高级搜索')
+                                    p.mian_b1_a8(onclick="click('search');")
+                        tr
+                            td.mian_b_bg_lm(width='3%')
+                            td.mian_b_bg_lm(width='15%')
+                                span
+                                | 配方声明
+                            td.mian_b_bg_lm(width='15%')
+                                span
+                                | 配料剂量
+                            td.mian_b_bg_lm(width='15%')
+                                span
+                                | 配料名称
+                    if users.repice != null
+                        each item in users.repice
+                            tr
+                                td(style='display:none')=item.rRecipeid
+                                td
+                                    input(name='del', type='checkbox', value=item.rRecipeid)
+                                td=item.recipecontent
+                                td
+                                    input(class='weight' value=item.recipeweight * 1000  style='border:none;',type='text' )
+                                    if item.stock.stockunit == 'KG'
+                                        span
+                                        | &nbsp;g
+                                    else if item.stock.stockunit == 'L'
+                                        span
+                                        | &nbsp;ml
+                                td=item.stock.stockname
+
+
+script.
+    $(function () {
+        aa();
+        $(".weight").attr("disabled", "disabled");
+    });
+
+    function aa() {
+        $(".weight").parent().dblclick(function () {
+            $(this).find(" .weight").css({background: "#eeeeee"}).removeAttr("disabled");
+        });
+        $(".weight").attr("disabled", "disabled");
+        $(".weight").css({background: "transparent"}).blur(function () {
+            $(this).attr("disabled", "disabled").css({background: "transparent"});
+            var rRecipeid = $(this).parent().prev().prev().prev().html();
+            var recipeweight = $(this).val();
+            updRecipe(rRecipeid, recipeweight);
+        });
+    }
+    function updRecipe(rRecipeid, recipeweight) {
+        $.ajax({
+            "url": "/cuisinecontroller/updRecipe",
+            "dataType": "json",
+            "data": {
+                rRecipeid: rRecipeid,
+                recipeweight: recipeweight
+            },
+            "type": "post",
+            "success": function (result) {
+                if (result > 0) {
+                    alert("修改成功");
+                    $("tr").empty();
+                    var id = "#{users.cuisineid}";
+                    location.href = "/cuisinecontroller/goRecipe/" + id;
+                } else {
+                    alert("修改失败");
+                }
+            }
+        })
+    }
+    function delRecipe(){
+        var checkbox_value=[];
+        var msg = "确定删除吗？";
+        if(confirm(msg)==true){
+            $("input[name='del']:checked").each(function () {
+                checkbox_value.push($(this).val());
+            });
+            if(checkbox_value.length==0){
+                alert("请选择！")
+            }else{
+                $.ajax({
+                    "url": "/cuisinecontroller/delRecipe/"+checkbox_value,
+                    "dataType": "json",
+                    "type": "post",
+                    "success": function (result) {
+                        if (result > 0) {
+                            alert("删除成功");
+                            $("tr").empty();
+                            var id="#{users.cuisineid}";
+                            alert(id);
+                            location.href="/cuisinecontroller/goRecipe/"+id;
+                        } else {
+                            alert("删除失败");
+                        }
+                    }
+                })
+            }
+            return true;
+        }else{
+            return false;
         }
+    }

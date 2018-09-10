@@ -70,4 +70,18 @@ public interface StockService {
      * 批量删除
      */
     public int delesc(List<Object> obj);
+
+
+    /**
+     * 当前页的数据
+     * @param Start
+     * @param Size
+     * @return
+     */
+    List<OrderfoodStock> stockPage(String stockName,@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
+    /**
+     * 查询数据总条数
+     * @return
+     */
+    Integer stockCont(String stockName);
 }

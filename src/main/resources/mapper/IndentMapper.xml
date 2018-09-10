@@ -53,19 +53,27 @@
        <result property="iEmployeeid" column="i_employeeId"/>
    </association>
     </resultMap>
-
+    <!-- 查询全部-->
     <select id="getAll" resultMap="ds">
         SELECT * FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.`i_employeeId`=e1.employeeId
     </select>
-
+    <!-- 分页查询-->
+    <select id="indentPage" resultMap="ds">
+        SELECT * FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.`i_employeeId`=e1.employeeId LIMIT #{Start},#{Size}
+    </select>
+    <!-- 查询总条数-->
+    <select id="indentCount" resultType="java.lang.Integer" >
+        SELECT count(*) FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.`i_employeeId`=e1.employeeId
+    </select>
+    <!-- 条件查询-->
     <select id="getInfo" resultMap="ds" >
                 SELECT * FROM orderfood_indent i1,orderfood_table t1,orderfood_employee e1 WHERE i1.`i_tableId`=t1.`tableId` AND i1.indentCode=#{indentId} AND i1.`i_employeeId`=e1.employeeId
     </select>
-
+    <!-- 删除-->
     <delete id="delIndent">
         DELETE FROM orderfood_indent WHERE indentId=#{indentId}
     </delete>
-
+    <!-- 查询详情-->
     <select id="getDetails" resultMap="ids">
        SELECT * FROM orderfood_indent_details ds,orderfood_cuisine cs,orderfood_indent i WHERE ds.`d_cuisineId`=cs.`cuisineId` AND ds.`d_indentId`=#{id}
     </select>

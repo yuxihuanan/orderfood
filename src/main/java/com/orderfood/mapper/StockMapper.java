@@ -52,4 +52,17 @@ public interface StockMapper extends CommonMapper<OrderfoodStock> {
     public OrderfoodStock getId(@Param("id") int id);
 
     public int delesc(List<Object> obj);
+
+    /**
+     * 当前页的数据
+     * @param Start
+     * @param Size
+     * @return
+     */
+    List<OrderfoodStock> stockPage(@Param(value = "stockName") String stockName,@Param(value = "Start") Integer Start, @Param(value = "Size") Integer Size);
+    /**
+     * 查询数据总条数
+     * @return
+     */
+    Integer stockCont(@Param(value = "stockName") String stockName);
 }

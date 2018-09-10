@@ -77,7 +77,7 @@ dependencies {
     compile group: 'org.apache.activemq', name: 'activemq-pool', version: '5.15.5'
     // https://mvnrepository.com/artifact/cz.mallat.uasparser/uasparser
     compile group: 'cz.mallat.uasparser', name: 'uasparser', version: '0.6.2'
-
+    compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
 }
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {

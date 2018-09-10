@@ -6,6 +6,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(type='text/javascript', src='/js/jquery.1.12.4.min.js')
     script(type='text/javascript', src='/js/CuisineJs.js')
     link(rel='stylesheet', type='text/css', href='/css/index.css')
+    script(src='/js/pinyin.js')
+    script.
+        $(function () {
+           $("#ac").css({textAlign:"center"});
+            $(".caiadd").css({
+                marginTop:"20px"
+            });
+        });
   body.mian_bj
     .mian_top_01
       .mian_top_r
@@ -15,49 +23,41 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li
             a(href='javascript:void(0)' onclick='show()')
               p
-                | 菜品管理
+                | 添加菜品
       .mian_b
           form#submitForm(action='cuisineadd' method="POST" enctype="multipart/form-data")
-             table.mian_b_bg_xz(width='100%', border='0', cellpadding='0', cellspacing='0')
-                tbody
-                 tr
-                  td.mian_b_bg_lm(colspan='3') 添加菜品
-                  td
-                    input#picture(type='file',name='multipartFile')
-                    tr
-                      td
-                          img(id='pictureshow',width='100', height='100', style='vertical-align: text-top;')
-                      td  
-                      th 菜品名称：
-                      td
-                        input(id='cuisineName' name='cuisinename' type='text')
-                      td   
-                      th 价格：
-                      td
-                        input(id='price' name='price' type='text')
-                      td
-                      th 添加缩写
-                        input(id='cuisineacronym' name='cuisineacronym' type='text')
-                      td  
-                      th 选择菜类：
-                      td(colspan='1')
-                        input#Checkbox3( name='cuisineidentify' type='Radio' value='0')
-                        | 普通菜
-                        input#Checkbox4(name='cuisineidentify' type='Radio' value='1')
-                        | 热门菜
-                        input#Checkbox5(name='cuisineidentify' type='Radio' value='2')
-                        | 促销菜 
-                      td  
-                      th 菜品分类：
-                        select#cClassifyid(name='cClassifyid')
-                          each item in users
-                                  option(value='#{item.classifyid}')=item.classifyname
-                      td  
-                         div(align='center')
-                         button(type='submit') 提交
-                      td
-                         button(type='button' onclick='') 重置
-                      td
+              #ac
+                  .caiadd
+                     input#picture(type='file',name='multipartFile')
+                     img(id='pictureshow',width='100', height='100', style='vertical-align: text-top;')
+                  .caiadd
+                      span 菜品名称：
+                      input(id='cuisineName' name='cuisinename' type='text' onkeyup="pinyin()")
+                      input(id="shortName" name="cuisineacronym" style='display:none')
+                  .caiadd   
+                      span 价格：
+                      input(id='price' name='price' type='text')
+                  //.caiadd()
+                  //    span 添加缩写：
+                  //    input(id='cuisineacronym' name='cuisineacronym' type='text')
+                  //.caiadd
+                  //    span 选择菜类：
+                  //    label(for='putong') 普通菜
+                  //    input(id='putong' name='cuisineidentify' type='Radio' value='0')
+                  //    label(for='remen')  热门菜
+                  //    input(id='remen' name='cuisineidentify' type='Radio' value='1')
+                  //    label(for='cuxiao') 促销菜
+                  //    input(id='cuxiao' name='cuisineidentify' type='Radio' value='2')
+                  .caiadd
+                     span 菜品分类：
+                     select#cClassifyid(name='cClassifyid')
+                            each item in users
+                              option(value='#{item.classifyid}')=item.classifyname
+                  .caiadd  
+                     div(align='center')
+                     button(type='submit') 提交
+                     | &nbsp;&nbsp;
+                     button(type='button' onclick='') 重置
 
 
 

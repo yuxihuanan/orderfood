@@ -16,4 +16,9 @@ public interface CuisinrifyMapper extends CommonMapper<OrderfoodCuisineClassify>
     Integer upd(OrderfoodCuisineClassify orderfoodCuisineClassify);
     Integer delpiliang(Integer classifyid);
     List<OrderfoodCuisineClassify> getcaibyfen(String names);
+
+    //得到全部的分类个数
+    Integer getAllCount();
+    //分类得到数据
+    List<OrderfoodCuisineClassify> getTiao(@Param("pageIndexss")Integer pageIndexss,@Param("pageSizess")Integer pageSizess);
 }

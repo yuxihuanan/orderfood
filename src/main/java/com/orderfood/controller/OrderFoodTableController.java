@@ -112,7 +112,7 @@ public class OrderFoodTableController {
                 lists.add(item);
             }
         }
-       RedisUtil.getRu().set("lyx"+Zhuohao, JSON.toJSONString(lists));
+       String a=RedisUtil.getRu().set("lyx"+Zhuohao, JSON.toJSONString(lists));
        return JSON.toJSONString(0);
     }
     /**

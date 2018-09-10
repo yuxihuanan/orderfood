@@ -1,7 +1,9 @@
 package com.orderfood.service;
 
 
+import com.orderfood.pojo.CargoPage;
 import com.orderfood.pojo.OrderfoodRunningData;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -34,4 +36,18 @@ public interface RunningDataService {
      * @return
      */
     public List<OrderfoodRunningData> SelectRunningData(OrderfoodRunningData runningData);
+
+    /**
+     * 分页查询收支流水
+     * @param runningData
+     * @param page
+     * @return
+     */
+    public List<OrderfoodRunningData> SelectRunningDataPages(OrderfoodRunningData runningData, CargoPage page);
+
+    /**
+     * 查询收支流水总页数
+     * @return
+     */
+    public Integer RunningDataCount(OrderfoodRunningData runningData);
 }

@@ -31,4 +31,22 @@ VALUES
     #{stock.stockunit}
   ) ;
     </insert>
+
+    <select id="stockPage" resultType="com.orderfood.pojo.OrderfoodStock">
+        SELECT * FROM  `orderdb`.`orderfood_stock`
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="stockName!=null and stockName!=''">
+                and stockName LIKE CONCAT('%',#{stockName},'%')
+            </if>
+        </trim>
+          LIMIT #{Start},#{Size}
+    </select>
+    <select id="stockCont" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM `orderdb`.`orderfood_stock`
+        <trim prefix="where" prefixOverrides="and | or">
+        <if test="stockName!=null and stockName!=''">
+           and stockName LIKE CONCAT('%',#{stockName},'%')
+        </if>
+        </trim>
+    </select>
 </mapper>

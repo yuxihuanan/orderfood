@@ -31,8 +31,8 @@ public class CargoPage {
     }
     //获取总页数
     public int getTotalPageCount() {
-        totalPageCount=getTotalCount()/getPageSize();
-        return (totalCount/pageSize==0) ? totalPageCount:totalPageCount+1;
+        totalPageCount=(totalCount%pageSize==0) ? (totalCount/pageSize):(totalCount/pageSize+1);
+        return totalPageCount;
     }
 
     public void setTotalPageCount(int totalPageCount) {

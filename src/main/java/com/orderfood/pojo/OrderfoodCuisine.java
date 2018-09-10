@@ -2,6 +2,7 @@ package com.orderfood.pojo;
 
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 菜品表实体类
@@ -18,14 +19,14 @@ public class OrderfoodCuisine implements Serializable {
     private Integer cuisineidentify;//菜品标识
 
     private Integer cClassifyid;//所属菜品分类
+    @Transient
+    private List<OrderfoodRecipe> repice;
 
     @Transient
     private Integer count=0;// 小程序所需
 
     @Transient
     private OrderfoodCuisineClassify classify; //菜品分类
-
-
 
     public OrderfoodCuisineClassify getClassify() {
         return classify;
@@ -45,14 +46,21 @@ public class OrderfoodCuisine implements Serializable {
         this.picture = picture;
     }
 
-    public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid,OrderfoodCuisineClassify classify) {
+    public List<OrderfoodRecipe> getRepice() {
+        return repice;
+    }
+
+    public void setRepice(List<OrderfoodRecipe> repice) {
+        this.repice = repice;
+    }
+
+    public OrderfoodCuisine(Integer cuisineid, String cuisinename, Float price, String cuisineacronym, Integer cuisineidentify, Integer cClassifyid) {
         this.cuisineid = cuisineid;
         this.cuisinename = cuisinename;
         this.price = price;
         this.cuisineacronym = cuisineacronym;
         this.cuisineidentify = cuisineidentify;
         this.cClassifyid = cClassifyid;
-        this.classify = classify;
     }
 
     public OrderfoodCuisine() {

@@ -400,8 +400,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                             | 您好，
                                             span=user.employeename
                                             | ，欢迎登录！
-                                            a(href='die')
-                                                | [注销]
                     tr
                         td(width='190', valign='top', style='background: url(images/lift_bj_02.gif) repeat-y;', background='images/lift_bj_02.gif ')
                             .side(style='position: absolute;')
@@ -410,10 +408,10 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                             #dTitle(style='float:left; margin-left:30px;')
                                 img(src='images/shouye.jpg', alt='', style='margin-top:5px')
                             div(style='text-align: right; margin-right: 15px; float: right')
-                                img(src='images/middil_05.gif', alt='')
-                                a(href='login.jade')
+
+                                a(href='die')
                                     img(alt='', src='images/middil_06.gif')
-                            iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame', src='selectrunningDatapage')
+                            iframe#mainFrame(frameborder='0', style='margin-top: 15px; height: 631px;', width='1215', name='mainFrame')
                         td(width='5', valign='top', style='position: relative;', height='93%')
         div(style='text-align:center;')
     script(type = 'text/javascript').
@@ -440,20 +438,23 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                         }
                                         j++;
                                     }
-                                    str += "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show("+count+")\" onmouseout=\"hidden1("+count+")\">";
-                                    if (result[i].classify.menuurl=="") {
-                                        str += "<a href='index1' class='chang' onclick=\"changeIcon('" + result[i].classify.parentid + "','" + count + "')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
-                                    } else {
-                                        str += "<a href='" + result[i].classify.menuurl + "' onclick=\"changeIcon('" + result[i].classify.parentid + "','" + count + "')\" target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
-                                    }
-                                        str+="<span></span>\n" +
+                                    str = "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(" + count + ")\" onmouseout=\"hidden1(" + count + ")\">";
+                                        str += "<a href='javaScript:void(0)' target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                    str += "<span></span>\n" +
                                         "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
                                         "</a>" +
                                         "</li>";
+                                    $("#nav").append(str);
+                                    changeIcon(result[i].classify.parentid, count);
+                                    $("#xx" + count + "").click(function () {
+                                        $(this).next().slideDown("slow");
+                                        $(this).next().siblings("ul").slideUp("slow");
+                                    });
                                     count++;
-                                }
-                                $("#nav").append(str);
+                                    };
+                                $("#xx1").addClass("x_css");
                             }
+
                         },
                         "error": function () {
                             alert("服务器异常！");
@@ -461,8 +462,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     });
                     }
                     function changeIcon(parentid,count) {
-                        var str="<ul>";
                         $("#xx" + count + "~ul").remove();
+
                         $.ajax({
                             "url": "jump",
                             'data': {
@@ -472,6 +473,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                             "type": "post",
                             "success": function (result) {
                                             if(null!=result){
+                                                if (count == 1) {
+                                                    var str = "<ul>";
+                                                    $("#mainFrame").attr("src", "" + result[0].menuurl + "");
+                                                } else {
+                                                    var str = "<ul style='display: none'>";
+                                                }
                                                 for(var i=0;i<result.length;i++){
                                                     str+="<li class='xiala'>";
                                                     if(result[i].menuurl==null ||result[i].menuurl=='') {
@@ -483,14 +490,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                                     "<p class='gongneng'>" + result[i].menuname + "</p>"+
                                                     "</a>" +
                                                     "</li>";
-                                                    // $("#mainFrame").attr("src",result[i].menuurl);
-                                                    // return;
                                                 }
                                                 str+="</ul>";
                                                 $("#xx" + count + "").after(str);
+
                                             }
                                 $(".gongneng:not(:last)").css({borderBottom: "1px #eeeeee solid"});
-                                $("#xx" + count + "~ul").slideDown("slow").siblings("ul").slideUp("slow");
+
                             },
                             "error": function () {
                                 alert("服务器异常！");

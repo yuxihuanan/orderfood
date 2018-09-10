@@ -73,4 +73,14 @@ public class IndentServiceImpl implements IndentService {
         return 1;
     }
 
+    @Override
+    public List<OrderfoodIndentDetails> indentPage(Integer Start, Integer Size) {
+        return indentMapper.indentPage(Start,Size);
+    }
+
+    @Override
+    public Integer indentCount() {
+        return indentMapper.indentCount();
+    }
+
 }

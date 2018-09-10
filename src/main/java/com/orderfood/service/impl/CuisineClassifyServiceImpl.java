@@ -79,4 +79,14 @@ public class CuisineClassifyServiceImpl implements CuisineClassifyService {
     public List<OrderfoodCuisineClassify> getcaibyfen(String names) {
         return cuisineClassifyMapper.getcaibyfen(names);
     }
+
+    @Override
+    public Integer getAllCount() {
+        return cuisineClassifyMapper.getAllCount();
+    }
+
+    @Override
+    public List<OrderfoodCuisineClassify> getTiao(Integer pageIndexss, Integer pageSizess) {
+        return cuisineClassifyMapper.getTiao(pageIndexss,pageSizess);
+    }
 }
