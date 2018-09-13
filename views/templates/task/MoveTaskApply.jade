@@ -124,8 +124,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                 "type": "post",
                                 "success": function (result) {
                                     $("#tb tr:gt(0)").remove();
+                                    var sum=0.0;
                                     $(result).each(function () {
-                                        $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stockid + "'></td><td id='" + this.stockid + "'>" + this.stockid + "</td><td><input class='stockName' value='" + this.stockname + "' style='border:white'></td><td>" + this.stockweight + "</td><td>" + this.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stockid + "," + this.stockweight + ")'>删除</a></td></tr>")
+                                        if (this.cargoweight == null) {
+                                            sum = 0.0;
+                                        } else {
+                                            sum = this.cargoweight;
+                                        }
+                                        $(".mian_b_bg").append("<tr style='border-top:1px #DFE2E6 solid'><td><input type='checkbox' class='ladl'  name='indent' value='" + this.stock.stockid + "'></td><td id='" + this.stock.stockid + "'>" + this.stock.stockid + "</td><td><input class='stockName' value='" + this.stock.stockname + "' style='border:white'></td><td>" +sum+ "</td><td>" + this.stock.stockunit + "</td><td width='10%'><a href='javascript:void(0)' class='stockName3' onclick='bianji(" + this.stock.stockid + ")'>编辑</a> &nbsp;| &nbsp;<a href='javascript:void(0)' onclick='delll(" + this.stock.stockid + "," + sum + ")'>删除</a></td></tr>")
                                     });
                                     aa();
                                     $(".stockName").attr("disabled", "disabled");

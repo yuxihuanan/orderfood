@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.orderfood.mapper.StockMapper">
+    <resultMap id="OrderfoodCargo" type="com.orderfood.pojo.OrderfoodCargo">
+        <id property="cargoid" column="cargoId"/>
+        <result property="cStockid" column="c_stockId"/>
+        <result property="cargoprice" column="cargoPrice"/>
+        <result property="cargoweight" column="cargoWeight"/>
+        <result property="weightCount" column="weightCount"/>
+        <association property="stock" javaType="com.orderfood.pojo.OrderfoodStock">
+            <id property="stockid" column="stockId"/>
+            <result property="stockname" column="stockName"/>
+            <result property="stockweight" column="stockWeight"/>
+            <result property="stockunit" column="stockUnit"/>
+        </association>
+    </resultMap>
+
+
     <select id="getInfo" resultType="com.orderfood.pojo.OrderfoodStock">
       SELECT * FROM orderfood_stock WHERE stockName LIKE CONCAT('%',#{stockName},'%')
     </select>
@@ -27,16 +42,16 @@ VALUES
   (
     NULL,
     #{stock.stockname},
-    #{stock.stockweight},
+    '0.0',
     #{stock.stockunit}
   ) ;
     </insert>
 
-    <select id="stockPage" resultType="com.orderfood.pojo.OrderfoodStock">
-        SELECT * FROM  `orderdb`.`orderfood_stock`
+    <select id="stockPage" resultMap="OrderfoodCargo">
+        SELECT * FROM orderfood_stock s LEFT JOIN orderfood_cargo c ON s.`stockId`=c.`c_stockId`
         <trim prefix="where" prefixOverrides="and | or">
             <if test="stockName!=null and stockName!=''">
-                and stockName LIKE CONCAT('%',#{stockName},'%')
+                and s.stockName LIKE CONCAT('%',#{stockName},'%')
             </if>
         </trim>
           LIMIT #{Start},#{Size}

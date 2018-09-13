@@ -10,7 +10,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         }
         function InsertStock() {
             var stockName = $("#stockName").val();
-            var stockWeight = $("#stockWeight").val();
             var stockUnit = $("#stockUnit").val();
             var a="";
             // if (stockUnit='千克'){
@@ -22,7 +21,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 "url": "InsertStock",
                 "data":{
                     'stockname':stockName,
-                    'stockweight':stockWeight,
+                    'stockweight':0,
                     'stockunit':stockUnit
                 },
                 "dataType": "json",
@@ -32,7 +31,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         alert("添加成功");
                         //location.href="stocklogin";
                         $("#stockName").val("");
-                        $("#stockWeight").val("");
                         $("#stockUnit").val("");
 
                     } else {
@@ -72,12 +70,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               td(width='55%')
                 input#stockName.input_01(type='text', name='cuisineName')
               td(width='35%')  
-            tr
-              td  
-              td(valign='top') 原料总量：
-              td
-                input#stockWeight.input_01(type='text', name='price')
-              td
             tr
               td
               td(valign='top') 原料单位：

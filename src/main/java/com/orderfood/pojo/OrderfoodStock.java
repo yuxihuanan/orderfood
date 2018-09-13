@@ -1,5 +1,6 @@
 package com.orderfood.pojo;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -13,6 +14,16 @@ public class OrderfoodStock implements Serializable {
     private Float stockweight;//单位数
 
     private String stockunit;//单位kg/L
+
+    public OrderfoodCargo getOrderfoodCargo() {
+        return orderfoodCargo;
+    }
+
+    public void setOrderfoodCargo(OrderfoodCargo orderfoodCargo) {
+        this.orderfoodCargo = orderfoodCargo;
+    }
+    @Transient
+    private OrderfoodCargo orderfoodCargo;//库存对象
 
     public OrderfoodStock(Integer stockid, String stockname, Float stockweight, String stockunit) {
         this.stockid = stockid;
