@@ -78,7 +78,8 @@ public ModelAndView index(HttpServletRequest request){
         if(request.getSession().getAttribute("user")==null){
             model.setViewName("login");
         }else{
-            model.setViewName("index");
+            OrderfoodEmployee employee=(OrderfoodEmployee) request.getSession().getAttribute("user");
+                model.setViewName("index");
             model.addObject("user", request.getSession().getAttribute("user"));
         }
         return model;

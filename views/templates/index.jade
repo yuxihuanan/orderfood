@@ -419,47 +419,53 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         jurisdiction();
                      });
                     function jurisdiction() {
+
                       var str = "";
                       var count = 1;
                       var roleId = '#{user.eRoleid}';
-                      $.ajax({
-                        "url": "indexMenu",
-                         'data': 'roleId=' + roleId,
-                        "dataType": "json",
-                        "type": "post",
-                        "success": function (result) {
-                            if (result != null) {
-                                for (var i = 0; i < result.length - 1; i++) {
+                      // if(roleId==8){
+                      //     location.href="/OrdrTableShow";
+                      // }else {
+                          $.ajax({
+                              "url": "indexMenu",
+                              'data': 'roleId=' + roleId,
+                              "dataType": "json",
+                              "type": "post",
+                              "success": function (result) {
+                                  if (result != null) {
+                                      for (var i = 0; i < result.length - 1; i++) {
 
-                                    for (var j = i + 1; j < result.length;) {
-                                        if (result[i].classify.parentid == result[j].classify.parentid) {
-                                            result.splice(j, 1);
-                                            continue;
-                                        }
-                                        j++;
-                                    }
-                                    str = "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(" + count + ")\" onmouseout=\"hidden1(" + count + ")\">";
-                                        str += "<a href='javaScript:void(0)' target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
-                                    str += "<span></span>\n" +
-                                        "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
-                                        "</a>" +
-                                        "</li>";
-                                    $("#nav").append(str);
-                                    changeIcon(result[i].classify.parentid, count);
-                                    $("#xx" + count + "").click(function () {
-                                        $(this).next().slideDown("slow");
-                                        $(this).next().siblings("ul").slideUp("slow");
-                                    });
-                                    count++;
-                                    };
-                                $("#xx1").addClass("x_css");
-                            }
+                                          for (var j = i + 1; j < result.length;) {
+                                              if (result[i].classify.parentid == result[j].classify.parentid) {
+                                                  result.splice(j, 1);
+                                                  continue;
+                                              }
+                                              j++;
+                                          }
+                                          str = "<li class=\"y_css\" id=\"xx" + count + "\" onmouseover=\"show(" + count + ")\" onmouseout=\"hidden1(" + count + ")\">";
+                                          str += "<a href='javaScript:void(0)' target=\"mainFrame\" onmousedown=\"javascript:pr('xx" + count + "')\">";
+                                          str += "<span></span>\n" +
+                                              "<p class=\"icon_0" + count + "\">" + result[i].classify.parentname + "</p>" +
+                                              "</a>" +
+                                              "</li>";
+                                          $("#nav").append(str);
+                                          changeIcon(result[i].classify.parentid, count);
+                                          $("#xx" + count + "").click(function () {
+                                              $(this).next().slideDown("slow");
+                                              $(this).next().siblings("ul").slideUp("slow");
+                                          });
+                                          count++;
+                                      }
+                                      ;
+                                      $("#xx1").addClass("x_css");
+                                  }
 
-                        },
-                        "error": function () {
-                            alert("服务器异常！");
-                        }
-                    });
+                              },
+                              "error": function () {
+                                  alert("服务器异常！");
+                              }
+                          });
+                      //}
                     }
                     function changeIcon(parentid,count) {
                         $("#xx" + count + "~ul").remove();

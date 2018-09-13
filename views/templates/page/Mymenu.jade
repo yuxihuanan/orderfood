@@ -75,12 +75,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             }
             var sss=[];
             for (var i = 0; i < meumId.length; i++) {
-                sss.push({
-                    id:meumId[i],
-                    name:meumName[i],
-                    num:amount[i],
-                    price:price[i]
-                })
+                if(meumId[i]!=null||meumId[i]!=""){
+                    sss.push({
+                        id: meumId[i],
+                        name: meumName[i],
+                        num: amount[i],
+                        price: price[i]
+                    })
+                }
             }
             console.info(sss)
             $.ajax({
