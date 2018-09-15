@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * 订单查询删除
- */
-
 @Repository
 public interface OrderfoodIndentMapper extends CommonMapper<OrderfoodIndent> {
     /**

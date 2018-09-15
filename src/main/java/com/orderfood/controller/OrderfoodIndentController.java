@@ -50,7 +50,7 @@ public class OrderfoodIndentController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "getDetail", produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "getDetail/{id}", produces = "text/plain;charset=utf-8")
     public String getDetail(@PathVariable("id") Integer id) {
         return JSON.toJSONString(indentService.getDetails(id));
     }
@@ -69,6 +69,7 @@ public class OrderfoodIndentController {
 
     @RequestMapping("tail")
     public ModelAndView tail() {
+        System.out.print("1");
         ModelAndView mode = new ModelAndView("item/IndentDetail");
         return mode;
     }

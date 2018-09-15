@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.orderfood.mapper.OrderfooddaoMapper">
-
-    <select id="getAll" resultType="com.orderfood.pojo.OrderfoodEmployeeRole">
-      SELECT * FROM orderfood_employee_role
+    <resultMap id="orderJurisdiction" type="com.orderfood.pojo.OrderfoodJurisdiction">
+        <result property="jRoleid" column="j_roleId"/>
+        <result property="jClassifyid" column="j_classifyId"/>
+        <association property="orderMenu" javaType="com.orderfood.pojo.OrderfoodMenu">
+            <id property="menuid" column="menuId"/>
+            <result property="menuname" column="menuName"/>
+            <result property="parentid" column="parentId"/>
+            <result property="menuurl" column="menuUrl"/>
+            <result property="parentname" column="parentName"/>
+        </association>
+        <association property="orderRole" javaType="com.orderfood.pojo.OrderfoodEmployeeRole">
+            <id property="roleid" column="roleId"/>
+            <result property="rolename" column="roleName"/>
+        </association>
+    </resultMap>
+    <select id="getAll" resultMap="orderJurisdiction">
+      SELECT * FROM orderfood_menu m1,orderfood_employee_role r1,orderfood_jurisdiction j1 WHERE m1.`parentId`=j1.`j_classifyId` AND r1.`roleId`=j1.`j_roleId`
     </select>
     <select id="getMen" resultType="com.orderfood.pojo.OrderfoodMenu">
         SELECT * FROM orderfood_menu where parentid=#{id}

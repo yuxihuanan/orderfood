@@ -36,16 +36,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       function getDes() {
           var a = location.search.substring(4,1000);
           $.ajax({
-              'url':'getDetail/'+a,
+              'url':'getDetail/'+parseInt(a),
               'dataType':'JSON',
               'type':'post',
               'success':function (result) {
                   $(result).each(function () {
+                      alert(result)
                       $(".mian_b_bg_xz").append("<tr><td>"+this.detailsid+"</td><td>"+this.cuisine.cuisinename+"</td><td>"+this.detailscount+"</td><td>"+this.indent.totalmoney+"</td><td><a href='javascript:void(0)' onclick='back()'>返回</a></td></tr>")
                   })
               }
           })
       }
-
-
-
