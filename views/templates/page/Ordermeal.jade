@@ -35,7 +35,51 @@ html
                "dataType": "json",
                "type": "post",
               "success": function(data) {
-                  window.location.href="MymenmShow";
+                   var stoclnam=[];
+                   var recipecontent=[];
+                   if(data==0){
+                       window.location.href = "MymenmShow";
+                   }else{
+                       $(data).each(function () {
+                           stoclnam.push(this.stockName);
+                           recipecontent.push(this.recipeContent);
+                       })
+                       var noStock=[];
+                       for (var i = 0;i <= stoclnam.length;i++){
+                           if(noStock.length==0){
+                               noStock.push(stoclnam[i]);
+                               continue;
+                           }
+                           for (var j = 0; j < noStock.length; j++) {
+                               if (noStock[j] == stoclnam[i])    {
+                                   break;
+                               } else if (j == noStock.length - 1) {
+                                   noStock.push(stoclnam[i]);
+                               }
+                           }
+                       }
+                       var recipe=[];
+                       for (var i = 0; i <= recipecontent.length; i++) {
+                           if (recipe.length == 0) {
+                               recipe.push(recipecontent[i]);
+                               continue;
+                           }
+                           for (var j = 0; j < recipecontent.length; j++) {
+                               if (recipe[j] == recipecontent[i]) {
+                                   break;
+                               } else if (j == recipe.length - 1) {
+                                   recipe.push(recipecontent[i]);
+                               }
+                           }
+                       }
+                       for (var i = 0; i <recipe.length ; i++) {
+                           if(recipe[i]==null||recipe==""){
+                               recipe[i]
+                           }
+                       }
+                       alert("由于没有" +noStock+recipe + "这几道菜不能弄了")
+                       window.location.href="OrdermealShowTwo";
+                   }
               }
 
            })

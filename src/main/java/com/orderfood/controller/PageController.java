@@ -18,9 +18,10 @@ public class PageController {
     }
 
     @RequestMapping("orderDetails")
-    public ModelAndView goOrderDetails(String tableId){
+    public ModelAndView goOrderDetails(String tableId,String indentId){
         ModelAndView model=new ModelAndView("page/orderdetails");
         model.addObject("tableId",tableId);
+        model.addObject("indentId",indentId);
         return model;
     }
 }

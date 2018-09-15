@@ -3,6 +3,7 @@ package com.orderfood.service.impl;
 import com.orderfood.mapper.CuisineMapper;
 import com.orderfood.mapper.OrderFoodTableMapper;
 import com.orderfood.mapper.OrderfoodTableCuisineMapper;
+import com.orderfood.pojo.NoOrder;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodIndentDetails;
 import com.orderfood.pojo.OrderfoodTable;
@@ -51,5 +52,10 @@ public class CashierServiceImpl implements CashierService {
     @Override
     public Integer UpdateOrder(OrderfoodIndentDetails indentDetails) {
         return null;
+    }
+
+    @Override
+    public List<NoOrder> getNoOrder(List<Object> list) {
+        return orderFoodTableMapper.getNoOrder(list);
     }
 }

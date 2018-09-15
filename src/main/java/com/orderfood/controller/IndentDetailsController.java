@@ -102,6 +102,7 @@ public class IndentDetailsController {
     @ResponseBody
     @RequestMapping("dayinIndent")
     public String dayinIndent(String indentId,int sta){
+        System.out.println(JSON.toJSONString(indentDetailsService.getDetailByTableId(indentId)));
         PrintUtil.print(indentDetailsService.getDetailByTableId(indentId),sta);
         return "1";
     }

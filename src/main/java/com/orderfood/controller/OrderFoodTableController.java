@@ -3,6 +3,7 @@ package com.orderfood.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.orderfood.config.RedisUtil;
+import com.orderfood.pojo.NoOrder;
 import com.orderfood.pojo.OrderfoodCuisine;
 import com.orderfood.pojo.OrderfoodTable;
 import com.orderfood.pojo.myMeum;
@@ -96,17 +97,26 @@ public class OrderFoodTableController {
         return "redirect:/OrdermealShow?statu=0&indentId=0";
     }
 
+    List<Object> infos;
     /**
      * 将菜单传入redis
      * @param
      * @return
      */
     @ResponseBody
-    @RequestMapping("AddMyMeum")
+    @RequestMapping(value = "AddMyMeum",produces = "text/plain;charset=utf-8")
     public String MymenuShow(String jsonArray){
+        infos=new ArrayList<Object>();
        String info=RedisUtil.getRu().get("lyx"+Zhuohao);
        List<myMeum> list=JSONObject.parseArray(info,myMeum.class);
        List<myMeum> lists=JSONObject.parseArray(jsonArray,myMeum.class);
+        for (int i = 0; i < lists.size() ; i++) {
+            infos.add(lists.get(i).getId());
+        }
+        List<NoOrder> noOrders=cashierService.getNoOrder(infos);
+        if(noOrders.size()!=0){
+            return JSON.toJSONString(noOrders);
+        }
         if(list!=null){
             for (myMeum item : list){
                 lists.add(item);
@@ -220,8 +230,8 @@ public class OrderFoodTableController {
     @RequestMapping("OrdermealShowTwo")
     public ModelAndView OrdermealShowTwo(Integer statu,Integer indentId){
         ModelAndView modelAndView=new ModelAndView("page/Ordermeal");
-        this.statu=statu;
-        this.indentId=indentId;
+//        this.statu=statu;
+       this.indentId=indentId;
         List<OrderfoodCuisine> list=cashierService.getOrderfoodCuisineAll();
         String info=RedisUtil.getRu().get("lyx"+Zhuohao);
         List<myMeum> lists=JSONObject.parseArray(info,myMeum.class);
@@ -233,7 +243,9 @@ public class OrderFoodTableController {
         }
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        modelAndView.addObject("indentId",indentId);
+        System.out.println(indentId);
+        System.out.println(this.indentId);
+        modelAndView.addObject("indentId",this.indentId);
         return modelAndView;
     }
 }

@@ -22,7 +22,9 @@ function init(url,tableId) {
         "data":"tableId="+tableId,
         "dataType":"JSON",
         "success":function (result) {
-            inId=result[0].indent.indentid;
+            if(result.length!=0){
+                inId=result[0].indent.indentid;
+            }
             $(result).each(function () {
                 indentId=this.dIndentid;
                 $(".content").append("<table class=\"order_list\">" +
@@ -312,7 +314,7 @@ function dele(index){
  * @param tableId
  */
 function jie(tableId){
-    location.href="orderDetails?tableId="+tableId;
+    location.href="orderDetails?tableId="+tableId+"&indentId="+inId;
 }
 
 /**
@@ -433,7 +435,6 @@ function dayin(indentId){
         "data":"indentId="+indentId+"&sta=1",
         "dataType":"JSON",
         "success":function () {
-            alert(1);
             u();
         },
         "error":function () {

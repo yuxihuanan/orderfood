@@ -12,7 +12,7 @@ public class PrintUtil {
     public static void print(OrderfoodIndent orderfoodIndent,int st){
         PrintWriter out=null;
         try {
-            out=new PrintWriter("E:/订单/"+orderfoodIndent.getIndentcode()+".txt");
+            out=new PrintWriter("F:/订单/"+orderfoodIndent.getIndentcode()+".txt");
             //1是下单
             if(st==1){
                 out.println("****************XXX餐厅订单详情*****************");

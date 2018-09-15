@@ -45,9 +45,10 @@ function zhifubao(){
 
 function xianjin(tableId){
     $.ajax({
-        "url":"dayinIndent",
-        "type":"post",
-        "data":"tableId="+tableId+"&sta=0",
+        "url":"IndentDetails/dayinIndent",
+        "type":"get",
+        "data":"indentId="+tableId+"&sta=0",
+        "dataType":"JSON",
         "success":function () {
             u();
         },
