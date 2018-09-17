@@ -1,18 +1,18 @@
 package com.orderfood.controller;
 
+
+import com.alibaba.fastjson.JSONObject;
 import com.orderfood.pojo.OrderfoodEmployee;
-import com.orderfood.pojo.OrderfoodJurisdiction;
 import com.orderfood.pojo.OrderfoodMenu;
 import com.orderfood.service.LoginService;
+import com.orderfood.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.fastjson.*;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class LoginController {
     private LoginService login;
     private ModelAndView model=new ModelAndView();
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisUtils redisUtils;
 
     /**
      * 首页获取菜单
@@ -42,12 +42,12 @@ public class LoginController {
      */
     @RequestMapping(value = "shouye",produces = "text/plain;charset=utf-8")
 public ModelAndView index(HttpServletRequest request){
-    if(request.getSession().getAttribute("user")==null) {
+    if(redisUtils.get("user")==null) {
             model.setViewName("login");
     }else{
-        model.addObject("user",request.getSession().getAttribute("user"));
+        OrderfoodEmployee employeeList=JSONObject.parseObject(redisUtils.get("user").toString(),OrderfoodEmployee.class);
+        model.addObject("user",employeeList);
         model.setViewName("index");
-
     }
     return model;
 }
@@ -61,11 +61,15 @@ public ModelAndView index(HttpServletRequest request){
     public String  Login(OrderfoodEmployee employee,HttpServletRequest request)
     {
         OrderfoodEmployee employee1=new OrderfoodEmployee();
+        OrderfoodEmployee employeeList=null;
         if(employee!=null) {
              employee1= login.AdminLogin(employee);
-            request.getSession().setAttribute("user", employee1);
+             if(employee1!=null) {
+                 redisUtils.set("user", JSON.toJSONString(employee1));
+                 employeeList=JSONObject.parseObject(redisUtils.get("user").toString(),OrderfoodEmployee.class);
+             }
         }
-            return JSON.toJSONString(employee1);
+            return JSON.toJSONString(employeeList);
     }
 
     /**
@@ -75,12 +79,12 @@ public ModelAndView index(HttpServletRequest request){
      */
     @RequestMapping(value = "login",produces = "text/plain;charset=utf-8")
     public ModelAndView loginPage(HttpServletRequest request){
-        if(request.getSession().getAttribute("user")==null){
+        OrderfoodEmployee employeeList=JSONObject.parseObject(redisUtils.get("user").toString(),OrderfoodEmployee.class);
+        if(employeeList==null){
             model.setViewName("login");
         }else{
-            OrderfoodEmployee employee=(OrderfoodEmployee) request.getSession().getAttribute("user");
                 model.setViewName("index");
-            model.addObject("user", request.getSession().getAttribute("user"));
+            model.addObject("user", employeeList);
         }
         return model;
     }
@@ -91,7 +95,7 @@ public ModelAndView index(HttpServletRequest request){
      */
     @RequestMapping(value = "die",produces = "text/plain;charset=utf-8")
     public ModelAndView die(HttpServletRequest request){
-            request.getSession().removeAttribute("user");
+            redisUtils.delete("user");
             model.setViewName("login");
             return model;
     }

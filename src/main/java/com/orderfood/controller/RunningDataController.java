@@ -5,6 +5,7 @@ import com.orderfood.pojo.OrderfoodEmployee;
 import com.orderfood.pojo.OrderfoodRunningData;
 import com.orderfood.service.RunningDataService;
 import com.orderfood.service.impl.RunningDataServiceImpl;
+import com.orderfood.util.RedisUtils;
 import jxl.CellView;
 import jxl.SheetSettings;
 import jxl.Workbook;
@@ -36,7 +37,8 @@ public class RunningDataController {
     private ModelAndView model=new ModelAndView();
     @Autowired
     private RunningDataService runningDataService;
-
+    @Autowired
+    private RedisUtils redisUtils;
     /**
      * 跳转收支流水页面
      * @param request
@@ -44,7 +46,7 @@ public class RunningDataController {
      */
     @RequestMapping(value = "selectrunningDatapage", produces = "text/plain;charset=utf-8")
     private ModelAndView selectRunningDatapage(HttpServletRequest request){
-        OrderfoodEmployee employee=(OrderfoodEmployee) request.getSession().getAttribute("user");
+        OrderfoodEmployee employee=(OrderfoodEmployee) redisUtils.get("user");
         if(null==employee){
             model.setViewName("login");
         }else{

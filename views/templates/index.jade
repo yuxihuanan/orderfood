@@ -423,9 +423,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                       var str = "";
                       var count = 1;
                       var roleId = '#{user.eRoleid}';
-                      // if(roleId==8){
-                      //     location.href="/OrdrTableShow";
-                      // }else {
+                       if(roleId==8){
+                           location.href="/OrdrTableShow";
+                       }else {
                           $.ajax({
                               "url": "indexMenu",
                               'data': 'roleId=' + roleId,
@@ -465,7 +465,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                   alert("服务器异常！");
                               }
                           });
-                      //}
+                      }
                     }
                     function changeIcon(parentid,count) {
                         $("#xx" + count + "~ul").remove();
