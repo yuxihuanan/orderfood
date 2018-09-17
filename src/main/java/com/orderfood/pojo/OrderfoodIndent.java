@@ -22,6 +22,16 @@ public class OrderfoodIndent implements Serializable {
 
     private Float totalmoney;//订单总金额
 
+    private Integer statu;
+
+    public Integer getStatu() {
+        return statu;
+    }
+
+    public void setStatu(Integer statu) {
+        this.statu = statu;
+    }
+
     @Transient
     private List<OrderfoodIndentDetails> details; //订单详情
 

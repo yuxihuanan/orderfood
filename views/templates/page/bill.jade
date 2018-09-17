@@ -1,0 +1,34 @@
+doctype transitional
+html(xmlns='http://www.w3.org/1999/xhtml')
+    head
+        meta(name='viewport', content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no')
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        link(href='css/reset.css', type='text/css', rel='stylesheet')
+        link(href='css/style.css', type='text/css', rel='stylesheet')
+        title 账单
+    body
+        header
+            a.return(href='#')
+                img(src='img/return.png')
+            h1 账单
+        each item in dindan
+            table.bill
+                tbody
+                    tr
+                        td.td_1=item.iTableid
+                        if item.statu==0
+                            td.td_2
+                                a 未付款
+                        else
+                            td.td_2
+                                a 已付款
+                    tr
+                        td.td_1=item.createdate
+                        td.td_2.state=item.totalmoney
+        .footer-space
+        footer
+            ul
+                li
+                    a(href='OrdrTableShow')
+                        img(src='img/footer_01.png')
+                        p 台 况

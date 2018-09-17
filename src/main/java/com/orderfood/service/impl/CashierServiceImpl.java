@@ -3,10 +3,7 @@ package com.orderfood.service.impl;
 import com.orderfood.mapper.CuisineMapper;
 import com.orderfood.mapper.OrderFoodTableMapper;
 import com.orderfood.mapper.OrderfoodTableCuisineMapper;
-import com.orderfood.pojo.NoOrder;
-import com.orderfood.pojo.OrderfoodCuisine;
-import com.orderfood.pojo.OrderfoodIndentDetails;
-import com.orderfood.pojo.OrderfoodTable;
+import com.orderfood.pojo.*;
 import com.orderfood.service.CashierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +54,15 @@ public class CashierServiceImpl implements CashierService {
     @Override
     public List<NoOrder> getNoOrder(List<Object> list) {
         return orderFoodTableMapper.getNoOrder(list);
+    }
+
+    @Override
+    public Integer updateDingDan(Integer indentId) {
+        return orderFoodTableMapper.updateDingDan(indentId);
+    }
+
+    @Override
+    public List<OrderfoodIndent> getDinDan() {
+        return orderFoodTableMapper.getDindan();
     }
 }

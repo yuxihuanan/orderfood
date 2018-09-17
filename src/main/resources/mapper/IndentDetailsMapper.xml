@@ -114,7 +114,7 @@
     </resultMap>
 
     <insert id="addIndent" parameterType="com.orderfood.pojo.OrderfoodIndent">
-        INSERT INTO `orderfood_indent` VALUES(NULL,#{indentcode},#{iTableid},DEFAULT,#{indentcomment},#{totalmoney},null,1,#{userId})
+        INSERT INTO `orderfood_indent` VALUES(NULL,#{indentcode},#{iTableid},DEFAULT,#{indentcomment},#{totalmoney},null,1,#{userId},0)
     </insert>
     
     <insert id="addDetails" parameterType="com.orderfood.pojo.OrderfoodIndentDetails">

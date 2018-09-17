@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.orderfood.mapper.OrderFoodTableMapper">
+    <resultMap id="ds" type="com.orderfood.pojo.OrderfoodIndent">
+        <id property="indentid" column="indentId"/>
+        <result property="indentcode" column="indentCode"/>
+        <result property="iTableid" column="i_tableId"/>
+        <result property="createdate" column="createDate"/>
+        <result property="indentcomment" column="indentComment"/>
+        <result property="totalmoney" column="totalmoney"/>
+        <result property="netmoney" column="netmoney"/>
+        <result property="iEmployeeid" column="i_employeeId"/>
+        <result property="statu" column="statu"></result>
+    </resultMap>
     <select id="getNoOrder" resultType="com.orderfood.pojo.NoOrder">
         SELECT s.`stockName`,t1.recipeContent FROM `orderfood_cargo` c,`orderfood_stock` s,`orderfood_recipe` t1
         WHERE c.`c_stockId`=s.`stockId` AND s.`stockId`=t1.r_stockId AND c.`c_stockId`=t1.r_stockId
@@ -12,5 +23,11 @@
             #{item}
         </foreach>
         AND c.c_stockId=t.`r_stockId`AND t.`recipeWeight`>=c.cargoWeight)
+    </select>
+    <update id="updateDingDan">
+        UPDATE orderfood_indent SET statu = 1 WHERE indentId =#{indentId}
+    </update>
+    <select id="getDindan" resultMap="ds">
+        select * from orderfood_indent
     </select>
 </mapper>

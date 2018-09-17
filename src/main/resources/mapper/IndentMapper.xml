@@ -11,6 +11,7 @@
             <result property="totalmoney" column="totalmoney"/>
             <result property="netmoney" column="netmoney"/>
             <result property="iEmployeeid" column="i_employeeId"/>
+            <result property="statu" column="statu"></result>
             <association property="orderfoodTable" javaType="com.orderfood.pojo.OrderfoodTable">
                 <id property="tableid" column="tableId"/>
                 <result property="tablenumber" column="tableNumber"/>

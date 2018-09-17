@@ -3,10 +3,7 @@ package com.orderfood.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.orderfood.config.RedisUtil;
-import com.orderfood.pojo.NoOrder;
-import com.orderfood.pojo.OrderfoodCuisine;
-import com.orderfood.pojo.OrderfoodTable;
-import com.orderfood.pojo.myMeum;
+import com.orderfood.pojo.*;
 import com.orderfood.service.CashierService;
 import com.orderfood.service.CuisineClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,13 @@ public class OrderFoodTableController {
     private Integer Zhuohao;  //桌号
     private Integer statu;   //状态
     private Integer indentId; //订单编号
+    @RequestMapping("billshow")
+    public ModelAndView billshow(){
+        ModelAndView modelAndView=new ModelAndView("page/bill");
+        List<OrderfoodIndent> info=cashierService.getDinDan();
+        modelAndView.addObject("dindan",info);
+        return modelAndView;
+    }
     @RequestMapping("OrdrTableShow")
     /**
      * @Author LYX
@@ -243,9 +247,13 @@ public class OrderFoodTableController {
         }
         modelAndView.addObject("foodCuisine",list);
         modelAndView.addObject("zhuanhao",false);
-        System.out.println(indentId);
-        System.out.println(this.indentId);
         modelAndView.addObject("indentId",this.indentId);
         return modelAndView;
+    }
+    @ResponseBody
+    @RequestMapping("updateDingDan/{indentId}")
+    public String updateDingDan(@PathVariable("indentId") Integer indentId) {
+        int res=cashierService.updateDingDan(indentId);
+        return JSON.toJSONString(res);
     }
 }

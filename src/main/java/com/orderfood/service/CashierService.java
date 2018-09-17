@@ -1,10 +1,7 @@
 package com.orderfood.service;
 
 
-import com.orderfood.pojo.NoOrder;
-import com.orderfood.pojo.OrderfoodCuisine;
-import com.orderfood.pojo.OrderfoodIndentDetails;
-import com.orderfood.pojo.OrderfoodTable;
+import com.orderfood.pojo.*;
 
 import java.util.List;
 
@@ -51,4 +48,17 @@ public interface CashierService {
      * @return
      */
     public List<NoOrder> getNoOrder(List<Object> list);
+
+    /**
+     * 结账修改订单
+     * @param indentId
+     * @return
+     */
+    public Integer updateDingDan(Integer indentId);
+
+    /**
+     * 获取订单
+     * @return
+     */
+    public List<OrderfoodIndent> getDinDan();
 }

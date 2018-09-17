@@ -46,7 +46,7 @@ function zhifubao(){
 function xianjin(tableId){
     $.ajax({
         "url":"IndentDetails/dayinIndent",
-        "type":"get",
+        "type":"post",
         "data":"indentId="+tableId+"&sta=0",
         "dataType":"JSON",
         "success":function () {
@@ -58,7 +58,10 @@ function xianjin(tableId){
     });
     /*location.href="http://localhost:8080/index";*/
 }
-
 function u(){
     location.href="OrderTableUpadte/0";
+}
+function updatadindan(tableId) {
+    alert(tableId)
+    location.href="updateDingDan/"+tableId;
 }

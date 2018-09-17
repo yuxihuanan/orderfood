@@ -27,6 +27,7 @@ public class PrintUtil {
             for (OrderfoodIndentDetails details : orderfoodIndent.getDetails()){
                 out.print("0"+number+"\t"+details.getCuisine().getCuisinename()+"\t"+details.getCuisine().getPrice()+"\t"+details.getDetailscount()+"\t"
                         +(details.getCuisine().getPrice())*(details.getDetailscount()));
+                number++;
             }
             out.println();
             out.println("---------------------------------------总价:"+orderfoodIndent.getTotalmoney()+"￥");
