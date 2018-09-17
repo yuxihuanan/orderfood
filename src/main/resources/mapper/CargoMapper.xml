@@ -52,13 +52,22 @@
         SELECT COUNt(1) FROM orderfood_cargo cargo
         INNER JOIN orderfood_stock stock
         ON cargo.`c_stockId`=stock.`stockId`
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="stockname!=null and stockname!=''">
+                and stockName LIKE CONCAT('%',#{stockname},'%')
+            </if>
+        </trim>
     </select>
     <!--模糊条件查分页所需数据-->
     <select id="findLike" resultMap="OrderfoodCargo">
         SELECT * FROM orderfood_cargo cargo
         INNER JOIN orderfood_stock stock
         ON cargo.`c_stockId`=stock.`stockId`
-        WHERE stockName LIKE CONCAT('%',#{stockname},'%')
+        <trim prefix="where" prefixOverrides="and | or">
+        <if test="stockname!=null and stockname!=''">
+         and stockName LIKE CONCAT('%',#{stockname},'%')
+        </if>
+        </trim>
         LIMIT #{Start},#{Size}
     </select>
     <!--模糊条件查出的数据总条数-->

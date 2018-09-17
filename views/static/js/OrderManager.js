@@ -3,7 +3,6 @@ var CargoPageCount=0;
 var CargoLikepageCount=0;
 var pageNow=0;
 $(function () {
-    pageCount();
     CargoPageInfo(page);
     next();
     previous();
@@ -50,7 +49,10 @@ function CargoPageInfo(pageno) {
     $("#pageInfo tr:gt(0)").remove();
     $(".mian_b1_list div:eq("+(pageNow-1)+")").css("background-color","gray").siblings().css("background-color","#D3D3D3");
     $.ajax({
-        "url":"ShowCargoInfo/"+pageno,
+        "url":"findLike/"+pageno,
+        "data":{
+            'stockname':$("input[name=stockname]").val()
+        },
         "dataType":"json",
         "type":"post",
         "success":function (result) {
@@ -67,6 +69,8 @@ function CargoPageInfo(pageno) {
                     "  <td class=\"mian_b_icon_01\" width=\"5%\"><a href=\"javascript:;\" onclick='toEditor("+this.cargoid+")'>编辑</a></td>\n" +
                     "</tr>");
             })
+            $(".mian_b1_list").html(" ");
+            pageCount();
         }
     })
 }
@@ -119,6 +123,9 @@ function last() {
 function pageCount() {
     $.ajax({
         "url":"getPageCount",
+        "data":{
+            'stockname':$("input[name=stockname]").val()
+        },
         "dataType":"json",
         "type":"post",
         "success":function (result) {
@@ -136,8 +143,7 @@ function pageCount() {
 }
 function selClick() {
     $("a[title='搜索']").click(function () {
-
-        showLikeCargoInfo(page);
+        CargoPageInfo(page);
     })
 }
 function showLikeCargoInfo(pageno) {

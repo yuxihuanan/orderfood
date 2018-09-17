@@ -72,7 +72,7 @@ public interface CargoService {
      * 查询数据总条数
      * @return
      */
-    Integer findNewCont();
+    Integer findNewCont(@Param(value = "stockname") String stockname);
     /**
      * 根据原料名模糊查询数据
      * @param stockname

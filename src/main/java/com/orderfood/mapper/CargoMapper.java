@@ -73,7 +73,7 @@ public interface CargoMapper extends CommonMapper<OrderfoodCargo> {
      * 查询数据总条数
      * @return
      */
-    Integer findNewCont();
+    Integer findNewCont(@Param(value = "stockname") String stockname);
 
     /**
      * 根据原料名模糊查询数据

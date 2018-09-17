@@ -27,37 +27,12 @@ public class CargoController {
     @RequestMapping("toCargo")
     public ModelAndView toCargo(){
         ModelAndView mav=new ModelAndView("client/OrderManager");
-        /*OrderfoodCargo cargo2=new OrderfoodCargo();
-        cargo2.setCargoid(13);
-        cargo2.setcStockid(26);
-        cargo2.setCargoprice(111.00f);
-        cargo2.setCargoweight(22.22f);
-        List<Object> list=new ArrayList<Object>();
-        list.add(24);
-        list.add(25);
-        list.add(26);
-        OrderfoodCargo cargo=new OrderfoodCargo();
-        cargo.setcStockid(30);
-        cargo.setCargoprice(111.00f);
-        cargo.setCargoweight(22.22f);
-        cargoService.delCargo(list);
-        OrderfoodRunningData runningData=new OrderfoodRunningData();
-        runningData.setDataprice(100.00f);
-        runningData.setDatacomment("买了1kg黄瓜");
-
-        mav.addObject("ins",cargoService.InsertInfo(cargo,runningData));
-        mav.addObject("upd",cargoService.UpdateCargo(cargo2));
-        mav.addObject("single",cargoService.SelectCargo(10));*/
-        mav.addObject("cargo",cargoService.getAllCargo());
-        /*mav.addObject("sum",cargoService.selRawStock(26));*/
         return mav;
     }
 
     @ResponseBody
     @RequestMapping("updCargo")
     public String updCargo(OrderfoodCargo cargo){
-        System.out.println(cargo.getCargoprice());
-        System.out.println(cargo.getCargoweight());
         cargo.setCargoid(cargid);
         return JSON.toJSONString(cargoService.UpdateCargo(cargo));
     }
@@ -78,14 +53,23 @@ public class CargoController {
         return mav;
     }
 
+    /**
+     * 原料入库
+     * @param cargo
+     * @param runningData
+     * @return
+     */
     @ResponseBody
     @RequestMapping("insCargo")
     public String insCargo(OrderfoodCargo cargo, OrderfoodRunningData runningData){
-        System.out.println(cargo.getCargoprice());
-        System.out.println(runningData.getDataprice());
         return JSON.toJSONString(cargoService.InsertInfo(cargo,runningData));
     }
 
+    /**
+     * 批量删除
+     * @param arrays
+     * @return
+     */
     @ResponseBody
     @RequestMapping("mandel")
     public String manDel(@RequestParam(value = "arrays[]") Object[] arrays){
@@ -98,12 +82,17 @@ public class CargoController {
         return JSON.toJSONString(cargoService.delCargo(list));
     }
 
+
     @ResponseBody
     @RequestMapping(value = "toCargoEditor",produces = "text/html;charset=UTF-8")
     public String toCargoEditor(){
         return JSON.toJSONString(cargoService.SelectCargo(cargid));
     }
 
+    /**
+     * 修改页面跳转
+     * @return
+     */
     @RequestMapping("ToCargoEditor")
     public ModelAndView ToCargoEditor(){
         ModelAndView mav=new ModelAndView("client/OrderShow");
@@ -112,6 +101,11 @@ public class CargoController {
 
     private Integer cargid=0;
 
+    /**
+     * 根据id修改信息
+     * @param Cargoid
+     * @return
+     */
     @RequestMapping("toEditor/{Cargoid}")
     public String toEditor(@PathVariable(value = "Cargoid") Integer Cargoid){
         this.cargid=Cargoid;
@@ -119,43 +113,57 @@ public class CargoController {
         return "redirect:/CargoController/ToCargoEditor";
     }
 
-    @ResponseBody
+    /**
+     * 获取分页数据
+     * @param pageNow
+     * @return
+     */
+    /*@ResponseBody
     @RequestMapping(value = "ShowCargoInfo/{pageNow}",produces = "text/html;charset=UTF-8")
     public String ShowCargoInfo(@PathVariable(value = "pageNow") String pageNow){
         //获取当前页数
         //获取数据总条数
         System.out.println(pageNow);
-        Integer totalCount=cargoService.findNewCont();
+        //Integer totalCount=cargoService.findNewCont();
         CargoPage cargoPage=null;
         List<OrderfoodCargo> list=new ArrayList<OrderfoodCargo>();
         Integer pageNo=Integer.parseInt(pageNow);
         if(pageNo>0){
             cargoPage=new CargoPage(pageNo,totalCount);
-            list=this.cargoService.findNewsPage(cargoPage.getStartPos(),cargoPage.getPageSize());
+                list=this.cargoService.findNewsPage(cargoPage.getStartPos(),cargoPage.getPageSize());
         }else {
             cargoPage =new CargoPage(1,totalCount);
             list=this.cargoService.findNewsPage(cargoPage.getStartPos(),cargoPage.getPageSize());
         }
         System.out.println(JSON.toJSONString(list));
         return JSON.toJSONString(list);
-    }
+    }*/
 
+    /**
+     * 获取总页数
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getPageCount")
-    public String getPageCount(){
-        Integer totalCount=cargoService.findNewCont();
+    public String getPageCount(@Param(value = "stockname") String stockname){
+        Integer totalCount=cargoService.findNewCont(stockname);
         Integer Count=totalCount/8;
         Integer PageCount=0;
         PageCount=totalCount%8==0?Count:Count+1;
         return JSON.toJSONString(PageCount);
     }
+
+    /**
+     * 模糊查分页数据
+     * @param stockname
+     * @param pageNow
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "findLike/{pageNow}",produces = "text/html;charset=UTF-8")
     public String findLike(@Param(value = "stockname") String stockname,@PathVariable(value = "pageNow") String pageNow){
         //获取当前页数
         //获取数据总条数
-        System.out.println(stockname);
-        System.out.println(pageNow);
         Integer totalCount=cargoService.findLikeCount(stockname);
         CargoPage cargoPage=null;
         List<OrderfoodCargo> list=new ArrayList<OrderfoodCargo>();
@@ -171,6 +179,12 @@ public class CargoController {
         System.out.println(JSON.toJSONString(list));
         return JSON.toJSONString(list);
     }
+
+    /**
+     * 模糊查总条数
+     * @param stockname
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getLikePageCount")
     public String getLikePageCount(@Param(value = "stockname") String stockname){
@@ -181,10 +195,14 @@ public class CargoController {
         return JSON.toJSONString(PageCount);
     }
 
+    /**
+     * 总重量
+     * @param stockname
+     * @return
+     */
     @ResponseBody
     @RequestMapping("weightSum/{stockname}")
     public ModelAndView weightSum(@Param(value = "stockname") String stockname){
-        System.out.println(stockname);
         ModelAndView mav=new ModelAndView("client/OrderClass");
         mav.addObject(cargoService.weightSum(stockname));
         return mav;

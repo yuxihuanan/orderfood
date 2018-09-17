@@ -91,8 +91,8 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public Integer findNewCont() {
-        return cargoMapper.findNewCont();
+    public Integer findNewCont(@Param(value = "stockname") String stockname) {
+        return cargoMapper.findNewCont(stockname);
     }
 
     @Override

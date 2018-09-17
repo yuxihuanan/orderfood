@@ -37,6 +37,7 @@ function updCargo() {
         "success":function (result) {
             if(result>0){
                 alert("修改成功");
+                location.href="toCargo";
             }else {
                 alert("数据库异常");
             }
