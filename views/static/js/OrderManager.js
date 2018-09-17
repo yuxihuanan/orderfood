@@ -3,6 +3,7 @@ var CargoPageCount=0;
 var CargoLikepageCount=0;
 var pageNow=0;
 $(function () {
+    pageCount();
     CargoPageInfo(page);
     next();
     previous();
@@ -69,8 +70,10 @@ function CargoPageInfo(pageno) {
                     "  <td class=\"mian_b_icon_01\" width=\"5%\"><a href=\"javascript:;\" onclick='toEditor("+this.cargoid+")'>编辑</a></td>\n" +
                     "</tr>");
             })
-            $(".mian_b1_list").html(" ");
-            pageCount();
+            if($("input[name=stockname]").val().length!=0){
+                $(".mian_b1_list").html(" ");
+                pageCount();
+            }
         }
     })
 }
