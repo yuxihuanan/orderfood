@@ -80,7 +80,7 @@ public ModelAndView index(HttpServletRequest request){
     @RequestMapping(value = "login",produces = "text/plain;charset=utf-8")
     public ModelAndView loginPage(HttpServletRequest request){
         OrderfoodEmployee employeeList=JSONObject.parseObject(redisUtils.get("user").toString(),OrderfoodEmployee.class);
-        if(employeeList==null){
+        if(null==employeeList){
             model.setViewName("login");
         }else{
                 model.setViewName("index");
