@@ -12,6 +12,6 @@ public interface DaoService {
     List<OrderfoodMenu> getMen(Integer id);//根据id查询管理员权限
     List<OrderfoodMenu> getNot(Integer id);//根据id查询非管理员权限
     //删除权限
-    int del(@Param(value = "j_roleId") Integer j_roleId,@Param(value = "j_classifyId") Integer j_classifyId);
+    int del(@Param(value = "j_classifyId") Integer j_classifyId);
     int insJurisdiction(OrderfoodJurisdiction orderfoodJurisdiction);//添加权限
 }

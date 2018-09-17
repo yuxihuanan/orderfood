@@ -14,24 +14,23 @@ import java.util.List;
 public class DaoServiceImpl implements DaoService {
 
     @Autowired
-    OrderfooddaoMapper orderfooddaoMapper;
+    private OrderfooddaoMapper orderfooddaoMapper;
     @Override
     public List<OrderfoodEmployeeRole> getAll() {
         return orderfooddaoMapper.getAll();
     }
 
     @Override
-    public List<OrderfoodMenu> getMen(@Param("id") Integer id) {
+    public List<OrderfoodMenu> getMen(Integer id) {
         return orderfooddaoMapper.getMen(id);
     }
-
     @Override
-    public List<OrderfoodMenu> getNot(@Param("id") Integer id) {
+    public List<OrderfoodMenu> getNot(Integer id) {
         return orderfooddaoMapper.getNot(id);
     }
     @Override
-    public int del(Integer id, Integer menuid) {
-        return orderfooddaoMapper.del(id,menuid);
+    public int del(Integer menuid) {
+        return orderfooddaoMapper.del(menuid);
     }
 
     @Override

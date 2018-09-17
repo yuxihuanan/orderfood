@@ -36,10 +36,8 @@ public class DaoController {
     @ResponseBody
     @RequestMapping(value = "getMen/{id}", produces = "text/plain;charset=utf-8")
     public String getInfo(@PathVariable("id") Integer id) {
-
         return JSON.toJSONString(daoService.getMen(id));
     }
-
     /**
      * 根据id查询非有权限
      * @param id
@@ -54,14 +52,13 @@ public class DaoController {
 
     /**
      * 删除权限
-     * @param j_roleid
      * @param j_classifyid
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "del/{j_roleid}/{j_classifyid}", produces = "text/plain;charset=utf-8")
-    public String del(@PathVariable("j_roleid")Integer j_roleid ,@PathVariable("j_classifyid") Integer j_classifyid){
-        return JSON.toJSONString(daoService.del(j_roleid,j_classifyid));
+    @RequestMapping(value = "del/{j_classifyid}", produces = "text/plain;charset=utf-8")
+    public String del(@PathVariable("j_classifyid") Integer j_classifyid){
+        return JSON.toJSONString(daoService.del(j_classifyid));
     }
 
     /**

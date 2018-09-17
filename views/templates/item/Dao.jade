@@ -19,8 +19,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         div
           select.sel( onchange='getMen()')
               each item in dao
-                option(value='#{item.roleid}')
-                   =item.rolename
+                 if item.roleid!=0
+                   option(value='#{item.roleid}')
+                     =item.rolename
         table.mian_b_bg_xz(width='100%', border='1', cellpadding='0', cellspacing='0')
     script.
         $(function () {
@@ -37,14 +38,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 'dataType':'JSON',
                 'type':'post',
                 'success':function (result) {
-                    var str = "<tr><td>已有权限</td><td>操作</td></tr>"
+                    var str = "<tr><td>已有权限</td><td style='width: 100px'><a href='javascript:void(0)' onclick='aaa()'>确定</a></td></tr>"
                     $(result).each(function () {
-                        str+="<tr><td>"+this.menuname+"</td><td><a href='javascript:void(0)' onclick='del("+id+","+this.menuid+")'>删除</a></td></tr>"
+                        str+="<tr style='float:left;border: white 0px'><td style='padding-left: 50px'><input type='checkbox' name='check' value='"+this.jClassifyid+"'/>"+this.classify.menuname+"</td></tr>"
                     })
                     $(".mian_b_bg_xz").append(str)
+
                 }
             })
-                getNot();
+            getNot();
         }
         /*
         *查询未有权限
@@ -57,60 +59,70 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 'dataType': 'JSON',
                 'type': 'post',
                 'success': function (result) {
-                    var str = "<tr><td>未有权限</td><td>操作</td></tr>"
+                    var str = "<tr><td>未有权限</td><td style='width: 100px'><a href='javascript:void(0)' onclick='bbb()'>确定</a></td></tr>"
                     $(result).each(function () {
-                        str += "<tr><td>" + this.menuname + "</td><td><a href='javascript:void(0)' onclick='insert("+id+","+this.menuid+")'>编辑</a></td></tr>"
+                        str += "<tr style='float: left;border: white 0px'><td style='padding-left: 50px'><input type='checkbox' value='"+this.jClassifyid+"' name='check'>" + this.classify.menuname + "</td></tr>"
                     })
                     $(".mian_b_bg_xz").append(str)
+                    //alert(this.jClassifyid)
                 }
-            })
 
+            })
         }
         /*
         * 删除权限
         */
-        function del(id,menuid) {
-            $.ajax({
-                'url': 'del/'+parseInt(id)+'/'+parseInt(menuid),
-                'dataType': 'JSON',
-                'type': 'post',
-                'success':
-                    function (result) {
-                        if (result > 0) {
-                            alert("删除成功")
-                            getMen();
-                        } else {
-                            alert("删除失败")
-                        }
-                }
-            })
-
-        }
-        /**
-        *添加权限
-         */
-        function insert(id, menuid) {
-            $.ajax({
-                'url': 'insJurisdiction' ,
-                'dataType': 'JSON',
-                'data':{
-                    jRoleid:parseInt(id),
-                    jClassifyid:parseInt(menuid)
-                },
-                'type': 'post',
-                'success':
-                    function (result) {
-                        if (result > 0) {
-                            alert("添加成功")
-                            getMen();
-                        } else {
-                            alert("添加失败")
-                        }
-                    }
-            })
+        function aaa() {
+            var str= $("input[name='check']:checked").val();
+                del(str);
+            }
+        function bbb() {
+            var id = $(".sel").val();
+            var str = $("input[name='check']:checked").val();
+            insert(id,str);
         }
 
+            function del(menuid) {
+                $.ajax({
+                    'url': 'del/' + parseInt(menuid),
+                    'dataType': 'JSON',
+                    'type': 'post',
+                    'success':
+                        function (result) {
+                            if (result > 0) {
+                                alert("删除成功")
+                                getMen();
+                            } else {
+                                alert("删除失败")
+                            }
+                        }
+                })
 
+            }
+
+            /**
+             *添加权限
+             */
+            function insert(id, menuid) {
+                $.ajax({
+                    'url': 'insJurisdiction',
+                    'dataType': 'JSON',
+                    'data': {
+                        jRoleid: parseInt(id),
+                        jClassifyid: parseInt(menuid)
+                    },
+                    'type': 'post',
+                    'success':
+                        function (result) {
+                            if (result > 0) {
+                                alert("添加成功")
+                                getMen();
+                            } else {
+                                alert("添加失败")
+                            }
+                        }
+                })
+        }
 
 
 
