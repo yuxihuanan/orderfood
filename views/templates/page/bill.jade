@@ -8,23 +8,23 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         title 账单
     body
         header
-            a.return(href='#')
+            a.return(href='OrdrTableShow')
                 img(src='img/return.png')
             h1 账单
         each item in dindan
             table.bill
                 tbody
                     tr
-                        td.td_1=item.iTableid
+                        td.td_1="桌号："+item.iTableid
                         if item.statu==0
                             td.td_2
-                                a 未付款
+                                a(href="DianDanshow/"+item.indentid) 未付款
                         else
                             td.td_2
-                                a 已付款
+                                a(href="DianDanshow/"+item.indentid) 已付款
                     tr
-                        td.td_1=item.createdate
-                        td.td_2.state=item.totalmoney
+                        td.td_1="时间："+item.createdate
+                        td.td_2.state="总价："+item.totalmoney
         .footer-space
         footer
             ul

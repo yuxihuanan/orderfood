@@ -12,6 +12,21 @@
         <result property="iEmployeeid" column="i_employeeId"/>
         <result property="statu" column="statu"></result>
     </resultMap>
+    <resultMap id="ids" type="com.orderfood.pojo.OrderfoodIndentDetails">
+    <id property="detailsid" column="detailsId"/>
+    <result property="dCuisineid" column="d_cuisineId"/>
+    <result property="detailscount" column="detailsCount"/>
+    <result property="dIndentid" column="d_indentId"/>
+    <association property="cuisine" javaType="com.orderfood.pojo.OrderfoodCuisine">
+        <id property="cuisineid" column="cuisineId"/>
+        <result property="cuisinename" column="cuisineName"/>
+        <result property="price" column="price"/>
+        <result property="cuisineacronym" column="cuisineAcronym"/>
+        <result property="cuisineidentify" column="cuisineIdentify"/>
+        <result property="cClassifyid" column="c_classifyId"/>
+    </association>
+    </resultMap>
+
     <select id="getNoOrder" resultType="com.orderfood.pojo.NoOrder">
         SELECT s.`stockName`,t1.recipeContent FROM `orderfood_cargo` c,`orderfood_stock` s,`orderfood_recipe` t1
         WHERE c.`c_stockId`=s.`stockId` AND s.`stockId`=t1.r_stockId AND c.`c_stockId`=t1.r_stockId
@@ -29,5 +44,8 @@
     </update>
     <select id="getDindan" resultMap="ds">
         select * from orderfood_indent
+    </select>
+    <select id="getDinDanXiangQin" resultMap="ids">
+        SELECT * FROM `orderfood_indent_details` oid,`orderfood_cuisine` oc WHERE oc.`cuisineId`=oid.`d_cuisineId` AND oid.`d_indentId` = #{id}
     </select>
 </mapper>

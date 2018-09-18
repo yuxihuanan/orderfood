@@ -28,6 +28,17 @@ public class OrderFoodTableController {
     private Integer Zhuohao;  //桌号
     private Integer statu;   //状态
     private Integer indentId; //订单编号
+    @RequestMapping("DianDanshow/{id}")
+    public ModelAndView DinDanshow(@PathVariable(value = "id") Integer id){
+        ModelAndView modelAndView=new ModelAndView("page/DinDan");
+        List<OrderfoodIndentDetails> info=cashierService.getDinDanXiangQin(id);
+        modelAndView.addObject("dindan",info);
+        return modelAndView;
+    }
+    /**
+     * 跳转到查看订单页面
+     * @return
+     */
     @RequestMapping("billshow")
     public ModelAndView billshow(){
         ModelAndView modelAndView=new ModelAndView("page/bill");
@@ -35,6 +46,7 @@ public class OrderFoodTableController {
         modelAndView.addObject("dindan",info);
         return modelAndView;
     }
+
     @RequestMapping("OrdrTableShow")
     /**
      * @Author LYX

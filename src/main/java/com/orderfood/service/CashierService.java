@@ -61,4 +61,8 @@ public interface CashierService {
      * @return
      */
     public List<OrderfoodIndent> getDinDan();
+    /**
+     * 查看订单详情
+     */
+    public List<OrderfoodIndentDetails> getDinDanXiangQin(Integer id);
 }

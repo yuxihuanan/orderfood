@@ -65,4 +65,9 @@ public class CashierServiceImpl implements CashierService {
     public List<OrderfoodIndent> getDinDan() {
         return orderFoodTableMapper.getDindan();
     }
+
+    @Override
+    public List<OrderfoodIndentDetails> getDinDanXiangQin(Integer id) {
+        return orderFoodTableMapper.getDinDanXiangQin(id);
+    }
 }

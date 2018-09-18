@@ -1,0 +1,41 @@
+html(xmlns='http://www.w3.org/1999/xhtml')
+    head
+    body
+        h1
+        meta(name='viewport', content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no')
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        link(href='../css/reset.css', type='text/css', rel='stylesheet')
+        link(href='../css/style.css', type='text/css', rel='stylesheet')
+        title 我的菜单
+        header
+            a.return(href='/billshow')
+                img(src='../img/return.png')
+            h1 订单详情
+            p
+        p.state 未下单
+        .content
+           each item in dindan
+            table.order_list
+                tbody
+                    tr
+                        td.name=item.cuisine.cuisinename
+                        td
+                            span
+                        td
+                    tr
+                        td=item.cuisine.price
+                        td.discount
+                        td.m_num
+                            span
+                            span.amount=item.detailscount
+                            span
+                    tr
+                        td.edit
+                            a(href='#')
+                                img(src='../img/edit.png')
+                            | 少辣
+                        td
+                        td
+        .footer-space
+        .bottom
+                a.right.orange_btn(href='/OrdrTableShow') 返回
