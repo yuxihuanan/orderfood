@@ -177,6 +177,7 @@ function showLikeCargoInfo(pageno) {
     })
     LikepageCount();
 }
+
 function LikepageCount() {
     $(".mian_b1_list").html(" ");
     $.ajax({
@@ -193,8 +194,6 @@ function LikepageCount() {
                 $(".mian_b1_list").append("<div style='float: left;width: 20px;padding-left:14px;margin-left:1px ;margin-right:4px;margin-top:11px;height: 25px;line-height: 26px;border: 1px solid gray;border-radius:19px;'><a href='javascript:;' onclick='CargoPageInfo("+(i+1)+")'>"+(i+1)+"</a></div>");
                 $(".mian_b1_list div:eq(0)").css("background-color","gray");
             }
-
         }
-
     })
 }

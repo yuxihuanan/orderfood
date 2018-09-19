@@ -35,7 +35,7 @@
     </insert>
     <!--添加入库数据-->
     <insert id="InsertCargo" parameterType="com.orderfood.pojo.OrderfoodCargo">
-        INSERT INTO orderfood_cargo VALUES(NULL,#{cargoprice},#{cargoweight},#{cStockid})
+        INSERT INTO orderfood_cargo VALUES(NULL,#{cStockid},#{cargoprice},#{cargoweight})
     </insert>
     <!--获取单位-->
     <select id="getUnitl" resultType="com.orderfood.pojo.OrderfoodStock">

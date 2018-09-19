@@ -23,32 +23,43 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           tbody
             tr
               td.mian_b_bg_lm(width='5%')  
-              td.mian_b_bg_lm(colspan='3') 新建入库
-            tr
-              td  
-              td(width='15%', valign='top') 原料单价
-              td(width='60%')
-                input#textfield.input_01(type='text', name='textfield')
-              td(width='20%')  
-            tr
-              td  
-              td(valign='top') 原料重量
-              td
-                input#text7.input_01(type='text', name='textfield')
-              td  
-            tr
-              td  
-              td(valign='top') 订单类别
-              td
-                span 原料：
-                select#stockName
-                span 单位：
-                select#stockUnitl
-                    option(value='L') L
-                    option(value='KG') KG
-                span 收支明细：
-                textarea#datacomment
-              td  
-
-                input(type='button' value='提交' onclick='insCargo()')
+              td.mian_b_bg_lm(colspan='8') 新建入库
+            //tr
+            //  td  
+            //  td(width='15%', valign='top') 原料单价
+            //  td(width='60%')
+            //    input#textfield.input_01(type='text', name='textfield')
+            //  td(width='20%')  
+            //tr
+            //  td  
+            //  td(valign='top') 原料重量
+            //  td
+            //    input#text7.input_01(type='text', name='textfield')
+            //  td
+            //tr
+            //  td(width='5%')  
+            //    input(type='checkbox')
+            //  td(width='7%',valign='center') 原料
+            //  td(width='15%') 单价：
+            //    input(type='text')
+            //  td(width='20%') 重量： 
+            //    input(type='text')
+            //  td(width='15%') 收支明细：
+            //    input(type='text')#datacomment
+              //td(width='20%') 重量： 
+              //  input(type='text')
+            //tr
+            //  td  
+            //  td(valign='top') 订单类别
+            //  td
+            //    span 原料：
+            //    select#stockName
+            //    span 单位：
+            //    select#stockUnitl
+            //        option(value='L') L
+            //        option(value='KG') KG
+            //    span 收支明细：
+            //    textarea#datacomment
+            //  td  
+            input(type='button' value='提交' onclick='insCargo()')
 

@@ -51,11 +51,11 @@ public interface CargoService {
     Integer InsertCargo(OrderfoodCargo cargo);
     /**
      * 同步入库支出流水
-     * @param cargo
+     * @param cargos
      * @param runData
      * @return
      */
-    Integer InsertInfo(OrderfoodCargo cargo,OrderfoodRunningData runData);
+    Integer InsertInfo(OrderfoodRunningData runData,List<OrderfoodCargo> cargos);
     /**
      * 获取原料和单位
      * @return

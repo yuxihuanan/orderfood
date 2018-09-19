@@ -1,6 +1,7 @@
 package com.orderfood.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.orderfood.pojo.CargoPage;
 import com.orderfood.pojo.OrderfoodRunningData;
 import com.orderfood.service.CargoService;
@@ -55,14 +56,28 @@ public class CargoController {
 
     /**
      * 原料入库
-     * @param cargo
-     * @param runningData
+     * @param jsonArray
      * @return
      */
     @ResponseBody
     @RequestMapping("insCargo")
-    public String insCargo(OrderfoodCargo cargo, OrderfoodRunningData runningData){
-        return JSON.toJSONString(cargoService.InsertInfo(cargo,runningData));
+    public String insCargo(String jsonArray){
+        List<OrderfoodCargo> cargos=JSONObject.parseArray(jsonArray,OrderfoodCargo.class);
+        OrderfoodRunningData orderfoodRunningData=new OrderfoodRunningData();
+        String str="购入";
+        Float Dataprice=0f;
+        for (OrderfoodCargo orderfoodCargo : cargos) {
+            System.out.println(orderfoodCargo.getStock().getStockname());
+            System.out.println(orderfoodCargo.getCargoprice());
+            System.out.println(orderfoodCargo.getCargoweight());
+            Dataprice+=orderfoodCargo.getCargoprice()*orderfoodCargo.getCargoweight();
+            orderfoodRunningData.setDataprice(Dataprice);
+            str+=orderfoodCargo.getStock().getStockname()+":"+orderfoodCargo.getCargoweight();
+            orderfoodRunningData.setDatacomment(str);
+        }
+        System.out.println(str);
+        System.out.println(Dataprice);
+        return JSON.toJSONString(cargoService.InsertInfo(orderfoodRunningData,cargos));
     }
 
     /**
@@ -112,33 +127,6 @@ public class CargoController {
 
         return "redirect:/CargoController/ToCargoEditor";
     }
-
-    /**
-     * 获取分页数据
-     * @param pageNow
-     * @return
-     */
-    /*@ResponseBody
-    @RequestMapping(value = "ShowCargoInfo/{pageNow}",produces = "text/html;charset=UTF-8")
-    public String ShowCargoInfo(@PathVariable(value = "pageNow") String pageNow){
-        //获取当前页数
-        //获取数据总条数
-        System.out.println(pageNow);
-        //Integer totalCount=cargoService.findNewCont();
-        CargoPage cargoPage=null;
-        List<OrderfoodCargo> list=new ArrayList<OrderfoodCargo>();
-        Integer pageNo=Integer.parseInt(pageNow);
-        if(pageNo>0){
-            cargoPage=new CargoPage(pageNo,totalCount);
-                list=this.cargoService.findNewsPage(cargoPage.getStartPos(),cargoPage.getPageSize());
-        }else {
-            cargoPage =new CargoPage(1,totalCount);
-            list=this.cargoService.findNewsPage(cargoPage.getStartPos(),cargoPage.getPageSize());
-        }
-        System.out.println(JSON.toJSONString(list));
-        return JSON.toJSONString(list);
-    }*/
-
     /**
      * 获取总页数
      * @return

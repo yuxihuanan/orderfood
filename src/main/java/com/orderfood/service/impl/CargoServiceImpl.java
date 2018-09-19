@@ -66,12 +66,12 @@ public class CargoServiceImpl implements CargoService {
         return cargoMapper.InsertCargo(cargo);
     }
     @Override
-    public Integer InsertInfo(OrderfoodCargo cargo,OrderfoodRunningData runData) throws RuntimeException{
+    public Integer InsertInfo(OrderfoodRunningData runData,List<OrderfoodCargo> cargos) throws RuntimeException{
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); // 事物隔离级别，开启新事务，这样会比较安全些。
         TransactionStatus status = transactionManager.getTransaction(def);
             try {
-            this.txIns(cargo,runData);
+            this.txIns(runData,cargos);
             } catch (Exception e) {
                 transactionManager.rollback(status);
                 e.printStackTrace();
@@ -110,10 +110,14 @@ public class CargoServiceImpl implements CargoService {
         return cargoMapper.weightSum(stockname);
     }
 
-    public Integer txIns(OrderfoodCargo cargo,OrderfoodRunningData runData){
+    public Integer txIns(OrderfoodRunningData runData,List<OrderfoodCargo> cargos){
         try {
-            this.InsertCargo(cargo);
+
+            for (OrderfoodCargo cargo : cargos) {
+                this.InsertCargo(cargo);
+            }
             this.InsRunData(runData);
+
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

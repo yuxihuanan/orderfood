@@ -50,11 +50,11 @@ public interface CargoMapper extends CommonMapper<OrderfoodCargo> {
 
     /**
      * 同步入库支出流水
-     * @param cargo
-     * @param runData
+     * @param cargos
+     * @param runDatas
      * @return
      */
-    Integer InsertInfo(OrderfoodCargo cargo,OrderfoodRunningData runData);
+    Integer InsertInfo(List<OrderfoodRunningData> runDatas,List<OrderfoodCargo> cargos);
     /**
      * 获取原料和单位
      * @return
