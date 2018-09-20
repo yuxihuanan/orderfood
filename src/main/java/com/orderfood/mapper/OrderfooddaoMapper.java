@@ -15,5 +15,4 @@ public interface OrderfooddaoMapper extends CommonMapper<OrderfoodEmployeeRole> 
     //删除权限
     int del(@Param(value = "j_classifyId")Integer j_classifyId);
     int insJurisdiction(OrderfoodJurisdiction orderfoodJurisdiction);//添加权限
-
 }

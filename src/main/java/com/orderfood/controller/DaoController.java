@@ -39,14 +39,13 @@ public class DaoController {
         return JSON.toJSONString(daoService.getMen(id));
     }
     /**
-     * 根据id查询非有权限
-     * @param id
+     * 查询全部权限
+     * @param
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "getNot/{id}", produces = "text/plain;charset=utf-8")
     public String getNot(@PathVariable("id") Integer id) {
-
         return JSON.toJSONString(daoService.getNot(id));
     }
 

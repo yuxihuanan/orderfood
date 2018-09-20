@@ -38,4 +38,5 @@ public class DaoServiceImpl implements DaoService {
         return orderfooddaoMapper.insJurisdiction(orderfoodJurisdiction);
     }
 
+
 }

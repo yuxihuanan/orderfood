@@ -20,10 +20,19 @@
       SELECT * FROM `orderfood_employee_role`
     </select>
     <select id="getMen" resultMap="orderJurisdiction">
-  SELECT * FROM orderfood_menu m1,orderfood_employee_role r1,orderfood_jurisdiction j1 WHERE m1.menuId=j1.`j_classifyId` AND r1.`roleId`=j1.`j_roleId`AND r1.roleId=#{id}
+      SELECT * FROM `orderfood_jurisdiction` j
+		INNER JOIN `orderfood_menu` m ON j.`j_classifyId`=m.`menuId`
+		INNER JOIN `orderfood_employee_role` r ON j.`j_roleId`=r.`roleId`
+		WHERE j.`j_roleId`=#{id}
     </select>
     <select id="getNot" resultMap="orderJurisdiction">
-        SELECT * FROM orderfood_menu m1,orderfood_employee_role r1,orderfood_jurisdiction j1 WHERE m1.menuId=j1.`j_classifyId` AND r1.`roleId`=j1.`j_roleId`AND r1.roleId !=#{id} AND m1.parentId!=0
+        SELECT * FROM `orderfood_menu` e WHERE e.`parentId`!=0 AND e.menuId NOT IN(
+	        SELECT m.menuId FROM `orderfood_jurisdiction` j
+		      INNER JOIN `orderfood_menu` m ON j.`j_classifyId`=m.`menuId`
+		      INNER JOIN `orderfood_employee_role` r ON j.`j_roleId`=r.`roleId`
+		    WHERE j.`j_roleId`=#{id}
+
+)
     </select>
     <delete id="del" parameterType="Integer">
         DELETE FROM orderfood_jurisdiction WHERE j_classifyId=#{j_classifyId}
