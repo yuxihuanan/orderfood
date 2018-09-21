@@ -18,11 +18,38 @@ $(function () {
                 "<input name='cargoweight' type=\"text\" />"+
                 " </td>"+
                 "</tr>");
-            })
+            });
+            $(".mian_b_bg_xz tbody").append("<input type='button' value='提交' onclick='insCargo()'>")
         }
     })
 })
 function insCargo() {
+    var count=0;
+    var checks=$("input[name='stockid']");
+    var cargoprices=$("input[name='cargoprice']");
+    var cargoweights=$("input[name='cargoweight']");
+    var o;
+    for (o in checks){
+        if(checks[o].checked==true){
+            count++;
+        }
+    }
+    if(count==0){
+        alert("请选中要入库的材料");
+        return;
+    }else {
+        for (o in checks){
+            if(checks[o].checked==true){
+               if(cargoprices[o].value.length==0){
+                   alert("请输入该材料单价");
+                   return;
+               }else if(cargoweights[o].value.length==0){
+                   alert("请输入该材料重量");
+                   return;
+               }
+            }
+        }
+    }
     var jsons=new Array();
     var datajson={}
     var obj = document.getElementsByName("stockid");
@@ -38,7 +65,6 @@ function insCargo() {
             }
             jsons.push(datajson);
         }
-
     }
     $.ajax({
         "url":"insCargo",

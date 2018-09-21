@@ -68,6 +68,7 @@
          and stockName LIKE CONCAT('%',#{stockname},'%')
         </if>
         </trim>
+        ORDER BY cargo.cargoId DESC
         LIMIT #{Start},#{Size}
     </select>
     <!--模糊条件查出的数据总条数-->
