@@ -48,13 +48,18 @@ VALUES
     </insert>
 
     <select id="stockPage" resultMap="OrderfoodCargo">
-        SELECT * FROM orderfood_stock s LEFT JOIN orderfood_cargo c ON s.`stockId`=c.`c_stockId`
-        <trim prefix="where" prefixOverrides="and | or">
+        /*SELECT * FROM orderfood_stock s LEFT JOIN orderfood_cargo c ON s.`stockId`=c.`c_stockId` GROUP BY stockName*/
+        SELECT s.`stockId`,s.`stockName`,SUM(c.`cargoWeight`) AS 'cargoWeight',s.stockUnit FROM orderfood_stock s
+        LEFT JOIN orderfood_cargo c
+        ON s.`stockId`=c.`c_stockId`
+        GROUP BY stockName
+        <trim prefix="having" prefixOverrides="and | or">
             <if test="stockName!=null and stockName!=''">
                 and s.stockName LIKE CONCAT('%',#{stockName},'%')
             </if>
         </trim>
-          LIMIT #{Start},#{Size}
+        ORDER BY c.cargoId DESC
+        LIMIT #{Start},#{Size}
     </select>
     <select id="stockCont" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM `orderdb`.`orderfood_stock`
